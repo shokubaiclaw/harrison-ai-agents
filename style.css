@@ -318,3 +318,121 @@ body {
     margin-bottom: 3rem;
     border: 1px solid var(--border-color);
 }
+/* =========================================================
+   Mobile Responsiveness (Samsung S25, iPhone 17, etc.)
+   ========================================================= */
+
+@media screen and (max-width: 900px) {
+    /* Stack the body layout vertically instead of horizontally */
+    body {
+        flex-direction: column;
+    }
+
+    /* Convert fixed sidebar to a sticky top navigation bar */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: sticky;
+        top: 0;
+        flex-direction: column;
+        padding: 1rem 0 0 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        z-index: 1000;
+        background-color: var(--panel-bg);
+    }
+
+    .sidebar .logo {
+        width: 120px;
+        margin-bottom: 1rem;
+    }
+
+    /* Make navigation links horizontally swipeable */
+    .sidebar nav {
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0px;
+        /* Hide scrollbars for a clean app-like look */
+        -ms-overflow-style: none; 
+        scrollbar-width: none; 
+    }
+    
+    .sidebar nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sidebar nav a {
+        padding: 0.75rem 1.2rem;
+        font-size: 0.85rem;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    /* Move the active state indicator to the bottom of the link */
+    .sidebar nav a:hover, .sidebar nav a.active {
+        border-left: none;
+        border-bottom: 3px solid var(--gold);
+        background: transparent;
+    }
+
+    /* Expand main content to full width */
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    /* Adjust Hero Banner for smaller screens */
+    .hero {
+        height: 400px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+        padding: 0 1rem;
+    }
+
+    .hero h2 {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+        line-height: 1.4;
+    }
+
+    /* Adjust padding for internal pages */
+    .page-container, .contact-container {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .page-header h1, .contact-header h1 {
+        font-size: 2rem;
+    }
+
+    .page-header p, .contact-header p {
+        font-size: 0.85rem;
+    }
+
+    /* Stack flex elements vertically */
+    .contact-layout {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 350px;
+        box-sizing: border-box;
+    }
+
+    .content-section {
+        padding: 1.5rem;
+    }
+
+    .about-banner {
+        height: 150px;
+    }
+}

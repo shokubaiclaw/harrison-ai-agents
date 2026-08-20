@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tier Comparison Matrix</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="services.html">AGENT SERVICES</a>
+            <a href="solutions.html">SOLUTIONS</a>
+            <a href="ai-tier-comparison-matrix.html">AI MATRIX</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT</a>
+            <a href="privacy.html">PRIVACY</a>
+        </nav>
+    </aside>
+
+<main class="main-content">
+  <div class="page-container">
+    <div class="page-header">
+      <h1>AI Tier Comparison Matrix</h1>
+      <p>Select a technical priority to compare trade-offs</p>
+    </div>
+    
+    <!-- Controls using your btn-gold class -->
+    <div id="btn-group" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
+      <button class="btn-gold" onclick="updateMatrix('cost', this)" style="opacity: 1; border: 2px solid var(--gold);">Cost Structure</button>
+      <button class="btn-gold" onclick="updateMatrix('privacy', this)" style="opacity: 0.6; border: 2px solid transparent;">Data Privacy</button>
+      <button class="btn-gold" onclick="updateMatrix('overhead', this)" style="opacity: 0.6; border: 2px solid transparent;">Technical Overhead</button>
+      <button class="btn-gold" onclick="updateMatrix('customization', this)" style="opacity: 0.6; border: 2px solid transparent;">Customization</button>
+    </div>
+
+    <!-- Layout using your card-container and card classes -->
+    <div class="card-container">
+      <!-- Tier 1 -->
+      <div class="card" id="card-1">
+        <h4 style="color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;">Tier 1</h4>
+        <h4 style="font-size: 1.5rem; margin-top: 0; color: var(--text-main);">Consumer Apps</h4>
+        <div id="display-1" style="min-height: 120px; margin-top: 1.5rem;"></div>
+      </div>
+      
+      <!-- Tier 2 -->
+      <div class="card" id="card-2">
+        <h4 style="color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;">Tier 2</h4>
+        <h4 style="font-size: 1.5rem; margin-top: 0; color: var(--text-main);">API Integration</h4>
+        <div id="display-2" style="min-height: 120px; margin-top: 1.5rem;"></div>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="card" id="card-3">
+        <h4 style="color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;">Tier 3</h4>
+        <h4 style="font-size: 1.5rem; margin-top: 0; color: var(--text-main);">Self-Hosted / Sovereign</h4>
+        <div id="display-3" style="min-height: 120px; margin-top: 1.5rem;"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const data = {
+    cost: [
+      { value: "Low / Fixed Subscription", desc: "Predictable, low monthly costs, but limited scaling for broader workflows or high-volume usage." },
+      { value: "Variable / Pay-per-token", desc: "Pay strictly for what you use. Highly scalable, but can become prohibitively expensive at enterprise scale." },
+      { value: "High Upfront / Fixed Ongoing", desc: "Requires significant capital expenditure for hardware and infrastructure, but marginal cost per query drops near zero." }
+    ],
+    privacy: [
+      { value: "Low Privacy", desc: "Data may be used by the provider to train future AI models. Not suitable for sensitive or proprietary information." },
+      { value: "Medium Privacy", desc: "Data is sent over the network. Enterprise API agreements typically guarantee zero retention, but it relies on third-party trust." },
+      { value: "Maximum Privacy", desc: "Total control. Data never leaves your internal network or 'Vault', ensuring full regulatory compliance." }
+    ],
+    overhead: [
+      { value: "Zero Overhead", desc: "Turnkey solution. Ready to use immediately out of the box with zero engineering or configuration required." },
+      { value: "Medium Overhead", desc: "Requires developers to integrate API endpoints, handle error rates, and build the surrounding software logic." },
+      { value: "High Overhead", desc: "Requires specialized MLOps talent to procure hardware, manage deployments, and maintain system infrastructure." }
+    ],
+    customization: [
+      { value: "Low Customization", desc: "Limited to basic system instructions, prompt engineering, and standard chat interfaces." },
+      { value: "High Customization", desc: "Supports Retrieval-Augmented Generation (RAG), autonomous tool calling, and fine-tuning via APIs." },
+      { value: "Maximum Customization", desc: "Full root access to model weights, enabling deep fine-tuning and entirely custom architectural modifications." }
+    ]
+  };
+
+  function updateMatrix(metric, btnElement) {
+    // Dim all buttons and remove borders
+    const buttons = document.querySelectorAll('#btn-group button');
+    buttons.forEach(btn => {
+      btn.style.opacity = '0.6';
+      btn.style.border = '2px solid transparent';
+    });
+    
+    // Highlight the active button
+    if (btnElement) {
+        btnElement.style.opacity = '1';
+        btnElement.style.border = '2px solid var(--gold)';
+    } else {
+        buttons[0].style.opacity = '1';
+        buttons[0].style.border = '2px solid var(--gold)';
+    }
+
+    // Update the card content with a fade effect
+    for (let i = 0; i < 3; i++) {
+      const display = document.getElementById(`display-${i + 1}`);
+      display.style.opacity = '0';
+      
+      setTimeout(() => {
+        // Styled dynamically using your CSS variables for seamless integration
+        display.innerHTML = `
+          <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 1rem; color: var(--text-main);">${data[metric][i].value}</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">${data[metric][i].desc}</p>
+        `;
+        display.style.opacity = '1';
+        display.style.transition = 'opacity 0.2s ease-in';
+      }, 150);
+    }
+  }
+
+  // Initialize on load
+  window.onload = () => updateMatrix('cost', null);
+</script>
+</body>
+</html>

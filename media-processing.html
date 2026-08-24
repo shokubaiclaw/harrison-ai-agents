@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison Agents - Automated Media Processing Solutions</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: var(--panel-bg, #141416);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        .tech-table th, .tech-table td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .tech-table th {
+            background-color: rgba(212, 175, 55, 0.08);
+            color: var(--gold, #d4af37);
+            font-weight: 600;
+        }
+        .checklist-box {
+            background: rgba(20, 20, 22, 0.6);
+            border-left: 3px solid var(--gold, #d4af37);
+            padding: 1rem 1.25rem;
+            margin-top: 1.25rem;
+            border-radius: 0 4px 4px 0;
+        }
+        .checklist-box h4 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            color: var(--gold, #d4af37);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .checklist-box ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .checklist-box li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted, #8b949e);
+            font-size: 0.88rem;
+        }
+        .checklist-box li::before {
+            content: "[ ]";
+            position: absolute;
+            left: 0;
+            color: var(--gold, #d4af37);
+            font-family: monospace;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 0.5rem;
+        }
+        .badge-cloud { background: rgba(52, 152, 219, 0.2); color: #3498db; }
+        .badge-local { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+        .workflow-step {
+            margin-bottom: 1.25rem;
+        }
+        .workflow-step h4 {
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="services.html">AGENT SERVICES</a>
+            <a href="solutions.html" class="active">SOLUTIONS</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>AUTOMATED MEDIA PROCESSING SOLUTIONS</h1>
+                <p>Enterprise AI Workflows for Photo Processing, Privacy Protection, &amp; Multi-Channel Publishing</p>
+            </div>
+
+            <!-- Intro Overview -->
+            <div class="content-section">
+                <h2>Automated Post-Event Media Pipelines</h2>
+                <p>Harrison AI Agents delivers end-to-end automated photo processing pipelines engineered to eliminate manual sorting, privacy redaction, color balancing, and publishing overhead. Whether your organization requires dynamic cloud orchestration or fully isolated, air-gapped local desktop execution, our solutions streamline media distribution with strict quality and privacy guarantees.</p>
+            </div>
+
+            <!-- SERVICE OFFERING 1: CLOUD-NATIVE PIPELINE -->
+            <div class="content-section">
+                <h2><span>01.</span> Cloud-Native Automated AI Pipeline <span class="badge badge-cloud">Cloud Hosted</span></h2>
+                <p>An enterprise cloud-native architecture designed to trigger automatically upon media upload, orchestrating cloud AI tools, automated quality control gates, targeted text blurring, and multi-channel publishing webhooks.</p>
+
+                <h3>Recommended Cloud Technology Stack</h3>
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Pipeline Stage</th>
+                            <th>Recommended Tool</th>
+                            <th>Core Technical Function</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Workflow Automation</strong></td>
+                            <td>n8n / Make.com</td>
+                            <td>Orchestrates cloud triggers, API payloads, and webhooks between cloud storage and distribution platforms.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI Visual Filtering</strong></td>
+                            <td>AWS Rekognition (DetectFaces)</td>
+                            <td>Evaluates eye status (EyesOpen), facial expressions (Smile), engagement metrics, and sharpness.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Privacy Redaction</strong></td>
+                            <td>AWS Rekognition (DetectText) + OpenCV</td>
+                            <td>Detects text bounding boxes on name tags/badges and applies targeted Gaussian blur.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Enhancement &amp; Branding</strong></td>
+                            <td>Cloudinary API / Python (Pillow + OpenCV)</td>
+                            <td>Applies uniform color LUT presets and overlays brand logo watermarks in specified positions.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-Channel Publishing</strong></td>
+                            <td>Buffer / Hootsuite API + CMS Webhooks</td>
+                            <td>Automatically formats, schedules, and publishes images across web media galleries and social channels.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Automated Processing &amp; Distribution Workflow</h3>
+                <div class="workflow-step">
+                    <h4>1. Ingestion &amp; Triggering</h4>
+                    <p>Photographers upload raw event photos to a monitored cloud folder (Google Drive or AWS S3). The upload instantly triggers an automated webhook in n8n/Make to initiate the execution pipeline.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>2. AI Quality Selection Gate</h4>
+                    <p>AWS Rekognition evaluates primary facial attributes. Quality thresholds retain photos where <code>EyesOpen</code> confidence is &ge; 80% for key subjects, lighting/sharpness scores pass minimum criteria, and subjects display natural engagement. Closed-eye or motion-blurred shots are automatically routed to a drop folder.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>3. Privacy &amp; Name Tag Redaction</h4>
+                    <p>AWS Rekognition Text Detection scans chest-level regions, lanyards, and name badges. OpenCV applies a padded Gaussian blur over all detected text regions to enforce privacy protection prior to web distribution.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>4. Color Standardization &amp; Branding Overlay</h4>
+                    <p>A uniform color lookup table (LUT) or Cloudinary transformation preset is applied to balance venue lighting variations. The official organizational logo watermark is composited at 85% opacity in the bottom-right corner with a 5% inset border padding.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>5. Multi-Channel Distribution</h4>
+                    <p>Approved media updates the main site gallery via CMS webhooks. Formatted photos (4:5 vertical for Instagram, 1:1 for Facebook, 16:9 for Web) are passed to scheduling APIs (Buffer/Hootsuite) for automated social channel distribution.</p>
+                </div>
+
+                <div class="checklist-box">
+                    <h4>Cloud Configuration &amp; System Settings Checklist</h4>
+                    <ul>
+                        <li><strong>AWS Rekognition Settings:</strong> Set <code>EyesOpen.Value = True</code> (Min Confidence: 80%), Face Pose Pitch/Yaw/Roll (&le; 30&deg;).</li>
+                        <li><strong>Blur Detection:</strong> Implement OpenCV Laplacian variance threshold (&ge; 100) to filter out out-of-focus shots.</li>
+                        <li><strong>Redaction Padding:</strong> Apply a 10% pixel padding around detected name badge bounding boxes before applying Gaussian blur.</li>
+                        <li><strong>Watermark Placement:</strong> Set Cloudinary placement gravity to <code>south_east</code>, offset <code>x=25px</code>, <code>y=25px</code>, opacity 85%.</li>
+                        <li><strong>Staff Alerts:</strong> Configure automated summary reports via Email/Slack detailing processed counts, rejected photos, and publication status.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SERVICE OFFERING 2: LOCAL ON-PREMISE APPLICATION -->
+            <div class="content-section">
+                <h2><span>02.</span> On-Premise Local Desktop AI Processor <span class="badge badge-local">Air-Gapped / Local</span></h2>
+                <p>Designed for strict privacy preferences or bandwidth-constrained environments. Harrison AI Agents delivers a lightweight, executable desktop application—the Local Photo Processor—that operates entirely on-device (macOS and Windows) without sending data to third-party cloud services.</p>
+
+                <h3>Local Architecture &amp; Technology Stack</h3>
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Cloud Alternative</th>
+                            <th>Local On-Laptop Tool</th>
+                            <th>Function</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AI Face &amp; Eye Quality Gate</strong></td>
+                            <td>AWS Rekognition</td>
+                            <td>MediaPipe / OpenCV</td>
+                            <td>Runs on-device AI to measure Eye Aspect Ratio (EAR) and facial orientation.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Blur &amp; Sharpness Filter</strong></td>
+                            <td>AWS Rekognition</td>
+                            <td>OpenCV (Laplacian Variance)</td>
+                            <td>Detects motion blur or out-of-focus photos locally.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Name Tag Redaction</strong></td>
+                            <td>AWS Text Detection</td>
+                            <td>EasyOCR / Tesseract OCR</td>
+                            <td>Identifies text bounding boxes on lanyards/badges and applies local Gaussian blur.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Color LUTs &amp; Watermarking</strong></td>
+                            <td>Cloudinary API</td>
+                            <td>Pillow / OpenCV</td>
+                            <td>Applies standard .CUBE color presets uniformly and overlays brand logo watermark.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Packaging &amp; UI</strong></td>
+                            <td>Cloud Webhooks / n8n</td>
+                            <td>Custom Executable (PyQt / Electron)</td>
+                            <td>One-click drag-and-drop standalone app built by Harrison AI Agents for non-technical users.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Local Automated Workflow</h3>
+                <div class="workflow-step">
+                    <h4>1. Batch Ingestion</h4>
+                    <p>Post-event, operators drag raw photos directly into the desktop application or monitored local folder.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>2. Local AI Inspection</h4>
+                    <p><strong>Eyes-Open Check:</strong> MediaPipe extracts 468 3D facial landmarks to calculate Eye Aspect Ratio (EAR); photos below threshold are flagged/rejected.<br>
+                    <strong>Focus Check:</strong> OpenCV measures contrast variance, automatically discarding blurry or low-quality shots.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>3. Local Text Detection &amp; Redaction</h4>
+                    <p>EasyOCR/Tesseract scans chest-level regions for text strings on name badges and automatically applies a local blur mask directly in memory.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>4. Color &amp; Branding Presets</h4>
+                    <p>The application applies a local <code>.CUBE</code> color lookup table to normalize lighting across all photos and overlays the official brand watermark in the bottom-right corner.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>5. Organized Output</h4>
+                    <p>Processed images are saved to a local <code>Approved_For_Publishing</code> folder, formatted and resized (4:5, 1:1, 16:9) for immediate manual or automated upload to web galleries and social channels.</p>
+                </div>
+
+                <div class="checklist-box">
+                    <h4>Local Application Settings Checklist</h4>
+                    <ul>
+                        <li><strong>Minimum Eye Aspect Ratio (EAR):</strong> Set to &ge; 0.22 to ensure subject eyes are open.</li>
+                        <li><strong>Blur Threshold:</strong> Set Laplacian variance threshold &ge; 100 for focus validation.</li>
+                        <li><strong>OCR Target Region:</strong> Restrict text detection scanning to lower 60% of detected body bounds to optimize local CPU/GPU speed.</li>
+                        <li><strong>Watermark Offset:</strong> Bottom-right placement with 25px margin and 85% opacity.</li>
+                        <li><strong>LUT File:</strong> Loaded locally from configuration path (e.g., <code>Brand_Standard.cube</code>).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

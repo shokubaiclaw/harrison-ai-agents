@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison Agents - Learn More About Autonomous Reception</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: var(--panel-bg, #141416);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        .tech-table th, .tech-table td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .tech-table th {
+            background-color: rgba(212, 175, 55, 0.08);
+            color: var(--gold, #d4af37);
+            font-weight: 600;
+        }
+        .checklist-box {
+            background: rgba(20, 20, 22, 0.6);
+            border-left: 3px solid var(--gold, #d4af37);
+            padding: 1rem 1.25rem;
+            margin-top: 1.25rem;
+            border-radius: 0 4px 4px 0;
+        }
+        .checklist-box h4 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            color: var(--gold, #d4af37);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .checklist-box ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .checklist-box li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted, #8b949e);
+            font-size: 0.88rem;
+        }
+        .checklist-box li::before {
+            content: "[ ]";
+            position: absolute;
+            left: 0;
+            color: var(--gold, #d4af37);
+            font-family: monospace;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 0.5rem;
+        }
+        .badge-direct { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+        .badge-pipeline { background: rgba(52, 152, 219, 0.2); color: #3498db; }
+        .workflow-step {
+            margin-bottom: 1.25rem;
+        }
+        .workflow-step h4 {
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="services.html">AGENT SERVICES</a>
+            <a href="solutions.html" class="active">SOLUTIONS</a>
+            <a href="ai-tier-comparison-matrix.html">AI MATRIX</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT</a>
+            <a href="privacy.html">PRIVACY</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>LEARN MORE ABOUT AUTONOMOUS RECEPTION</h1>
+                <p>Enterprise AI Telephony, Voice Streaming Architectures, & Automated Booking Continuity</p>
+            </div>
+
+            <!-- Architectural Overview -->
+            <div class="content-section">
+                <h2>Architectural Overview</h2>
+                <p>To eliminate incoming call friction while maintaining full booking continuity with enterprise scheduling platforms (such as Zenoti REST APIs), the voice channel is routed into a voice-capable AI framework. Our implementations leverage two core architectural layers:</p>
+                <ul>
+                    <li><strong>Telephony Layer:</strong> Telephony providers (Twilio, Telnyx, or Vapi) provision primary business phone numbers and stream call audio over WebSockets or Webhooks.</li>
+                    <li><strong>Integration Middleware Layer:</strong> Middleware server exposing tool endpoints mapped directly to enterprise Center and Booking API endpoints.</li>
+                </ul>
+            </div>
+
+            <!-- SERVICE OFFERING 1: NATIVE MULTIMODAL DIRECT SOLUTION -->
+            <div class="content-section">
+                <h2><span>01.</span> Google Gemini Direct Solution <span class="badge badge-direct">Native Multimodal Voice</span></h2>
+                <p>An ultra-low latency architecture engineered for direct speech-to-speech interaction without intermediate transcription delays.</p>
+
+                <h3>Architecture Stack</h3>
+                <p><code>Twilio Media Streams &rarr; Custom Node.js/Python WebSocket Server &rarr; Gemini Multimodal Live API</code></p>
+
+                <h3>How It Works</h3>
+                <div class="workflow-step">
+                    <h4>1. Audio Streaming</h4>
+                    <p>Inbound calls stream raw PCM audio directly to the Gemini Multimodal Live API over a persistent WebSocket session.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>2. Native Execution</h4>
+                    <p>Gemini handles speech recognition, conversational logic, and voice synthesis natively within a single model loop, maintaining low latency (~300–500 ms).</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>3. Real-Time Tool Execution</h4>
+                    <p>Gemini uses Function Calling during the live conversation to query booking systems for open time slots or provider availability and executes booking payloads.</p>
+                </div>
+
+                <div class="checklist-box">
+                    <h4>Key Advantages</h4>
+                    <ul>
+                        <li>Ultra-low conversational latency (~300–500 ms).</li>
+                        <li>Natural voice interruptions and barge-in support.</li>
+                        <li>Simplified technical stack requiring no separate STT or TTS vendor subscriptions.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SERVICE OFFERING 2: OPENCLAW + CLAUDE SOLUTION -->
+            <div class="content-section">
+                <h2><span>02.</span> OpenClaw + Claude Solution <span class="badge badge-pipeline">Pipeline Integration</span></h2>
+                <p>A highly customizable pipeline architecture designed for complex scheduling rules, multi-step agentic workflows, and persistent memory across visits.</p>
+
+                <h3>Architecture Stack</h3>
+                <p><code>Twilio Voice Webhook &rarr; STT Engine (Deepgram) &rarr; OpenClaw (Claude Model) &rarr; TTS Engine (ElevenLabs / Cartesia)</code></p>
+
+                <h3>How It Works</h3>
+                <div class="workflow-step">
+                    <h4>1. Real-Time Transcription</h4>
+                    <p>Incoming caller audio is transcribed in real time via Deepgram streaming.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>2. Agentic Reasoning</h4>
+                    <p>OpenClaw processes text streams using Claude (e.g., Claude 3.5 Haiku for speed or Claude 3.7 Sonnet for complex requests) while maintaining persistent session context across interactions.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>3. Tool Execution</h4>
+                    <p>OpenClaw triggers tool executions directly against REST APIs or through custom Model Context Protocol (MCP) servers.</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>4. Speech Synthesis</h4>
+                    <p>Response strings are converted back to natural audio via ElevenLabs or Cartesia and played back to the caller seamlessly.</p>
+                </div>
+
+                <div class="checklist-box">
+                    <h4>Key Advantages</h4>
+                    <ul>
+                        <li>Superior instruction-following for multi-step service scheduling rules.</li>
+                        <li>High precision in handling complex appointment modifications and edge cases.</li>
+                        <li>Persistent caller memory and history tracking across recurring visits.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- API FUNCTION MAPPING TABLE -->
+            <div class="content-section">
+                <h2>REST API Function Mapping</h2>
+                <p>Standardized tool mappings connecting conversational AI agents directly to enterprise booking backends:</p>
+
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Interaction</th>
+                            <th>API Endpoint</th>
+                            <th>AI Tool Function</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Identify Client</strong></td>
+                            <td><code>GET /v1/guests?phone={number}</code></td>
+                            <td><code>lookup_guest_by_phone()</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Check Availability</strong></td>
+                            <td><code>GET /v1/centers/{center_id}/slots</code></td>
+                            <td><code>get_barber_slots()</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hold Appointment</strong></td>
+                            <td><code>POST /v1/bookings</code></td>
+                            <td><code>reserve_booking_slot()</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Confirm &amp; Text</strong></td>
+                            <td><code>POST /v1/bookings/{id}/confirm</code></td>
+                            <td><code>confirm_and_send_sms()</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PROCUREMENT & DEPLOYMENT CHECKLIST -->
+            <div class="content-section">
+                <h2>Account Setup & Infrastructure Provisioning</h2>
+                <div class="checklist-box">
+                    <h4>Deployment Prerequisites Checklist</h4>
+                    <ul>
+                        <li><strong>Cloud Platform Account:</strong> Configure cloud console project, enable Vertex AI / Developer APIs, and activate Multimodal Live API access for bidirectional WebSocket streaming.</li>
+                        <li><strong>Telephony Provisioning:</strong> Provision dedicated telephony accounts, import primary business numbers, and enable Webhook/Media Streams streaming to middleware endpoints.</li>
+                        <li><strong>API Credentials:</strong> Obtain enterprise API keys, Center IDs, and OAuth tokens to grant guest lookup and booking capabilities.</li>
+                        <li><strong>Middleware Infrastructure:</strong> Provision serverless container environments (e.g., Cloud Run) to execute persistent WebSocket bridges.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

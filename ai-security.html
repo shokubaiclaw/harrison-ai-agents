@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison Agents - AI Security & OWASP LLM Top 10</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="services.html">AGENT SERVICES</a>
+            <a href="solutions.html" class="active">SOLUTIONS</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>AI SECURITY.</h1>
+                <p>OWASP Top 10 for LLM Applications (2026/2025 Framework)</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Overview</h2>
+                <p>The OWASP Top 10 for Large Language Model (LLM) Applications is a standard security guide created by the OWASP Gen AI Security Project to identify and prevent critical risks in generative and agentic AI systems.</p>
+                <p style="margin-top: 1rem;">The latest 2026 update details these primary security vulnerabilities and threats:</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM01: Prompt Injection</h2>
+                <p>Attackers send malicious direct or indirect inputs to manipulate model behavior, override system instructions, or hijack workflows.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM02: Sensitive Information Disclosure</h2>
+                <p>The model inadvertently leaks confidential data, proprietary business information, or PII (Personally Identifiable Information) in its responses.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM03: Supply Chain Vulnerabilities</h2>
+                <p>Risks arise from compromised third-party components, pre-trained models, plugins, or external datasets used in the application lifecycle.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM04: Data and Model Poisoning</h2>
+                <p>Adversaries corrupt pre-training data, fine-tuning processes, or embedding data to introduce backdoors, biases, or vulnerabilities.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM05: Improper Output Handling</h2>
+                <p>Downstream components or interfaces accept model outputs without sufficient validation, sanitization, or encoding, leading to XSS, CSRF, or code execution.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM06: Excessive Agency</h2>
+                <p>An LLM-based agent is granted too many permissions, functions, or autonomy, allowing it to take damaging or unauthorized real-world actions.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM07: System Prompt Leakage</h2>
+                <p>Internal system prompts, guardrail instructions, or proprietary logic are extracted by users through clever conversational engineering.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM08: Vector and Embedding Weaknesses</h2>
+                <p>Flaws in vector databases or embedding pipelines allow unauthorized data access, poisoning, or retrieval manipulation.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM09: Misinformation</h2>
+                <p>The model generates false, fabricated, or hallucinated facts that are presented as truth, causing operational or reputational harm.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>LLM10: Unbounded Consumption</h2>
+                <p>The application fails to restrict resource usage (such as tokens, memory, or compute cycles), exposing the system to denial-of-service (DoS) or high financial costs.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Official Documentation</h2>
+                <p>For more information, visit the official <a href="https://genai.owasp.org/llm-top-10/" target="_blank" style="color: var(--gold); text-decoration: underline; font-weight: bold;">OWASP Gen AI Security Project (LLM Top 10)</a>.</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

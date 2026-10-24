@@ -1,56 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harrison AI Agents - Home</title>
-    <!-- Favicon Link -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Harrison AI Agents</title>
+  <meta name="description" content="Enterprise AI agents, AI-driven paid ad campaigns, 24/7 autonomous voice reception, and custom multi-agent LLM architectures." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
 </head>
 <body>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
 
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
-        <nav>
-            <a href="index.html" class="active">HOME</a>
-            <a href="services.html">AGENT SERVICES</a>
-            <a href="solutions.html">SOLUTIONS</a>
-            <a href="about.html">ABOUT US</a>
-            <a href="contact.html">CONTACT</a>
-            <a href="privacy.html">PRIVACY</a>
-        </nav>
-    </aside>
-
-    <!-- Main Content -->
     <main class="main-content">
-        
-        <!-- Hero Banner Section -->
-        <section class="hero">
-            <div class="hero-text">
-                <h1>Intelligence Redefined.</h1>
-                <h2>BUILD THE FUTURE WITH HARRISON AI AGENTS.</h2>
-                <a href="#" class="btn-gold">EXPLORE AGENT SOLUTIONS</a>
-            </div>
-        </section>
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <span class="eyebrow">Intelligence Redefined</span>
+        <h1 class="hero-title">BUILD THE FUTURE WITH HARRISON AI AGENTS</h1>
+        <p class="hero-tagline">
+          End-to-end commercial growth and autonomous operational infrastructure. We engineer high-converting web platforms, AI-driven paid ad campaigns, 24/7 multimodal voice receptionists, and sovereign multi-agent workflows.
+        </p>
+        <div class="hero-quote">"Workforce augmented. Demand captured. AI agents deployed."</div>
+        <div class="btn-group">
+          <a href="solutions.html" class="btn btn-primary">Explore Full-Funnel Solutions →</a>
+          <a href="ad-campaigns.html" class="btn btn-secondary">AI Ad Campaigns & Growth</a>
+          <a href="ai-tier-comparison-matrix.html" class="btn btn-secondary">Compare AI Tiers</a>
+        </div>
+      </section>
 
-        <!-- Services Cards Section -->
-        <section class="services">
-            <h3>"Workforce augmented. AI agents deployed."</h3>
-            <div class="card-container">
-                <div class="card">
-                    <h4>Agentic Workflow Automation</h4>
-                    <p>Agentic core workflow automation to have continuous agentic workflow operations seamlessly integrating into your business.</p>
-                </div>
-                <div class="card">
-                    <h4>AI Integration & Deployment</h4>
-                    <p>AI integration & deployment managing the entire AI ecosystems and deployment techniques tailored to your needs.</p>
-                </div>
-            </div>
-        </section>
+      <!-- CORE VALUE PILLARS (FIXED COPY + NEW AD CAMPAIGN PILLAR) -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">Executive Overview</span>
+          <h2 class="section-title">Closed-Loop Growth & Autonomous Execution</h2>
+          <p class="section-subtitle">
+            Most consultancies either run ads that leak leads or build isolated bots with no traffic. We unify demand generation, instant conversational capture, and backend workflow execution into one architecture.
+          </p>
+        </div>
 
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-number">CORE 01</span>
+            <h3 class="card-title">Agentic Workflow Automation</h3>
+            <p>
+              Autonomous workflow architectures engineered for continuous, self-correcting execution across your core business operations—eliminating manual bottlenecks in scheduling, ticketing, and data pipelines.
+            </p>
+            <a href="solutions.html#stage-4" class="card-link">Explore Agentic Workflows →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-number">CORE 02</span>
+            <h3 class="card-title">AI-Driven Ad Campaigns</h3>
+            <p>
+              Full-funnel paid media management across Google, Meta, LinkedIn, and programmatic networks—combining generative ad creative and algorithmic bidding with instant AI voice and chat lead qualification.
+            </p>
+            <a href="ad-campaigns.html" class="card-link">Explore Ad Campaign Systems →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-number">CORE 03</span>
+            <h3 class="card-title">AI Integration & Deployment</h3>
+            <p>
+              End-to-end model integration and production deployment—managing your entire AI ecosystem across frontier cloud APIs (GPT-5.4, Gemini 3.1 Pro, Claude 4.6) and self-hosted sovereign vaults.
+            </p>
+            <a href="ai-tier-comparison-matrix.html" class="card-link">Explore AI Tier Matrix →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4-STAGE FULL-FUNNEL CLIENT JOURNEY -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">The 4-Stage Architecture</span>
+          <h2 class="section-title">How Our Ecosystem Scales Your Enterprise</h2>
+          <p class="section-subtitle">
+            Deploy a single specialized capability or integrate all four stages for an end-to-end autonomous commercial engine.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <span class="card-meta">Stage 01 • Digital Foundation</span>
+            <h3 class="card-title">Web Design & Managed Infrastructure</h3>
+            <p>
+              Modular, high-speed web platforms paired with complete domain, DNS, and SSL administration—engineered from day one to host embedded AI assistants and high-converting campaign landing pages.
+            </p>
+            <a href="solutions.html#stage-1" class="card-link">View Infrastructure Specs →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Stage 02 • Demand & Media Velocity</span>
+            <h3 class="card-title">AI Ad Campaigns & Media Processing</h3>
+            <p>
+              Scale qualified inbound traffic through algorithmic paid media campaigns and automated audio/video production pipelines that upscale, transcribe, and format creative assets at scale.
+            </p>
+            <a href="ad-campaigns.html" class="card-link">View Paid Growth Architecture →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Stage 03 • 24/7 Conversion & Intake</span>
+            <h3 class="card-title">Autonomous Voice Reception & Smart Booking</h3>
+            <p>
+              Zero missed calls or cold leads. Inbound phone calls and web inquiries are answered in under 400ms by natural voice and chat agents wired directly into your live calendar and CRM APIs.
+            </p>
+            <a href="autonomous-reception.html" class="card-link">View Voice Architecture →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Stage 04 • Backend Intelligence</span>
+            <h3 class="card-title">Multi-Agent Operations & Sovereign LLMs</h3>
+            <p>
+              Networked AI agents that collaborate, critique, and execute complex post-sale workflows across Tier 2 frontier APIs or Tier 3 air-gapped sovereign hardware.
+            </p>
+            <a href="ai-tier-comparison-matrix.html" class="card-link">Compare Deployment Tiers →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE LIVE VOICE & AD LEAD CAPTURE SIMULATOR -->
+      <section class="demo-panel">
+        <div>
+          <span class="eyebrow">Closed-Loop Proof of Concept</span>
+          <h2 class="section-title" style="margin-bottom: 0.75rem;">From Ad Click to Confirmed Booking in 12 Seconds</h2>
+          <p>
+            When a prospect clicks your paid ad or calls your business line at 11:00 PM, our <strong>Gemini Multimodal Live</strong> and <strong>OpenClaw + Claude 4.6</strong> telephony pipelines answer immediately, check live provider slots via REST APIs, and lock in the appointment.
+          </p>
+          <div class="btn-group" style="margin-top: 1.5rem;">
+            <button id="run-voice-simulation" class="btn btn-primary" type="button">▶ Simulate Live Agent Call</button>
+            <a href="autonomous-reception.html" class="btn btn-secondary">Read Technical Specs</a>
+          </div>
+        </div>
+
+        <div class="demo-console">
+          <div class="demo-status-row">
+            <span class="status-indicator"><span class="status-dot"></span> Live Pipeline Telemetry</span>
+            <code id="voice-latency-badge" style="color: var(--accent-secondary);">RTT Latency: ~320ms</code>
+          </div>
+          <div id="voice-transcript-output" class="transcript-box">
+            Click <strong>"Simulate Live Agent Call"</strong> to watch how an inbound paid-ad lead is screened and booked via real-time REST API tool calling.
+          </div>
+        </div>
+      </section>
+
+      <harrison-footer-cta></harrison-footer-cta>
     </main>
-
+  </div>
 </body>
 </html>

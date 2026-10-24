@@ -1,65 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harrison Agents - Solutions</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solutions & Capabilities Hub | Harrison AI Agents</title>
+  <meta name="description" content="Applied AI implementations and outcome-driven systems: Managed Digital Presence, AI Ad Campaigns, 24/7 Autonomous Reception, Smart Scheduling, Enterprise LLMs, and Media Processing." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
 </head>
 <body>
-
-    <aside class="sidebar">
-        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="services.html">AGENT SERVICES</a>
-            <a href="solutions.html" class="active">SOLUTIONS</a>
-            <a href="about.html">ABOUT US</a>
-            <a href="contact.html">CONTACT</a>
-        </nav>
-    </aside>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
 
     <main class="main-content">
-        <div class="page-container">
-            <div class="page-header">
-                <h1>SOLUTIONS.</h1>
-                <p>Applied Implementations & Outcome-Driven Systems</p>
-            </div>
-
-            <div class="content-section">
-                <h2>Managed Digital Presence</h2>
-                <p>Establish a secure, high-performance Web footprint without technical complexity. We deploy custom websites backed by full-service domain registration, DNS management, and SSL security to give your business an optimized front door that captures traffic and drives growth.</p>
-            </div>
-
-            <div class="content-section">
-                <h2>24/7 Autonomous Reception</h2>
-                <p>Eliminate missed inbound calls, off-hours inquiries, and hold times. Our voice agent solutions answer incoming phone calls around the clock, conduct natural conversational screening, qualify leads, and route urgent matters directly to your team.</p>
-            </div>
-
-            <div class="content-section">
-                <h2>Automated Booking & Engagement</h2>
-                <p>Turn website traffic into confirmed appointments automatically. By combining on-site conversational assistants with intelligent calendar integrations, prospective clients can ask questions, evaluate offerings, and lock in meeting slots instantly without back-and-forth emails.</p>
-            </div>
-
-            <div class="content-section">
-                <h2>Enterprise Operational Intelligence</h2>
-                <p>Scale internal throughput using tailored multi-agent networks and fine-tuned model backends. We integrate custom agentic workflows directly into your operational stack to automate data engineering, document processing, ticketing, and administrative handoffs.</p>
-            </div>
-
-            <div class="content-section">
-                <h2>Media Processing</h2>
-                <p>Streamline digital asset workflows with automated audio and video processing. Our AI-driven pipelines automatically convert, upscale, noise-filter, transcribe, and enhance multimedia files at scale, giving your enterprise high-fidelity output and automated production capabilities.</p>
-                <p style="margin-top: 1.5rem;"><a href="media-processing.html" style="color: var(--gold); font-weight: bold; text-decoration: none;">Learn More About Media Processing &rarr;</a></p>
-            </div>
-
-            <div class="content-section">
-                <h2>AI Security</h2>
-                <p>Safeguard your generative and agentic AI deployments against critical enterprise vulnerabilities. We implement robust defense-in-depth guardrails aligned with the OWASP LLM Top 10 framework to protect against prompt injection, data poisoning, and unauthorized system access.</p>
-                <p style="margin-top: 1.5rem;"><a href="ai-security.html" style="color: var(--gold); font-weight: bold; text-decoration: none;">Learn More About AI Security &rarr;</a></p>
-            </div>
+      <section class="hero-section">
+        <span class="eyebrow">Applied Implementations & Outcome-Driven Systems</span>
+        <h1 class="hero-title">UNIFIED SOLUTIONS & CAPABILITIES HUB</h1>
+        <p class="hero-tagline">
+          Every Harrison AI Agents engagement combines measurable commercial outcomes with hardened engineering infrastructure. Explore our six core solution pillars across the entire customer and operational lifecycle.
+        </p>
+        <div class="btn-group">
+          <a href="contact.html" class="btn btn-primary">Request a Custom Architecture →</a>
+          <a href="services.html" class="btn btn-secondary">View Technical Service Catalog</a>
         </div>
-    </main>
+      </section>
 
+      <!-- PILLAR 01 & PILLAR 02 -->
+      <section id="stage-1">
+        <div class="section-header">
+          <span class="eyebrow">Stage 01 & 02 • Digital Presence & Paid Acquisition</span>
+          <h2 class="section-title">Infrastructure, Ad Campaigns & Media Velocity</h2>
+          <p class="section-subtitle">
+            Establish an enterprise-grade web footprint and drive high-intent customer acquisition with AI-optimized paid media and automated creative pipelines.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <!-- Solution 01 -->
+          <div class="card">
+            <span class="card-number">01 • MANAGED DIGITAL PRESENCE</span>
+            <div class="card-meta">Technical Pillar: Web Design & Digital Infrastructure</div>
+            <h3 class="card-title">High-Conversion Web Platforms & DNS/SSL Administration</h3>
+            <p>
+              Establish a secure, high-performance web footprint without technical complexity. From modular code architectures and responsive UI design to domain registration, DNS record configuration, and SSL management, we build the reliable digital front door your business needs.
+            </p>
+            <ul class="card-list">
+              <li>Custom responsive frontend architectures optimized for Core Web Vitals & SEO</li>
+              <li>Full-service domain provisioning, DNS routing, and automated SSL security</li>
+              <li>Pre-wired webhook and WebSocket endpoints for embedded AI voice and chat agents</li>
+            </ul>
+            <a href="contact.html?service=web-infrastructure" class="card-link">Deploy Digital Infrastructure →</a>
+          </div>
+
+          <!-- Solution 02 (NEW: AD CAMPAIGNS) -->
+          <div class="card">
+            <span class="card-number">02 • AUTONOMOUS AD CAMPAIGNS & LEAD ACQUISITION</span>
+            <div class="card-meta">Technical Pillar: AI-Driven Ad Campaigns & Paid Media</div>
+            <h3 class="card-title">Full-Funnel Paid Media & Algorithmic ROAS Optimization</h3>
+            <p>
+              Turn paid advertising into a predictable, closed-loop revenue engine across Google Search/Performance Max, Meta, LinkedIn, and programmatic networks. We combine AI-accelerated creative generation and precision audience targeting with instant autonomous lead capture.
+            </p>
+            <ul class="card-list">
+              <li>Generative ad copy, multimodal video/image creative variations & rapid A/B testing</li>
+              <li>Server-side conversion tracking (CAPI) & algorithmic bid optimization for maximum ROAS</li>
+              <li>Zero lead leakage: ad clicks route directly to 24/7 AI voice and smart scheduling agents</li>
+            </ul>
+            <a href="ad-campaigns.html" class="card-link">Learn More About AI Ad Campaigns →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PILLAR 03 & PILLAR 04 -->
+      <section id="stage-3">
+        <div class="section-header">
+          <span class="eyebrow">Stage 03 • 24/7 Lead Capture & Appointment Automation</span>
+          <h2 class="section-title">Autonomous Telephony & Smart Scheduling</h2>
+          <p class="section-subtitle">
+            Convert inbound phone calls and website traffic into confirmed calendar bookings around the clock without human hold times or back-and-forth emails.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <!-- Solution 03 -->
+          <div class="card">
+            <span class="card-number">03 • 24/7 AUTONOMOUS RECEPTION</span>
+            <div class="card-meta">Technical Pillar: AI Voice & Telephony Agents</div>
+            <h3 class="card-title">Real-Time Conversational Phone Agents</h3>
+            <p>
+              Eliminate missed inbound calls, off-hours inquiries, and hold times. Our voice agents answer incoming phone calls 24/7 with ~300–500ms latency, conduct natural conversational screening, qualify prospective leads, and execute live bookings or priority call transfers.
+            </p>
+            <ul class="card-list">
+              <li>Dual architectures: Google Gemini Multimodal Live API or OpenClaw + Claude 4.6</li>
+              <li>Real-time REST API tool calling for guest lookup, slot availability, and SMS confirmation</li>
+              <li>Natural barge-in handling, interruption support, and persistent caller memory</li>
+            </ul>
+            <a href="autonomous-reception.html" class="card-link">Learn More About Autonomous Reception →</a>
+          </div>
+
+          <!-- Solution 04 -->
+          <div class="card">
+            <span class="card-number">04 • AUTOMATED BOOKING & ENGAGEMENT</span>
+            <div class="card-meta">Technical Pillar: On-Site Assistants & Smart Scheduling</div>
+            <h3 class="card-title">Embedded Web & SMS Booking Assistants</h3>
+            <p>
+              Turn website visitors and ad traffic into confirmed appointments automatically. Trained directly on your business knowledge base, our digital assistants handle visitor Q&A, negotiate meeting availability, and sync directly with your enterprise calendar and CRM systems.
+            </p>
+            <ul class="card-list">
+              <li>Omnichannel deployment across web widgets, SMS text follow-ups, and messaging apps</li>
+              <li>Bi-directional calendar synchronization with conflict detection and automated reminders</li>
+              <li>Structured lead qualification payloads pushed directly to your CRM pipeline</li>
+            </ul>
+            <a href="contact.html?service=smart-scheduling" class="card-link">Deploy Smart Scheduling →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PILLAR 05 & PILLAR 06 -->
+      <section id="stage-4">
+        <div class="section-header">
+          <span class="eyebrow">Stage 04 • Enterprise Intelligence & Media Pipelines</span>
+          <h2 class="section-title">Multi-Agent Workflows & Automated Media Processing</h2>
+          <p class="section-subtitle">
+            Scale internal operational throughput with custom LLM orchestration and high-volume multimedia processing pipelines.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <!-- Solution 05 -->
+          <div class="card">
+            <span class="card-number">05 • ENTERPRISE OPERATIONAL INTELLIGENCE</span>
+            <div class="card-meta">Technical Pillar: Autonomous Agentic Workflows & LLMs</div>
+            <h3 class="card-title">Bespoke Multi-Agent Networks & Sovereign AI</h3>
+            <p>
+              Move beyond linear automation with state-managed multi-agent systems that collaborate, critique, and execute complex business pipelines. We architect across frontier API layers (GPT-5.4, Gemini 3.1 Pro, Claude 4.6) and self-contained sovereign open-weight vaults (Llama 4, DeepSeek V4, Qwen 3.5).
+            </p>
+            <ul class="card-list">
+              <li>Custom Model Context Protocol (MCP) servers & enterprise database tool bindings</li>
+              <li>Automated document engineering, compliance auditing, ticketing, and backend handoffs</li>
+              <li>Flexible deployment across Cloud APIs (Tier 2) or Air-Gapped Sovereign Hardware (Tier 3)</li>
+            </ul>
+            <a href="ai-tier-comparison-matrix.html" class="card-link">Learn More About AI Tiers →</a>
+          </div>
+
+          <!-- Solution 06 -->
+          <div class="card">
+            <span class="card-number">06 • MEDIA PROCESSING AT SCALE</span>
+            <div class="card-meta">Technical Pillar: Automated Media Processing Pipelines</div>
+            <h3 class="card-title">AI Audio, Video & Multimodal Asset Workflows</h3>
+            <p>
+              Streamline digital asset operations with automated audio and video processing pipelines. Our AI-driven workflows automatically convert, upscale, noise-filter, transcribe, caption, and repurpose multimedia files at scale for enterprise communications and paid ad creative.
+            </p>
+            <ul class="card-list">
+              <li>Automated 4K video upscaling, frame interpolation, and studio-grade audio denoising</li>
+              <li>Multi-speaker diarization, time-coded transcription, and multilingual dubbing/subtitles</li>
+              <li>Automated aspect-ratio reframing (16:9 to 9:16) for social and paid ad deployment</li>
+            </ul>
+            <a href="media-processing.html" class="card-link">Learn More About Media Processing →</a>
+          </div>
+        </div>
+      </section>
+
+      <harrison-footer-cta></harrison-footer-cta>
+    </main>
+  </div>
 </body>
 </html>

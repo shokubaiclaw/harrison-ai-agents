@@ -1,47 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harrison Agents - About Us</title>
-    <!-- Favicon Link -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Harrison AI Agents</title>
+  <meta name="description" content="Learn about Harrison AI Agents, part of the Harrison Arbitrage LLC brand family, engineering autonomous AI systems, voice receptionists, and paid growth infrastructure." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
 </head>
 <body>
-
-    <aside class="sidebar">
-        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="services.html">AGENT SERVICES</a>
-            <a href="solutions.html">SOLUTIONS</a>
-            <a href="about.html" class="active">ABOUT US</a>
-            <a href="contact.html">CONTACT</a>
-            <a href="privacy.html">PRIVACY</a>
-        </nav>
-    </aside>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
 
     <main class="main-content">
-        <div class="page-container">
-            <div class="page-header">
-                <h1>ABOUT US.</h1>
-                <p>Architects of Artificial Intelligence</p>
-            </div>
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <span class="eyebrow">Corporate Profile &amp; Engineering Philosophy</span>
+        <h1 class="hero-title">ABOUT HARRISON AI AGENTS</h1>
+        <p class="hero-tagline">
+          We bridge the gap between frontier artificial intelligence and measurable commercial execution—building autonomous digital workforces, closed-loop paid acquisition engines, and resilient enterprise infrastructure.
+        </p>
+      </section>
 
-            <div class="about-banner"></div>
+      <!-- MISSION & ECOSYSTEM -->
+      <section>
+        <div class="grid-2">
+          <div class="card">
+            <span class="card-number">OUR MISSION</span>
+            <h2 class="card-title">Practical Autonomy That Drives Revenue &amp; Efficiency</h2>
+            <p>
+              At <strong>Harrison AI Agents</strong>, our mission is to transform artificial intelligence from an isolated novelty into dependable operational infrastructure. Too many organizations are stuck in "pilot purgatory"—paying for consumer chat subscriptions or disconnected ad campaigns that still require constant manual human intervention.
+            </p>
+            <p style="margin-bottom: 0;">
+              We engineer complete, production-hardened systems: high-speed digital foundations, AI-driven paid media campaigns that generate qualified demand, 24/7 autonomous voice and scheduling agents that capture every lead in milliseconds, and multi-agent backend workflows that execute complex business logic reliably.
+            </p>
+          </div>
 
-            <div class="content-section">
-                <h2>Our Mission</h2>
-                <p>At Harrison AI Agents, we believe the future of enterprise lies not just in artificial intelligence, but in autonomous agency. Our mission is to bridge the gap between theoretical AI capabilities and practical, scalable business solutions. We design systems that don't just assist—they execute.</p>
-            </div>
-
-            <div class="content-section">
-                <h2>Why Harrison AI Agents?</h2>
-                <p>We are a specialized collective of AI engineers, workflow architects, and automation specialists. Unlike broad-spectrum tech consultancies, our singular focus is on the rapidly evolving field of agentic architecture. We bring deep technical rigor, uncompromising data security, and an innovative approach to every ecosystem we deploy.</p>
-            </div>
+          <div class="card">
+            <span class="card-number">BRAND ECOSYSTEM</span>
+            <h2 class="card-title">Why Harrison AI Agents?</h2>
+            <p>
+              Operating as a specialized technology division within the broader <strong>Harrison Arbitrage LLC</strong> brand family, we approach every engineering challenge through the lens of asymmetric operational leverage and capital efficiency.
+            </p>
+            <p style="margin-bottom: 0;">
+              Whether we are optimizing algorithmic return on ad spend (ROAS), shaving 200 milliseconds off a real-time telephony WebSocket stream, or deploying air-gapped open-weight models on dedicated GPU clusters, every architectural decision is governed by security, speed, and bottom-line ROI.
+            </p>
+          </div>
         </div>
-    </main>
+      </section>
 
+      <!-- 4 ENGINEERING TENETS -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">Architectural Standards</span>
+          <h2 class="section-title">The Principles Behind Every Deployment</h2>
+          <p class="section-subtitle">
+            How we consistently deliver enterprise-grade reliability across voice, web, paid media, and multi-agent systems.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <span class="card-meta">Principle 01</span>
+            <h3 class="card-title">Closed-Loop Commercial Accountability</h3>
+            <p>
+              Traffic without instant conversion is wasted ad spend, and AI agents without inbound demand sit idle. By uniting AI-driven ad campaigns with 24/7 autonomous reception and smart CRM booking, we deliver a unified revenue engine with end-to-end server-side attribution.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Principle 02</span>
+            <h3 class="card-title">Model &amp; Vendor Agnosticism</h3>
+            <p>
+              We are never locked into a single AI vendor. We dynamically route workloads across GPT-5.4, Gemini 3.1 Pro, and Claude 4.6 when frontier API capabilities are required, or deploy sovereign Llama 4, DeepSeek V4, and Qwen 3.5 vaults when strict data custody and zero token fees are paramount.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Principle 03</span>
+            <h3 class="card-title">Deterministic Guardrails &amp; Human-in-the-Loop</h3>
+            <p>
+              Autonomous does not mean uncontrolled. Every voice receptionist, booking assistant, and multi-agent pipeline is governed by strict JSON schema validation, scoped API permissions, and instant warm-transfer escalation paths to your human team when high-value edge cases arise.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Principle 04</span>
+            <h3 class="card-title">Zero-Bloat, High-Speed Engineering</h3>
+            <p>
+              From clean, modular web code that loads instantaneously to hardware-accelerated media pipelines and sub-400ms voice streams, we strip away unnecessary middleware layers that introduce latency, security vulnerabilities, or maintenance debt.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <harrison-footer-cta
+        heading="Partner With Our Engineering Team"
+        subtext="Connect with Harrison AI Agents to audit your current digital infrastructure, paid acquisition funnel, and AI automation roadmap.">
+      </harrison-footer-cta>
+    </main>
+  </div>
 </body>
 </html>

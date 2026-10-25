@@ -2,16 +2,20 @@
    HARRISON AI AGENTS — GLOBAL WEB COMPONENTS & THEME MEDIA ENGINE (main.js)
    ========================================================================== */
 
+function isUnlearningDirectory() {
+  return window.location.pathname.toLowerCase().includes('/unlearning');
+}
+
 function getRootPrefix() {
-  const path = window.location.pathname;
-  return path.includes('/unlearning/') ? '../' : '';
+  return isUnlearningDirectory() ? '../' : '';
 }
 
 function syncThemeMediaAssets() {
   const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const inUnlearning = isUnlearningDirectory();
   const prefix = getRootPrefix();
 
-  /* 1. Sync 1x1 Sidebar & Mobile Brand Logos */
+  /* 1. Sync 1x1 Sidebar & Mobile Brand Logos (Root Assets) */
   const logoSrc = prefix + (isLight ? 'Harrison_Agents_Light.jpg' : 'Harrison_Agents_Dark.jpg');
   document.querySelectorAll('.theme-brand-logo').forEach(img => {
     if (img.getAttribute('src') !== logoSrc) {
@@ -19,23 +23,52 @@ function syncThemeMediaAssets() {
     }
   });
 
-  /* 2. Sync 9x16 Animated Logo Videos & Poster Frames */
-  const videoSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16_Animated.mp4' : 'Harrison_Agents_Dark_9x16_Animated.mp4');
-  const posterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
+  /* 2. Sync 9x16 Animated Crest Videos & Posters
+        - Root pages use: Harrison_Agents_[Dark|Light]_9x16_Animated.mp4
+        - /unlearning/ uses: Harrison_Arbitrage_[Dark|Light]_9x16_Animated.mp4 */
+  const rootVideoSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16_Animated.mp4' : 'Harrison_Agents_Dark_9x16_Animated.mp4');
+  const rootPosterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
+
+  const arbitrageVideoSrc = isLight ? 'Harrison_Arbitrage_Light_9x16_Animated.mp4' : 'Harrison_Arbitrage_Dark_9x16_Animated.mp4';
+  const arbitragePosterSrc = isLight ? 'Harrison_Arbitrage_Light_9x16.jpg' : 'Harrison_Arbitrage_Dark_9x16.jpg';
 
   document.querySelectorAll('.theme-brand-video').forEach(video => {
-    video.setAttribute('poster', posterSrc);
-    if (video.getAttribute('src') !== videoSrc) {
-      video.setAttribute('src', videoSrc);
+    const useArbitrage = inUnlearning || video.dataset.brand === 'arbitrage';
+    const targetVideo = useArbitrage ? arbitrageVideoSrc : rootVideoSrc;
+    const targetPoster = useArbitrage ? arbitragePosterSrc : rootPosterSrc;
+
+    video.setAttribute('poster', targetPoster);
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+
+    /* Fallback to root Harrison_Agents video if Arbitrage file is not yet uploaded */
+    video.onerror = () => {
+      if (video.getAttribute('src') !== rootVideoSrc) {
+        video.setAttribute('poster', rootPosterSrc);
+        video.setAttribute('src', rootVideoSrc);
+        video.load();
+        video.play().catch(() => {});
+      }
+    };
+
+    if (video.getAttribute('src') !== targetVideo) {
+      video.setAttribute('src', targetVideo);
       video.load();
-      video.play().catch(() => {});
+    }
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
     }
   });
 
-  /* 3. Sync 9x16 Static Brand Images */
+  /* 3. Sync 9x16 Static Brand Images (.theme-brand-9x16) */
   document.querySelectorAll('.theme-brand-9x16').forEach(img => {
-    if (img.getAttribute('src') !== posterSrc) {
-      img.setAttribute('src', posterSrc);
+    const useArbitrage = inUnlearning || img.dataset.brand === 'arbitrage';
+    const targetImg = useArbitrage ? arbitragePosterSrc : rootPosterSrc;
+    if (img.getAttribute('src') !== targetImg) {
+      img.setAttribute('src', targetImg);
     }
   });
 }
@@ -43,7 +76,7 @@ function syncThemeMediaAssets() {
 class HarrisonSidebar extends HTMLElement {
   connectedCallback() {
     const prefix = getRootPrefix();
-    const inUnlearning = prefix === '../';
+    const inUnlearning = isUnlearningDirectory();
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
     const navItems = [

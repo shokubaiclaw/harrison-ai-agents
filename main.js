@@ -20,7 +20,7 @@ function syncThemeMediaAssets() {
   });
 
   /* 2. Sync 9x16 Animated Logo Videos & Poster Frames */
-  const videoSrc = prefix + (isLight ? 'Harrison_Agents_Light_Animated.mp4' : 'Harrison_Agents_Dark_Animated.mp4');
+  const videoSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16_Animated.mp4' : 'Harrison_Agents_Dark_9x16_Animated.mp4');
   const posterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
 
   document.querySelectorAll('.theme-brand-video').forEach(video => {

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Harrison AI Agents</title>
+  <meta name="description" content="Enterprise AI agents, AI-driven paid ad campaigns, 24/7 autonomous voice reception, custom multi-agent LLM architectures, and home of The Unlearning Dilemma." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
+
+    <main class="main-content">
+      <!-- SPLIT HERO SECTION WITH 9:16 ANIMATED CREST VIDEO -->
+      <section class="hero-section">
+        <div class="hero-split">
+          <div>
+            <span class="eyebrow">Intelligence Redefined</span>
+            <h1 class="hero-title">
+              BUILD THE FUTURE WITH H<span class="ai-crimson">A</span>RR<span class="ai-crimson">I</span>SON <span class="ai-crimson">AGENTS</span>
+            </h1>
+            <p class="hero-tagline">
+              End-to-end commercial growth and autonomous operational infrastructure. We engineer high-converting web platforms, AI-driven paid ad campaigns, 24/7 multimodal voice receptionists, and sovereign multi-agent workflows.
+            </p>
+            <div class="hero-quote">"Workforce augmented. Demand captured. AI agents deployed."</div>
+            <div class="btn-group">
+              <a href="solutions.html" class="btn btn-primary">Explore Agent Solutions →</a>
+              <a href="unlearning/index.html" class="btn btn-secondary">📖 New Book: The Unlearning Dilemma</a>
+              <a href="ad-campaigns.html" class="btn btn-secondary">AI Ad Campaigns</a>
+            </div>
+          </div>
+
+          <!-- 9:16 Portrait Animated Logo Video (Auto-switches Dark/Light via main.js) -->
+          <div class="media-9x16-frame">
+            <video
+              class="theme-brand-video"
+              src="Harrison_Agents_Dark_Animated.mp4"
+              poster="Harrison_Agents_Dark_9x16.jpg"
+              autoplay
+              loop
+              muted
+              playsinline
+              controls>
+            </video>
+            <div class="media-9x16-caption">Harrison AI Agents • Official Crest</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CORE VALUE PILLARS (WITH TIER/SERVICE DIFFERENTIATION BADGES) -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">Executive Overview</span>
+          <h2 class="section-title">Closed-Loop Growth &amp; Autonomous Execution</h2>
+          <p class="section-subtitle">
+            Most consultancies either run ads that leak leads or build isolated bots with no traffic. We unify demand generation, instant conversational capture, and backend workflow execution into one architecture.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-number tier-badge-crimson">CORE 01 • WORKFLOWS</span>
+            <h3 class="card-title">Agentic Workflow Automation</h3>
+            <p>
+              Autonomous workflow architectures engineered for continuous, self-correcting execution across your core business operations—eliminating manual bottlenecks in scheduling, ticketing, and data pipelines.
+            </p>
+            <a href="solutions.html#stage-4" class="card-link">Explore Agentic Workflows →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-number tier-badge-gold">CORE 02 • PAID MEDIA</span>
+            <h3 class="card-title">AI-Driven Ad Campaigns</h3>
+            <p>
+              Full-funnel paid media management across Google, Meta, LinkedIn, and programmatic networks—combining generative ad creative and algorithmic bidding with instant AI voice and chat lead qualification.
+            </p>
+            <a href="ad-campaigns.html" class="card-link">Explore Ad Campaign Systems →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-number tier-badge-blue">CORE 03 • INFRASTRUCTURE</span>
+            <h3 class="card-title">AI Integration &amp; Deployment</h3>
+            <p>
+              End-to-end model integration and production deployment—managing your entire AI ecosystem across frontier cloud APIs (GPT-5.4, Gemini 3.1 Pro, Claude 4.6) and self-hosted sovereign vaults.
+            </p>
+            <a href="ai-tier-comparison-matrix.html" class="card-link">Explore AI Tier Matrix →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED PUBLICATION SPOTLIGHT: THE UNLEARNING DILEMMA (9:16 PREVIEW) -->
+      <section class="demo-panel" style="grid-template-columns: minmax(0, 1.35fr) minmax(240px, 300px);">
+        <div>
+          <span class="eyebrow">Featured Publication • Available Now</span>
+          <h2 class="section-title" style="margin-bottom: 0.75rem;">
+            <span class="ai-crimson">The Unlearning Dilemma</span>
+          </h2>
+          <p>
+            In an era defined by autonomous systems and rapid technological paradigm shifts, the hardest executive challenge isn't learning new tools—it's <strong>unlearning obsolete mental models</strong> before they calcify your organization.
+          </p>
+          <p>
+            Explore the official 9:16 mobile-first visual experience featuring the animated book cover, official launch trailer, 3D edition showcase, and ordering links.
+          </p>
+          <div class="btn-group" style="margin-top: 1.5rem;">
+            <a href="unlearning/index.html" class="btn btn-primary">Enter the 9:16 Book Experience →</a>
+            <a href="contact.html?service=book-media" class="btn btn-secondary">Speaking &amp; Bulk Inquiries</a>
+          </div>
+        </div>
+
+        <div class="media-9x16-frame" style="max-width: 260px;">
+          <video
+            src="Book_Cover_Animated.mp4"
+            poster="Book_Cover_9x16.jpg"
+            autoplay
+            loop
+            muted
+            playsinline>
+          </video>
+          <div class="media-9x16-caption">The Unlearning Dilemma • 9:16 Preview</div>
+        </div>
+      </section>
+
+      <!-- 4-STAGE FULL-FUNNEL CLIENT JOURNEY -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">The 4-Stage Architecture</span>
+          <h2 class="section-title">How Our Ecosystem Scales Your Enterprise</h2>
+          <p class="section-subtitle">
+            Deploy a single specialized capability or integrate all four stages for an end-to-end autonomous commercial engine.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <span class="card-meta">Stage 01 • Digital Foundation</span>
+            <h3 class="card-title">Web Design &amp; Managed Infrastructure</h3>
+            <p>
+              Modular, high-speed web platforms paired with complete domain, DNS, and SSL administration—engineered from day one to host embedded AI assistants and high-converting campaign landing pages.
+            </p>
+            <a href="solutions.html#stage-1" class="card-link">View Infrastructure Specs →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Stage 02 • Demand &amp; Media Velocity</span>
+            <h3 class="card-title">AI Ad Campaigns &amp; Media Processing</h3>
+            <p>
+              Scale qualified inbound traffic through algorithmic paid media campaigns and automated audio/video production pipelines that upscale, transcribe, and format creative assets at scale.
+            </p>
+            <a href="ad-campaigns.html" class="card-link">View Paid Growth Architecture →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Stage 03 • 24/7 Conversion &amp; Intake</span>
+            <h3 class="card-title">Autonomous Voice Reception &amp; Smart Booking</h3>
+            <p>
+              Zero missed calls or cold leads. Inbound phone calls and web inquiries are answered in under 400ms by natural voice and chat agents wired directly into your live calendar and CRM APIs.
+            </p>
+            <a href="autonomous-reception.html" class="card-link">View Voice Architecture →</a>
+          </div>
+
+          <div class="card">
+            <span class="card-meta">Stage 04 • Backend Intelligence</span>
+            <h3 class="card-title">Multi-Agent Operations &amp; Sovereign LLMs</h3>
+            <p>
+              Networked AI agents that collaborate, critique, and execute complex post-sale workflows across Tier 2 frontier APIs or Tier 3 air-gapped sovereign hardware.
+            </p>
+            <a href="ai-tier-comparison-matrix.html" class="card-link">Compare Deployment Tiers →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE LIVE VOICE & AD LEAD CAPTURE SIMULATOR -->
+      <section class="demo-panel">
+        <div>
+          <span class="eyebrow">Closed-Loop Proof of Concept</span>
+          <h2 class="section-title" style="margin-bottom: 0.75rem;">From Ad Click to Confirmed Booking in 12 Seconds</h2>
+          <p>
+            When a prospect clicks your paid ad or calls your business line at 11:00 PM, our <strong>Gemini Multimodal Live</strong> and <strong>OpenClaw + Claude 4.6</strong> telephony pipelines answer immediately, check live provider slots via REST APIs, and lock in the appointment.
+          </p>
+          <div class="btn-group" style="margin-top: 1.5rem;">
+            <button id="run-voice-simulation" class="btn btn-primary" type="button">▶ Simulate Live Agent Call</button>
+            <a href="autonomous-reception.html" class="btn btn-secondary">Read Technical Specs</a>
+          </div>
+        </div>
+
+        <div class="demo-console">
+          <div class="demo-status-row">
+            <span class="status-indicator"><span class="status-dot"></span> Live Pipeline Telemetry</span>
+            <code id="voice-latency-badge" style="color: var(--accent-gold);">RTT Latency: ~320ms</code>
+          </div>
+          <div id="voice-transcript-output" class="transcript-box">
+            Click <strong>"Simulate Live Agent Call"</strong> to watch how an inbound paid-ad lead is screened and booked via real-time REST API tool calling.
+          </div>
+        </div>
+      </section>
+
+      <harrison-footer-cta></harrison-footer-cta>
+    </main>
+  </div>
+</body>
+</html>

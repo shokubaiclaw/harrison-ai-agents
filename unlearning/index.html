@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Unlearning Dilemma | Harrison AI Agents</title>
-  <meta name="description" content="The Unlearning Dilemma — Official 9:16 mobile-first book launch experience, animated cover showcase, trailers, and ordering guide by Harrison AI Agents." />
+  <meta name="description" content="The Unlearning Dilemma — Official 9:16 mobile-first book showcase. Explore the three existential dilemmas when data becomes the program." />
   <script>
     (function() {
       const savedTheme = localStorage.getItem('harrison-theme');
@@ -17,14 +17,19 @@
   <link rel="stylesheet" href="../styles.css" />
   <script src="../main.js" defer></script>
   <style>
-    /* ==========================================================================
-       UNLEARNING DILEMMA — 9:16 PORTRAIT MOBILE-FIRST EXPERIENCE STYLES
-       ========================================================================== */
+    /* Override page circuitry watermark with Harrison Arbitrage 9x16 assets */
+    :root {
+      --bg-circuit-image: url('Harrison_Arbitrage_Dark_9x16.jpg');
+    }
+    [data-theme="light"] {
+      --bg-circuit-image: url('Harrison_Arbitrage_Light_9x16.jpg');
+    }
+
     .unlearning-header {
       text-align: center;
-      max-width: 760px;
-      margin: 0 auto 2.5rem;
-      padding-bottom: 2rem;
+      max-width: 780px;
+      margin: 0 auto 2.25rem;
+      padding-bottom: 1.75rem;
       border-bottom: 1px solid var(--border-color);
     }
 
@@ -32,30 +37,29 @@
       display: flex;
       justify-content: center;
       gap: 0.75rem;
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
       flex-wrap: wrap;
     }
 
-    /* 9:16 Portrait Deck Container */
+    /* 4-Card 9:16 Portrait Grid */
     .portrait-9x16-stream {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
+      grid-template-columns: repeat(auto-fit, minmax(290px, 350px));
       justify-content: center;
-      gap: 2.25rem;
+      gap: 2rem;
       margin: 0 auto 3.5rem;
     }
 
-    /* Single-Column Mobile Reel Stream Mode */
     .portrait-9x16-stream.mobile-reel-mode {
       grid-template-columns: minmax(280px, 380px);
-      gap: 2.5rem;
+      gap: 2.25rem;
     }
 
-    /* Strict 9:16 Portrait Card Container */
+    /* Strict 9:16 Portrait Card Frame */
     .reel-card-9x16 {
       aspect-ratio: 9 / 16;
       width: 100%;
-      max-width: 380px;
+      max-width: 370px;
       margin: 0 auto;
       border-radius: var(--radius-lg);
       border: 2px solid var(--accent-gold);
@@ -68,8 +72,7 @@
       justify-content: space-between;
     }
 
-    .reel-card-9x16 video,
-    .reel-card-9x16 .reel-bg-img {
+    .reel-card-9x16 video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -77,16 +80,102 @@
       background-color: #0b0c0e;
     }
 
-    /* Contained Showcase for Full Book Covers & 3D Mockups Inside 9:16 Frame */
+    .reel-top-badge {
+      position: absolute;
+      top: 0.8rem;
+      left: 0.85rem;
+      right: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .reel-pill {
+      background: rgba(16, 17, 21, 0.88);
+      backdrop-filter: blur(8px);
+      color: var(--accent-gold);
+      border: 1px solid var(--accent-gold);
+      padding: 0.24rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .reel-pill.crimson {
+      background: var(--accent-primary);
+      color: #ffffff;
+      border-color: var(--accent-gold);
+    }
+
+    /* Card 3: Condensed Front-Matter 9:16 Story Layout */
+    .reel-story-card {
+      width: 100%;
+      height: 100%;
+      padding: 3.1rem 1.15rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(14, 15, 19, 0.92) 0%, rgba(14, 15, 19, 0.97) 100%),
+        url('Book_Cover.jpg') center/cover no-repeat;
+      color: #f2f3f5;
+      overflow-y: auto;
+    }
+
+    .reel-story-card h3 {
+      color: #ffffff;
+      font-size: 1.12rem;
+      line-height: 1.22;
+      margin-bottom: 0.35rem;
+    }
+
+    .reel-story-lead {
+      color: #d5d8df;
+      font-size: 0.76rem;
+      line-height: 1.42;
+      margin-bottom: 0.55rem;
+    }
+
+    .reel-dilemma-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.48rem;
+      margin: 0 0 0.65rem;
+    }
+
+    .reel-dilemma-list li {
+      font-size: 0.73rem;
+      line-height: 1.38;
+      color: #e4e6eb;
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 3px solid var(--accent-primary);
+      padding: 0.42rem 0.58rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .reel-dilemma-list li strong {
+      color: var(--accent-gold);
+      display: block;
+      font-size: 0.74rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.1rem;
+    }
+
+    /* Card 4: 3D Book Mockup & Animated Publisher Crest Stage */
     .reel-contained-stage {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 1.35rem;
+      padding: 3.1rem 1.15rem 1.1rem;
       background:
-        radial-gradient(circle at 50% 25%, var(--accent-subtle), transparent 70%),
+        radial-gradient(circle at 50% 30%, var(--accent-subtle), transparent 70%),
         linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
       position: relative;
     }
@@ -97,10 +186,12 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding: 0.5rem 0;
+      padding: 0.35rem 0;
+      position: relative;
     }
 
-    .reel-contained-img-wrap img {
+    .reel-contained-img-wrap img,
+    .reel-contained-img-wrap video {
       max-width: 100%;
       max-height: 100%;
       width: auto;
@@ -109,94 +200,6 @@
       border-radius: var(--radius-sm);
       border: 1px solid var(--accent-gold-border);
       box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
-    }
-
-    /* Top & Bottom Overlay Bars inside 9:16 Cards */
-    .reel-top-badge {
-      position: absolute;
-      top: 0.9rem;
-      left: 0.9rem;
-      right: 0.9rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .reel-pill {
-      background: rgba(16, 17, 21, 0.85);
-      backdrop-filter: blur(8px);
-      color: var(--accent-gold);
-      border: 1px solid var(--accent-gold);
-      padding: 0.28rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-    }
-
-    .reel-pill.crimson {
-      background: var(--accent-primary);
-      color: #ffffff;
-      border-color: var(--accent-gold);
-    }
-
-    .reel-bottom-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 2.5rem 1.15rem 1.1rem;
-      background: linear-gradient(to top, rgba(12, 13, 16, 0.96) 0%, rgba(12, 13, 16, 0.78) 65%, transparent 100%);
-      color: #f2f3f5;
-      z-index: 4;
-    }
-
-    /* Interactive 9:16 Reading Story Card */
-    .reel-story-card {
-      width: 100%;
-      height: 100%;
-      padding: 3.5rem 1.4rem 1.4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background:
-        linear-gradient(180deg, rgba(16, 17, 21, 0.86) 0%, rgba(16, 17, 21, 0.95) 100%),
-        url('../Book_Cover_9x16.jpg') center/cover no-repeat;
-      color: #f2f3f5;
-      overflow-y: auto;
-    }
-
-    .reel-story-card h3 {
-      color: #ffffff;
-      font-size: 1.35rem;
-      margin-bottom: 0.65rem;
-    }
-
-    .reel-story-card p {
-      color: #d5d8df;
-      font-size: 0.88rem;
-      line-height: 1.55;
-      margin-bottom: 0.75rem;
-    }
-
-    .reel-chapter-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      margin: 0.5rem 0 0.9rem;
-    }
-
-    .reel-chapter-list li {
-      font-size: 0.82rem;
-      color: #e4e6eb;
-      background: rgba(255, 255, 255, 0.06);
-      border-left: 3px solid var(--accent-primary);
-      padding: 0.45rem 0.65rem;
-      border-radius: 0 4px 4px 0;
     }
 
     @media (max-width: 640px) {
@@ -218,11 +221,11 @@
       <!-- 9:16 MOBILE-FIRST HEADER -->
       <header class="unlearning-header">
         <span class="eyebrow">New Release • Official 9:16 Mobile Experience</span>
-        <h1 class="hero-title" style="margin: 0 auto 1rem;">
+        <h1 class="hero-title" style="margin: 0 auto 0.85rem;">
           THE <span class="ai-crimson">UNLEARNING</span> DILEMMA
         </h1>
         <p class="hero-tagline" style="margin: 0 auto 1.25rem;">
-          Why yesterday's cognitive habits, legacy playbooks, and institutional assumptions are the greatest bottleneck in the age of autonomous intelligence—and how to systematically unlearn them.
+          When data becomes the program, legacy cybersecurity tools cannot protect your model weights. Explore the official 9:16 portrait showcase below.
         </p>
         <div class="btn-group" style="justify-content: center;">
           <a href="#order-deck" class="btn btn-primary">Get Your Copy Now →</a>
@@ -230,24 +233,24 @@
         </div>
 
         <div class="view-mode-bar">
-          <button type="button" id="toggle-reel-layout" class="btn btn-secondary" style="padding: 0.55rem 1.1rem; font-size: 0.75rem;">
+          <button type="button" id="toggle-reel-layout" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.74rem;">
             📱 Switch to Single-Column Mobile Reel View
           </button>
         </div>
       </header>
 
-      <!-- 9:16 PORTRAIT VERTICAL SHOWCASE DECK (ALL 6 CARDS IN 9:16 ASPECT RATIO) -->
+      <!-- 4-CARD 9:16 PORTRAIT SHOWCASE DECK -->
       <section class="portrait-9x16-stream" id="book-portrait-stream">
 
-        <!-- 9:16 CARD 01: OFFICIAL LAUNCH AD VIDEO (unlearning/Available_now.mp4) -->
+        <!-- CARD 01: OFFICIAL LAUNCH AD VIDEO (unlearning/Available_now.mp4) -->
         <article class="reel-card-9x16">
           <div class="reel-top-badge">
             <span class="reel-pill crimson">01 • Launch Trailer</span>
-            <span class="reel-pill">9:16 Reel</span>
+            <span class="reel-pill">Available Now</span>
           </div>
           <video
             src="Available_now.mp4"
-            poster="Book_Cover_9x16.jpg"
+            poster="Book_Cover.jpg"
             autoplay
             loop
             muted
@@ -256,97 +259,116 @@
           </video>
         </article>
 
-        <!-- 9:16 CARD 02: 3D BOOK MOCKUP & ORDERING CARD (unlearning/3D_Book_Mockup.jpg) -->
+        <!-- CARD 02: ANIMATED BOOK COVER REEL (unlearning/Book_Cover_Animated.mp4) -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill">02 • Animated Cover</span>
+            <span class="reel-pill">9:16 Motion</span>
+          </div>
+          <video
+            src="Book_Cover_Animated.mp4"
+            poster="Book_Cover.jpg"
+            autoplay
+            loop
+            muted
+            playsinline
+            controls>
+          </video>
+        </article>
+
+        <!-- CARD 03: FRONT-MATTER THESIS — THE THREE EXISTENTIAL DILEMMAS -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill">03 • Front Matter</span>
+            <span class="reel-pill crimson">3 Dilemmas</span>
+          </div>
+          <div class="reel-story-card">
+            <div>
+              <span style="font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); font-weight: 700;">
+                Core Thesis
+              </span>
+              <h3>When Data Becomes the Program</h3>
+              <p class="reel-story-lead">
+                Three existential dilemmas emerge that legacy cybersecurity tools cannot solve:
+              </p>
+              <ul class="reel-dilemma-list">
+                <li>
+                  <strong>01. Gradient Descent Trojans</strong>
+                  MCAs no longer need buffer overflows or stolen admin credentials to plant a backdoor—they seed poisoned records into open web or collaborative training pools so your own gradient descent pipeline compiles their trojan directly into your model weights.
+                </li>
+                <li>
+                  <strong>02. Model Inversion &amp; Reconstruction</strong>
+                  Your model weights act as a compressed, queryable archive of sensitive training records, allowing MCAs with standard API access to reconstruct private data through membership inference and model inversion.
+                </li>
+                <li>
+                  <strong>03. The Unlearning Dilemma</strong>
+                  When a regulator, customer, or incident response team demands permanent removal of a trained record, you cannot run a SQL delete query against a 10B-parameter tensor where every sample entangles across the entire network.
+                </li>
+              </ul>
+            </div>
+            <a href="#order-deck" class="btn btn-primary" style="width: 100%; padding: 0.6rem; font-size: 0.75rem; text-align: center;">
+              Order The Book ↓
+            </a>
+          </div>
+        </article>
+
+        <!-- CARD 04: 3D BOOK MOCKUP + HARRISON ARBITRAGE 9x16 ANIMATED CREST -->
         <article class="reel-card-9x16" id="order-deck">
           <div class="reel-top-badge">
-            <span class="reel-pill crimson">02 • Available Now</span>
+            <span class="reel-pill crimson">04 • First Edition</span>
             <span class="reel-pill">Print &amp; Digital</span>
           </div>
           <div class="reel-contained-stage">
-            <div style="margin-top: 2rem; text-align: center;">
-              <div style="font-size: 0.72rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
-                First Edition Release
+            <div style="text-align: center;">
+              <div style="font-size: 0.68rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+                Harrison Arbitrage Publishing
               </div>
-              <h3 style="font-size: 1.2rem; margin-top: 0.2rem;">The Unlearning Dilemma</h3>
+              <h3 style="font-size: 1.1rem; margin-top: 0.15rem;">The Unlearning Dilemma</h3>
             </div>
 
             <div class="reel-contained-img-wrap">
-              <img src="3D_Book_Mockup.jpg" alt="The Unlearning Dilemma 3D Book Mockup" />
+              <img id="card4-mockup-img" src="3D_Book_Mockup.jpg" alt="The Unlearning Dilemma 3D Book Mockup" />
+              <video
+                id="card4-crest-video"
+                class="theme-brand-video"
+                data-brand="arbitrage"
+                src="Harrison_Arbitrage_Dark_9x16_Animated.mp4"
+                poster="Harrison_Arbitrage_Dark_9x16.jpg"
+                autoplay
+                loop
+                muted
+                playsinline
+                controls
+                style="display: none; width: 100%; height: 100%; object-fit: cover;">
+              </video>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.55rem;">
-              <a href="https://www.amazon.com/gp/product/B0HP3SP2KS" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+            <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+              <button type="button" id="toggle-card4-media" class="btn btn-secondary" style="width: 100%; padding: 0.5rem; font-size: 0.7rem;">
+                🎬 Switch to Animated Publisher Crest
+              </button>
+              <a href="../contact.html?service=book-media" class="btn btn-primary" style="width: 100%; padding: 0.65rem; font-size: 0.76rem;">
                 Order Direct / Bulk Copies →
               </a>
-              <a href="../contact.html?service=book-media" class="btn btn-secondary" style="width: 100%; padding: 0.65rem; font-size: 0.75rem;">
+              <a href="../contact.html?service=book-media" class="btn btn-secondary" style="width: 100%; padding: 0.55rem; font-size: 0.72rem;">
                 Request Author Keynote / Press Kit
               </a>
             </div>
           </div>
         </article>
 
-        <!-- 9:16 CARD 03: FULL COVER ARTWORK SHOWCASE (unlearning/Book_Cover.jpg & Book_Cover_9x16.jpg) -->
-        <article class="reel-card-9x16">
-          <div class="reel-top-badge">
-            <span class="reel-pill">03 • Cover Artwork</span>
-            <span class="reel-pill">9:16 Edition</span>
-          </div>
-          <img
-            id="static-cover-9x16"
-            class="reel-bg-img"
-            src="../Book_Cover_9x16.jpg"
-            alt="The Unlearning Dilemma 9:16 Portrait Book Cover" />
-          <div class="reel-bottom-overlay">
-            <div style="font-size: 0.7rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
-              Official Cover Jacket
-            </div>
-            <div style="font-size: 0.95rem; font-weight: 700; margin: 0.2rem 0 0.6rem;">
-              Designed for Leaders Navigating the Autonomous Era
-            </div>
-            <button type="button" id="swap-cover-crop" class="btn btn-secondary" style="width: 100%; padding: 0.55rem; font-size: 0.72rem; background: rgba(24,26,32,0.9); color: #fff;">
-              🔄 Toggle Full Jacket (Book_Cover.jpg)
-            </button>
-          </div>
-        </article>
-
-        <!-- 9:16 CARD 04: HARRISON ARBITRAGE LLC PUBLISHING INFO (Dark/Light Auto-Switching) -->
-        <article class="reel-card-9x16">
-          <div class="reel-top-badge">
-            <span class="reel-pill">04 • Published By</span>
-            <span class="reel-pill crimson">Harrison Arbitrage LLC</span>
-          </div>
-          <video
-            class="theme-brand-video"
-            src="Harrison_Arbitrage_Dark_9x16_Animated.mp4"
-            poster="Harrison_Arbitrage_Dark_9x16.jpg"
-            autoplay
-            loop
-            muted
-            playsinline
-            controls>
-          </video>
-          <div class="reel-bottom-overlay">
-            <div style="font-size: 0.82rem; margin-bottom: 0.6rem; color: #e2e5ec;">
-              Ready to put the principles of <em>The Unlearning Dilemma</em> into production with autonomous AI agents?
-            </div>
-            <a href="../solutions.html" class="btn btn-primary" style="width: 100%; padding: 0.65rem; font-size: 0.76rem;">
-              Explore Harrison AI Solutions →
-            </a>
-          </div>
-        </article>
-
       </section>
 
       <harrison-footer-cta
-        heading="Bring The Unlearning Dilemma to Your Executive Team"
-        subtext="Book a keynote briefing, order bulk hardcover/digital copies for your leadership team, or scope an autonomous AI transformation with Harrison AI Agents.">
+        heading="Bring The Unlearning Dilemma to Your Security & AI Leadership"
+        subtext="Book an executive briefing on adversarial ML, data poisoning, and machine unlearning, or order bulk copies for your technical organization.">
       </harrison-footer-cta>
     </main>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      /* 1. Toggle between Multi-Card Grid and Single-Column Mobile Reel Stream */
+      /* 1. Toggle between 4-Card Grid and Single-Column Mobile Reel Stream */
       const layoutBtn = document.getElementById('toggle-reel-layout');
       const streamContainer = document.getElementById('book-portrait-stream');
 
@@ -355,46 +377,29 @@
           streamContainer.classList.toggle('mobile-reel-mode');
           const isSingle = streamContainer.classList.contains('mobile-reel-mode');
           layoutBtn.textContent = isSingle
-            ? '⊞ Switch to Multi-Card Deck View'
+            ? '⊞ Switch to 4-Card Deck View'
             : '📱 Switch to Single-Column Mobile Reel View';
         });
       }
 
-      /* 2. Automatic Path Fallback if Book_Cover_Animated.mp4 or Book_Cover_9x16.jpg is moved into /unlearning/ */
-      const animVideo = document.getElementById('animated-cover-video');
-      if (animVideo) {
-        animVideo.addEventListener('error', () => {
-          if (animVideo.getAttribute('src') === '../Book_Cover_Animated.mp4') {
-            animVideo.setAttribute('src', 'Book_Cover_Animated.mp4');
-            animVideo.setAttribute('poster', 'Book_Cover.jpg');
-            animVideo.load();
-          }
-        }, true);
-      }
+      /* 2. Card 4 Toggle between 3D Book Mockup and Animated Publisher Crest */
+      const toggleMediaBtn = document.getElementById('toggle-card4-media');
+      const mockupImg = document.getElementById('card4-mockup-img');
+      const crestVideo = document.getElementById('card4-crest-video');
 
-      const staticCover = document.getElementById('static-cover-9x16');
-      if (staticCover) {
-        staticCover.addEventListener('error', () => {
-          if (staticCover.getAttribute('src') === '../Book_Cover_9x16.jpg') {
-            staticCover.setAttribute('src', 'Book_Cover.jpg');
-          }
-        });
-      }
-
-      /* 3. Interactive Toggle between Book_Cover_9x16.jpg and unlearning/Book_Cover.jpg */
-      const swapBtn = document.getElementById('swap-cover-crop');
-      if (swapBtn && staticCover) {
-        let showing9x16 = true;
-        swapBtn.addEventListener('click', () => {
-          showing9x16 = !showing9x16;
-          if (showing9x16) {
-            staticCover.setAttribute('src', '../Book_Cover_9x16.jpg');
-            staticCover.style.objectFit = 'cover';
-            swapBtn.textContent = '🔄 Toggle Full Jacket (Book_Cover.jpg)';
+      if (toggleMediaBtn && mockupImg && crestVideo) {
+        let showingVideo = false;
+        toggleMediaBtn.addEventListener('click', () => {
+          showingVideo = !showingVideo;
+          if (showingVideo) {
+            mockupImg.style.display = 'none';
+            crestVideo.style.display = 'block';
+            crestVideo.play().catch(() => {});
+            toggleMediaBtn.textContent = '📘 Switch to 3D Book Mockup';
           } else {
-            staticCover.setAttribute('src', 'Book_Cover.jpg');
-            staticCover.style.objectFit = 'contain';
-            swapBtn.textContent = '🔄 Toggle 9:16 Portrait Crop (Book_Cover_9x16.jpg)';
+            crestVideo.style.display = 'none';
+            mockupImg.style.display = 'block';
+            toggleMediaBtn.textContent = '🎬 Switch to Animated Publisher Crest';
           }
         });
       }

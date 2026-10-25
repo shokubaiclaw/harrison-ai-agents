@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home | Harrison AI Agents</title>
-  <meta name="description" content="Enterprise AI agents, AI-driven paid ad campaigns, 24/7 autonomous voice reception, custom multi-agent LLM architectures, and home of The Unlearning Dilemma." />
+  <title>The Unlearning Dilemma | Harrison AI Agents</title>
+  <meta name="description" content="The Unlearning Dilemma — Official 9:16 mobile-first book launch experience, animated cover showcase, trailers, and ordering guide by Harrison AI Agents." />
   <script>
     (function() {
       const savedTheme = localStorage.getItem('harrison-theme');
@@ -14,198 +14,434 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="main.js" defer></script>
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="../main.js" defer></script>
+  <style>
+    /* ==========================================================================
+       UNLEARNING DILEMMA — 9:16 PORTRAIT MOBILE-FIRST EXPERIENCE STYLES
+       ========================================================================== */
+    .unlearning-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .view-mode-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* 9:16 Portrait Deck Container */
+    .portrait-9x16-stream {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
+      justify-content: center;
+      gap: 2.25rem;
+      margin: 0 auto 3.5rem;
+    }
+
+    /* Single-Column Mobile Reel Stream Mode */
+    .portrait-9x16-stream.mobile-reel-mode {
+      grid-template-columns: minmax(280px, 380px);
+      gap: 2.5rem;
+    }
+
+    /* Strict 9:16 Portrait Card Container */
+    .reel-card-9x16 {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--accent-gold);
+      background-color: var(--bg-secondary);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65), 0 0 24px var(--accent-glow);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .reel-card-9x16 video,
+    .reel-card-9x16 .reel-bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background-color: #0b0c0e;
+    }
+
+    /* Contained Showcase for Full Book Covers & 3D Mockups Inside 9:16 Frame */
+    .reel-contained-stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.35rem;
+      background:
+        radial-gradient(circle at 50% 25%, var(--accent-subtle), transparent 70%),
+        linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+      position: relative;
+    }
+
+    .reel-contained-img-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0.5rem 0;
+    }
+
+    .reel-contained-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--accent-gold-border);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Top & Bottom Overlay Bars inside 9:16 Cards */
+    .reel-top-badge {
+      position: absolute;
+      top: 0.9rem;
+      left: 0.9rem;
+      right: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .reel-pill {
+      background: rgba(16, 17, 21, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--accent-gold);
+      border: 1px solid var(--accent-gold);
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .reel-pill.crimson {
+      background: var(--accent-primary);
+      color: #ffffff;
+      border-color: var(--accent-gold);
+    }
+
+    .reel-bottom-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.5rem 1.15rem 1.1rem;
+      background: linear-gradient(to top, rgba(12, 13, 16, 0.96) 0%, rgba(12, 13, 16, 0.78) 65%, transparent 100%);
+      color: #f2f3f5;
+      z-index: 4;
+    }
+
+    /* Interactive 9:16 Reading Story Card */
+    .reel-story-card {
+      width: 100%;
+      height: 100%;
+      padding: 3.5rem 1.4rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(16, 17, 21, 0.86) 0%, rgba(16, 17, 21, 0.95) 100%),
+        url('../Book_Cover_9x16.jpg') center/cover no-repeat;
+      color: #f2f3f5;
+      overflow-y: auto;
+    }
+
+    .reel-story-card h3 {
+      color: #ffffff;
+      font-size: 1.35rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .reel-story-card p {
+      color: #d5d8df;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin-bottom: 0.75rem;
+    }
+
+    .reel-chapter-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin: 0.5rem 0 0.9rem;
+    }
+
+    .reel-chapter-list li {
+      font-size: 0.82rem;
+      color: #e4e6eb;
+      background: rgba(255, 255, 255, 0.06);
+      border-left: 3px solid var(--accent-primary);
+      padding: 0.45rem 0.65rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    @media (max-width: 640px) {
+      .portrait-9x16-stream {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .reel-card-9x16 {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="app-shell">
     <harrison-sidebar></harrison-sidebar>
 
     <main class="main-content">
-      <!-- SPLIT HERO SECTION WITH 9:16 ANIMATED CREST VIDEO -->
-      <section class="hero-section">
-        <div class="hero-split">
-          <div>
-            <span class="eyebrow">Intelligence Redefined</span>
-            <h1 class="hero-title">
-              BUILD THE FUTURE WITH H<span class="ai-crimson">A</span>RR<span class="ai-crimson">I</span>SON <span class="ai-crimson">AGENTS</span>
-            </h1>
-            <p class="hero-tagline">
-              End-to-end commercial growth and autonomous operational infrastructure. We engineer high-converting web platforms, AI-driven paid ad campaigns, 24/7 multimodal voice receptionists, and sovereign multi-agent workflows.
-            </p>
-            <div class="hero-quote">"Workforce augmented. Demand captured. AI agents deployed."</div>
-            <div class="btn-group">
-              <a href="solutions.html" class="btn btn-primary">Explore Agent Solutions →</a>
-              <a href="https://www.amazon.com/gp/product/B0HP3SP2KS" class="btn btn-secondary">📖 New Book: The Unlearning Dilemma</a>
-              <a href="ad-campaigns.html" class="btn btn-secondary">AI Ad Campaigns</a>
-            </div>
-          </div>
-
-          <!-- 9:16 Portrait Animated Logo Video (Auto-switches Dark/Light via main.js) -->
-          <div class="media-9x16-frame">
-            <video
-              class="theme-brand-video"
-              src="Harrison_Agents_Dark_Animated.mp4"
-              poster="Harrison_Agents_Dark_9x16.jpg"
-              autoplay
-              loop
-              muted
-              playsinline
-              controls>
-            </video>
-            <div class="media-9x16-caption">Harrison AI Agents • Official Crest</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CORE VALUE PILLARS (WITH TIER/SERVICE DIFFERENTIATION BADGES) -->
-      <section>
-        <div class="section-header">
-          <span class="eyebrow">Executive Overview</span>
-          <h2 class="section-title">Closed-Loop Growth &amp; Autonomous Execution</h2>
-          <p class="section-subtitle">
-            Most consultancies either run ads that leak leads or build isolated bots with no traffic. We unify demand generation, instant conversational capture, and backend workflow execution into one architecture.
-          </p>
+      <!-- 9:16 MOBILE-FIRST HEADER -->
+      <header class="unlearning-header">
+        <span class="eyebrow">New Release • Official 9:16 Mobile Experience</span>
+        <h1 class="hero-title" style="margin: 0 auto 1rem;">
+          THE <span class="ai-crimson">UNLEARNING</span> DILEMMA
+        </h1>
+        <p class="hero-tagline" style="margin: 0 auto 1.25rem;">
+          Why yesterday's cognitive habits, legacy playbooks, and institutional assumptions are the greatest bottleneck in the age of autonomous intelligence—and how to systematically unlearn them.
+        </p>
+        <div class="btn-group" style="justify-content: center;">
+          <a href="#order-deck" class="btn btn-primary">Get Your Copy Now →</a>
+          <a href="../contact.html?service=book-media" class="btn btn-secondary">Speaking, Bulk &amp; Media Inquiries</a>
         </div>
 
-        <div class="grid-3">
-          <div class="card">
-            <span class="card-number tier-badge-crimson">CORE 01 • WORKFLOWS</span>
-            <h3 class="card-title">Agentic Workflow Automation</h3>
-            <p>
-              Autonomous workflow architectures engineered for continuous, self-correcting execution across your core business operations—eliminating manual bottlenecks in scheduling, ticketing, and data pipelines.
-            </p>
-            <a href="solutions.html#stage-4" class="card-link">Explore Agentic Workflows →</a>
-          </div>
-
-          <div class="card">
-            <span class="card-number tier-badge-gold">CORE 02 • PAID MEDIA</span>
-            <h3 class="card-title">AI-Driven Ad Campaigns</h3>
-            <p>
-              Full-funnel paid media management across Google, Meta, LinkedIn, and programmatic networks—combining generative ad creative and algorithmic bidding with instant AI voice and chat lead qualification.
-            </p>
-            <a href="ad-campaigns.html" class="card-link">Explore Ad Campaign Systems →</a>
-          </div>
-
-          <div class="card">
-            <span class="card-number tier-badge-blue">CORE 03 • INFRASTRUCTURE</span>
-            <h3 class="card-title">AI Integration &amp; Deployment</h3>
-            <p>
-              End-to-end model integration and production deployment—managing your entire AI ecosystem across frontier cloud APIs (GPT-5.4, Gemini 3.1 Pro, Claude 4.6) and self-hosted sovereign vaults.
-            </p>
-            <a href="ai-tier-comparison-matrix.html" class="card-link">Explore AI Tier Matrix →</a>
-          </div>
+        <div class="view-mode-bar">
+          <button type="button" id="toggle-reel-layout" class="btn btn-secondary" style="padding: 0.55rem 1.1rem; font-size: 0.75rem;">
+            📱 Switch to Single-Column Mobile Reel View
+          </button>
         </div>
-      </section>
+      </header>
 
-      <!-- FEATURED PUBLICATION SPOTLIGHT: THE UNLEARNING DILEMMA (9:16 PREVIEW) -->
-      <section class="demo-panel" style="grid-template-columns: minmax(0, 1.35fr) minmax(240px, 300px);">
-        <div>
-          <span class="eyebrow">Featured Publication • Available Now</span>
-          <h2 class="section-title" style="margin-bottom: 0.75rem;">
-            <span class="ai-crimson">The Unlearning Dilemma</span>
-          </h2>
-          <p>
-            In an era defined by autonomous systems and rapid technological paradigm shifts, the hardest executive challenge isn't learning new tools—it's <strong>unlearning obsolete mental models</strong> before they calcify your organization.
-          </p>
-          <p>
-            Explore the official 9:16 mobile-first visual experience featuring the animated book cover, official launch trailer, 3D edition showcase, and ordering links.
-          </p>
-          <div class="btn-group" style="margin-top: 1.5rem;">
-            <a href="unlearning/index.html" class="btn btn-primary">Enter the 9:16 Book Experience →</a>
-            <a href="contact.html?service=book-media" class="btn btn-secondary">Speaking &amp; Bulk Inquiries</a>
+      <!-- 9:16 PORTRAIT VERTICAL SHOWCASE DECK (ALL 6 CARDS IN 9:16 ASPECT RATIO) -->
+      <section class="portrait-9x16-stream" id="book-portrait-stream">
+
+        <!-- 9:16 CARD 01: OFFICIAL LAUNCH AD VIDEO (unlearning/Available_now.mp4) -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill crimson">01 • Launch Trailer</span>
+            <span class="reel-pill">9:16 Reel</span>
           </div>
-        </div>
-
-        <div class="media-9x16-frame" style="max-width: 260px;">
           <video
-            src="Book_Cover_Animated.mp4"
-            poster="Book_Cover_9x16.jpg"
+            src="Available_now.mp4"
+            poster="Book_Cover.jpg"
             autoplay
             loop
             muted
-            playsinline>
+            playsinline
+            controls>
           </video>
-          <div class="media-9x16-caption">The Unlearning Dilemma • 9:16 Preview</div>
-        </div>
+        </article>
+
+        <!-- 9:16 CARD 02: ANIMATED BOOK COVER REEL (Book_Cover_Animated.mp4 + Book_Cover_9x16.jpg) -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill">02 • Animated Cover</span>
+            <span class="reel-pill">Motion Art</span>
+          </div>
+          <video
+            id="animated-cover-video"
+            src="../Book_Cover_Animated.mp4"
+            poster="../Book_Cover_9x16.jpg"
+            autoplay
+            loop
+            muted
+            playsinline
+            controls>
+          </video>
+        </article>
+
+        <!-- 9:16 CARD 03: THE CORE THESIS (9:16 PORTRAIT READING CARD OVER Book_Cover_9x16.jpg) -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill">03 • The Thesis</span>
+            <span class="reel-pill crimson">Synopsis</span>
+          </div>
+          <div class="reel-story-card">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); font-weight: 700;">
+                Executive Summary
+              </span>
+              <h3>Knowledge Acquisition Is No Longer the Bottleneck</h3>
+              <p>
+                When artificial intelligence makes instant expertise and execution a commodity, clinging to legacy processes becomes an existential liability.
+              </p>
+              <ul class="reel-chapter-list">
+                <li><strong>Part I — The Cognitive Trap:</strong> Why high-performing professionals resist letting go of obsolete mental models.</li>
+                <li><strong>Part II — Institutional Friction:</strong> How legacy workflows silently sabotage autonomous transformation.</li>
+                <li><strong>Part III — The Unlearning Protocol:</strong> A tactical framework to strip away outdated habits and rebuild from first principles.</li>
+              </ul>
+            </div>
+            <a href="#order-deck" class="btn btn-primary" style="width: 100%; text-align: center;">Order The Book ↓</a>
+          </div>
+        </article>
+
+        <!-- 9:16 CARD 04: 3D BOOK MOCKUP & ORDERING CARD (unlearning/3D_Book_Mockup.jpg) -->
+        <article class="reel-card-9x16" id="order-deck">
+          <div class="reel-top-badge">
+            <span class="reel-pill crimson">04 • Available Now</span>
+            <span class="reel-pill">Print &amp; Digital</span>
+          </div>
+          <div class="reel-contained-stage">
+            <div style="margin-top: 2rem; text-align: center;">
+              <div style="font-size: 0.72rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+                First Edition Release
+              </div>
+              <h3 style="font-size: 1.2rem; margin-top: 0.2rem;">The Unlearning Dilemma</h3>
+            </div>
+
+            <div class="reel-contained-img-wrap">
+              <img src="3D_Book_Mockup.jpg" alt="The Unlearning Dilemma 3D Book Mockup" />
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+              <a href="../contact.html?service=book-media" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+                Order Direct / Bulk Copies →
+              </a>
+              <a href="../contact.html?service=book-media" class="btn btn-secondary" style="width: 100%; padding: 0.65rem; font-size: 0.75rem;">
+                Request Author Keynote / Press Kit
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9:16 CARD 05: FULL COVER ARTWORK SHOWCASE (unlearning/Book_Cover.jpg & Book_Cover_9x16.jpg) -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill">05 • Cover Artwork</span>
+            <span class="reel-pill">9:16 Edition</span>
+          </div>
+          <img
+            id="static-cover-9x16"
+            class="reel-bg-img"
+            src="../Book_Cover_9x16.jpg"
+            alt="The Unlearning Dilemma 9:16 Portrait Book Cover" />
+          <div class="reel-bottom-overlay">
+            <div style="font-size: 0.7rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+              Official Cover Jacket
+            </div>
+            <div style="font-size: 0.95rem; font-weight: 700; margin: 0.2rem 0 0.6rem;">
+              Designed for Leaders Navigating the Autonomous Era
+            </div>
+            <button type="button" id="swap-cover-crop" class="btn btn-secondary" style="width: 100%; padding: 0.55rem; font-size: 0.72rem; background: rgba(24,26,32,0.9); color: #fff;">
+              🔄 Toggle Full Jacket (Book_Cover.jpg)
+            </button>
+          </div>
+        </article>
+
+        <!-- 9:16 CARD 06: HARRISON AI AGENTS BRAND CREST REEL (Dark/Light Auto-Switching) -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill">06 • Published By</span>
+            <span class="reel-pill crimson">Harrison Agents</span>
+          </div>
+          <video
+            class="theme-brand-video"
+            src="../Harrison_Agents_Dark_Animated.mp4"
+            poster="../Harrison_Agents_Dark_9x16.jpg"
+            autoplay
+            loop
+            muted
+            playsinline
+            controls>
+          </video>
+          <div class="reel-bottom-overlay">
+            <div style="font-size: 0.82rem; margin-bottom: 0.6rem; color: #e2e5ec;">
+              Ready to put the principles of <em>The Unlearning Dilemma</em> into production with autonomous AI agents?
+            </div>
+            <a href="../solutions.html" class="btn btn-primary" style="width: 100%; padding: 0.65rem; font-size: 0.76rem;">
+              Explore Harrison AI Solutions →
+            </a>
+          </div>
+        </article>
+
       </section>
 
-      <!-- 4-STAGE FULL-FUNNEL CLIENT JOURNEY -->
-      <section>
-        <div class="section-header">
-          <span class="eyebrow">The 4-Stage Architecture</span>
-          <h2 class="section-title">How Our Ecosystem Scales Your Enterprise</h2>
-          <p class="section-subtitle">
-            Deploy a single specialized capability or integrate all four stages for an end-to-end autonomous commercial engine.
-          </p>
-        </div>
-
-        <div class="grid-2">
-          <div class="card">
-            <span class="card-meta">Stage 01 • Digital Foundation</span>
-            <h3 class="card-title">Web Design &amp; Managed Infrastructure</h3>
-            <p>
-              Modular, high-speed web platforms paired with complete domain, DNS, and SSL administration—engineered from day one to host embedded AI assistants and high-converting campaign landing pages.
-            </p>
-            <a href="solutions.html#stage-1" class="card-link">View Infrastructure Specs →</a>
-          </div>
-
-          <div class="card">
-            <span class="card-meta">Stage 02 • Demand &amp; Media Velocity</span>
-            <h3 class="card-title">AI Ad Campaigns &amp; Media Processing</h3>
-            <p>
-              Scale qualified inbound traffic through algorithmic paid media campaigns and automated audio/video production pipelines that upscale, transcribe, and format creative assets at scale.
-            </p>
-            <a href="ad-campaigns.html" class="card-link">View Paid Growth Architecture →</a>
-          </div>
-
-          <div class="card">
-            <span class="card-meta">Stage 03 • 24/7 Conversion &amp; Intake</span>
-            <h3 class="card-title">Autonomous Voice Reception &amp; Smart Booking</h3>
-            <p>
-              Zero missed calls or cold leads. Inbound phone calls and web inquiries are answered in under 400ms by natural voice and chat agents wired directly into your live calendar and CRM APIs.
-            </p>
-            <a href="autonomous-reception.html" class="card-link">View Voice Architecture →</a>
-          </div>
-
-          <div class="card">
-            <span class="card-meta">Stage 04 • Backend Intelligence</span>
-            <h3 class="card-title">Multi-Agent Operations &amp; Sovereign LLMs</h3>
-            <p>
-              Networked AI agents that collaborate, critique, and execute complex post-sale workflows across Tier 2 frontier APIs or Tier 3 air-gapped sovereign hardware.
-            </p>
-            <a href="ai-tier-comparison-matrix.html" class="card-link">Compare Deployment Tiers →</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- INTERACTIVE LIVE VOICE & AD LEAD CAPTURE SIMULATOR -->
-      <section class="demo-panel">
-        <div>
-          <span class="eyebrow">Closed-Loop Proof of Concept</span>
-          <h2 class="section-title" style="margin-bottom: 0.75rem;">From Ad Click to Confirmed Booking in 12 Seconds</h2>
-          <p>
-            When a prospect clicks your paid ad or calls your business line at 11:00 PM, our <strong>Gemini Multimodal Live</strong> and <strong>OpenClaw + Claude 4.6</strong> telephony pipelines answer immediately, check live provider slots via REST APIs, and lock in the appointment.
-          </p>
-          <div class="btn-group" style="margin-top: 1.5rem;">
-            <button id="run-voice-simulation" class="btn btn-primary" type="button">▶ Simulate Live Agent Call</button>
-            <a href="autonomous-reception.html" class="btn btn-secondary">Read Technical Specs</a>
-          </div>
-        </div>
-
-        <div class="demo-console">
-          <div class="demo-status-row">
-            <span class="status-indicator"><span class="status-dot"></span> Live Pipeline Telemetry</span>
-            <code id="voice-latency-badge" style="color: var(--accent-gold);">RTT Latency: ~320ms</code>
-          </div>
-          <div id="voice-transcript-output" class="transcript-box">
-            Click <strong>"Simulate Live Agent Call"</strong> to watch how an inbound paid-ad lead is screened and booked via real-time REST API tool calling.
-          </div>
-        </div>
-      </section>
-
-      <harrison-footer-cta></harrison-footer-cta>
+      <harrison-footer-cta
+        heading="Bring The Unlearning Dilemma to Your Executive Team"
+        subtext="Book a keynote briefing, order bulk hardcover/digital copies for your leadership team, or scope an autonomous AI transformation with Harrison AI Agents.">
+      </harrison-footer-cta>
     </main>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* 1. Toggle between Multi-Card Grid and Single-Column Mobile Reel Stream */
+      const layoutBtn = document.getElementById('toggle-reel-layout');
+      const streamContainer = document.getElementById('book-portrait-stream');
+
+      if (layoutBtn && streamContainer) {
+        layoutBtn.addEventListener('click', () => {
+          streamContainer.classList.toggle('mobile-reel-mode');
+          const isSingle = streamContainer.classList.contains('mobile-reel-mode');
+          layoutBtn.textContent = isSingle
+            ? '⊞ Switch to Multi-Card Deck View'
+            : '📱 Switch to Single-Column Mobile Reel View';
+        });
+      }
+
+      /* 2. Automatic Path Fallback if Book_Cover_Animated.mp4 or Book_Cover_9x16.jpg is moved into /unlearning/ */
+      const animVideo = document.getElementById('animated-cover-video');
+      if (animVideo) {
+        animVideo.addEventListener('error', () => {
+          if (animVideo.getAttribute('src') === '../Book_Cover_Animated.mp4') {
+            animVideo.setAttribute('src', 'Book_Cover_Animated.mp4');
+            animVideo.setAttribute('poster', 'Book_Cover.jpg');
+            animVideo.load();
+          }
+        }, true);
+      }
+
+      const staticCover = document.getElementById('static-cover-9x16');
+      if (staticCover) {
+        staticCover.addEventListener('error', () => {
+          if (staticCover.getAttribute('src') === '../Book_Cover_9x16.jpg') {
+            staticCover.setAttribute('src', 'Book_Cover.jpg');
+          }
+        });
+      }
+
+      /* 3. Interactive Toggle between Book_Cover_9x16.jpg and unlearning/Book_Cover.jpg */
+      const swapBtn = document.getElementById('swap-cover-crop');
+      if (swapBtn && staticCover) {
+        let showing9x16 = true;
+        swapBtn.addEventListener('click', () => {
+          showing9x16 = !showing9x16;
+          if (showing9x16) {
+            staticCover.setAttribute('src', '../Book_Cover_9x16.jpg');
+            staticCover.style.objectFit = 'cover';
+            swapBtn.textContent = '🔄 Toggle Full Jacket (Book_Cover.jpg)';
+          } else {
+            staticCover.setAttribute('src', 'Book_Cover.jpg');
+            staticCover.style.objectFit = 'contain';
+            swapBtn.textContent = '🔄 Toggle 9:16 Portrait Crop (Book_Cover_9x16.jpg)';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

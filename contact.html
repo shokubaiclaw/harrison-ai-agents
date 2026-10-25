@@ -1,66 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harrison Agents - Contact</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Harrison AI Agents</title>
+  <meta name="description" content="Contact Harrison AI Agents to scope AI-driven ad campaigns, 24/7 autonomous voice receptionists, web infrastructure, or custom multi-agent LLM workflows." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
 </head>
 <body>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
 
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="services.html">AGENT SERVICES</a>
-            <a href="solutions.html">SOLUTIONS</a>
-            <a href="about.html">ABOUT US</a>
-            <a href="contact.html" class="active">CONTACT</a>
-            <a href="privacy.html">PRIVACY</a>
-        </nav>
-    </aside>
-
-    <!-- Main Content -->
     <main class="main-content">
-        <div class="contact-container">
-            
-            <div class="contact-header">
-                <h1>CONNECT WITH US.</h1>
-                <p>GET IN TOUCH WITH THE HARRISON AGENTS TEAM.</p>
-            </div>
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <span class="eyebrow">Architecture Scoping &amp; Campaign Onboarding</span>
+        <h1 class="hero-title">INITIATE YOUR DEPLOYMENT</h1>
+        <p class="hero-tagline">
+          Tell us about your growth targets, telephony volume, or operational bottlenecks. Our solutions architects will review your stack and prepare a concrete implementation blueprint.
+        </p>
+      </section>
 
-            <div class="contact-layout">
-                
-                <!-- Contact Form -->
-                <form class="contact-form" action="#" method="POST">
-                    <input type="text" name="name" placeholder="NAME" required>
-                    <input type="email" name="email" placeholder="EMAIL" required>
-                    <textarea name="message" placeholder="MESSAGE" required></textarea>
-                    <button type="submit" class="btn-gold">SEND MESSAGE</button>
-                </form>
+      <!-- CONTACT GRID: FORM + DIRECT CHANNELS -->
+      <section>
+        <div class="grid-2" style="align-items: start;">
+          <!-- Left Card: Interactive Architecture & Campaign Intake Form -->
+          <div class="card">
+            <span class="card-number">PROJECT INTAKE</span>
+            <h2 class="card-title">Request an Architecture &amp; Growth Consultation</h2>
+            <p>
+              Complete the technical intake below. If you arrived from a specific solution page, your primary capability interest is pre-selected automatically.
+            </p>
 
-                <!-- Contact Details -->
-                <div class="contact-info">
-                    <div class="info-block">
-                        <h4>EMAIL</h4>
-                        <p>info@harrisonaiagents.com</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>ADDRESS</h4>
-                        <p>Maryland<br>Tech District</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>SOCIAL</h4>
-                        <p><a href="https://www.linkedin.com/company/harrison-ai-agents/">Harrison AI Agents</a> (LinkedIn)</p>
-                        <p><a href="https://x.com/harrisonaiagent">Harrison AI Agents</a> (Twitter/X)</p>
-                    </div>
+            <!-- Replace action="" with your Formspree / Web3Forms / Webhook URL when ready; the script below also supports instant email routing to info@harrisonaiagents.com -->
+            <form id="harrison-contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="full-name">Full Name *</label>
+                  <input type="text" id="full-name" name="name" placeholder="Jane Doe" required />
                 </div>
 
-            </div>
-        </div>
-    </main>
+                <div class="form-group">
+                  <label for="company-name">Company / Organization *</label>
+                  <input type="text" id="company-name" name="company" placeholder="Acme Enterprise LLC" required />
+                </div>
 
+                <div class="form-group">
+                  <label for="work-email">Work Email *</label>
+                  <input type="email" id="work-email" name="email" placeholder="jane@company.com" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone-number">Phone Number</label>
+                  <input type="tel" id="phone-number" name="phone" placeholder="+1 (555) 000-0000" />
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="service-interest">Primary Capability / Solution Interest *</label>
+                  <select id="service-interest" name="service" required>
+                    <option value="full-funnel">Full-Funnel Growth + Autonomous AI Ecosystem (All Stages)</option>
+                    <option value="ad-campaigns">02. AI-Driven Ad Campaigns &amp; Paid Media (Google / Meta / LinkedIn)</option>
+                    <option value="voice-reception">03. 24/7 Autonomous Voice Reception (Gemini Live / OpenClaw + Claude 4.6)</option>
+                    <option value="smart-scheduling">04. On-Site Assistants &amp; Smart CRM/Calendar Scheduling</option>
+                    <option value="agentic-workflows">05. Multi-Agent Workflows &amp; Sovereign/API LLM Deployment</option>
+                    <option value="media-processing">06. Automated Audio/Video Media Processing Pipelines</option>
+                    <option value="web-infrastructure">01. Web Design, Landing Pages &amp; DNS/SSL Infrastructure</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="project-scope">Current Stack, Goals &amp; Timeline *</label>
+                  <textarea id="project-scope" name="message" rows="5" placeholder="Describe your current CRM/calendar tools, target monthly ad spend or call volume, and desired launch timeline..." required></textarea>
+                </div>
+              </div>
+
+              <div class="btn-group" style="margin-top: 0.5rem;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Architecture Inquiry →</button>
+              </div>
+              <p id="form-status-msg" style="font-size: 0.82rem; margin-top: 0.85rem; margin-bottom: 0; color: var(--text-muted);">
+                Direct encrypted routing to <strong>info@harrisonaiagents.com</strong>.
+              </p>
+            </form>
+          </div>
+
+          <!-- Right Column: Direct Contact & Onboarding Process -->
+          <div style="display: flex; flex-direction: column; gap: 1.75rem;">
+            <div class="card">
+              <span class="card-number">DIRECT DISPATCH</span>
+              <h3 class="card-title">Direct Enterprise Communications</h3>
+              <p>
+                Prefer to reach our engineering and paid growth desk directly via email? Send your RFP, architecture requirements, or campaign brief to:
+              </p>
+              <div class="pipeline-flow" style="justify-content: space-between;">
+                <a href="mailto:info@harrisonaiagents.com" style="font-weight: 700; color: var(--accent-primary);">info@harrisonaiagents.com</a>
+                <span style="color: var(--success); font-size: 0.75rem;">● SLA: &lt; 24 HRS</span>
+              </div>
+              <p style="font-size: 0.88rem; margin-bottom: 0;">
+                Part of the <strong>Harrison Arbitrage LLC</strong> brand family. Available for remote architecture deployments nationwide and globally.
+              </p>
+            </div>
+
+            <div class="card">
+              <span class="card-number">ONBOARDING PROTOCOL</span>
+              <h3 class="card-title">What Happens After You Reach Out?</h3>
+              <ul class="card-list" style="margin-bottom: 0;">
+                <li>
+                  <div>
+                    <strong style="color: var(--text-primary);">01. Technical &amp; Commercial Audit (30 Min):</strong> We review your current web footprint, ad accounts, telephony routing, and CRM/calendar APIs.
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <strong style="color: var(--text-primary);">02. Architecture &amp; ROAS Blueprint:</strong> You receive a clear specification detailing model selection (Tier 2 API vs. Tier 3 Sovereign), tool-calling endpoints, and campaign attribution flows.
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <strong style="color: var(--text-primary);">03. Sandbox Testing &amp; Production Cutover:</strong> We build, stress-test, and launch your campaigns and autonomous agents with zero disruption to existing operations.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- URL Query Parameter Auto-Selector & Instant Mailto Fallback Handler -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const requestedService = params.get('service');
+      const selectEl = document.getElementById('service-interest');
+
+      if (requestedService && selectEl) {
+        const matchingOption = Array.from(selectEl.options).find(opt => opt.value === requestedService);
+        if (matchingOption) {
+          selectEl.value = requestedService;
+        }
+      }
+
+      const form = document.getElementById('harrison-contact-form');
+      const statusMsg = document.getElementById('form-status-msg');
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          const actionUrl = form.getAttribute('action') || '';
+          // If the placeholder Formspree ID hasn't been swapped yet, route seamlessly via pre-formatted mailto so no inquiry is ever lost
+          if (actionUrl.includes('YOUR_FORMSPREE_ID')) {
+            e.preventDefault();
+            const name = document.getElementById('full-name').value.trim();
+            const company = document.getElementById('company-name').value.trim();
+            const email = document.getElementById('work-email').value.trim();
+            const phone = document.getElementById('phone-number').value.trim() || 'Not provided';
+            const serviceText = selectEl.options[selectEl.selectedIndex].text;
+            const message = document.getElementById('project-scope').value.trim();
+
+            const subject = encodeURIComponent(`[Architecture Inquiry] ${company} — ${serviceText}`);
+            const body = encodeURIComponent(
+              `Name: ${name}\nCompany: ${company}\nEmail: ${email}\nPhone: ${phone}\nPrimary Interest: ${serviceText}\n\nProject Scope & Goals:\n${message}`
+            );
+
+            statusMsg.style.color = 'var(--success)';
+            statusMsg.innerHTML = 'Opening your email client to dispatch inquiry directly to <strong>info@harrisonaiagents.com</strong>...';
+            window.location.href = `mailto:info@harrisonaiagents.com?subject=${subject}&body=${body}`;
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

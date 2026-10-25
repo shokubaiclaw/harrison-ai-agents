@@ -1,22 +1,63 @@
 /* ==========================================================================
-   HARRISON AI AGENTS — GLOBAL WEB COMPONENTS & UI ENGINE (main.js)
+   HARRISON AI AGENTS — GLOBAL WEB COMPONENTS & THEME MEDIA ENGINE (main.js)
    ========================================================================== */
+
+function getRootPrefix() {
+  const path = window.location.pathname;
+  return path.includes('/unlearning/') ? '../' : '';
+}
+
+function syncThemeMediaAssets() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const prefix = getRootPrefix();
+
+  /* 1. Sync 1x1 Sidebar & Mobile Brand Logos */
+  const logoSrc = prefix + (isLight ? 'Harrison_Agents_Light.jpg' : 'Harrison_Agents_Dark.jpg');
+  document.querySelectorAll('.theme-brand-logo').forEach(img => {
+    if (img.getAttribute('src') !== logoSrc) {
+      img.setAttribute('src', logoSrc);
+    }
+  });
+
+  /* 2. Sync 9x16 Animated Logo Videos & Poster Frames */
+  const videoSrc = prefix + (isLight ? 'Harrison_Agents_Light_Animated.mp4' : 'Harrison_Agents_Dark_Animated.mp4');
+  const posterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
+
+  document.querySelectorAll('.theme-brand-video').forEach(video => {
+    video.setAttribute('poster', posterSrc);
+    if (video.getAttribute('src') !== videoSrc) {
+      video.setAttribute('src', videoSrc);
+      video.load();
+      video.play().catch(() => {});
+    }
+  });
+
+  /* 3. Sync 9x16 Static Brand Images */
+  document.querySelectorAll('.theme-brand-9x16').forEach(img => {
+    if (img.getAttribute('src') !== posterSrc) {
+      img.setAttribute('src', posterSrc);
+    }
+  });
+}
 
 class HarrisonSidebar extends HTMLElement {
   connectedCallback() {
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const prefix = getRootPrefix();
+    const inUnlearning = prefix === '../';
+    const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
     const navItems = [
-      { href: 'index.html', label: 'Home', section: 'Core Platform' },
-      { href: 'solutions.html', label: 'Solutions Hub', badge: 'Full Funnel', section: 'Core Platform' },
-      { href: 'services.html', label: 'Agent Services', section: 'Core Platform' },
-      { href: 'ad-campaigns.html', label: 'AI Ad Campaigns', badge: 'New', section: 'Architecture Deep-Dives' },
-      { href: 'autonomous-reception.html', label: 'Voice Reception', section: 'Architecture Deep-Dives' },
-      { href: 'ai-tier-comparison-matrix.html', label: 'AI Tier Matrix', section: 'Architecture Deep-Dives' },
-      { href: 'media-processing.html', label: 'Media Pipelines', section: 'Architecture Deep-Dives' },
-      { href: 'about.html', label: 'About Us', section: 'Company & Governance' },
-      { href: 'contact.html', label: 'Contact', section: 'Company & Governance' },
-      { href: 'privacy.html', label: 'Privacy Policy', section: 'Company & Governance' }
+      { href: `${prefix}index.html`, id: 'index.html', label: 'Home', section: 'Core Platform' },
+      { href: `${prefix}solutions.html`, id: 'solutions.html', label: 'Solutions Hub', badge: 'Full Funnel', badgeClass: 'gold', section: 'Core Platform' },
+      { href: `${prefix}services.html`, id: 'services.html', label: 'Agent Services', section: 'Core Platform' },
+      { href: `${prefix}unlearning/index.html`, id: 'unlearning', label: 'The Unlearning Dilemma', badge: 'New Book', badgeClass: '', section: 'Featured Publication' },
+      { href: `${prefix}ad-campaigns.html`, id: 'ad-campaigns.html', label: 'AI Ad Campaigns', section: 'Architecture Deep-Dives' },
+      { href: `${prefix}autonomous-reception.html`, id: 'autonomous-reception.html', label: 'Voice Reception', section: 'Architecture Deep-Dives' },
+      { href: `${prefix}ai-tier-comparison-matrix.html`, id: 'ai-tier-comparison-matrix.html', label: 'AI Tier Matrix', section: 'Architecture Deep-Dives' },
+      { href: `${prefix}media-processing.html`, id: 'media-processing.html', label: 'Media Pipelines', section: 'Architecture Deep-Dives' },
+      { href: `${prefix}about.html`, id: 'about.html', label: 'About Us', section: 'Company & Governance' },
+      { href: `${prefix}contact.html`, id: 'contact.html', label: 'Contact', section: 'Company & Governance' },
+      { href: `${prefix}privacy.html`, id: 'privacy.html', label: 'Privacy Policy', section: 'Company & Governance' }
     ];
 
     const grouped = navItems.reduce((acc, item) => {
@@ -29,8 +70,12 @@ class HarrisonSidebar extends HTMLElement {
     for (const [section, items] of Object.entries(grouped)) {
       navHTML += `<div class="nav-section-label">${section}</div><ul class="nav-list">`;
       items.forEach(item => {
-        const isActive = currentPath === item.href || (currentPath === '' && item.href === 'index.html');
-        const badgeHTML = item.badge ? `<span class="nav-badge">${item.badge}</span>` : '';
+        const isActive = inUnlearning
+          ? item.id === 'unlearning'
+          : (currentFile === item.id || (currentFile === '' && item.id === 'index.html'));
+        const badgeHTML = item.badge
+          ? `<span class="nav-badge ${item.badgeClass || ''}">${item.badge}</span>`
+          : '';
         navHTML += `
           <li>
             <a href="${item.href}" class="nav-link ${isActive ? 'active' : ''}">
@@ -43,17 +88,23 @@ class HarrisonSidebar extends HTMLElement {
       navHTML += `</ul>`;
     }
 
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const initialLogo = prefix + (isLight ? 'Harrison_Agents_Light.jpg' : 'Harrison_Agents_Dark.jpg');
+
     this.innerHTML = `
       <div class="mobile-topbar">
-        <a href="index.html" class="brand-name">HARRISON AI AGENTS</a>
+        <a href="${prefix}index.html" style="display:flex; align-items:center; gap:0.6rem;">
+          <img src="${initialLogo}" alt="Harrison Agents Crest" class="theme-brand-logo" style="width:36px; height:36px; border-radius:8px; border:1px solid var(--accent-gold); object-fit:cover;" />
+          <span class="brand-name">H<span class="ai-crimson">a</span>rr<span class="ai-crimson">i</span>son <span class="ai-crimson">Agents</span></span>
+        </a>
         <button class="mobile-menu-btn" id="mobile-nav-toggle" aria-label="Toggle Menu">☰ MENU</button>
       </div>
       <aside class="sidebar" id="app-sidebar">
-        <a href="index.html" class="brand-header">
-          <div class="brand-avatar">HA</div>
+        <a href="${prefix}index.html" class="brand-header">
+          <img src="${initialLogo}" alt="Harrison Agents Logo" class="brand-logo-img theme-brand-logo" />
           <div class="brand-title-group">
-            <span class="brand-name">Harrison AI</span>
-            <span class="brand-sub">Autonomous Systems</span>
+            <span class="brand-name">H<span class="ai-crimson">a</span>rr<span class="ai-crimson">i</span>son <span class="ai-crimson">Agents</span></span>
+            <span class="brand-sub">Autonomous AI Systems</span>
           </div>
         </a>
         <nav aria-label="Primary Sidebar Navigation" style="display:flex; flex-direction:column; flex:1;">
@@ -61,7 +112,7 @@ class HarrisonSidebar extends HTMLElement {
         </nav>
         <div class="sidebar-footer">
           <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle Light/Dark Theme">
-            ☀️ Light Mode
+            ☀️ Switch to Light Mode
           </button>
           <div class="sidebar-legal">© ${new Date().getFullYear()} Harrison AI Agents</div>
         </div>
@@ -70,6 +121,7 @@ class HarrisonSidebar extends HTMLElement {
 
     this.initThemeToggle();
     this.initMobileMenu();
+    syncThemeMediaAssets();
   }
 
   initThemeToggle() {
@@ -79,6 +131,7 @@ class HarrisonSidebar extends HTMLElement {
     const syncLabel = () => {
       const isLight = rootEl.getAttribute('data-theme') === 'light';
       toggleBtn.innerHTML = isLight ? '🌙 Switch to Dark Mode' : '☀️ Switch to Light Mode';
+      syncThemeMediaAssets();
     };
 
     syncLabel();
@@ -105,6 +158,7 @@ class HarrisonSidebar extends HTMLElement {
 
 class HarrisonFooterCTA extends HTMLElement {
   connectedCallback() {
+    const prefix = getRootPrefix();
     const heading = this.getAttribute('heading') || 'Ready to Deploy Autonomous Growth & Operations?';
     const subtext = this.getAttribute('subtext') || 'Whether you need AI-driven paid ad campaigns, 24/7 multimodal voice reception, or sovereign multi-agent workflows, our engineering team builds production systems that execute.';
     this.innerHTML = `
@@ -113,8 +167,9 @@ class HarrisonFooterCTA extends HTMLElement {
         <h2>${heading}</h2>
         <p>${subtext}</p>
         <div class="btn-group" style="justify-content: center;">
-          <a href="contact.html" class="btn btn-primary">Schedule an Architecture Call →</a>
-          <a href="solutions.html" class="btn btn-secondary">Explore Full-Funnel Solutions</a>
+          <a href="${prefix}contact.html" class="btn btn-primary">Schedule an Architecture Call →</a>
+          <a href="${prefix}solutions.html" class="btn btn-secondary">Explore Full-Funnel Solutions</a>
+          <a href="${prefix}unlearning/index.html" class="btn btn-secondary">📖 The Unlearning Dilemma</a>
         </div>
       </section>
     `;
@@ -124,8 +179,10 @@ class HarrisonFooterCTA extends HTMLElement {
 customElements.define('harrison-sidebar', HarrisonSidebar);
 customElements.define('harrison-footer-cta', HarrisonFooterCTA);
 
-/* Interactive Voice Reception Demo Simulator (Used on index.html & autonomous-reception.html) */
+/* Interactive Voice Reception Demo Simulator */
 document.addEventListener('DOMContentLoaded', () => {
+  syncThemeMediaAssets();
+
   const demoBtn = document.getElementById('run-voice-simulation');
   const transcriptBox = document.getElementById('voice-transcript-output');
   const latencyBadge = document.getElementById('voice-latency-badge');
@@ -152,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (latencyBadge) latencyBadge.textContent = `RTT Latency: ${step.latency}`;
           const line = document.createElement('div');
           line.style.marginBottom = '0.45rem';
-          line.innerHTML = `<strong style="color: var(--accent-primary);">${step.speaker}:</strong> ${step.text}`;
+          line.innerHTML = `<strong style="color: var(--accent-gold);">${step.speaker}:</strong> ${step.text}`;
           transcriptBox.appendChild(line);
 
           if (idx === steps.length - 1) {

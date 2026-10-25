@@ -1,60 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harrison Agents - Privacy Policy</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Harrison AI Agents</title>
+  <meta name="description" content="Data Protection, Paid Media Attribution, Telephony Voice Stream, and Enterprise AI Governance Standards for Harrison AI Agents." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
 </head>
 <body>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
 
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="services.html">AGENT SERVICES</a>
-            <a href="solutions.html">SOLUTIONS</a>
-            <a href="about.html">ABOUT US</a>
-            <a href="contact.html">CONTACT</a>
-            <a href="privacy.html" class="active">PRIVACY</a>
-        </nav>
-    </aside>
-
-    <!-- Main Content -->
     <main class="main-content">
-        <div class="page-container">
-            <div class="page-header">
-                <h1>PRIVACY POLICY.</h1>
-                <p>Data Protection & Privacy Standards</p>
-            </div>
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <span class="eyebrow">Data Protection &amp; Privacy Standards</span>
+        <h1 class="hero-title">PRIVACY POLICY &amp; AI DATA GOVERNANCE</h1>
+        <p class="hero-tagline">
+          Effective Year: 2026 • Harrison AI Agents (a division of the Harrison Arbitrage LLC brand family). We engineer every web platform, paid media funnel, voice receptionist, and LLM workflow with strict data minimization and cryptographic security.
+        </p>
+      </section>
 
-            <div class="content-section">
-                <h2>1. Information We Collect</h2>
-                <p>When you interact with Harrison Agents, we collect personal information you voluntarily provide through our contact forms or direct communications, such as your name, email address, and project specifications. We also automatically collect non-personal technical data including IP addresses, browser types, and usage metrics to optimize site performance.</p>
-            </div>
+      <!-- 6 GOVERNANCE CLAUSES -->
+      <section>
+        <div class="grid-2">
+          <!-- Clause 1 -->
+          <div class="card">
+            <span class="card-number">CLAUSE 01</span>
+            <h3 class="card-title">1. Information We Collect</h3>
+            <p>
+              We collect only the information required to scope, deliver, and optimize our technical services:
+            </p>
+            <ul class="card-list">
+              <li><strong>Direct Business Inquiries:</strong> Name, organization, work email, phone number, and project specifications submitted via our contact and onboarding forms.</li>
+              <li><strong>Technical Telemetry:</strong> Non-invasive browser preferences (such as local Light/Dark theme state), IP-level security logs, and aggregate site performance metrics.</li>
+              <li><strong>Client System Credentials:</strong> Scoped API keys and webhook tokens provided during onboarding, stored strictly in encrypted secret vaults.</li>
+            </ul>
+          </div>
 
-            <div class="content-section">
-                <h2>2. How We Use Your Data</h2>
-                <p>Your data is strictly utilized to deliver, manage, and optimize our AI agent services, respond to inquiries, and process service engagements. We do not sell, rent, or trade your personal information to third parties for marketing purposes.</p>
-            </div>
+          <!-- Clause 2 -->
+          <div class="card">
+            <span class="card-number">CLAUSE 02</span>
+            <h3 class="card-title">2. Paid Media &amp; Attribution Telemetry</h3>
+            <p>
+              When executing <strong>AI-Driven Ad Campaigns</strong> on behalf of our clients or our own platform, we utilize privacy-compliant attribution protocols:
+            </p>
+            <ul class="card-list">
+              <li><strong>Click &amp; Conversion Identifiers:</strong> UTM parameters, Google Click IDs (<code>gclid</code>), and Meta/LinkedIn click identifiers used to measure return on ad spend (ROAS).</li>
+              <li><strong>Server-Side Conversion APIs (CAPI):</strong> Hashed conversion events (using SHA-256) transmitted server-to-server to ad platforms strictly to optimize campaign delivery in compliance with platform privacy terms.</li>
+            </ul>
+          </div>
 
-            <div class="content-section">
-                <h2>3. AI Architecture & Data Security</h2>
-                <p>Client data and operational parameters shared during custom agent deployments are protected using industry-standard encryption protocols. Proprietary information processed through our agent workflows remains strictly confidential and is handled in accordance with enterprise-grade data protection guidelines.</p>
-            </div>
+          <!-- Clause 3 -->
+          <div class="card">
+            <span class="card-number">CLAUSE 03</span>
+            <h3 class="card-title">3. Voice Telephony &amp; Booking Data Processing</h3>
+            <p>
+              Our 24/7 autonomous reception and smart scheduling agents process live audio streams and appointment payloads strictly as a data processor on behalf of the deploying enterprise:
+            </p>
+            <ul class="card-list">
+              <li><strong>Real-Time Audio Streams:</strong> Inbound and outbound voice streams routed via Twilio SIP/WebSockets are processed in real time to execute caller requests and calendar bookings.</li>
+              <li><strong>No Unauthorized Voice Cloning:</strong> Caller audio is never harvested to train public foundation models or synthesize unauthorized voice clones.</li>
+            </ul>
+          </div>
 
-            <div class="content-section">
-                <h2>4. Third-Party Integration</h2>
-                <p>Our website and agent solutions may interface with trusted third-party providers (such as hosting infrastructure and domain providers). These providers have independent privacy policies governing data managed on their platforms.</p>
-            </div>
+          <!-- Clause 4 -->
+          <div class="card">
+            <span class="card-number">CLAUSE 04</span>
+            <h3 class="card-title">4. AI Model Tiers &amp; Zero-Data-Retention (ZDR)</h3>
+            <p>
+              We architect AI workflows to prevent proprietary business logic or customer PII from leaking into public training corpora:
+            </p>
+            <ul class="card-list">
+              <li><strong>Tier 2 Commercial APIs:</strong> Workloads routed through OpenAI, Google Cloud/Vertex, or Anthropic APIs utilize commercial API endpoints governed by enterprise Zero-Data-Retention (ZDR) and no-training policies where applicable.</li>
+              <li><strong>Tier 3 Sovereign Vaults:</strong> For regulated industries, we deploy self-contained open-weight models (Llama 4, DeepSeek V4, Qwen 3.5) inside client-controlled VPCs or on-premise hardware with zero external network egress.</li>
+            </ul>
+          </div>
 
-            <div class="content-section">
-                <h2>5. Contact & Data Inquiries</h2>
-                <p>If you have questions regarding this Privacy Policy or wish to request data deletion or modification, please contact us directly via our contact page or email us at <strong>info@harrisonaiagents.com</strong>.</p>
-            </div>
+          <!-- Clause 5 -->
+          <div class="card">
+            <span class="card-number">CLAUSE 05</span>
+            <h3 class="card-title">5. Data Security &amp; Third-Party Subprocessors</h3>
+            <p>
+              We do not sell, rent, or broker personal or enterprise data to third parties. Data is shared only with vetted infrastructure subprocessors necessary to operate your selected architecture (such as cloud hosting, Twilio telephony carriers, and your designated CRM/calendar endpoints), all bound by strict TLS 1.3 encryption in transit and AES-256 encryption at rest.
+            </p>
+          </div>
+
+          <!-- Clause 6 -->
+          <div class="card">
+            <span class="card-number">CLAUSE 06</span>
+            <h3 class="card-title">6. Contact &amp; Data Governance Inquiries</h3>
+            <p>
+              You retain full rights to request access to, correction of, or deletion of any personal data held by Harrison AI Agents, or to request a copy of our enterprise Data Processing Addendum (DPA).
+            </p>
+            <p style="margin-bottom: 0;">
+              Direct all privacy, security, and compliance inquiries to:<br />
+              <a href="mailto:info@harrisonaiagents.com" style="font-weight: 700;">info@harrisonaiagents.com</a>
+            </p>
+          </div>
         </div>
-    </main>
+      </section>
 
+      <harrison-footer-cta
+        heading="Need a Custom Data Processing Addendum or Sovereign AI Deployment?"
+        subtext="Speak with our engineering team about air-gapped Tier 3 LLM deployments and HIPAA/SOC2-aligned voice and workflow architectures.">
+      </harrison-footer-cta>
+    </main>
+  </div>
 </body>
 </html>

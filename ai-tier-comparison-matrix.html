@@ -1,163 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Tier Comparison Matrix</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tier Comparison Matrix | Harrison AI Agents</title>
+  <meta name="description" content="Enterprise comparison of Tier 1 Consumer AI Apps, Tier 2 Frontier APIs (GPT-5.4, Gemini 3.1 Pro, Claude 4.6), and Tier 3 Sovereign Self-Hosted AI (Llama 4, DeepSeek V4, Qwen 3.5)." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
 </head>
 <body>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
 
-    <aside class="sidebar">
-        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="services.html">AGENT SERVICES</a>
-            <a href="solutions.html" class="active">SOLUTIONS</a>
-            <a href="about.html">ABOUT US</a>
-            <a href="contact.html">CONTACT</a>
-            <a href="privacy.html">PRIVACY</a>
-        </nav>
-    </aside>
+    <main class="main-content">
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <span class="eyebrow">Pillar 05 • Enterprise AI Architecture Guide</span>
+        <h1 class="hero-title">AI TIER COMPARISON MATRIX</h1>
+        <p class="hero-tagline">
+          Navigating the 2026 AI landscape requires separating consumer chat interfaces from production API engines and air-gapped sovereign infrastructure. Use our interactive trade-off matrix below to evaluate the right tier for your security, scale, and compliance requirements.
+        </p>
+      </section>
 
-<main class="main-content">
-  <div class="page-container">
-    <div class="page-header">
-      <h1>AI Tier Comparison Matrix</h1>
-      <p>Select a technical priority to compare trade-offs</p>
-    </div>
-    
-    <!-- Controls using your btn-gold class -->
-    <div id="btn-group" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
-      <button class="btn-gold" onclick="updateMatrix('cost', this)" style="opacity: 1; border: 2px solid var(--gold);">Cost Structure</button>
-      <button class="btn-gold" onclick="updateMatrix('privacy', this)" style="opacity: 0.6; border: 2px solid transparent;">Data Privacy</button>
-      <button class="btn-gold" onclick="updateMatrix('overhead', this)" style="opacity: 0.6; border: 2px solid transparent;">Technical Overhead</button>
-      <button class="btn-gold" onclick="updateMatrix('customization', this)" style="opacity: 0.6; border: 2px solid transparent;">Customization</button>
-    </div>
+      <!-- INTERACTIVE PRIORITY FILTER BAR & DYNAMIC TIER CARDS -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">Interactive Trade-Off Analyzer</span>
+          <h2 class="section-title">Select a Technical Priority to Compare Trade-Offs</h2>
+          <p class="section-subtitle">
+            Click any operational priority below to dynamically inspect how Tier 1, Tier 2, and Tier 3 architectures compare.
+          </p>
+        </div>
 
-    <!-- Layout using your card-container and card classes -->
-    <div class="card-container">
-            
-      <!-- Tier 2 -->
-      <div class="card" id="card-2">
-        <h4 style="color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;">Tier 2</h4>
-        <h4 style="font-size: 1.5rem; margin-top: 0; color: var(--text-main);">API Integration</h4>
-        <div id="display-2" style="min-height: 120px; margin-top: 1.5rem;"></div>
-      </div>
+        <div class="filter-bar" role="tablist" aria-label="Technical Priority Filter">
+          <button class="filter-btn active" data-priority="cost" type="button">💰 Cost Structure</button>
+          <button class="filter-btn" data-priority="privacy" type="button">🔒 Data Privacy</button>
+          <button class="filter-btn" data-priority="overhead" type="button">⚙️ Technical Overhead</button>
+          <button class="filter-btn" data-priority="customization" type="button">🛠️ Customization</button>
+        </div>
 
-      <!-- Tier 3 -->
-      <div class="card" id="card-3">
-        <h4 style="color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;">Tier 3</h4>
-        <h4 style="font-size: 1.5rem; margin-top: 0; color: var(--text-main);">Self-Hosted / Sovereign</h4>
-        <div id="display-3" style="min-height: 120px; margin-top: 1.5rem;"></div>
-      </div>
+        <div class="grid-3" id="tier-dynamic-cards">
+          <!-- Tier 1 Card -->
+          <div class="card">
+            <span class="card-number">TIER 1 • THE APPS</span>
+            <h3 class="card-title">Consumer-Grade AI</h3>
+            <p class="card-meta" id="t1-subtitle">Cost Structure Analysis</p>
+            <p id="t1-body">
+              Fixed monthly per-seat subscriptions ($20–$30/user/mo). Low barrier to entry for individuals, but costs scale poorly across large teams and offer zero programmatic ROI.
+            </p>
+          </div>
 
-      <!-- Tier 1 -->
-      <div class="card" id="card-1">
-        <h4 style="color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;">Tier 1</h4>
-        <h4 style="font-size: 1.5rem; margin-top: 0; color: var(--text-main);">Consumer Apps</h4>
-        <div id="display-1" style="min-height: 120px; margin-top: 1.5rem;"></div>
-      </div>     
-    </div>
-      <p></p><p></p>
-      <!-- Tier Descriptions -->
-      <div class="content-section">
-        <h2>Tier 1: Consumer-Grade AI (The Apps)</h2>
-        <h4>The Architecture</h4>
-          <p>The provider hosts the hardware, the model, and the interface.</p>
-        <h4>The 2026 Landscape</h4>
-          <p>These web and mobile apps often serve as the testing ground for the absolute frontier of multimodal capabilities, such as advanced voice, vision, and real-time generation.</p>
-        <h4>The Trade-offs</h4>
-          <p>Users get zero-friction access to the best models, but they trade away data privacy and system control. The provider dictates the interface limits and can generally use prompt history for training.</p>
-        <h4>Best For</h4>
-          <p>Everyday productivity, quick brainstorming, and individual consumers who need immediate answers without any technical setup.</p>
-      </div>
-      <div class="content-section">
-        <h2>Tier 2: The API Layer (The Engine Room)</h2>
-        <h4>The Architecture</h4>
-          <p>The operator owns the application logic, user interface, or agent framework, but the model itself lives on a provider's cloud (e.g., OpenAI, Anthropic, Google).</p>
-        <h4>The 2026 Landscape</h4>
-          <p>This tier is currently dominated by frontier API models like GPT-5.4, Gemini 3.1 Pro, and Claude 4.6. It allows organizations to build complex, autonomous workflows without needing to purchase or provision massive GPU clusters.</p>
-        <h4>The Trade-offs</h4>
-          <p>Costs scale directly with usage through token-metering, which can become prohibitively expensive at high volumes. While enterprise API agreements protect data from being used in training, the raw data must still leave the operator's internal network to be processed by a third party.</p>
-        <h4>Best For</h4>
-          <p>Startups, software integrations, and enterprise tasks requiring maximum reasoning capabilities without the burden of hardware management.</p>
-      </div>
-      <div class="content-section">
-        <h2>Tier 3: Sovereign &amp; Self-Contained AI (The Vault)</h2>
-        <h4>The Architecture</h4>
-          <p>Total ownership. The operator manages the hardware (local servers or a private cloud data center), the software stack, and runs an open-weight AI model.</p>
-        <h4>The 2026 Landscape</h4>
-          <p>This is a rapidly expanding sector for enterprise AI, heavily driven by the "Sovereign AI" movement. Because the capability gap between closed models and top open-weight models (like Llama 4, DeepSeek V4, and Qwen 3.5) has virtually closed for standard enterprise tasks, organizations no longer have to sacrifice intelligence to maintain control.</p>
-        <h4>The Trade-offs</h4>
-          <p>It requires significant upfront capital for hardware and specialized engineering talent to maintain the systems. However, it converts AI from a variable token expense into a predictable, fixed capital asset.</p>
-        <h4>Best For</h4>
-          <p>Healthcare, finance, government agencies, and high-volume data pipelines where regulatory compliance and absolute data privacy are non-negotiable.</p>
-      </div>
+          <!-- Tier 2 Card -->
+          <div class="card" style="border-color: var(--border-highlight);">
+            <span class="card-number">TIER 2 • THE ENGINE ROOM</span>
+            <h3 class="card-title">The API Layer</h3>
+            <p class="card-meta" id="t2-subtitle">Cost Structure Analysis</p>
+            <p id="t2-body">
+              Pay-as-you-go token and audio-minute consumption + initial systems engineering. Highly capital-efficient—you pay strictly for actual automated work executed.
+            </p>
+          </div>
+
+          <!-- Tier 3 Card -->
+          <div class="card">
+            <span class="card-number">TIER 3 • THE VAULT</span>
+            <h3 class="card-title">Sovereign &amp; Self-Contained AI</h3>
+            <p class="card-meta" id="t3-subtitle">Cost Structure Analysis</p>
+            <p id="t3-body">
+              Significant upfront CapEx (dedicated enterprise GPUs or reserved cloud clusters) paired with predictable long-term OpEx and zero per-token vendor fees at massive volume.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEEP-DIVE TIER BREAKDOWN & 2026 MODEL LANDSCAPE -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">Architectural Deep-Dive</span>
+          <h2 class="section-title">The 2026 Enterprise AI Landscape by Tier</h2>
+          <p class="section-subtitle">
+            How leading frontier models and open-weight vaults map across the three operational tiers.
+          </p>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Tier &amp; Designation</th>
+                <th>Representative 2026 Models &amp; Platforms</th>
+                <th>Data Governance &amp; Security</th>
+                <th>Ideal Enterprise Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Tier 1: Consumer-Grade AI</strong><br />
+                  <span style="color: var(--text-muted); font-size: 0.8rem;">"The Apps"</span>
+                </td>
+                <td>ChatGPT Web, Claude.ai Web, Gemini Consumer App, Microsoft Copilot Web</td>
+                <td>Hosted on multi-tenant vendor cloud; manual copy-paste risks shadow-IT data leakage unless enterprise seat controls are enforced.</td>
+                <td>Individual employee drafting, ad-hoc brainstorming, and manual research. Cannot run autonomous background workflows.</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Tier 2: The API Layer</strong><br />
+                  <span style="color: var(--accent-primary); font-size: 0.8rem;">"The Engine Room"</span>
+                </td>
+                <td>
+                  <strong>OpenAI:</strong> GPT-5.4<br />
+                  <strong>Google:</strong> Gemini 3.1 Pro &amp; Multimodal Live<br />
+                  <strong>Anthropic:</strong> Claude 4.6 Opus / Sonnet / Haiku
+                </td>
+                <td>Zero-data-retention (ZDR) API agreements available; data is never used to train foundation models; encrypted in transit via TLS 1.3.</td>
+                <td>24/7 autonomous voice receptionists, smart CRM booking assistants, multi-agent orchestration, and closed-loop ad conversion pipelines.</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Tier 3: Sovereign AI</strong><br />
+                  <span style="color: var(--success); font-size: 0.8rem;">"The Vault"</span>
+                </td>
+                <td>
+                  <strong>Meta:</strong> Llama 4 (Scout / Maverick)<br />
+                  <strong>DeepSeek:</strong> DeepSeek V4<br />
+                  <strong>Alibaba:</strong> Qwen 3.5<br />
+                  <em>Served via vLLM / Ollama / TensorRT-LLM</em>
+                </td>
+                <td>100% air-gapped or VPC-isolated infrastructure. Zero external API calls; complete physical and cryptographic custody of weights and logs.</td>
+                <td>Regulated healthcare (HIPAA), defense/government compliance, proprietary financial arbitrage, and high-volume internal document intelligence.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- MODEL-BY-MODEL CAPABILITY MATRIX -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">2026 Model Benchmarks</span>
+          <h2 class="section-title">How We Select Models Inside Your Architecture</h2>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <span class="card-number">TIER 2 • FRONTIER PROPRIETARY APIS</span>
+            <h3 class="card-title">When Maximum Reasoning & Multimodal Speed Matter</h3>
+            <ul class="card-list">
+              <li><strong>GPT-5.4:</strong> Industry benchmark for complex structured output, deep multi-step planning, and broad tool-use reliability.</li>
+              <li><strong>Gemini 3.1 Pro &amp; Live:</strong> Unmatched 2M+ token context window and sub-400ms native audio/video streaming for real-time telephony and media pipelines.</li>
+              <li><strong>Claude 4.6 (Sonnet / Opus):</strong> Superior agentic coding, nuanced customer communication, and deterministic adherence to complex system guardrails inside OpenClaw.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <span class="card-number">TIER 3 • SOVEREIGN OPEN-WEIGHT MODELS</span>
+            <h3 class="card-title">When Data Custody & Zero Token Fees Matter</h3>
+            <ul class="card-list">
+              <li><strong>Llama 4:</strong> Versatile multimodal open-weight backbone ideal for private RAG knowledge bases and fine-tuned enterprise adapters (LoRA).</li>
+              <li><strong>DeepSeek V4:</strong> Exceptional mathematical, analytical, and reasoning density at a fraction of traditional compute overhead.</li>
+              <li><strong>Qwen 3.5:</strong> Top-tier multilingual, coding, and structured tool-calling performance for self-hosted agentic clusters.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <harrison-footer-cta
+        heading="Not Sure Whether Tier 2 APIs or Tier 3 Sovereign AI Fits Your Stack?"
+        subtext="Our architects frequently build hybrid systems—keeping sensitive PII inside a local Tier 3 vault while routing public customer voice and ad interactions through fast Tier 2 APIs.">
+      </harrison-footer-cta>
+    </main>
   </div>
-</main>
 
-<script>
-  const data = {
-    cost: [
-      { value: "Low / Fixed Subscription", desc: "Predictable, low monthly costs, but limited scaling for broader workflows or high-volume usage." },
-      { value: "Variable / Pay-per-token", desc: "Pay strictly for what you use. Highly scalable, but can become prohibitively expensive at enterprise scale." },
-      { value: "High Upfront / Fixed Ongoing", desc: "Requires significant capital expenditure for hardware and infrastructure, but marginal cost per query drops near zero." }
-    ],
-    privacy: [
-      { value: "Low Privacy", desc: "Data may be used by the provider to train future AI models. Not suitable for sensitive or proprietary information." },
-      { value: "Medium Privacy", desc: "Data is sent over the network. Enterprise API agreements typically guarantee zero retention, but it relies on third-party trust." },
-      { value: "Maximum Privacy", desc: "Total control. Data never leaves your internal network or 'Vault', ensuring full regulatory compliance." }
-    ],
-    overhead: [
-      { value: "Zero Overhead", desc: "Turnkey solution. Ready to use immediately out of the box with zero engineering or configuration required." },
-      { value: "Medium Overhead", desc: "Requires developers to integrate API endpoints, handle error rates, and build the surrounding software logic." },
-      { value: "High Overhead", desc: "Requires specialized MLOps talent to procure hardware, manage deployments, and maintain system infrastructure." }
-    ],
-    customization: [
-      { value: "Low Customization", desc: "Limited to basic system instructions, prompt engineering, and standard chat interfaces." },
-      { value: "High Customization", desc: "Supports Retrieval-Augmented Generation (RAG), autonomous tool calling, and fine-tuning via APIs." },
-      { value: "Maximum Customization", desc: "Full root access to model weights, enabling deep fine-tuning and entirely custom architectural modifications." }
-    ]
-  };
+  <!-- Interactive Priority Filter Controller -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const priorityData = {
+        cost: {
+          label: 'Cost Structure Analysis',
+          t1: 'Fixed monthly per-seat subscriptions ($20–$30/user/mo). Low barrier to entry for individuals, but costs scale poorly across large teams and offer zero programmatic ROI.',
+          t2: 'Pay-as-you-go token and audio-minute consumption + initial systems engineering. Highly capital-efficient—you pay strictly for actual automated work executed.',
+          t3: 'Significant upfront CapEx (dedicated enterprise GPUs or reserved VPC clusters) paired with predictable long-term OpEx and zero per-token vendor fees at massive volume.'
+        },
+        privacy: {
+          label: 'Data Privacy & Governance',
+          t1: 'Lowest control. Standard consumer tiers may log prompts for model improvement; employees manually pasting sensitive client data create severe compliance exposure.',
+          t2: 'Enterprise-grade API privacy. Zero-Data-Retention (ZDR) endpoints ensure your prompts and customer calls are never used to train public models.',
+          t3: 'Absolute sovereignty. Models run on your own hardware or private cloud VPC. Sensitive data never leaves your firewall—ideal for HIPAA, legal, and financial mandates.'
+        },
+        overhead: {
+          label: 'Technical Overhead & Maintenance',
+          t1: 'Zero engineering overhead—users simply log into a browser tab. However, every task still requires 100% manual human prompting and copy-pasting.',
+          t2: 'Managed by Harrison AI Agents. We handle webhook bridges, REST API bindings, prompt guardrails, and failover routing while cloud providers manage GPU scaling.',
+          t3: 'Highest infrastructure complexity. Requires GPU orchestration, quantization management, vLLM/inference server tuning, and hardware monitoring—fully managed by our team.'
+        },
+        customization: {
+          label: 'Customization & System Integration',
+          t1: 'Minimal customization. Limited to basic system instructions and file uploads inside a walled garden; cannot autonomously trigger your internal business software.',
+          t2: 'Deep workflow integration. Full support for real-time REST tool calling, MCP servers, custom ElevenLabs voices, Twilio SIP trunks, and multi-agent state machines.',
+          t3: 'Total model control. Supports custom LoRA weight fine-tuning on proprietary datasets, custom tokenizers, and unrestricted system-level behavior modification.'
+        }
+      };
 
-  function updateMatrix(metric, btnElement) {
-    // Dim all buttons and remove borders
-    const buttons = document.querySelectorAll('#btn-group button');
-    buttons.forEach(btn => {
-      btn.style.opacity = '0.6';
-      btn.style.border = '2px solid transparent';
+      const buttons = document.querySelectorAll('.filter-btn');
+      const t1Sub = document.getElementById('t1-subtitle');
+      const t2Sub = document.getElementById('t2-subtitle');
+      const t3Sub = document.getElementById('t3-subtitle');
+      const t1Body = document.getElementById('t1-body');
+      const t2Body = document.getElementById('t2-body');
+      const t3Body = document.getElementById('t3-body');
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const key = btn.getAttribute('data-priority');
+          const info = priorityData[key];
+          if (info) {
+            t1Sub.textContent = info.label;
+            t2Sub.textContent = info.label;
+            t3Sub.textContent = info.label;
+            t1Body.textContent = info.t1;
+            t2Body.textContent = info.t2;
+            t3Body.textContent = info.t3;
+          }
+        });
+      });
     });
-    
-    // Highlight the active button
-    if (btnElement) {
-        btnElement.style.opacity = '1';
-        btnElement.style.border = '2px solid var(--gold)';
-    } else {
-        buttons[0].style.opacity = '1';
-        buttons[0].style.border = '2px solid var(--gold)';
-    }
-
-    // Update the card content with a fade effect
-    for (let i = 0; i < 3; i++) {
-      const display = document.getElementById(`display-${i + 1}`);
-      display.style.opacity = '0';
-      
-      setTimeout(() => {
-        // Styled dynamically using your CSS variables for seamless integration
-        display.innerHTML = `
-          <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 1rem; color: var(--text-main);">${data[metric][i].value}</div>
-          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 0;">${data[metric][i].desc}</p>
-        `;
-        display.style.opacity = '1';
-        display.style.transition = 'opacity 0.2s ease-in';
-      }, 150);
-    }
-  }
-
-  // Initialize on load
-  window.onload = () => updateMatrix('cost', null);
-</script>
+  </script>
 </body>
 </html>

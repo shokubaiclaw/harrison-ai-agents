@@ -1,54 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harrison Agents - Agent Services</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Services | Harrison AI Agents</title>
+  <meta name="description" content="Core capabilities and technical offerings: Web Design & Digital Infrastructure, AI-Driven Ad Campaigns, AI Voice & Telephony Agents, On-Site Assistants, Autonomous Workflows, and Media Processing." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
 </head>
 <body>
-
-    <aside class="sidebar">
-        <img src="HAIA_profile.jpg" alt="Harrison Agents Profile" class="logo">
-        <nav>
-            <a href="index.html">HOME</a>
-            <a href="services.html" class="active">AGENT SERVICES</a>
-            <a href="solutions.html">SOLUTIONS</a>
-            <a href="about.html">ABOUT US</a>
-            <a href="contact.html">CONTACT</a>
-            <a href="privacy.html">PRIVACY</a>
-        </nav>
-    </aside>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
 
     <main class="main-content">
-        <div class="page-container">
-            <div class="page-header">
-                <h1>AGENT SERVICES.</h1>
-                <p>Core Capabilities & Technical Offerings</p>
-            </div>
-
-            <div class="content-section">
-                <h2><span>01.</span> Web Design & Digital Infrastructure</h2>
-                <p>We design and deploy modern, high-performance web platforms paired with complete backend administration. From relative code architectures and responsive UI design to domain registration, DNS record configuration, and SSL management, we establish the reliable digital foundation your business needs.</p>
-            </div>
-
-            <div class="content-section">
-                <h2><span>02.</span> AI Voice & Telephony Agents</h2>
-                <p>Deploy 24/7 autonomous phone agents engineered to handle inbound inquiries with conversational natural language processing. Our voice agents answer business FAQs, screen and qualify prospective leads in real-time, collect structured customer details, and intelligently route high-priority calls to your team.</p>
-            </div>
-
-            <div class="content-section">
-                <h2><span>03.</span> On-Site Assistants & Smart Scheduling</h2>
-                <p>Eliminate friction in customer booking with embedded AI agents trained on your business data. Interfacing directly across your website and messaging platforms, our digital assistants handle visitor Q&amp;A, negotiate meeting availability, and sync directly with your enterprise calendar systems to automate appointments.</p>
-            </div>
-
-            <div class="content-section">
-                <h2><span>04.</span> Autonomous Agentic Workflows & LLMs</h2>
-                <p>Move beyond linear automation with networked AI systems built for complex operations. We specialize in prompt engineering, state-managed architectures, and Large Language Model (LLM) fine-tuning to deliver bespoke multi-agent workflows that collaborate, critique, and execute multi-step business pipelines.</p>
-            </div>
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <span class="eyebrow">Core Capabilities &amp; Technical Offerings</span>
+        <h1 class="hero-title">AGENT SERVICES &amp; ENGINEERING CATALOG</h1>
+        <p class="hero-tagline">
+          Production-grade engineering across the entire commercial and operational stack. Every capability is built for low-latency execution, API interoperability, and measurable business ROI.
+        </p>
+        <div class="btn-group">
+          <a href="solutions.html" class="btn btn-primary">View Outcome-Driven Solutions Hub →</a>
+          <a href="contact.html" class="btn btn-secondary">Request Technical Scoping</a>
         </div>
-    </main>
+      </section>
 
+      <!-- 6 NUMBERED TECHNICAL SERVICE PILLARS -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">6 Core Engineering Pillars</span>
+          <h2 class="section-title">Full-Stack AI &amp; Digital Growth Capabilities</h2>
+          <p class="section-subtitle">
+            Each service pillar can be deployed as a standalone technical engagement or unified into a closed-loop growth and automation system.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <!-- 01. Web Design & Digital Infrastructure -->
+          <div class="card">
+            <span class="card-number">01 • INFRASTRUCTURE</span>
+            <h3 class="card-title">Web Design &amp; Digital Infrastructure</h3>
+            <p>
+              From modular code architectures and responsive UI design to domain registration, DNS record configuration, and SSL management, we establish the reliable digital foundation your business needs. Every platform is engineered for sub-second load times, technical SEO, and seamless WebSocket/webhook integration with embedded AI agents.
+            </p>
+            <ul class="card-list">
+              <li>Zero-bloat, responsive HTML/CSS/JS &amp; modern web component architectures</li>
+              <li>End-to-end domain lifecycle, DNS routing (SPF/DKIM/DMARC), and automated TLS/SSL</li>
+              <li>Conversion-engineered landing pages built specifically for paid media traffic</li>
+            </ul>
+            <a href="contact.html?service=web-infrastructure" class="card-link">Scope Infrastructure Engagement →</a>
+          </div>
+
+          <!-- 02. AI-Driven Ad Campaigns & Paid Media -->
+          <div class="card">
+            <span class="card-number">02 • PAID GROWTH &amp; ACQUISITION</span>
+            <h3 class="card-title">AI-Driven Ad Campaigns &amp; Paid Media</h3>
+            <p>
+              Launch, manage, and scale high-converting paid advertising campaigns across Google Search, Performance Max, Meta (Facebook &amp; Instagram), LinkedIn, and programmatic networks. We pair generative ad creative and precision audience targeting with server-side Conversion APIs (CAPI) and instant 24/7 autonomous lead capture.
+            </p>
+            <ul class="card-list">
+              <li>AI-accelerated video and static ad creative generation with rapid A/B testing</li>
+              <li>Cross-network bid orchestration optimized for Cost-Per-Booked-Appointment (CPBA)</li>
+              <li>Direct routing from ad click/call extension to autonomous voice and booking agents</li>
+            </ul>
+            <a href="ad-campaigns.html" class="card-link">Explore Ad Campaign Architecture →</a>
+          </div>
+
+          <!-- 03. AI Voice & Telephony Agents -->
+          <div class="card">
+            <span class="card-number">03 • TELEPHONY &amp; VOICE AI</span>
+            <h3 class="card-title">AI Voice &amp; Telephony Agents</h3>
+            <p>
+              Deploy ultra-low-latency conversational voice agents that answer inbound phone lines and trigger outbound speed-to-lead calls 24/7. Engineered on top of Twilio SIP trunks using either Google's native Gemini Multimodal Live stream or modular OpenClaw + Claude 4.6 + ElevenLabs pipelines.
+            </p>
+            <ul class="card-list">
+              <li>~300ms–500ms round-trip audio latency with natural mid-sentence interruption handling</li>
+              <li>Live REST API tool execution during active calls (caller ID lookup, calendar holds, SMS)</li>
+              <li>Deterministic guardrails with instant warm-transfer escalation to human staff</li>
+            </ul>
+            <a href="autonomous-reception.html" class="card-link">Explore Voice Telephony Specs →</a>
+          </div>
+
+          <!-- 04. On-Site Assistants & Smart Scheduling -->
+          <div class="card">
+            <span class="card-number">04 • CONVERSATIONAL CONVERSION</span>
+            <h3 class="card-title">On-Site Assistants &amp; Smart Scheduling</h3>
+            <p>
+              Embed intelligent web and SMS assistants trained directly on your proprietary service catalog, pricing rules, and knowledge base. Our scheduling agents qualify visitors in real time, negotiate multi-provider calendar availability, and lock in confirmed appointments automatically.
+            </p>
+            <ul class="card-list">
+              <li>Custom RAG (Retrieval-Augmented Generation) over your company documentation</li>
+              <li>Bi-directional sync with enterprise calendars, CRMs, and field-service platforms</li>
+              <li>Automated SMS/email confirmation sequences and no-show rescheduling workflows</li>
+            </ul>
+            <a href="contact.html?service=smart-scheduling" class="card-link">Scope Smart Scheduling Agent →</a>
+          </div>
+
+          <!-- 05. Autonomous Agentic Workflows & LLMs -->
+          <div class="card">
+            <span class="card-number">05 • MULTI-AGENT ORCHESTRATION</span>
+            <h3 class="card-title">Autonomous Agentic Workflows &amp; LLMs</h3>
+            <p>
+              Architect bespoke multi-agent state machines that collaborate, validate outputs, and execute complex backend operations autonomously. We integrate across Tier 2 frontier APIs (GPT-5.4, Gemini 3.1 Pro, Claude 4.6) and Tier 3 self-contained sovereign open-weight deployments (Llama 4, DeepSeek V4, Qwen 3.5).
+            </p>
+            <ul class="card-list">
+              <li>Custom Model Context Protocol (MCP) servers and internal database tool bindings</li>
+              <li>Automated document parsing, compliance auditing, CRM enrichment, and ERP handoffs</li>
+              <li>Zero-Data-Retention (ZDR) cloud APIs or air-gapped VPC/on-premise GPU clusters</li>
+            </ul>
+            <a href="ai-tier-comparison-matrix.html" class="card-link">Compare Enterprise AI Tiers →</a>
+          </div>
+
+          <!-- 06. Automated Media Processing Pipelines -->
+          <div class="card">
+            <span class="card-number">06 • MULTIMODAL ASSET PIPELINES</span>
+            <h3 class="card-title">Automated Media Processing Pipelines</h3>
+            <p>
+              Replace manual audio and video post-production with event-driven GPU media pipelines. Whenever raw recordings hit your storage buckets, our workflows automatically transcode, upscale to 4K, strip background noise, diarize speakers, burn in brand captions, and export multi-aspect clips.
+            </p>
+            <ul class="card-list">
+              <li>Hardware-accelerated FFmpeg + neural video upscaling and studio audio denoising</li>
+              <li>Word-level timestamped transcription, subtitle burn-in, and multilingual AI dubbing</li>
+              <li>Semantic highlight extraction formatted into 9:16, 1:1, and 16:9 ad variations</li>
+            </ul>
+            <a href="media-processing.html" class="card-link">Explore Media Pipeline Architecture →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICE-TO-SOLUTION ARCHITECTURAL MAPPING TABLE -->
+      <section>
+        <div class="section-header">
+          <span class="eyebrow">System Interoperability</span>
+          <h2 class="section-title">Service Pillar to Applied Solution Mapping</h2>
+          <p class="section-subtitle">
+            How our technical engineering capabilities map directly to commercial business outcomes across your organization.
+          </p>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Technical Service Pillar</th>
+                <th>Applied Commercial Solution</th>
+                <th>Primary Technology Stack</th>
+                <th>Architecture Spec</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>01. Web Design &amp; Digital Infrastructure</strong></td>
+                <td>Managed Digital Presence</td>
+                <td>Modular HTML5/CSS3/JS, DNS/SSL, Edge CDN, Webhook Bridges</td>
+                <td><a href="solutions.html#stage-1">View Solution →</a></td>
+              </tr>
+              <tr>
+                <td><strong>02. AI-Driven Ad Campaigns &amp; Paid Media</strong></td>
+                <td>Autonomous Ad Campaigns &amp; Lead Acquisition</td>
+                <td>Google Ads, Meta CAPI, LinkedIn ABM, Generative Ad Pipelines</td>
+                <td><a href="ad-campaigns.html">Deep-Dive Spec →</a></td>
+              </tr>
+              <tr>
+                <td><strong>03. AI Voice &amp; Telephony Agents</strong></td>
+                <td>24/7 Autonomous Reception</td>
+                <td>Twilio SIP, Gemini Live API, OpenClaw, Claude 4.6, ElevenLabs</td>
+                <td><a href="autonomous-reception.html">Deep-Dive Spec →</a></td>
+              </tr>
+              <tr>
+                <td><strong>04. On-Site Assistants &amp; Smart Scheduling</strong></td>
+                <td>Automated Booking &amp; Engagement</td>
+                <td>Vector RAG, WebSockets, REST Calendar/CRM APIs, Twilio SMS</td>
+                <td><a href="solutions.html#stage-3">View Solution →</a></td>
+              </tr>
+              <tr>
+                <td><strong>05. Autonomous Agentic Workflows &amp; LLMs</strong></td>
+                <td>Enterprise Operational Intelligence</td>
+                <td>GPT-5.4, Gemini 3.1 Pro, Claude 4.6, Llama 4, DeepSeek V4, MCP</td>
+                <td><a href="ai-tier-comparison-matrix.html">Deep-Dive Spec →</a></td>
+              </tr>
+              <tr>
+                <td><strong>06. Automated Media Processing Pipelines</strong></td>
+                <td>Media Processing at Scale</td>
+                <td>FFmpeg NVENC, Whisper v3 Turbo, DeepFilterNet, Real-ESRGAN</td>
+                <td><a href="media-processing.html">Deep-Dive Spec →</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <harrison-footer-cta></harrison-footer-cta>
+    </main>
+  </div>
 </body>
 </html>

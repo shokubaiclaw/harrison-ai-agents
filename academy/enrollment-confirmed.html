@@ -1,183 +1,258 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enrollment Confirmed | Harrison AI Agents Academy</title>
-  <meta name="description" content="Cohort onboarding checklist and tuition receipt confirmation for the Harrison AI Agents Academy.">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="../styles.css">
+  <meta name="description" content="Cohort onboarding checklist and tuition receipt confirmation for the Harrison AI Agents Academy." />
+  <meta name="robots" content="noindex, nofollow" />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="../main.js" defer></script>
+
+  <!-- SCOPED ACADEMY STEEL-BLUE SLIDING OVERLAY & RECEIPT STYLES -->
+  <style>
+    :root {
+      --academy-steel-panel: linear-gradient(165deg, rgba(18, 34, 58, 0.86) 0%, rgba(11, 21, 38, 0.92) 100%);
+      --academy-steel-card: rgba(15, 29, 50, 0.82);
+      --academy-steel-border: rgba(91, 146, 204, 0.34);
+      --academy-steel-accent: #5b92cc;
+    }
+
+    [data-theme="light"] {
+      --academy-steel-panel: linear-gradient(165deg, rgba(232, 240, 250, 0.92) 0%, rgba(216, 228, 244, 0.95) 100%);
+      --academy-steel-card: rgba(255, 255, 255, 0.90);
+      --academy-steel-border: rgba(43, 92, 143, 0.30);
+      --academy-steel-accent: #2b5c8f;
+    }
+
+    body.academy-subsite::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(135deg, rgba(10, 16, 28, 0.80) 0%, rgba(18, 34, 58, 0.72) 100%),
+        url("../Harrison_Agents_Dark_9x16.jpg");
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    [data-theme="light"] body.academy-subsite::before {
+      background-image:
+        linear-gradient(135deg, rgba(238, 243, 250, 0.84) 0%, rgba(214, 226, 242, 0.78) 100%),
+        url("../Harrison_Agents_Light_9x16.jpg");
+    }
+
+    .steel-overlay-section {
+      background: var(--academy-steel-panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--academy-steel-border);
+      border-left: 4px solid var(--accent-gold);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .steel-card {
+      background: var(--academy-steel-card);
+      border: 1px solid var(--academy-steel-border);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--card-shadow);
+    }
+
+    .receipt-metadata-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.15rem;
+      margin: 1.75rem 0;
+    }
+
+    .receipt-item {
+      background: var(--academy-steel-card);
+      border: 1px solid var(--academy-steel-border);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .receipt-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .receipt-value {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      word-break: break-word;
+    }
+
+    @media (max-width: 768px) {
+      .receipt-metadata-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      harrison-sidebar,
+      harrison-footer-cta,
+      .mobile-topbar,
+      .sidebar,
+      .no-print {
+        display: none !important;
+      }
+      .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+      .steel-overlay-section,
+      .receipt-item {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #000000 !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
 </head>
-<body class="academy-theme">
+<body class="academy-subsite">
+  <div class="app-shell">
+    <!-- SHARED LEFT VERTICAL SIDEBAR WEB COMPONENT -->
+    <harrison-sidebar></harrison-sidebar>
 
-  <!-- MOBILE TOP BAR (Visible on viewports <= 960px) -->
-  <div class="mobile-topbar">
-    <a href="../index.html" class="mobile-brand">
-      <img alt="Harrison AI Agents Crest" src="../Harrison_Agents_Dark.jpg" data-dark-src="../Harrison_Agents_Dark.jpg" data-light-src="../Harrison_Agents_Light.jpg">
-      <span class="brand-name-gold">Harrison AI Agents</span>
-    </a>
-    <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-sidebar">
-      ☰ Menu
-    </button>
-  </div>
-
-  <div class="site-wrapper">
-    <!-- LEFT VERTICAL SIDEBAR -->
-    <aside class="sidebar" id="primary-sidebar" aria-label="Primary Sidebar Navigation">
-      <div>
-        <a href="../index.html" class="sidebar-brand">
-          <div class="sidebar-crest">
-            <img alt="Harrison Agents Profile" src="../Harrison_Agents_Dark.jpg" data-dark-src="../Harrison_Agents_Dark.jpg" data-light-src="../Harrison_Agents_Light.jpg">
-          </div>
-          <div class="sidebar-titles">
-            <span class="sidebar-title-main">Harrison AI Agents</span>
-            <span class="sidebar-title-sub">Academy // Onboarding</span>
-          </div>
-        </a>
-
-        <nav class="sidebar-nav" aria-label="Main Site Navigation">
-          <a href="../index.html">Home</a>
-          <a href="../services.html">Agent Services</a>
-          <a href="../solutions.html">Solutions</a>
-          <a href="../ai-tier-comparison-matrix.html">AI Tier Matrix</a>
-          <a href="index.html" class="active" aria-current="page">Academy</a>
-          <a href="../about.html">About Us</a>
-          <a href="../contact.html">Contact</a>
-          <a href="../privacy.html">Privacy</a>
-        </nav>
-      </div>
-
-      <div class="sidebar-footer">
-        <a href="index.html" class="sidebar-cta-btn">← Academy Hub</a>
-        <button type="button" class="theme-toggle-btn" data-theme-toggle>
-          ☀ Switch to Light Mode
-        </button>
-      </div>
-    </aside>
-
-    <!-- MAIN CONTENT VIEWPORT (Steel-Blue Sliding Overlay Panels) -->
     <main class="main-content">
 
-      <section class="steel-overlay-panel" id="confirmation-hero">
-        <div class="section-container">
-          <div class="confirmation-banner-card">
-            <span class="eyebrow-badge">Tuition Captured // Seat Reserved</span>
-            <h1>Welcome to the Academy, <span id="confirmed-student-name">Practitioner</span>.</h1>
-            <p class="hero-lead">
-              Your enrollment in the <strong>Harrison AI Agents Academy</strong> is officially confirmed. Please save your transaction details below for your records or corporate L&amp;D tuition reimbursement submission.
-            </p>
+      <!-- RECEIPT & CONFIRMATION BANNER -->
+      <section class="steel-overlay-section" id="confirmation-hero">
+        <span class="eyebrow">Tuition Captured • Seat Reserved</span>
+        <h1 class="hero-title" style="margin-bottom: 0.85rem;">
+          WELCOME TO THE ACADEMY, <span class="ai-crimson" id="confirmed-student-name">PRACTITIONER</span>.
+        </h1>
+        <p class="hero-tagline" style="margin-bottom: 1.25rem;">
+          Your enrollment in the <strong>Harrison AI Agents Academy</strong> is officially confirmed. Please save your transaction details below for your records or corporate L&amp;D tuition reimbursement submission.
+        </p>
 
-            <!-- DYNAMIC RECEIPT SUMMARY BAR -->
-            <div class="receipt-metadata-grid">
-              <div class="receipt-item">
-                <span class="receipt-label">PayPal Transaction / Order ID</span>
-                <span class="receipt-value" id="confirmed-order-id">Verifying...</span>
-              </div>
-              <div class="receipt-item">
-                <span class="receipt-label">Enrolled Curriculum Track</span>
-                <span class="receipt-value" id="confirmed-track-name">Track 201 Flagship Cohort</span>
-              </div>
-              <div class="receipt-item">
-                <span class="receipt-label">Included CPE Credential Allocation</span>
-                <span class="receipt-value" id="confirmed-cpe-count">25 CPE Credits (ISC2 / ISACA / PMI)</span>
-              </div>
-              <div class="receipt-item">
-                <span class="receipt-label">Included Book Bundle</span>
-                <span class="receipt-value" id="confirmed-book-bundle">All 5 Pictured Volumes + Manuscripts</span>
-              </div>
-            </div>
-
-            <div class="receipt-actions-strip">
-              <button type="button" onclick="window.print()" class="btn-secondary-outline">
-                🖨️ Print / Save Official Enrollment Confirmation as PDF
-              </button>
-            </div>
+        <div class="receipt-metadata-grid">
+          <div class="receipt-item">
+            <span class="receipt-label">PayPal Transaction / Order ID</span>
+            <span class="receipt-value" id="confirmed-order-id">Verifying...</span>
           </div>
+          <div class="receipt-item">
+            <span class="receipt-label">Enrolled Curriculum Track</span>
+            <span class="receipt-value" id="confirmed-track-name">Track 201 Flagship Cohort</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-label">Included CPE Credential Allocation</span>
+            <span class="receipt-value" id="confirmed-cpe-count">25 CPE Credits (ISC2 / ISACA / PMI)</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-label">Included Book Bundle</span>
+            <span class="receipt-value" id="confirmed-book-bundle">All 5 Pictured Volumes + Manuscripts</span>
+          </div>
+        </div>
+
+        <div class="btn-group no-print">
+          <button type="button" onclick="window.print()" class="btn btn-primary">
+            🖨️ Print / Save Official Enrollment Receipt as PDF
+          </button>
+          <a href="tuition-reimbursement.html" class="btn btn-secondary">
+            Employer L&amp;D Justification Brief →
+          </a>
+          <a href="index.html" class="btn btn-secondary">
+            ← Return to Academy Hub
+          </a>
         </div>
       </section>
 
       <!-- 3-STEP ONBOARDING CHECKLIST -->
-      <section class="steel-overlay-panel" id="onboarding-steps">
-        <div class="section-container">
-          <div class="section-header">
-            <span class="eyebrow-badge">Mandatory Cohort Onboarding</span>
-            <h2>Complete Your 3-Step Intake Checklist</h2>
-            <p>
-              To provision your companion books, unlock your Week 1 / Milestone 1 multi-day exercise workbook, and register your email for the private weekly Google Meet sessions, complete the three steps below within the next 24 hours.
-            </p>
-          </div>
+      <section class="steel-overlay-section no-print" id="onboarding-steps">
+        <div class="section-header">
+          <span class="eyebrow">Mandatory Cohort Onboarding</span>
+          <h2 class="section-title">Complete Your 3-Step Intake Checklist</h2>
+          <p class="section-subtitle">
+            To provision your companion books, unlock your Week 1 / Milestone 1 multi-day exercise workbook, and register your email for the private weekly Google Meet sessions, complete the three steps below within the next 24 hours.
+          </p>
+        </div>
 
-          <div class="three-column-grid">
-            <!-- STEP 01 -->
-            <article class="feature-card">
-              <div>
-                <div class="card-meta">
-                  <span>ONBOARDING // STEP 01</span>
-                  <span>Immediate Action Required</span>
-                </div>
-                <h3>Activate Your Cohort &amp; Book Delivery Profile</h3>
-                <p>
-                  Click the button below to send your pre-populated Order ID confirmation to our operations desk at <strong>info@harrisonaiagents.com</strong> along with your preferred delivery format (Digital Kindle/PDF or Paperback shipping address) and professional credential numbers (ISC2, ISACA, or PMI) for CPE mapping.
-                </p>
-              </div>
-              <div class="track-card-actions">
-                <a id="onboarding-mailto-link" href="mailto:info@harrisonaiagents.com" class="btn-primary-gold">
-                  Send Onboarding Activation Email →
-                </a>
-              </div>
-            </article>
+        <div class="grid-3" style="margin-bottom: 0;">
+          <!-- STEP 01 -->
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-crimson">ONBOARDING STEP 01 • IMMEDIATE ACTION</span>
+              <h3 class="card-title">Activate Your Cohort &amp; Book Delivery Profile</h3>
+              <p>
+                Click the button below to send your pre-populated Order ID confirmation to our operations desk at <strong>info@harrisonaiagents.com</strong> along with your preferred delivery format (Digital Kindle/PDF or Paperback shipping address) and professional credential numbers (ISC2, ISACA, or PMI) for CPE mapping.
+              </p>
+            </div>
+            <div class="btn-group" style="margin-top: 1.25rem;">
+              <a id="onboarding-mailto-link" href="mailto:info@harrisonaiagents.com" class="btn btn-primary">
+                Send Onboarding Activation Email →
+              </a>
+            </div>
+          </article>
 
-            <!-- STEP 02 -->
-            <article class="feature-card">
-              <div>
-                <div class="card-meta">
-                  <span>ONBOARDING // STEP 02</span>
-                  <span>Within 24 Hours of Activation</span>
-                </div>
-                <h3>Receive Your Companion Books &amp; Enclave Access</h3>
-                <p>
-                  Once your Step 01 confirmation email is received, our team will dispatch your companion volumes (<span id="step2-book-note">all 4 published books + The Determinism Paradox &amp; technical manuscripts</span>) and unlock your private Cohort Enclave containing your first multi-day exercise workbook.
-                </p>
-              </div>
-              <div class="track-card-actions">
-                <a href="https://harrisonarbitrage.com/series-ai-cybersecurity.html" target="_blank" rel="noopener noreferrer" class="btn-secondary-outline">
-                  Preview Companion Book Series ↗
-                </a>
-              </div>
-            </article>
+          <!-- STEP 02 -->
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-gold">ONBOARDING STEP 02 • WITHIN 24 HOURS</span>
+              <h3 class="card-title">Receive Your Companion Books &amp; Enclave Access</h3>
+              <p>
+                Once your Step 01 confirmation email is received, our team will dispatch your companion volumes (<span id="step2-book-note">all 4 published books + The Determinism Paradox &amp; technical manuscripts</span>) and unlock your private Cohort Enclave containing your first multi-day exercise workbook.
+              </p>
+            </div>
+            <div class="btn-group" style="margin-top: 1.25rem;">
+              <a href="../unlearning/index.html" class="btn btn-secondary">
+                📖 Preview The Unlearning Dilemma →
+              </a>
+            </div>
+          </article>
 
-            <!-- STEP 03 -->
-            <article class="feature-card">
-              <div>
-                <div class="card-meta">
-                  <span>ONBOARDING // STEP 03</span>
-                  <span>Weekly Live Cadence</span>
-                </div>
-                <h3>Accept Your Private Google Meet Calendar Invite</h3>
-                <p>
-                  You will receive a recurring calendar invitation linked to your registered email address for our weekly live session with Kristopher Harrison. Each session features a protected video demonstration of production AI architectures followed by live Q&amp;A and exercise reviews.
-                </p>
-                <p class="small-compliance-note">
-                  <em>Note: To protect student privacy and proprietary architecture IP, external recording bots and screen-capture utilities are prohibited during live sessions.</em>
-                </p>
-              </div>
-            </article>
-          </div>
+          <!-- STEP 03 -->
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-blue">ONBOARDING STEP 03 • WEEKLY LIVE CADENCE</span>
+              <h3 class="card-title">Accept Your Private Google Meet Calendar Invite</h3>
+              <p>
+                You will receive a recurring calendar invitation linked to your registered email address for our weekly live session with Kristopher Harrison. Each session features a protected video demonstration of production AI architectures followed by live Q&amp;A and exercise reviews.
+              </p>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0;">
+                <em>Note: To protect student privacy and proprietary architecture IP, external recording bots and screen-capture utilities are prohibited during live sessions.</em>
+              </p>
+            </div>
+          </article>
         </div>
       </section>
+
+      <harrison-footer-cta
+        heading="Need Assistance With Your Cohort Onboarding?"
+        subtext="Reach our operations team directly at info@harrisonaiagents.com for expedited book dispatch or corporate receipt formatting.">
+      </harrison-footer-cta>
 
     </main>
   </div>
 
-  <!-- COMPACT CONTENT FOOTER -->
-  <footer class="content-footer">
-    <div class="content-footer-inner">
-      <span>© 2026 Harrison AI Agents // A Division of Harrison Arbitrage LLC. All Rights Reserved.</span>
-      <span>Questions? Email <a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a></span>
-    </div>
-  </footer>
-
-  <script src="../main.js"></script>
   <script>
     (function() {
       const params = new URLSearchParams(window.location.search);

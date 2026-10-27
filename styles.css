@@ -1686,3 +1686,271 @@ input:focus, select:focus, textarea:focus {
     border: 1px solid #000000 !important;
   }
 }
+/* ==========================================================================
+   TURN 3A PATCH: HEADER, LOGO, NAVIGATION & FOOTER LAYOUT FIX
+   Fixes oversized crest logos, crammed navigation links, and 2:3 book thumbs
+   across academy.html, academy-enroll.html, and enrollment-confirmed.html
+   ========================================================================== */
+
+/* --- Sticky Top Header & Constrained Brand Crest --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--academy-bg-primary);
+  border-bottom: 1px solid var(--academy-border-subtle);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.85rem 0;
+}
+
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.brand-identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: var(--academy-text-primary);
+  flex-shrink: 0;
+}
+
+.brand-crest {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--academy-gold-border);
+  flex-shrink: 0;
+  background: var(--academy-bg-card);
+}
+
+.brand-crest img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  object-fit: cover;
+  display: block;
+}
+
+.brand-titles {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-titles .brand-name-gold {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: var(--academy-gold-primary);
+}
+
+.brand-titles .brand-sub {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--academy-text-muted);
+}
+
+/* --- Horizontal Primary Navigation Bar --- */
+.primary-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  flex-wrap: wrap;
+}
+
+.primary-nav a {
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--academy-text-secondary);
+  padding: 0.35rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.primary-nav a:hover,
+.primary-nav a[aria-current="page"] {
+  color: var(--academy-gold-primary);
+  border-bottom-color: var(--academy-gold-primary);
+}
+
+.header-utilities {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* --- Dual 2:3 Book Cover Stack for Multi-Book Modules (Week 4 & Track 101) --- */
+.dual-book-cover-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.milestone-book-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--academy-border-subtle);
+}
+
+.milestone-book-mini {
+  width: 48px;
+  aspect-ratio: 2 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--academy-gold-border);
+  flex-shrink: 0;
+}
+
+.milestone-book-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Site Footer & Constrained Footer Logo --- */
+.site-footer {
+  background-color: var(--academy-bg-secondary);
+  border-top: 1px solid var(--academy-border-subtle);
+  padding: 3.5rem 0 2rem 0;
+  color: var(--academy-text-secondary);
+}
+
+.footer-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 2.25rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--academy-border-subtle);
+}
+
+.footer-brand > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: var(--academy-text-primary);
+  margin-bottom: 1rem;
+}
+
+.footer-brand > a > div:first-child {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--academy-gold-border);
+  flex-shrink: 0;
+}
+
+.footer-brand img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  object-fit: cover;
+  display: block;
+}
+
+.footer-brand > a > div:last-child {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  color: var(--academy-text-muted);
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--academy-text-secondary);
+  margin: 0;
+}
+
+.footer-links h4 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--academy-gold-primary);
+  margin: 0 0 1rem 0;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-links a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--academy-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--academy-gold-primary);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--academy-text-muted);
+}
+
+.footer-bottom a {
+  color: var(--academy-gold-primary);
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .primary-nav {
+    width: 100%;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--academy-border-subtle);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}

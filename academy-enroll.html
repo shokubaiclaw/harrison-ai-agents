@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuition &amp; Enrollment Checkout | Harrison AI Agents Academy</title>
+  <meta name="description" content="Secure cohort enrollment and tuition checkout for the Harrison AI Agents Academy via PayPal Business, Pay Later, or Corporate Invoice.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- PRIMARY HEADER (harrisonaiagents.com) -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-identity">
+        <div class="brand-crest">
+          <img alt="Harrison AI Agents Crest" src="Harrison_Agents_Dark.jpg" data-light-src="Harrison_Agents_Light.jpg" data-dark-src="Harrison_Agents_Dark.jpg">
+        </div>
+        <div class="brand-titles">
+          <span class="brand-name-gold">Harrison AI Agents</span>
+          <span class="brand-sub">Academy // Enrollment Portal</span>
+        </div>
+      </a>
+
+      <nav aria-label="Primary Navigation" class="primary-nav">
+        <a href="index.html">Home</a>
+        <a href="academy.html">Academy Syllabus</a>
+        <a href="academy-enroll.html" aria-current="page">Tuition &amp; Checkout</a>
+        <a href="https://harrisonarbitrage.com/publishing.html" target="_blank" rel="noopener noreferrer">Publishing ↗</a>
+        <a href="brands.html">Brands</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header-utilities">
+        <a href="academy.html#track-comparison" class="btn-secondary-outline">← Back to Syllabus</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- CHECKOUT HERO HEADER -->
+    <section class="checkout-header-section">
+      <div class="section-container">
+        <span class="eyebrow-badge">Secure Cohort Registration // Harrison AI Agents Academy</span>
+        <h1>Select Your Training Track &amp; <span>Complete Enrollment.</span></h1>
+        <p>
+          All enrollments include direct cohort access, companion book bundles, weekly live Google Meet video demonstration &amp; Q&amp;A sessions with Kristopher Harrison, and an official itemized receipt + verifiable CPE certificate for employer tuition reimbursement.
+        </p>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE TIER SELECTOR & DYNAMIC PAYPAL CHECKOUT -->
+    <section class="checkout-portal-section" id="checkout-workspace">
+      <div class="section-container">
+        <div class="checkout-two-column-layout">
+
+          <!-- LEFT COLUMN: INTERACTIVE TRACK SELECTOR CARDS -->
+          <div class="tier-selector-column">
+            <div class="column-step-header">
+              <span class="step-badge">STEP 01</span>
+              <h2>Choose Your Academy Track</h2>
+            </div>
+
+            <!-- OPTION 1: TRACK 101 -->
+            <div class="selectable-tier-card" id="selector-card-101" data-track="101" role="button" tabindex="0" aria-pressed="false">
+              <div class="selectable-card-top">
+                <div class="card-meta">
+                  <span>TRACK // 101</span>
+                  <span>3 Milestones (~3 Weeks) // 10 CPEs</span>
+                </div>
+                <span class="selection-indicator" id="indicator-101">Select Track</span>
+              </div>
+              <h3>Applied AI Systems &amp; Agent Workflow Sprint</h3>
+              <p>
+                Master the 3-Level AI Tier Matrix, Domain 1 security baselines, segregated multi-agent prompt engineering, and production web/asset deployment. Includes <strong>2 companion books</strong> (<em>The Unlearning Dilemma</em> &amp; <em>The AI-Augmented Project Manager</em>).
+              </p>
+              <div class="tier-price-line">
+                <span class="price-tag" id="display-price-101">$495.00 USD</span>
+                <span class="price-note" id="display-note-101">100% creditable toward Track 201</span>
+              </div>
+            </div>
+
+            <!-- OPTION 2: TRACK 201 (FLAGSHIP) -->
+            <div class="selectable-tier-card active-selection" id="selector-card-201" data-track="201" role="button" tabindex="0" aria-pressed="true">
+              <div class="selectable-card-top">
+                <div class="card-meta">
+                  <span>TRACK // 201 (FLAGSHIP)</span>
+                  <span>5 Calendar Weeks // 25 CPEs</span>
+                </div>
+                <span class="selection-indicator" id="indicator-201">Selected ✓</span>
+              </div>
+              <h3>Certified AI Security, Architecture &amp; Resilience Practitioner</h3>
+              <p>
+                Full 5-Domain AI Security Certification curriculum covering Native AI Architecture &amp; Non-Human IAM, Data Provenance &amp; Machine Unlearning, NIST AI RMF / PMBOK® GERC, and SecMLOps Incident Response. Includes <strong>all 6 volumes</strong> (4 published books + 2 technical manuscripts).
+              </p>
+              <div class="tier-price-line">
+                <span class="price-tag" id="display-price-201">$1,695.00 USD</span>
+                <span class="price-note" id="display-note-201">Aligned to ISC2, ISACA &amp; PMI CPEs</span>
+              </div>
+            </div>
+
+            <!-- OPTION 3: ASCENSION UPGRADE (101 -> 201) -->
+            <div class="selectable-tier-card" id="selector-card-upgrade" data-track="upgrade" role="button" tabindex="0" aria-pressed="false">
+              <div class="selectable-card-top">
+                <div class="card-meta">
+                  <span>ALUMNI ASCENSION BRIDGE</span>
+                  <span>100% Track 101 Tuition Credit Applied</span>
+                </div>
+                <span class="selection-indicator" id="indicator-upgrade">Select Upgrade</span>
+              </div>
+              <h3>Track 101-to-201 Flagship Ascension Upgrade</h3>
+              <p>
+                Exclusively for Track 101 graduates upgrading into the 5-Week Flagship Practitioner Track. Applies your full $495 Track 101 tuition credit, unlocks the remaining <strong>4 technical volumes</strong>, and adds <strong>15 additional CPE credits</strong> (for all 25 total CPEs).
+              </p>
+              <div class="tier-price-line">
+                <span class="price-tag" id="display-price-upgrade">$1,200.00 USD</span>
+                <span class="price-note">Requires prior Track 101 Order ID verification</span>
+              </div>
+            </div>
+
+            <!-- OPTION 4: CORPORATE TEAM INVOICE / PO -->
+            <div class="selectable-tier-card" id="selector-card-corporate" data-track="corporate" role="button" tabindex="0" aria-pressed="false">
+              <div class="selectable-card-top">
+                <div class="card-meta">
+                  <span>ENTERPRISE &amp; GOVERNMENT L&amp;D</span>
+                  <span>ACH / Purchase Order / Multi-Seat</span>
+                </div>
+                <span class="selection-indicator" id="indicator-corporate">Select Invoicing</span>
+              </div>
+              <h3>Corporate Team Pack &amp; Direct L&amp;D Invoicing</h3>
+              <p>
+                Enrolling 3 or more practitioners, or require a formal vendor invoice, W-9, and ACH/wire instructions for corporate or federal agency training approval? Select this option for direct procurement routing.
+              </p>
+              <div class="tier-price-line">
+                <span class="price-tag">$4,500.00 USD (3-Seat Pack)</span>
+                <span class="price-note">Or custom single/multi-seat PO</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: DYNAMIC ORDER SUMMARY & PAYPAL SDK CONTAINER -->
+          <div class="order-summary-column">
+            <div class="sticky-checkout-box">
+              <div class="column-step-header">
+                <span class="step-badge">STEP 02</span>
+                <h2>Order Summary &amp; Payment</h2>
+              </div>
+
+              <div class="summary-details-card">
+                <span class="eyebrow-badge" id="summary-track-badge">TRACK // 201 (FLAGSHIP)</span>
+                <h3 id="summary-track-title">Certified AI Security, Architecture &amp; Resilience Practitioner</h3>
+                <p id="summary-track-desc">
+                  5-Week Live &amp; Applied Cohort covering all 5 AI Security Certification Domains.
+                </p>
+
+                <div class="summary-deliverables-block">
+                  <h4>Included in Your Enrollment:</h4>
+                  <ul id="summary-deliverables-list">
+                    <li>5 Weekly Multi-Day Applied Architecture &amp; Security Workbooks</li>
+                    <li>5 Weekly 90-Min Live Google Meet Video Demo &amp; Hot-Seat Q&amp;A Sessions</li>
+                    <li>Complete 6-Volume Book &amp; Technical Manuscript Bundle</li>
+                    <li>Official 25 CPE Credit Certificate (ISC2, ISACA, PMI Aligned)</li>
+                    <li>Itemized Corporate Tuition Reimbursement Receipt</li>
+                  </ul>
+                </div>
+
+                <!-- OPTIONAL ALUMNI ORDER ID INPUT (SHOWN ONLY FOR UPGRADE TRACK) -->
+                <div id="upgrade-verification-box" class="optional-input-block" style="display: none;">
+                  <label for="prior-order-id">Enter Your Prior Track 101 PayPal Order ID or Email:</label>
+                  <input type="text" id="prior-order-id" placeholder="e.g., 7AB12345CD678901E or your enrollment email">
+                </div>
+
+                <!-- STUDENT COHORT EMAIL INPUT FOR RECEIPT & ONBOARDING MATCHING -->
+                <div id="student-intake-preview" class="optional-input-block">
+                  <label for="student-email-input">Primary Student Email (for Cohort Onboarding &amp; Book Delivery):</label>
+                  <input type="email" id="student-email-input" placeholder="name@company.com" required>
+                </div>
+
+                <div class="summary-total-Breakdown">
+                  <div class="total-row">
+                    <span>Tuition Rate:</span>
+                    <span id="summary-subtotal">$1,695.00 USD</span>
+                  </div>
+                  <div class="total-row">
+                    <span>Companion Books &amp; CPE Credentialing:</span>
+                    <span>Included ($0.00)</span>
+                  </div>
+                  <div class="total-row grand-total-row">
+                    <span>Total Due Today:</span>
+                    <span id="summary-grand-total">$1,695.00 USD</span>
+                  </div>
+                </div>
+
+                <!-- PAYPAL SMART BUTTON MOUNT POINT -->
+                <div id="paypal-checkout-wrapper">
+                  <div id="paypal-button-container"></div>
+                  <p class="payment-security-note">
+                    Processed securely via <strong>PayPal Business</strong>. Pay upfront via Corporate Card, Debit/Credit Card, PayPal Balance, or split into monthly installments via <strong>PayPal Pay Later</strong>.
+                  </p>
+                </div>
+
+                <!-- CORPORATE INVOICE ALTERNATIVE BOX (SHOWN WHEN ?track=corporate IS SELECTED) -->
+                <div id="corporate-invoice-wrapper" style="display: none;">
+                  <p class="corporate-instructions">
+                    To request an official corporate invoice, W-9, or 3-Seat Enterprise Team Pack ($4,500 USD), click below to generate a pre-formatted procurement email to our operations desk:
+                  </p>
+                  <a id="corporate-mailto-btn" href="mailto:info@harrisonaiagents.com?subject=Corporate%20Enrollment%20%26%20Invoice%20Request%20-%20Harrison%20AI%20Agents%20Academy&body=Hello%20Harrison%20AI%20Agents%20Academy%20Team%2C%0A%0AWe%20would%20like%20to%20request%20a%20corporate%20invoice%20for%20the%20following%20training%20enrollment%3A%0A%0A-%20Organization%20Name%3A%20%0A-%20Track%20%28Track%20101%20or%20Track%20201%29%3A%20%0A-%20Number%20of%20Seats%3A%20%0A-%20Billing%20Contact%20Email%3A%20%0A%0AThank%20you." class="btn-primary-gold full-width-btn">
+                    Request Corporate Invoice via Email →
+                  </a>
+                </div>
+
+                <!-- DIRECT SUPPORT FALLBACK -->
+                <div class="checkout-support-footer">
+                  <span>Need an Employer L&amp;D Justification Letter or payment assistance?</span>
+                  <a href="mailto:info@harrisonaiagents.com?subject=Academy%20Enrollment%20Inquiry">Contact info@harrisonaiagents.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PRIMARY FOOTER (harrisonaiagents.com) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html">
+            <div>
+              <img alt="Harrison AI Agents Crest" src="Harrison_Agents_Dark.jpg" data-light-src="Harrison_Agents_Light.jpg" data-dark-src="Harrison_Agents_Dark.jpg">
+            </div>
+            <div>
+              <span class="brand-name-gold">Harrison AI Agents</span>
+              <span>A Harrison Arbitrage LLC Brand // Maryland, USA</span>
+            </div>
+          </a>
+          <p>
+            Deploying probabilistic AI architecture, multi-agent engineering, and executive cyber resilience training across high-consequence environments.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Academy Navigation</h4>
+          <ul>
+            <li><a href="academy.html">Full Course Syllabus</a></li>
+            <li><a href="academy.html#syllabus-track-101">Track 101: Builder Sprint</a></li>
+            <li><a href="academy.html#syllabus-track-201">Track 201: 5-Week Security Track</a></li>
+            <li><a href="https://harrisonarbitrage.com/publishing.html" target="_blank" rel="noopener noreferrer">Companion Book Catalog ↗</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4>Direct Support</h4>
+          <ul>
+            <li><a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a></li>
+            <li><a href="contact.html">Enterprise &amp; Agency Inquiries</a></li>
+            <li><a href="privacy.html">Privacy &amp; Data Sovereignty</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Harrison Arbitrage LLC. All Rights Reserved.</span>
+        <span>Harrison AI Agents Academy // Secure Checkout Portal</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+
+  <!-- =====================================================================
+       PAYPAL REST API JS SDK & DYNAMIC TIER SWITCHER ENGINE
+       Replace YOUR_PAYPAL_LIVE_CLIENT_ID with your Live Client ID from
+       https://developer.paypal.com/dashboard/applications/live
+       ===================================================================== -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_LIVE_CLIENT_ID&currency=USD&intent=capture&enable-funding=paylater,card"></script>
+
+  <script>
+    (function() {
+      /**
+       * PRICING SWITCH:
+       * Set USE_FOUNDING_RATES to true during your Founding Launch ($395 / $1,295),
+       * or false for Standard Tuition ($495 / $1,695).
+       */
+      const USE_FOUNDING_RATES = false;
+
+      const TRACK_CATALOG = {
+        "101": {
+          code: "TRACK-101",
+          badge: "TRACK // 101 (3 MILESTONES — 10 CPEs)",
+          title: "Applied AI Systems & Agent Workflow Sprint",
+          description: "3-Milestone Applied Cohort covering the 3-Level AI Tier Matrix, Domain 1 Security Baselines, Multi-Agent Role Segregation, and Production Deployment.",
+          price: USE_FOUNDING_RATES ? "395.00" : "495.00",
+          displayPrice: USE_FOUNDING_RATES ? "$395.00 USD (Founding Rate)" : "$495.00 USD",
+          deliverables: [
+            "3 Applied Multi-Day Milestone Workbooks & Prompt Templates",
+            "3 Weekly 60-Min Live Google Meet Video Demo & Q&A Sessions",
+            "2 Companion Books (The Unlearning Dilemma & The AI-Augmented PM)",
+            "Official 10 CPE Credit Certificate",
+            "100% Tuition Credit Eligibility Toward Track 201"
+          ]
+        },
+        "201": {
+          code: "TRACK-201",
+          badge: "TRACK // 201 (FLAGSHIP — 5 WEEKS / 25 CPEs)",
+          title: "Certified AI Security, Architecture & Resilience Practitioner",
+          description: "5-Week Flagship Cohort covering all 5 AI Security Certification Domains, Native IAM Architecture, Data Provenance, GERC, and SecMLOps Defense.",
+          price: USE_FOUNDING_RATES ? "1295.00" : "1695.00",
+          displayPrice: USE_FOUNDING_RATES ? "$1,295.00 USD (Founding Cohort)" : "$1,695.00 USD",
+          deliverables: [
+            "5 Weekly Multi-Day Applied Architecture & Security Workbooks",
+            "5 Weekly 90-Min Live Google Meet Video Demo & Hot-Seat Q&A Sessions",
+            "Complete 6-Volume Book & Technical Manuscript Bundle",
+            "Official 25 CPE Credit Certificate (ISC2, ISACA, PMI Aligned)",
+            "Itemized Corporate Tuition Reimbursement Receipt"
+          ]
+        },
+        "upgrade": {
+          code: "TRACK-UPGRADE-101-TO-201",
+          badge: "ALUMNI ASCENSION BRIDGE (100% CREDIT APPLIED)",
+          title: "Track 101-to-201 Flagship Ascension Upgrade",
+          description: "Upgrades Track 101 graduates into the full 5-Week Flagship Practitioner Track with 100% of prior Track 101 tuition credited.",
+          price: USE_FOUNDING_RATES ? "900.00" : "1200.00",
+          displayPrice: USE_FOUNDING_RATES ? "$900.00 USD (Founding Upgrade)" : "$1,200.00 USD",
+          deliverables: [
+            "Full Enrollment in the 5-Week Track 201 Flagship Cohort",
+            "Remaining 4 Companion Volumes (Including Both Technical Manuscripts)",
+            "15 Additional CPE Credits (Completing All 25 Total CPEs)",
+            "5 Weekly 90-Min Live Google Meet Video Demo & Hot-Seat Q&A Sessions"
+          ]
+        },
+        "corporate": {
+          code: "CORPORATE-INVOICE",
+          badge: "ENTERPRISE & AGENCY PROCUREMENT",
+          title: "Corporate Team Pack & Direct L&D Invoicing",
+          description: "Direct invoice, W-9, and ACH/PO processing for 3-Seat Enterprise Team Packs ($4,500 USD) or custom agency training approvals.",
+          price: "4500.00",
+          displayPrice: "$4,500.00 USD (3-Seat Pack)",
+          deliverables: [
+            "3 Full Seats in Track 201 Flagship Cohort (25 CPEs per Student)",
+            "3 Complete 6-Volume Book & Technical Manuscript Bundles",
+            "Formal Vendor Invoice, W-9 & ACH/Wire Remittance Instructions",
+            "Dedicated Post-Cohort Executive Completion Summary"
+          ]
+        }
+      };
+
+      let activeTrackKey = "201";
+
+      // 1. Sync Card Prices on Load if Founding Rates Are Active
+      const price101El = document.getElementById("display-price-101");
+      const price201El = document.getElementById("display-price-201");
+      const priceUpgEl = document.getElementById("display-price-upgrade");
+      if (price101El) price101El.textContent = TRACK_CATALOG["101"].displayPrice;
+      if (price201El) price201El.textContent = TRACK_CATALOG["201"].displayPrice;
+      if (priceUpgEl) priceUpgEl.textContent = TRACK_CATALOG["upgrade"].displayPrice;
+
+      // 2. Read ?track= URL Parameter on Load
+      const urlParams = new URLSearchParams(window.location.search);
+      const requestedTrack = (urlParams.get("track") || "201").toLowerCase();
+      if (TRACK_CATALOG[requestedTrack]) {
+        activeTrackKey = requestedTrack;
+      }
+
+      // 3. UI Update Function When User Switches Tracks
+      function selectTrack(trackKey) {
+        if (!TRACK_CATALOG[trackKey]) return;
+        activeTrackKey = trackKey;
+        const selectedData = TRACK_CATALOG[trackKey];
+
+        // Update URL query string cleanly without reloading page
+        const newUrl = window.location.pathname + "?track=" + trackKey;
+        window.history.replaceState({ path: newUrl }, "", newUrl);
+
+        // Highlight active selector card
+        document.querySelectorAll(".selectable-tier-card").forEach(function(card) {
+          const cardTrack = card.getAttribute("data-track");
+          const indicator = card.querySelector(".selection-indicator");
+          if (cardTrack === trackKey) {
+            card.classList.add("active-selection");
+            card.setAttribute("aria-pressed", "true");
+            if (indicator) indicator.textContent = "Selected ✓";
+          } else {
+            card.classList.remove("active-selection");
+            card.setAttribute("aria-pressed", "false");
+            if (indicator) indicator.textContent = "Select Track";
+          }
+        });
+
+        // Populate Order Summary Text & Deliverables
+        document.getElementById("summary-track-badge").textContent = selectedData.badge;
+        document.getElementById("summary-track-title").textContent = selectedData.title;
+        document.getElementById("summary-track-desc").textContent = selectedData.description;
+        document.getElementById("summary-subtotal").textContent = selectedData.displayPrice;
+        document.getElementById("summary-grand-total").textContent = selectedData.displayPrice;
+
+        const listEl = document.getElementById("summary-deliverables-list");
+        listEl.innerHTML = "";
+        selectedData.deliverables.forEach(function(item) {
+          const li = document.createElement("li");
+          li.textContent = item;
+          listEl.appendChild(li);
+        });
+
+        // Show/Hide Upgrade Verification Input
+        const upgradeBox = document.getElementById("upgrade-verification-box");
+        upgradeBox.style.display = (trackKey === "upgrade") ? "block" : "none";
+
+        // Toggle between PayPal Smart Buttons and Corporate Invoice Button
+        const paypalWrapper = document.getElementById("paypal-checkout-wrapper");
+        const corpWrapper = document.getElementById("corporate-invoice-wrapper");
+        if (trackKey === "corporate") {
+          paypalWrapper.style.display = "none";
+          corpWrapper.style.display = "block";
+        } else {
+          paypalWrapper.style.display = "block";
+          corpWrapper.style.display = "none";
+        }
+      }
+
+      // Attach Click & Keyboard Listeners to All 4 Cards
+      document.querySelectorAll(".selectable-tier-card").forEach(function(card) {
+        card.addEventListener("click", function() {
+          selectTrack(this.getAttribute("data-track"));
+        });
+        card.addEventListener("keydown", function(e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            selectTrack(this.getAttribute("data-track"));
+          }
+        });
+      });
+
+      // Initialize UI with the active track
+      selectTrack(activeTrackKey);
+
+      // 4. Mount PayPal REST API Smart Buttons
+      if (window.paypal) {
+        paypal.Buttons({
+          style: {
+            layout: "vertical",
+            color: "gold",
+            shape: "rect",
+            label: "pay"
+          },
+          createOrder: function(data, actions) {
+            const currentTrack = TRACK_CATALOG[activeTrackKey];
+            const studentEmail = (document.getElementById("student-email-input").value || "").trim();
+            const priorOrder = (document.getElementById("prior-order-id").value || "").trim();
+
+            let customMetadata = currentTrack.code;
+            if (studentEmail) customMetadata += " | Email: " + studentEmail;
+            if (activeTrackKey === "upgrade" && priorOrder) {
+              customMetadata += " | Prior101: " + priorOrder;
+            }
+
+            return actions.order.create({
+              purchase_units: [{
+                reference_id: currentTrack.code,
+                description: "Harrison AI Agents Academy - " + currentTrack.title,
+                custom_id: customMetadata.substring(0, 127),
+                amount: {
+                  currency_code: "USD",
+                  value: currentTrack.price
+                }
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              const payerName = (details.payer && details.payer.name && details.payer.name.given_name)
+                ? details.payer.name.given_name
+                : "Practitioner";
+              const targetUrl = "enrollment-confirmed.html?orderID=" + encodeURIComponent(data.orderID) +
+                                "&track=" + encodeURIComponent(activeTrackKey) +
+                                "&name=" + encodeURIComponent(payerName);
+              window.location.href = targetUrl;
+            });
+          },
+          onError: function(err) {
+            console.error("PayPal Checkout Error:", err);
+            alert("We encountered an issue initializing PayPal checkout. Please try again or email info@harrisonaiagents.com for a direct payment link or invoice.");
+          }
+        }).render("#paypal-button-container");
+      } else {
+        document.getElementById("paypal-button-container").innerHTML =
+          '<div class="sdk-placeholder-notice">PayPal Checkout SDK will render here once your Live Client ID is inserted. For immediate enrollment assistance, email <a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a>.</div>';
+      }
+    })();
+  </script>
+</body>
+</html>

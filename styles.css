@@ -963,3 +963,726 @@ input:focus, select:focus, textarea:focus {
     grid-template-columns: 1fr;
   }
 }
+/* ==========================================================================
+   HARRISON AI AGENTS ACADEMY — EXTENSION MODULE (APPEND TO styles.css)
+   Supports: academy.html, academy-enroll.html, enrollment-confirmed.html
+   Visual System: Dual-Mode Dark/Light, Gold Accents (#D4AF37 / #F5C518),
+   9:16 Vertical Media Containers & 2:3 Book Cover Thumbnails
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  --academy-bg-primary: #090b10;
+  --academy-bg-secondary: #11151f;
+  --academy-bg-card: #151a26;
+  --academy-bg-card-hover: #1b2232;
+  --academy-bg-elevated: #1e2536;
+  --academy-text-primary: #f3f5f8;
+  --academy-text-secondary: #a8b2c3;
+  --academy-text-muted: #717c91;
+  --academy-gold-primary: #D4AF37;
+  --academy-gold-bright: #F5C518;
+  --academy-gold-glow: rgba(212, 175, 55, 0.16);
+  --academy-gold-border: rgba(212, 175, 55, 0.38);
+  --academy-border-subtle: rgba(255, 255, 255, 0.09);
+  --academy-success: #2ea043;
+  --academy-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="light"] {
+  --academy-bg-primary: #f7f8fa;
+  --academy-bg-secondary: #eef0f5;
+  --academy-bg-card: #ffffff;
+  --academy-bg-card-hover: #fcfcfd;
+  --academy-bg-elevated: #f1f3f8;
+  --academy-text-primary: #0f141e;
+  --academy-text-secondary: #3b4456;
+  --academy-text-muted: #636d80;
+  --academy-gold-primary: #b59022;
+  --academy-gold-bright: #D4AF37;
+  --academy-gold-glow: rgba(181, 144, 34, 0.12);
+  --academy-gold-border: rgba(181, 144, 34, 0.45);
+  --academy-border-subtle: rgba(15, 20, 30, 0.12);
+  --academy-success: #1a7f37;
+  --academy-shadow: 0 14px 32px rgba(15, 20, 30, 0.08);
+}
+
+/* --- Base Layout & Container Utilities --- */
+.section-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.hero-section,
+.matrix-bridge-section,
+.tracks-overview-section,
+.syllabus-section,
+.methodology-section,
+.checkout-header-section,
+.checkout-portal-section,
+.confirmation-hero-section,
+.onboarding-steps-section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--academy-border-subtle);
+  background-color: var(--academy-bg-primary);
+  color: var(--academy-text-primary);
+}
+
+.matrix-bridge-section,
+.syllabus-section:nth-of-type(even) {
+  background-color: var(--academy-bg-secondary);
+}
+
+.section-header {
+  max-width: 820px;
+  margin-bottom: 3rem;
+}
+
+.eyebrow-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--academy-gold-primary);
+  background: var(--academy-gold-glow);
+  border: 1px solid var(--academy-gold-border);
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.section-header h2,
+.hero-copy h1,
+.checkout-header-section h1,
+.confirmation-banner-card h1 {
+  font-size: clamp(1.85rem, 3.5vw, 2.85rem);
+  line-height: 1.15;
+  margin: 0 0 1rem 0;
+  color: var(--academy-text-primary);
+}
+
+.hero-copy h1 span,
+.checkout-header-section h1 span,
+.confirmation-banner-card h1 span,
+.brand-name-gold {
+  color: var(--academy-gold-primary);
+}
+
+.section-header p,
+.hero-lead {
+  font-size: 1.08rem;
+  line-height: 1.68;
+  color: var(--academy-text-secondary);
+  margin: 0;
+}
+
+/* --- Buttons & Interactive CTAs --- */
+.btn-primary-gold,
+.btn-secondary-outline,
+.nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.88rem 1.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary-gold,
+.nav-cta-btn {
+  background: linear-gradient(135deg, var(--academy-gold-bright), var(--academy-gold-primary));
+  color: #090b10;
+  border: 1px solid var(--academy-gold-bright);
+  box-shadow: 0 4px 16px var(--academy-gold-glow);
+}
+
+.btn-primary-gold:hover,
+.nav-cta-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.btn-secondary-outline {
+  background: transparent;
+  color: var(--academy-text-primary);
+  border: 1px solid var(--academy-gold-border);
+}
+
+.btn-secondary-outline:hover {
+  background: var(--academy-gold-glow);
+  border-color: var(--academy-gold-primary);
+  color: var(--academy-gold-primary);
+}
+
+.full-width-btn {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Academy Hero Grid & 9:16 Vertical Media Container --- */
+.hero-grid {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-quote-box {
+  margin: 1.5rem 0;
+  padding: 1.1rem 1.35rem;
+  border-left: 3px solid var(--academy-gold-primary);
+  background: var(--academy-bg-card);
+  color: var(--academy-text-primary);
+  font-style: italic;
+  border-radius: 0 6px 6px 0;
+}
+
+.hero-metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.75rem 0;
+  padding: 1.15rem;
+  background: var(--academy-bg-card);
+  border: 1px solid var(--academy-border-subtle);
+  border-radius: 8px;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--academy-text-muted);
+}
+
+.metric-value {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--academy-gold-primary);
+}
+
+.hero-cta-group,
+.section-footer-cta,
+.track-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.poster-container-9x16 {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--academy-gold-border);
+  box-shadow: var(--academy-shadow);
+  background: var(--academy-bg-card);
+}
+
+.poster-container-9x16 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-caption {
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--academy-text-muted);
+  margin-top: 0.75rem;
+}
+
+/* --- Multi-Column Card Grids (3-Col & 2-Col) --- */
+.three-column-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.two-column-tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.feature-card,
+.milestone-card,
+.track-card {
+  background: var(--academy-bg-card);
+  border: 1px solid var(--academy-border-subtle);
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--academy-shadow);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-card:hover,
+.milestone-card:hover,
+.track-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--academy-gold-border);
+}
+
+.featured-flagship {
+  border: 1.5px solid var(--academy-gold-primary);
+  position: relative;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--academy-gold-primary);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--academy-border-subtle);
+}
+
+.feature-card h3,
+.milestone-card h3,
+.track-card h3 {
+  font-size: 1.35rem;
+  margin: 0 0 0.85rem 0;
+  color: var(--academy-text-primary);
+}
+
+.feature-card p,
+.milestone-card p,
+.track-subtitle {
+  color: var(--academy-text-secondary);
+  line-height: 1.62;
+  font-size: 0.96rem;
+}
+
+/* --- Track Specifications Rows --- */
+.track-specs-list {
+  margin: 1.5rem 0;
+  border-top: 1px solid var(--academy-border-subtle);
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--academy-border-subtle);
+  font-size: 0.9rem;
+}
+
+.spec-key {
+  color: var(--academy-text-muted);
+  font-weight: 600;
+}
+
+.spec-val {
+  color: var(--academy-text-primary);
+  text-align: right;
+  font-weight: 600;
+}
+
+.highlight-price-row .spec-val {
+  font-size: 1.15rem;
+  color: var(--academy-gold-primary);
+  font-weight: 800;
+}
+
+/* --- Ascension Funnel Banner --- */
+.ascension-banner {
+  margin-top: 2.5rem;
+  padding: 2rem 2.25rem;
+  background: linear-gradient(135deg, var(--academy-bg-elevated), var(--academy-bg-card));
+  border: 1px solid var(--academy-gold-border);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.ascension-content h3 {
+  margin: 0.35rem 0 0.5rem 0;
+  font-size: 1.35rem;
+}
+
+.ascension-content p {
+  margin: 0;
+  color: var(--academy-text-secondary);
+}
+
+/* --- 5-Week Vertical Curriculum Stack & 2:3 Book Covers --- */
+.vertical-curriculum-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.week-module-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 2rem;
+  align-items: start;
+  background: var(--academy-bg-card);
+  border: 1px solid var(--academy-border-subtle);
+  border-radius: 10px;
+  padding: 1.75rem;
+  box-shadow: var(--academy-shadow);
+}
+
+.book-cover-thumb {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--academy-gold-border);
+  background: var(--academy-bg-secondary);
+}
+
+.book-cover-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.week-module-content h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.3rem;
+}
+
+.week-module-content p {
+  margin: 0;
+  color: var(--academy-text-secondary);
+  line-height: 1.65;
+}
+
+/* --- Checkout Portal (academy-enroll.html) --- */
+.checkout-two-column-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.column-step-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.step-badge {
+  background: var(--academy-gold-primary);
+  color: #090b10;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+}
+
+.column-step-header h2 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.selectable-tier-card {
+  background: var(--academy-bg-card);
+  border: 1.5px solid var(--academy-border-subtle);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.selectable-tier-card:hover {
+  border-color: var(--academy-gold-border);
+  background: var(--academy-bg-card-hover);
+}
+
+.selectable-tier-card.active-selection {
+  border-color: var(--academy-gold-primary);
+  background: var(--academy-bg-elevated);
+  box-shadow: 0 0 0 2px var(--academy-gold-glow);
+}
+
+.selectable-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+}
+
+.selectable-card-top .card-meta {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  flex-grow: 1;
+}
+
+.selection-indicator {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+  border: 1px solid var(--academy-gold-border);
+  color: var(--academy-text-secondary);
+}
+
+.selectable-tier-card.active-selection .selection-indicator {
+  background: var(--academy-gold-primary);
+  color: #090b10;
+  border-color: var(--academy-gold-primary);
+}
+
+.tier-price-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--academy-border-subtle);
+}
+
+.price-tag {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--academy-gold-primary);
+}
+
+.price-note {
+  font-size: 0.8rem;
+  color: var(--academy-text-muted);
+}
+
+/* --- Sticky Order Summary & PayPal Container --- */
+.sticky-checkout-box {
+  position: sticky;
+  top: 2rem;
+}
+
+.summary-details-card {
+  background: var(--academy-bg-card);
+  border: 1.5px solid var(--academy-gold-border);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: var(--academy-shadow);
+}
+
+.summary-deliverables-block {
+  margin: 1.25rem 0;
+  padding: 1rem 1.25rem;
+  background: var(--academy-bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--academy-border-subtle);
+}
+
+.summary-deliverables-block h4 {
+  margin: 0 0 0.65rem 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--academy-gold-primary);
+}
+
+.summary-deliverables-block ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--academy-text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.optional-input-block {
+  margin: 1.15rem 0;
+}
+
+.optional-input-block label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--academy-text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.optional-input-block input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid var(--academy-border-subtle);
+  background: var(--academy-bg-primary);
+  color: var(--academy-text-primary);
+  font-size: 0.92rem;
+}
+
+.optional-input-block input:focus {
+  outline: none;
+  border-color: var(--academy-gold-primary);
+}
+
+.summary-total-Breakdown {
+  margin: 1.25rem 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--academy-border-subtle);
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--academy-text-secondary);
+}
+
+.grand-total-row {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--academy-gold-primary);
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--academy-border-subtle);
+}
+
+#paypal-button-container {
+  margin-top: 1.25rem;
+  min-height: 95px;
+}
+
+.payment-security-note,
+.checkout-support-footer {
+  font-size: 0.8rem;
+  color: var(--academy-text-muted);
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+.checkout-support-footer a {
+  display: block;
+  color: var(--academy-gold-primary);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* --- Enrollment Confirmed Receipt Grid (enrollment-confirmed.html) --- */
+.confirmation-banner-card {
+  background: var(--academy-bg-card);
+  border: 1.5px solid var(--academy-gold-primary);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: var(--academy-shadow);
+}
+
+.receipt-metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--academy-bg-secondary);
+  border: 1px solid var(--academy-border-subtle);
+  border-radius: 8px;
+}
+
+.receipt-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.receipt-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--academy-text-muted);
+}
+
+.receipt-value {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--academy-gold-primary);
+  word-break: break-word;
+}
+
+/* --- Responsive Breakpoints --- */
+@media (max-width: 992px) {
+  .hero-grid,
+  .two-column-tracks-grid,
+  .checkout-two-column-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .three-column-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .receipt-metadata-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ascension-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-metrics-strip,
+  .receipt-metadata-grid,
+  .week-module-card {
+    grid-template-columns: 1fr;
+  }
+
+  .book-cover-thumb {
+    max-width: 160px;
+  }
+}
+
+/* --- Print Stylesheet for Corporate Tuition Reimbursement Receipts --- */
+@media print {
+  .site-header,
+  .site-footer,
+  .receipt-actions-strip,
+  .onboarding-steps-section {
+    display: none !important;
+  }
+
+  body,
+  .confirmation-hero-section,
+  .confirmation-banner-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: 1px solid #000000 !important;
+  }
+}

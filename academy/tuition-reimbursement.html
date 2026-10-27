@@ -1,103 +1,223 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employer Tuition &amp; CPE Reimbursement Packet | Harrison AI Agents Academy</title>
-  <meta name="description" content="Official corporate L&D tuition justification and ISC2, ISACA, and PMI CPE credit mapping for the Harrison AI Agents Academy.">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employer Tuition &amp; CPE Justification Brief | Harrison AI Agents Academy</title>
+  <meta name="description" content="Official corporate L&D tuition justification and ISC2, ISACA, and PMI CPE credit mapping for the Harrison AI Agents Academy." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="../main.js" defer></script>
+
+  <!-- SCOPED ACADEMY STEEL-BLUE SLIDING OVERLAY & PRINTABLE L&D BRIEF STYLES -->
+  <style>
+    :root {
+      --academy-steel-panel: linear-gradient(165deg, rgba(18, 34, 58, 0.86) 0%, rgba(11, 21, 38, 0.92) 100%);
+      --academy-steel-card: rgba(15, 29, 50, 0.82);
+      --academy-steel-border: rgba(91, 146, 204, 0.34);
+      --academy-steel-accent: #5b92cc;
+    }
+
+    [data-theme="light"] {
+      --academy-steel-panel: linear-gradient(165deg, rgba(232, 240, 250, 0.92) 0%, rgba(216, 228, 244, 0.95) 100%);
+      --academy-steel-card: rgba(255, 255, 255, 0.90);
+      --academy-steel-border: rgba(43, 92, 143, 0.30);
+      --academy-steel-accent: #2b5c8f;
+    }
+
+    body.academy-subsite::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(135deg, rgba(10, 16, 28, 0.80) 0%, rgba(18, 34, 58, 0.72) 100%),
+        url("../Harrison_Agents_Dark_9x16.jpg");
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    [data-theme="light"] body.academy-subsite::before {
+      background-image:
+        linear-gradient(135deg, rgba(238, 243, 250, 0.84) 0%, rgba(214, 226, 242, 0.78) 100%),
+        url("../Harrison_Agents_Light_9x16.jpg");
+    }
+
+    .steel-overlay-section {
+      background: var(--academy-steel-panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--academy-steel-border);
+      border-left: 4px solid var(--academy-steel-accent);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .steel-card {
+      background: var(--academy-steel-card);
+      border: 1px solid var(--academy-steel-border);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ld-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 1.75rem 0;
+    }
+
+    .ld-metric-box {
+      background: var(--academy-steel-card);
+      border: 1px solid var(--academy-steel-border);
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .ld-metric-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .ld-metric-value {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+    }
+
+    @media (max-width: 992px) {
+      .ld-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .ld-metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      harrison-sidebar,
+      harrison-footer-cta,
+      .mobile-topbar,
+      .sidebar,
+      .no-print {
+        display: none !important;
+      }
+      .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+      .steel-overlay-section,
+      .steel-card,
+      .ld-metric-box {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #000000 !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="academy-subsite">
+  <div class="app-shell">
+    <!-- SHARED LEFT VERTICAL SIDEBAR WEB COMPONENT -->
+    <harrison-sidebar></harrison-sidebar>
 
-  <!-- PRIMARY HEADER (Refactored with Turn 3A classes & Harrison_Agents_* assets) -->
-  <header class="site-header">
-    <div class="header-container">
-      <a href="index.html" class="brand-identity">
-        <div class="brand-crest">
-          <img alt="Harrison AI Agents Crest" src="Harrison_Agents_Dark.jpg" data-light-src="Harrison_Agents_Light.jpg" data-dark-src="Harrison_Agents_Dark.jpg">
-        </div>
-        <div class="brand-titles">
-          <span class="brand-name-gold">Harrison AI Agents</span>
-          <span class="brand-sub">Academy // L&amp;D Documentation</span>
-        </div>
-      </a>
+    <main class="main-content">
 
-      <nav aria-label="Primary Navigation" class="primary-nav">
-        <a href="index.html">Home</a>
-        <a href="academy.html">Academy Syllabus</a>
-        <a href="academy-enroll.html">Tuition &amp; Checkout</a>
-        <a href="https://harrisonarbitrage.com/publishing.html" target="_blank" rel="noopener noreferrer">Publishing ↗</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+      <section class="steel-overlay-section">
+        <span class="eyebrow">Corporate L&amp;D &amp; Federal Training Documentation</span>
+        <h1 class="hero-title" style="margin-bottom: 0.85rem;">
+          EMPLOYER TUITION &amp; <span class="ai-crimson">CPE JUSTIFICATION BRIEF.</span>
+        </h1>
+        <p class="hero-tagline" style="margin-bottom: 1.25rem;">
+          Designed for CISOs, Chief Architects, PMO Directors, Contracting Officers, and L&amp;D Approvers evaluating practitioner enrollment in the <strong>Harrison AI Agents Academy</strong> under Harrison Arbitrage LLC.
+        </p>
 
-      <div class="header-utilities">
-        <a href="academy-enroll.html?track=201" class="nav-cta-btn">Enroll Now →</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="confirmation-hero-section">
-      <div class="section-container">
-        <div class="confirmation-banner-card">
-          <span class="eyebrow-badge">Corporate L&amp;D &amp; Federal Training Documentation</span>
-          <h1>Employer Tuition &amp; <span>CPE Justification Brief.</span></h1>
-          <p class="hero-lead">
-            Designed for CISOs, PMO Directors, Contracting Officers, and L&amp;D Approvers evaluating practitioner enrollment in the <strong>Harrison AI Agents Academy</strong> under Harrison Arbitrage LLC.
-          </p>
-
-          <div class="receipt-metadata-grid">
-            <div class="receipt-item">
-              <span class="receipt-label">Training Provider</span>
-              <span class="receipt-value">Harrison Arbitrage LLC (Harrison AI Agents)</span>
-            </div>
-            <div class="receipt-item">
-              <span class="receipt-label">Track 101 Tuition &amp; CPEs</span>
-              <span class="receipt-value">$495.00 USD // 10 CPE Credits</span>
-            </div>
-            <div class="receipt-item">
-              <span class="receipt-label">Track 201 Tuition &amp; CPEs</span>
-              <span class="receipt-value">$1,695.00 USD // 25 CPE Credits</span>
-            </div>
-            <div class="receipt-item">
-              <span class="receipt-label">3-Seat Enterprise Pack</span>
-              <span class="receipt-value">$4,500.00 USD ($1,500/Seat)</span>
-            </div>
+        <div class="ld-metrics-grid">
+          <div class="ld-metric-box">
+            <span class="ld-metric-label">Training Provider</span>
+            <span class="ld-metric-value">Harrison Arbitrage LLC (Harrison AI Agents)</span>
           </div>
-
-          <div class="summary-deliverables-block">
-            <h4>Continuing Professional Education (CPE / PDU) Domain Alignment:</h4>
-            <ul>
-              <li><strong>Domain 1 — AI Fundamentals &amp; Security Baselines (15% Weight / 3.75 CPEs):</strong> Maps to ISC2 CISSP Domain 1 (Security and Risk Management) &amp; ISACA CISM Domain 1.</li>
-              <li><strong>Domain 2 — Secure Native AI Architecture &amp; Non-Human IAM (25% Weight / 6.25 CPEs):</strong> Maps to ISC2 CISSP Domain 3 (Security Architecture &amp; Engineering) &amp; Domain 5 (IAM).</li>
-              <li><strong>Domain 3 — AI Data Management, Privacy &amp; Model Confidentiality (20% Weight / 5.00 CPEs):</strong> Maps to ISC2 CISSP Domain 2 (Asset Security) &amp; ISACA CISA Domain 5 (Protection of Information Assets).</li>
-              <li><strong>Domain 4 — AI Governance, Risk, Compliance (GERC) &amp; PMBOK® Delivery (20% Weight / 5.00 CPEs):</strong> Maps to PMI Talent Triangle (Ways of Working / Business Acumen) &amp; ISACA CRISC / CGEIT Frameworks.</li>
-              <li><strong>Domain 5 — Secure AI Operations (SecMLOps) &amp; Incident Response (20% Weight / 5.00 CPEs):</strong> Maps to ISC2 CISSP Domain 7 (Security Operations) &amp; ISACA CISA Domain 1 (Information Systems Auditing).</li>
-            </ul>
+          <div class="ld-metric-box">
+            <span class="ld-metric-label">Track 101 Tuition &amp; CPEs</span>
+            <span class="ld-metric-value">$495.00 USD // 10 CPE Credits</span>
           </div>
-
-          <div class="receipt-actions-strip" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.75rem;">
-            <button type="button" onclick="window.print()" class="btn-primary-gold">
-              🖨️ Print / Save Official L&amp;D Justification Packet as PDF
-            </button>
-            <a href="academy-enroll.html?track=corporate" class="btn-secondary-outline">
-              Request Corporate Invoice / W-9 →
-            </a>
+          <div class="ld-metric-box">
+            <span class="ld-metric-label">Track 201 Tuition &amp; CPEs</span>
+            <span class="ld-metric-value">$1,695.00 USD // 25 CPE Credits</span>
+          </div>
+          <div class="ld-metric-box">
+            <span class="ld-metric-label">3-Seat Enterprise Pack</span>
+            <span class="ld-metric-value">$4,500.00 USD ($1,500/Seat)</span>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-bottom">
-        <span>© 2026 Harrison Arbitrage LLC. All Rights Reserved.</span>
-        <span>Procurement &amp; Invoicing Desk: <a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a></span>
-      </div>
-    </div>
-  </footer>
+        <div class="steel-card">
+          <span class="card-number tier-badge-gold">CONTINUING PROFESSIONAL EDUCATION (CPE / PDU) MAPPING</span>
+          <h3 class="card-title">5-Domain Alignment to ISC2, ISACA &amp; PMI Frameworks</h3>
+          <ul class="card-list" style="margin-bottom: 0;">
+            <li><strong>Domain 1 — AI Concepts, Security Baselines &amp; Cognitive Unlearning (15% Weight / 3.75 CPEs):</strong> Maps to ISC2 CISSP Domain 1 (Security &amp; Risk Management) and ISACA CISM Domain 1. Text: <em>The Unlearning Dilemma</em>.</li>
+            <li><strong>Domain 2 — Secure Native AI Architecture, Silicon Enclaves &amp; Glass-Box Governance (25% Weight / 6.25 CPEs):</strong> Maps to ISC2 CISSP Domain 3 (Security Architecture &amp; Engineering) and Domain 5 (IAM). Text: <em>The Determinism Paradox</em>.</li>
+            <li><strong>Domain 3 — AI Data Management, Privacy, Provenance &amp; Model Confidentiality (20% Weight / 5.00 CPEs):</strong> Maps to ISC2 CISSP Domain 2 (Asset Security) and ISACA CISA Domain 5 (Protection of Information Assets). Text: <em>The Unlearning Dilemma (Technical Edition)</em>.</li>
+            <li><strong>Domain 4 — AI Governance, Ethics, Risk, Compliance (GERC) &amp; PMBOK® Delivery (20% Weight / 5.00 CPEs):</strong> Maps to PMI Talent Triangle (Ways of Working / Business Acumen) and ISACA CRISC / CGEIT Frameworks. Texts: <em>The AI-Driven Enterprise</em> &amp; <em>The AI-Augmented Project Manager</em>.</li>
+            <li><strong>Domain 5 — Secure AI Operations (SecMLOps), Auditing &amp; Incident Response (20% Weight / 5.00 CPEs):</strong> Maps to ISC2 CISSP Domain 7 (Security Operations) and ISACA CISA Domain 1 (Information Systems Auditing). Text: <em>AI in the Trenches</em>.</li>
+          </ul>
+        </div>
 
-  <script src="main.js"></script>
+        <div class="steel-card" style="margin-bottom: 1.75rem;">
+          <span class="card-number tier-badge-blue">DELIVERABLES &amp; VENDOR DOCUMENTATION</span>
+          <h3 class="card-title">Included Enterprise Training Artifacts</h3>
+          <ul class="card-list" style="margin-bottom: 0;">
+            <li><strong>Complete 5-Volume Technical Book Library:</strong> Includes all 4 published trade volumes plus cohort access to the 5th greenfield specification volume (<em>The Determinism Paradox</em>) at $0 additional textbook cost.</li>
+            <li><strong>Applied Workplace Capstone Deliverables:</strong> Students produce an Institutional Threat Surface Brief, a Zero Trust &amp; Silicon Enclave Reference Architecture, a RAG Data Provenance Protocol, a NIST AI RMF / PMBOK® Charter, and a SecMLOps Incident Response Playbook directly applicable to their employer.</li>
+            <li><strong>Official Itemized Receipt &amp; Signed CPE Certificate:</strong> Issued upon enrollment and cohort completion for seamless corporate L&amp;D reimbursement or audit verification.</li>
+          </ul>
+        </div>
+
+        <div class="btn-group no-print">
+          <button type="button" onclick="window.print()" class="btn btn-primary">
+            🖨️ Print / Save Official L&amp;D Justification Packet as PDF
+          </button>
+          <a href="enroll.html?track=201" class="btn btn-secondary">
+            Enroll in Track 201 ($1,695) →
+          </a>
+          <a href="enroll.html?track=corporate" class="btn btn-secondary">
+            Request Corporate Invoice / W-9 →
+          </a>
+          <a href="index.html" class="btn btn-secondary">
+            ← Back to Academy Syllabus
+          </a>
+        </div>
+      </section>
+
+      <harrison-footer-cta
+        heading="Ready to Submit Your Training Request or Enroll Direct?"
+        subtext="Proceed to the checkout portal to pay via corporate card or request a formal multi-seat vendor invoice.">
+      </harrison-footer-cta>
+
+    </main>
+  </div>
 </body>
 </html>

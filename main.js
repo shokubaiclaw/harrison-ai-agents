@@ -254,3 +254,132 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+/* ==========================================================================
+   HARRISON AI AGENTS ACADEMY — THEME & MEDIA SYNC ENGINE (APPEND TO main.js)
+   Handles: Dark/Light data-theme persistence, Harrison_Agents_* 1:1 & 9:16
+   asset swapping, and smooth syllabus anchor scrolling.
+   ========================================================================== */
+
+(function() {
+  "use strict";
+
+  const THEME_STORAGE_KEY = "harrison_agents_theme";
+  const rootHtml = document.documentElement;
+
+  /**
+   * 1. Synchronize all theme-reactive images (Harrison_Agents_Dark/Light)
+   */
+  function syncThemeReactiveMedia(activeTheme) {
+    const reactiveImages = document.querySelectorAll("img[data-dark-src][data-light-src]");
+    reactiveImages.forEach(function(img) {
+      const targetSrc = (activeTheme === "light")
+        ? img.getAttribute("data-light-src")
+        : img.getAttribute("data-dark-src");
+
+      if (targetSrc && img.getAttribute("src") !== targetSrc) {
+        img.setAttribute("src", targetSrc);
+      }
+    });
+  }
+
+  /**
+   * 2. Apply theme to <html data-theme="..."> and update toggle button labels
+   */
+  function applyAcademyTheme(themeName) {
+    const validTheme = (themeName === "light") ? "light" : "dark";
+    rootHtml.setAttribute("data-theme", validTheme);
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, validTheme);
+    } catch (e) {
+      // Ignore storage errors in private browsing modes
+    }
+
+    syncThemeReactiveMedia(validTheme);
+
+    const toggleButtons = document.querySelectorAll("[data-theme-toggle]");
+    toggleButtons.forEach(function(btn) {
+      btn.setAttribute("aria-label", validTheme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode");
+      btn.innerHTML = validTheme === "dark" ? "☀️ Light" : "🌙 Dark";
+    });
+  }
+
+  /**
+   * 3. Initialize theme from localStorage or default to "dark"
+   */
+  function initAcademyThemeEngine() {
+    let savedTheme = "dark";
+    try {
+      savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || rootHtml.getAttribute("data-theme") || "dark";
+    } catch (e) {
+      savedTheme = rootHtml.getAttribute("data-theme") || "dark";
+    }
+
+    // Inject a theme toggle button into .header-utilities if one isn't present
+    const headerUtils = document.querySelector(".header-utilities");
+    if (headerUtils && !document.querySelector("[data-theme-toggle]")) {
+      const themeBtn = document.createElement("button");
+      themeBtn.type = "button";
+      themeBtn.className = "btn-secondary-outline";
+      themeBtn.setAttribute("data-theme-toggle", "true");
+      themeBtn.style.marginRight = "0.65rem";
+      themeBtn.style.padding = "0.55rem 0.9rem";
+      themeBtn.style.fontSize = "0.82rem";
+      headerUtils.insertBefore(themeBtn, headerUtils.firstChild);
+    }
+
+    // Bind click listeners to any theme toggle button on the page
+    document.querySelectorAll("[data-theme-toggle]").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        const current = rootHtml.getAttribute("data-theme") === "light" ? "light" : "dark";
+        applyAcademyTheme(current === "dark" ? "light" : "dark");
+      });
+    });
+
+    // Observe external mutations to data-theme (in case existing main.js toggles it)
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === "data-theme") {
+          const updatedTheme = rootHtml.getAttribute("data-theme") || "dark";
+          syncThemeReactiveMedia(updatedTheme);
+        }
+      });
+    });
+    observer.observe(rootHtml, { attributes: true, attributeFilter: ["data-theme"] });
+
+    applyAcademyTheme(savedTheme);
+  }
+
+  /**
+   * 4. Smooth In-Page Anchor Scrolling for Syllabus Links
+   */
+  function initSmoothSyllabusScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener("click", function(e) {
+        const targetId = this.getAttribute("href");
+        if (!targetId || targetId === "#") return;
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          const headerOffset = 84;
+          const elementPosition = targetEl.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function() {
+      initAcademyThemeEngine();
+      initSmoothSyllabusScroll();
+    });
+  } else {
+    initAcademyThemeEngine();
+    initSmoothSyllabusScroll();
+  }
+})();

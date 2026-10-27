@@ -1,265 +1,455 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tuition &amp; Enrollment Checkout | Harrison AI Agents Academy</title>
-  <meta name="description" content="Secure cohort enrollment and tuition checkout for the Harrison AI Agents Academy via PayPal Business, Pay Later, or Corporate Invoice.">
-  <link rel="stylesheet" href="../styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tuition &amp; Checkout | Harrison AI Agents Academy</title>
+  <meta name="description" content="Secure cohort enrollment and tuition checkout for the Harrison AI Agents Academy via PayPal Business, Pay Later, or Corporate Invoice." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="../main.js" defer></script>
+
+  <!-- SCOPED ACADEMY STEEL-BLUE SLIDING OVERLAY & CHECKOUT STYLES -->
+  <style>
+    :root {
+      --academy-steel-panel: linear-gradient(165deg, rgba(18, 34, 58, 0.86) 0%, rgba(11, 21, 38, 0.92) 100%);
+      --academy-steel-card: rgba(15, 29, 50, 0.82);
+      --academy-steel-card-hover: rgba(22, 42, 72, 0.94);
+      --academy-steel-border: rgba(91, 146, 204, 0.34);
+      --academy-steel-accent: #5b92cc;
+      --academy-steel-pill: rgba(91, 146, 204, 0.16);
+    }
+
+    [data-theme="light"] {
+      --academy-steel-panel: linear-gradient(165deg, rgba(232, 240, 250, 0.92) 0%, rgba(216, 228, 244, 0.95) 100%);
+      --academy-steel-card: rgba(255, 255, 255, 0.90);
+      --academy-steel-card-hover: rgba(255, 255, 255, 0.99);
+      --academy-steel-border: rgba(43, 92, 143, 0.30);
+      --academy-steel-accent: #2b5c8f;
+      --academy-steel-pill: rgba(43, 92, 143, 0.12);
+    }
+
+    body.academy-subsite::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(135deg, rgba(10, 16, 28, 0.80) 0%, rgba(18, 34, 58, 0.72) 100%),
+        url("../Harrison_Agents_Dark_9x16.jpg");
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    [data-theme="light"] body.academy-subsite::before {
+      background-image:
+        linear-gradient(135deg, rgba(238, 243, 250, 0.84) 0%, rgba(214, 226, 242, 0.78) 100%),
+        url("../Harrison_Agents_Light_9x16.jpg");
+    }
+
+    .steel-overlay-section {
+      background: var(--academy-steel-panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--academy-steel-border);
+      border-left: 4px solid var(--academy-steel-accent);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .checkout-two-column-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.25rem;
+      align-items: start;
+    }
+
+    .column-step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-badge {
+      background: var(--accent-gold);
+      color: #101115;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 0.28rem 0.65rem;
+      border-radius: 4px;
+    }
+
+    .selectable-tier-card {
+      background: var(--academy-steel-card);
+      border: 1.5px solid var(--academy-steel-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.15rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .selectable-tier-card:hover {
+      border-color: var(--academy-steel-accent);
+      background: var(--academy-steel-card-hover);
+    }
+
+    .selectable-tier-card.active-selection {
+      border: 2px solid var(--accent-gold);
+      background: var(--academy-steel-card-hover);
+      box-shadow: 0 10px 26px rgba(212, 175, 55, 0.18);
+    }
+
+    .selectable-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .selection-indicator {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: var(--academy-steel-pill);
+      color: var(--text-secondary);
+      border: 1px solid var(--academy-steel-border);
+    }
+
+    .selectable-tier-card.active-selection .selection-indicator {
+      background: var(--accent-gold);
+      color: #101115;
+      border-color: var(--accent-gold);
+    }
+
+    .tier-price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.9rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--academy-steel-border);
+    }
+
+    .price-tag {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+    }
+
+    .price-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .sticky-checkout-box {
+      position: sticky;
+      top: 2rem;
+    }
+
+    .summary-details-card {
+      background: var(--academy-steel-card);
+      border: 1.5px solid var(--accent-gold);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .summary-deliverables-block {
+      margin: 1.15rem 0;
+      padding: 1rem 1.15rem;
+      background: rgba(10, 16, 28, 0.35);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--academy-steel-border);
+    }
+
+    [data-theme="light"] .summary-deliverables-block {
+      background: rgba(232, 240, 250, 0.65);
+    }
+
+    .summary-deliverables-block h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-gold);
+      margin-bottom: 0.55rem;
+    }
+
+    .summary-deliverables-block ul {
+      padding-left: 1.15rem;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    .summary-deliverables-block li {
+      margin-bottom: 0.35rem;
+    }
+
+    .optional-input-block {
+      margin: 1rem 0;
+    }
+
+    .summary-total-Breakdown {
+      margin: 1.25rem 0;
+      padding-top: 1rem;
+      border-top: 1px solid var(--academy-steel-border);
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .grand-total-row {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--academy-steel-border);
+    }
+
+    #paypal-button-container {
+      margin-top: 1rem;
+      min-height: 90px;
+    }
+
+    .payment-security-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    .checkout-support-footer {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--academy-steel-border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    @media (max-width: 1024px) {
+      .checkout-two-column-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body class="academy-theme">
+<body class="academy-subsite">
+  <div class="app-shell">
+    <!-- SHARED LEFT VERTICAL SIDEBAR WEB COMPONENT -->
+    <harrison-sidebar></harrison-sidebar>
 
-  <!-- MOBILE TOP BAR (Visible on viewports <= 960px) -->
-  <div class="mobile-topbar">
-    <a href="../index.html" class="mobile-brand">
-      <img alt="Harrison AI Agents Crest" src="../Harrison_Agents_Dark.jpg" data-dark-src="../Harrison_Agents_Dark.jpg" data-light-src="../Harrison_Agents_Light.jpg">
-      <span class="brand-name-gold">Harrison AI Agents</span>
-    </a>
-    <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-sidebar">
-      ☰ Menu
-    </button>
-  </div>
-
-  <div class="site-wrapper">
-    <!-- LEFT VERTICAL SIDEBAR -->
-    <aside class="sidebar" id="primary-sidebar" aria-label="Primary Sidebar Navigation">
-      <div>
-        <a href="../index.html" class="sidebar-brand">
-          <div class="sidebar-crest">
-            <img alt="Harrison Agents Profile" src="../Harrison_Agents_Dark.jpg" data-dark-src="../Harrison_Agents_Dark.jpg" data-light-src="../Harrison_Agents_Light.jpg">
-          </div>
-          <div class="sidebar-titles">
-            <span class="sidebar-title-main">Harrison AI Agents</span>
-            <span class="sidebar-title-sub">Academy // Checkout</span>
-          </div>
-        </a>
-
-        <nav class="sidebar-nav" aria-label="Main Site Navigation">
-          <a href="../index.html">Home</a>
-          <a href="../services.html">Agent Services</a>
-          <a href="../solutions.html">Solutions</a>
-          <a href="../ai-tier-comparison-matrix.html">AI Tier Matrix</a>
-          <a href="index.html" class="active" aria-current="page">Academy</a>
-          <a href="../about.html">About Us</a>
-          <a href="../contact.html">Contact</a>
-          <a href="../privacy.html">Privacy</a>
-        </nav>
-      </div>
-
-      <div class="sidebar-footer">
-        <a href="index.html#track-comparison" class="sidebar-cta-btn">← Academy Syllabus</a>
-        <button type="button" class="theme-toggle-btn" data-theme-toggle>
-          ☀ Switch to Light Mode
-        </button>
-      </div>
-    </aside>
-
-    <!-- MAIN CONTENT VIEWPORT (Steel-Blue Sliding Overlay Panels) -->
     <main class="main-content">
 
       <!-- CHECKOUT HERO HEADER -->
-      <section class="steel-overlay-panel" id="checkout-header">
-        <div class="section-container">
-          <span class="eyebrow-badge">Secure Cohort Registration // Harrison AI Agents Academy</span>
-          <h1>Select Your Training Track &amp; <span>Complete Enrollment.</span></h1>
-          <p class="hero-lead">
-            All enrollments include direct cohort access, companion book bundles, weekly live Google Meet video demonstration &amp; Q&amp;A sessions with Kristopher Harrison, and an official itemized receipt + verifiable CPE certificate for employer tuition reimbursement.
-          </p>
+      <section class="steel-overlay-section" id="checkout-header">
+        <span class="eyebrow">Secure Cohort Registration • Harrison AI Agents Academy</span>
+        <h1 class="hero-title" style="margin-bottom: 0.85rem;">
+          SELECT YOUR TRACK &amp; <span class="ai-crimson">COMPLETE ENROLLMENT.</span>
+        </h1>
+        <p class="hero-tagline" style="margin-bottom: 1rem;">
+          All enrollments include direct cohort access, companion book bundles, weekly live Google Meet video demonstration &amp; Q&amp;A sessions with Kristopher Harrison, and an official itemized receipt + verifiable CPE certificate for employer tuition reimbursement.
+        </p>
+        <div class="btn-group">
+          <a href="index.html#track-comparison" class="btn btn-secondary">← Back to Academy Syllabus</a>
+          <a href="tuition-reimbursement.html" class="btn btn-secondary">Employer Tuition &amp; CPE Justification Brief →</a>
         </div>
       </section>
 
       <!-- INTERACTIVE TIER SELECTOR & DYNAMIC PAYPAL CHECKOUT -->
-      <section class="steel-overlay-panel" id="checkout-workspace">
-        <div class="section-container">
-          <div class="checkout-two-column-layout">
+      <section class="steel-overlay-section" id="checkout-workspace">
+        <div class="checkout-two-column-layout">
 
-            <!-- LEFT COLUMN: INTERACTIVE TRACK SELECTOR CARDS -->
-            <div class="tier-selector-column">
-              <div class="column-step-header">
-                <span class="step-badge">STEP 01</span>
-                <h2>Choose Your Academy Track</h2>
+          <!-- LEFT COLUMN: INTERACTIVE TRACK SELECTOR CARDS -->
+          <div class="tier-selector-column">
+            <div class="column-step-header">
+              <span class="step-badge">STEP 01</span>
+              <h2 class="section-title" style="margin-bottom: 0;">Choose Your Academy Track</h2>
+            </div>
+
+            <!-- OPTION 1: TRACK 101 -->
+            <div class="selectable-tier-card" id="selector-card-101" data-track="101" role="button" tabindex="0" aria-pressed="false">
+              <div class="selectable-card-top">
+                <span class="card-number tier-badge-gold" style="margin-bottom: 0;">TRACK 101 • 3 MILESTONES (~3 WEEKS) • 10 CPEs</span>
+                <span class="selection-indicator" id="indicator-101">Select Track</span>
               </div>
-
-              <!-- OPTION 1: TRACK 101 -->
-              <div class="selectable-tier-card" id="selector-card-101" data-track="101" role="button" tabindex="0" aria-pressed="false">
-                <div class="selectable-card-top">
-                  <div class="card-meta">
-                    <span>TRACK // 101</span>
-                    <span>3 Milestones (~3 Weeks) // 10 CPEs</span>
-                  </div>
-                  <span class="selection-indicator" id="indicator-101">Select Track</span>
-                </div>
-                <h3>Applied AI Systems &amp; Agent Workflow Sprint</h3>
-                <p>
-                  Master the 3-Level AI Tier Matrix, Domain 1 security baselines, segregated multi-agent prompt engineering, and production web/asset deployment. Includes <strong>2 companion books</strong> (<em>The Unlearning Dilemma</em> &amp; <em>The AI-Augmented Project Manager</em>).
-                </p>
-                <div class="tier-price-line">
-                  <span class="price-tag" id="display-price-101">$495.00 USD</span>
-                  <span class="price-note" id="display-note-101">100% creditable toward Track 201</span>
-                </div>
-              </div>
-
-              <!-- OPTION 2: TRACK 201 (FLAGSHIP) -->
-              <div class="selectable-tier-card active-selection" id="selector-card-201" data-track="201" role="button" tabindex="0" aria-pressed="true">
-                <div class="selectable-card-top">
-                  <div class="card-meta">
-                    <span>TRACK // 201 (FLAGSHIP)</span>
-                    <span>5 Calendar Weeks // 25 CPEs</span>
-                  </div>
-                  <span class="selection-indicator" id="indicator-201">Selected ✓</span>
-                </div>
-                <h3>Certified AI Security, Architecture &amp; Resilience Practitioner</h3>
-                <p>
-                  Full 5-Domain AI Security Certification curriculum covering Native Trust &amp; Silicon Enclaves (<em>The Determinism Paradox</em>), Data Provenance &amp; Machine Unlearning, NIST AI RMF / PMBOK® GERC, and SecMLOps Incident Response. Includes <strong>all 5 pictured volumes + companion technical manuscripts</strong>.
-                </p>
-                <div class="tier-price-line">
-                  <span class="price-tag" id="display-price-201">$1,695.00 USD</span>
-                  <span class="price-note" id="display-note-201">Aligned to ISC2, ISACA &amp; PMI CPEs</span>
-                </div>
-              </div>
-
-              <!-- OPTION 3: ASCENSION UPGRADE (101 -> 201) -->
-              <div class="selectable-tier-card" id="selector-card-upgrade" data-track="upgrade" role="button" tabindex="0" aria-pressed="false">
-                <div class="selectable-card-top">
-                  <div class="card-meta">
-                    <span>ALUMNI ASCENSION BRIDGE</span>
-                    <span>100% Track 101 Tuition Credit Applied</span>
-                  </div>
-                  <span class="selection-indicator" id="indicator-upgrade">Select Upgrade</span>
-                </div>
-                <h3>Track 101-to-201 Flagship Ascension Upgrade</h3>
-                <p>
-                  Exclusively for Track 101 graduates upgrading into the 5-Week Flagship Practitioner Track. Applies your full $495 Track 101 tuition credit, unlocks the remaining volumes (including <em>The Determinism Paradox</em>), and adds <strong>15 additional CPE credits</strong> (for all 25 total CPEs).
-                </p>
-                <div class="tier-price-line">
-                  <span class="price-tag" id="display-price-upgrade">$1,200.00 USD</span>
-                  <span class="price-note">Requires prior Track 101 Order ID verification</span>
-                </div>
-              </div>
-
-              <!-- OPTION 4: CORPORATE TEAM INVOICE / PO -->
-              <div class="selectable-tier-card" id="selector-card-corporate" data-track="corporate" role="button" tabindex="0" aria-pressed="false">
-                <div class="selectable-card-top">
-                  <div class="card-meta">
-                    <span>ENTERPRISE &amp; GOVERNMENT L&amp;D</span>
-                    <span>ACH / Purchase Order / Multi-Seat</span>
-                  </div>
-                  <span class="selection-indicator" id="indicator-corporate">Select Invoicing</span>
-                </div>
-                <h3>Corporate Team Pack &amp; Direct L&amp;D Invoicing</h3>
-                <p>
-                  Enrolling 3 or more practitioners, or require a formal vendor invoice, W-9, and ACH/wire instructions for corporate or federal agency training approval? Select this option for direct procurement routing.
-                </p>
-                <div class="tier-price-line">
-                  <span class="price-tag">$4,500.00 USD (3-Seat Pack)</span>
-                  <span class="price-note">Or custom single/multi-seat PO</span>
-                </div>
+              <h3 class="card-title">Applied AI Systems &amp; Agent Workflow Sprint</h3>
+              <p style="font-size: 0.92rem; margin-bottom: 0;">
+                Master the 3-Level AI Tier Matrix, Domain 1 security baselines, segregated multi-agent prompt engineering, and production web/asset deployment. Includes <strong>2 companion books</strong> (<em>The Unlearning Dilemma</em> &amp; <em>The AI-Augmented Project Manager</em>).
+              </p>
+              <div class="tier-price-line">
+                <span class="price-tag" id="display-price-101">$495.00 USD</span>
+                <span class="price-note">100% creditable toward Track 201</span>
               </div>
             </div>
 
-            <!-- RIGHT COLUMN: DYNAMIC ORDER SUMMARY & PAYPAL SDK CONTAINER -->
-            <div class="order-summary-column">
-              <div class="sticky-checkout-box">
-                <div class="column-step-header">
-                  <span class="step-badge">STEP 02</span>
-                  <h2>Order Summary &amp; Payment</h2>
-                </div>
-
-                <div class="summary-details-card">
-                  <span class="eyebrow-badge" id="summary-track-badge">TRACK // 201 (FLAGSHIP)</span>
-                  <h3 id="summary-track-title">Certified AI Security, Architecture &amp; Resilience Practitioner</h3>
-                  <p id="summary-track-desc">
-                    5-Week Live &amp; Applied Cohort covering all 5 AI Security Certification Domains.
-                  </p>
-
-                  <div class="summary-deliverables-block">
-                    <h4>Included in Your Enrollment:</h4>
-                    <ul id="summary-deliverables-list">
-                      <li>5 Weekly Multi-Day Applied Architecture &amp; Security Workbooks</li>
-                      <li>5 Weekly 90-Min Live Google Meet Video Demo &amp; Hot-Seat Q&amp;A Sessions</li>
-                      <li>Complete 5-Volume Book Series (Including <em>The Determinism Paradox</em>) &amp; Manuscripts</li>
-                      <li>Official 25 CPE Credit Certificate (ISC2, ISACA, PMI Aligned)</li>
-                      <li>Itemized Corporate Tuition Reimbursement Receipt</li>
-                    </ul>
-                  </div>
-
-                  <!-- OPTIONAL ALUMNI ORDER ID INPUT (SHOWN ONLY FOR UPGRADE TRACK) -->
-                  <div id="upgrade-verification-box" class="optional-input-block" style="display: none;">
-                    <label for="prior-order-id">Enter Your Prior Track 101 PayPal Order ID or Email:</label>
-                    <input type="text" id="prior-order-id" placeholder="e.g., 7AB12345CD678901E or your enrollment email">
-                  </div>
-
-                  <!-- STUDENT COHORT EMAIL INPUT FOR RECEIPT & ONBOARDING MATCHING -->
-                  <div id="student-intake-preview" class="optional-input-block">
-                    <label for="student-email-input">Primary Student Email (for Cohort Onboarding &amp; Book Delivery):</label>
-                    <input type="email" id="student-email-input" placeholder="name@company.com" required>
-                  </div>
-
-                  <div class="summary-total-Breakdown">
-                    <div class="total-row">
-                      <span>Tuition Rate:</span>
-                      <span id="summary-subtotal">$1,695.00 USD</span>
-                    </div>
-                    <div class="total-row">
-                      <span>Companion Books &amp; CPE Credentialing:</span>
-                      <span>Included ($0.00)</span>
-                    </div>
-                    <div class="total-row grand-total-row">
-                      <span>Total Due Today:</span>
-                      <span id="summary-grand-total">$1,695.00 USD</span>
-                    </div>
-                  </div>
-
-                  <!-- PAYPAL SMART BUTTON MOUNT POINT -->
-                  <div id="paypal-checkout-wrapper">
-                    <div id="paypal-button-container"></div>
-                    <p class="payment-security-note">
-                      Processed securely via <strong>PayPal Business</strong>. Pay upfront via Corporate Card, Debit/Credit Card, PayPal Balance, or split into monthly installments via <strong>PayPal Pay Later</strong>.
-                    </p>
-                  </div>
-
-                  <!-- CORPORATE INVOICE ALTERNATIVE BOX (SHOWN WHEN ?track=corporate IS SELECTED) -->
-                  <div id="corporate-invoice-wrapper" style="display: none;">
-                    <p class="corporate-instructions">
-                      To request an official corporate invoice, W-9, or 3-Seat Enterprise Team Pack ($4,500 USD), click below to generate a pre-formatted procurement email to our operations desk:
-                    </p>
-                    <a id="corporate-mailto-btn" href="mailto:info@harrisonaiagents.com?subject=Corporate%20Enrollment%20%26%20Invoice%20Request%20-%20Harrison%20AI%20Agents%20Academy&body=Hello%20Harrison%20AI%20Agents%20Academy%20Team%2C%0A%0AWe%20would%20like%20to%20request%20a%20corporate%20invoice%20for%20the%20following%20training%20enrollment%3A%0A%0A-%20Organization%20Name%3A%20%0A-%20Track%20%28Track%20101%20or%20Track%20201%29%3A%20%0A-%20Number%20of%20Seats%3A%20%0A-%20Billing%20Contact%20Email%3A%20%0A%0AThank%20you." class="btn-primary-gold full-width-btn">
-                      Request Corporate Invoice via Email →
-                    </a>
-                  </div>
-
-                  <!-- DIRECT SUPPORT FALLBACK -->
-                  <div class="checkout-support-footer">
-                    <span>Need an Employer L&amp;D Justification Letter or payment assistance?</span>
-                    <a href="academy-reimbursement.html">View Employer Tuition &amp; CPE Justification Brief →</a>
-                    <a href="mailto:info@harrisonaiagents.com?subject=Academy%20Enrollment%20Inquiry">Contact info@harrisonaiagents.com</a>
-                  </div>
-                </div>
+            <!-- OPTION 2: TRACK 201 (FLAGSHIP) -->
+            <div class="selectable-tier-card active-selection" id="selector-card-201" data-track="201" role="button" tabindex="0" aria-pressed="true">
+              <div class="selectable-card-top">
+                <span class="card-number tier-badge-crimson" style="margin-bottom: 0;">TRACK 201 (FLAGSHIP) • 5 WEEKS • 25 CPEs</span>
+                <span class="selection-indicator" id="indicator-201">Selected ✓</span>
+              </div>
+              <h3 class="card-title">Certified AI Security, Architecture &amp; Resilience Practitioner</h3>
+              <p style="font-size: 0.92rem; margin-bottom: 0;">
+                Full 5-Domain AI Security Certification curriculum covering Native Trust &amp; Silicon Enclaves (<em>The Determinism Paradox</em>), Data Provenance &amp; Machine Unlearning, NIST AI RMF / PMBOK® GERC, and SecMLOps Incident Response. Includes <strong>all 5 pictured volumes + companion technical manuscripts</strong>.
+              </p>
+              <div class="tier-price-line">
+                <span class="price-tag" id="display-price-201">$1,695.00 USD</span>
+                <span class="price-note">Aligned to ISC2, ISACA &amp; PMI CPEs</span>
               </div>
             </div>
 
+            <!-- OPTION 3: ASCENSION UPGRADE (101 -> 201) -->
+            <div class="selectable-tier-card" id="selector-card-upgrade" data-track="upgrade" role="button" tabindex="0" aria-pressed="false">
+              <div class="selectable-card-top">
+                <span class="card-number tier-badge-blue" style="margin-bottom: 0;">ALUMNI ASCENSION • 100% TRACK 101 CREDIT APPLIED</span>
+                <span class="selection-indicator" id="indicator-upgrade">Select Upgrade</span>
+              </div>
+              <h3 class="card-title">Track 101-to-201 Flagship Ascension Upgrade</h3>
+              <p style="font-size: 0.92rem; margin-bottom: 0;">
+                Exclusively for Track 101 graduates upgrading into the 5-Week Flagship Practitioner Track. Applies your full $495 Track 101 tuition credit, unlocks the remaining volumes (including <em>The Determinism Paradox</em>), and adds <strong>15 additional CPE credits</strong> (for all 25 total CPEs).
+              </p>
+              <div class="tier-price-line">
+                <span class="price-tag" id="display-price-upgrade">$1,200.00 USD</span>
+                <span class="price-note">Requires prior Track 101 Order ID verification</span>
+              </div>
+            </div>
+
+            <!-- OPTION 4: CORPORATE TEAM INVOICE / PO -->
+            <div class="selectable-tier-card" id="selector-card-corporate" data-track="corporate" role="button" tabindex="0" aria-pressed="false">
+              <div class="selectable-card-top">
+                <span class="card-number tier-badge-gold" style="margin-bottom: 0;">ENTERPRISE &amp; GOVERNMENT L&amp;D • ACH / PO</span>
+                <span class="selection-indicator" id="indicator-corporate">Select Invoicing</span>
+              </div>
+              <h3 class="card-title">Corporate Team Pack &amp; Direct L&amp;D Invoicing</h3>
+              <p style="font-size: 0.92rem; margin-bottom: 0;">
+                Enrolling 3 or more practitioners, or require a formal vendor invoice, W-9, and ACH/wire instructions for corporate or federal agency training approval? Select this option for direct procurement routing.
+              </p>
+              <div class="tier-price-line">
+                <span class="price-tag">$4,500.00 USD (3-Seat Pack)</span>
+                <span class="price-note">Or custom single/multi-seat PO</span>
+              </div>
+            </div>
           </div>
+
+          <!-- RIGHT COLUMN: DYNAMIC ORDER SUMMARY & PAYPAL SDK CONTAINER -->
+          <div class="order-summary-column">
+            <div class="sticky-checkout-box">
+              <div class="column-step-header">
+                <span class="step-badge">STEP 02</span>
+                <h2 class="section-title" style="margin-bottom: 0;">Order Summary &amp; Payment</h2>
+              </div>
+
+              <div class="summary-details-card">
+                <span class="eyebrow" id="summary-track-badge" style="margin-bottom: 0.75rem;">TRACK 201 (FLAGSHIP)</span>
+                <h3 class="card-title" id="summary-track-title">Certified AI Security, Architecture &amp; Resilience Practitioner</h3>
+                <p id="summary-track-desc" style="font-size: 0.9rem;">
+                  5-Week Live &amp; Applied Cohort covering all 5 AI Security Certification Domains.
+                </p>
+
+                <div class="summary-deliverables-block">
+                  <h4>Included in Your Enrollment:</h4>
+                  <ul id="summary-deliverables-list">
+                    <li>5 Weekly Multi-Day Applied Architecture &amp; Security Workbooks</li>
+                    <li>5 Weekly 90-Min Live Google Meet Video Demo &amp; Hot-Seat Q&amp;A Sessions</li>
+                    <li>Complete 5-Volume Book Library (Including <em>The Determinism Paradox</em>) &amp; Manuscripts</li>
+                    <li>Official 25 CPE Credit Certificate (ISC2, ISACA, PMI Aligned)</li>
+                    <li>Itemized Corporate Tuition Reimbursement Receipt</li>
+                  </ul>
+                </div>
+
+                <!-- OPTIONAL ALUMNI ORDER ID INPUT (SHOWN ONLY FOR UPGRADE TRACK) -->
+                <div id="upgrade-verification-box" class="optional-input-block" style="display: none;">
+                  <label for="prior-order-id">Enter Your Prior Track 101 PayPal Order ID or Email:</label>
+                  <input type="text" id="prior-order-id" placeholder="e.g., 7AB12345CD678901E or your enrollment email" />
+                </div>
+
+                <!-- STUDENT COHORT EMAIL INPUT -->
+                <div id="student-intake-preview" class="optional-input-block">
+                  <label for="student-email-input">Primary Student Email (for Cohort Onboarding &amp; Book Delivery):</label>
+                  <input type="email" id="student-email-input" placeholder="name@company.com" required />
+                </div>
+
+                <div class="summary-total-Breakdown">
+                  <div class="total-row">
+                    <span>Tuition Rate:</span>
+                    <span id="summary-subtotal">$1,695.00 USD</span>
+                  </div>
+                  <div class="total-row">
+                    <span>Companion Books &amp; CPE Credentialing:</span>
+                    <span>Included ($0.00)</span>
+                  </div>
+                  <div class="total-row grand-total-row">
+                    <span>Total Due Today:</span>
+                    <span id="summary-grand-total">$1,695.00 USD</span>
+                  </div>
+                </div>
+
+                <!-- PAYPAL SMART BUTTON MOUNT POINT -->
+                <div id="paypal-checkout-wrapper">
+                  <div id="paypal-button-container"></div>
+                  <p class="payment-security-note">
+                    Processed securely via <strong>PayPal Business</strong>. Pay upfront via Corporate Card, Debit/Credit Card, PayPal Balance, or split into monthly installments via <strong>PayPal Pay Later</strong>.
+                  </p>
+                </div>
+
+                <!-- CORPORATE INVOICE ALTERNATIVE BOX -->
+                <div id="corporate-invoice-wrapper" style="display: none;">
+                  <p style="font-size: 0.88rem;">
+                    To request an official corporate invoice, W-9, or 3-Seat Enterprise Team Pack ($4,500 USD), click below to generate a pre-formatted procurement email to our operations desk:
+                  </p>
+                  <a id="corporate-mailto-btn" href="mailto:info@harrisonaiagents.com?subject=Corporate%20Enrollment%20%26%20Invoice%20Request%20-%20Harrison%20AI%20Agents%20Academy&body=Hello%20Harrison%20AI%20Agents%20Academy%20Team%2C%0A%0AWe%20would%20like%20to%20request%20a%20corporate%20invoice%20for%20the%20following%20training%20enrollment%3A%0A%0A-%20Organization%20Name%3A%20%0A-%20Track%20%28Track%20101%20or%20Track%20201%29%3A%20%0A-%20Number%20of%20Seats%3A%20%0A-%20Billing%20Contact%20Email%3A%20%0A%0AThank%20you." class="btn btn-primary" style="width: 100%;">
+                    Request Corporate Invoice via Email →
+                  </a>
+                </div>
+
+                <div class="checkout-support-footer">
+                  <span>Need an Employer L&amp;D Justification Letter or payment assistance?</span>
+                  <a href="tuition-reimbursement.html">View Employer Tuition &amp; CPE Justification Brief →</a>
+                  <a href="mailto:info@harrisonaiagents.com?subject=Academy%20Enrollment%20Inquiry">Contact info@harrisonaiagents.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
+
+      <harrison-footer-cta
+        heading="Questions About Team Enrollment or L&amp;D Reimbursement?"
+        subtext="Download our printable Employer Tuition &amp; CPE Justification Brief or contact our operations desk for W-9 and purchase order processing.">
+      </harrison-footer-cta>
 
     </main>
   </div>
 
-  <!-- COMPACT CONTENT FOOTER -->
-  <footer class="content-footer">
-    <div class="content-footer-inner">
-      <span>© 2026 Harrison AI Agents // A Division of Harrison Arbitrage LLC. All Rights Reserved.</span>
-      <span>Academy Checkout Support: <a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a></span>
-    </div>
-  </footer>
-
-  <script src="../main.js"></script>
-
-  <!-- =====================================================================
-       PAYPAL REST API JS SDK & DYNAMIC TIER SWITCHER ENGINE
-       Replace YOUR_PAYPAL_LIVE_CLIENT_ID with your Live Client ID from
-       https://developer.paypal.com/dashboard/applications/live
-       ===================================================================== -->
+  <!-- PAYPAL REST API JS SDK (Replace YOUR_PAYPAL_LIVE_CLIENT_ID with your Live Client ID) -->
   <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_LIVE_CLIENT_ID&currency=USD&intent=capture&enable-funding=paylater,card"></script>
 
   <script>
@@ -269,7 +459,7 @@
       const TRACK_CATALOG = {
         "101": {
           code: "TRACK-101",
-          badge: "TRACK // 101 (3 MILESTONES — 10 CPEs)",
+          badge: "TRACK 101 • 3 MILESTONES (10 CPEs)",
           title: "Applied AI Systems & Agent Workflow Sprint",
           description: "3-Milestone Applied Cohort covering the 3-Level AI Tier Matrix, Domain 1 Security Baselines, Multi-Agent Role Segregation, and Production Deployment.",
           price: USE_FOUNDING_RATES ? "395.00" : "495.00",
@@ -284,7 +474,7 @@
         },
         "201": {
           code: "TRACK-201",
-          badge: "TRACK // 201 (FLAGSHIP — 5 WEEKS / 25 CPEs)",
+          badge: "TRACK 201 • FLAGSHIP (5 WEEKS / 25 CPEs)",
           title: "Certified AI Security, Architecture & Resilience Practitioner",
           description: "5-Week Flagship Cohort covering all 5 AI Security Certification Domains, Native Trust & Silicon Enclaves, Data Provenance, GERC, and SecMLOps Defense.",
           price: USE_FOUNDING_RATES ? "1295.00" : "1695.00",
@@ -455,7 +645,7 @@
         }).render("#paypal-button-container");
       } else {
         document.getElementById("paypal-button-container").innerHTML =
-          '<div class="sdk-placeholder-notice">PayPal Checkout SDK will render here once your Live Client ID is inserted. For immediate enrollment assistance, email <a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a>.</div>';
+          '<div style="padding: 1rem; border: 1px dashed var(--accent-gold); border-radius: 6px; font-size: 0.85rem; text-align: center;">PayPal Checkout SDK will render here once your Live Client ID is inserted. For immediate enrollment assistance, email <a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a>.</div>';
       }
     })();
   </script>

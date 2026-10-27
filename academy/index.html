@@ -1,643 +1,861 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Harrison AI Agents Academy | Applied AI Systems &amp; Cyber Resilience Training</title>
-  <meta name="description" content="Practitioner-led AI architecture, multi-agent workflow engineering, and 5-domain AI security certification cohorts at Harrison AI Agents (harrisonaiagents.com/academy/).">
-  <link rel="stylesheet" href="../styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agents Academy | Harrison AI Agents</title>
+  <meta name="description" content="Practitioner-led AI architecture, multi-agent workflow engineering, and 5-domain AI security certification cohorts at Harrison AI Agents." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="../main.js" defer></script>
+
+  <!-- SCOPED ACADEMY STEEL-BLUE SLIDING OVERLAY & 2:3 BOOK LIBRARY STYLES -->
+  <style>
+    :root {
+      --academy-steel-panel: linear-gradient(165deg, rgba(18, 34, 58, 0.86) 0%, rgba(11, 21, 38, 0.92) 100%);
+      --academy-steel-card: rgba(15, 29, 50, 0.80);
+      --academy-steel-card-hover: rgba(22, 42, 72, 0.92);
+      --academy-steel-border: rgba(91, 146, 204, 0.34);
+      --academy-steel-accent: #5b92cc;
+      --academy-steel-pill: rgba(91, 146, 204, 0.16);
+    }
+
+    [data-theme="light"] {
+      --academy-steel-panel: linear-gradient(165deg, rgba(232, 240, 250, 0.92) 0%, rgba(216, 228, 244, 0.95) 100%);
+      --academy-steel-card: rgba(255, 255, 255, 0.90);
+      --academy-steel-card-hover: rgba(255, 255, 255, 0.99);
+      --academy-steel-border: rgba(43, 92, 143, 0.30);
+      --academy-steel-accent: #2b5c8f;
+      --academy-steel-pill: rgba(43, 92, 143, 0.12);
+    }
+
+    /* Fixed Circuitry Watermark Stage Behind Sliding Panels */
+    body.academy-subsite::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(135deg, rgba(10, 16, 28, 0.80) 0%, rgba(18, 34, 58, 0.72) 100%),
+        url("../Harrison_Agents_Dark_9x16.jpg");
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    [data-theme="light"] body.academy-subsite::before {
+      background-image:
+        linear-gradient(135deg, rgba(238, 243, 250, 0.84) 0%, rgba(214, 226, 242, 0.78) 100%),
+        url("../Harrison_Agents_Light_9x16.jpg");
+    }
+
+    /* Steel-Blue Sliding Overlay Panels */
+    .steel-overlay-section {
+      background: var(--academy-steel-panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--academy-steel-border);
+      border-left: 4px solid var(--academy-steel-accent);
+      border-radius: var(--radius-lg);
+      padding: 2.75rem 2.5rem;
+      margin-bottom: 2.75rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+      transition: border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .steel-overlay-section:hover {
+      border-left-color: var(--accent-gold);
+    }
+
+    .steel-card {
+      background: var(--academy-steel-card);
+      border: 1px solid var(--academy-steel-border);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--card-shadow);
+      transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .steel-card:hover {
+      transform: translateY(-3px);
+      background: var(--academy-steel-card-hover);
+      border-color: var(--accent-gold);
+    }
+
+    .steel-card.flagship-highlight {
+      border: 2px solid var(--accent-gold);
+    }
+
+    .metrics-strip-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .metric-box {
+      background: var(--academy-steel-card);
+      border: 1px solid var(--academy-steel-border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+    }
+
+    .metric-box-label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .metric-box-value {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+    }
+
+    /* Track Specs List */
+    .track-specs {
+      margin: 1.25rem 0 1.5rem;
+      border-top: 1px solid var(--academy-steel-border);
+    }
+
+    .spec-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--academy-steel-border);
+      font-size: 0.88rem;
+    }
+
+    .spec-line-key {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .spec-line-val {
+      color: var(--text-primary);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .spec-line.tuition-row .spec-line-val {
+      font-size: 1.15rem;
+      color: var(--accent-gold);
+      font-weight: 800;
+    }
+
+    .ascension-bridge-box {
+      margin-top: 2rem;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.14) 0%, rgba(15, 29, 50, 0.92) 100%);
+      border: 1px solid var(--accent-gold);
+      border-radius: var(--radius-md);
+      padding: 1.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.75rem;
+    }
+
+    /* 2:3 Book Showcase Grid (4 Published + 5th Unpublished Greenfield Volume) */
+    .book-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .book-item-card {
+      background: var(--academy-steel-card);
+      border: 1px solid var(--academy-steel-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.4rem;
+      align-items: start;
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .book-item-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-gold);
+    }
+
+    .book-item-card.featured-fifth-book {
+      grid-column: 1 / -1;
+      grid-template-columns: 165px 1fr;
+      border: 1.5px solid var(--accent-gold);
+    }
+
+    .cover-frame-2x3 {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--accent-gold);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+      background: #0a101d;
+    }
+
+    .cover-frame-2x3 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .book-pill {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.22rem 0.6rem;
+      border-radius: 4px;
+      background: var(--academy-steel-pill);
+      color: var(--academy-steel-accent);
+      border: 1px solid var(--academy-steel-border);
+      margin-bottom: 0.5rem;
+    }
+
+    .book-pill.gold-pill {
+      background: rgba(212, 175, 55, 0.16);
+      color: var(--accent-gold);
+      border-color: var(--accent-gold);
+    }
+
+    /* Milestone Mini Book Row & 5-Week Curriculum Stack */
+    .milestone-book-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--academy-steel-border);
+      font-size: 0.85rem;
+    }
+
+    .mini-cover-2x3 {
+      width: 50px;
+      aspect-ratio: 2 / 3;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    .mini-cover-2x3 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .curriculum-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .week-row-card {
+      background: var(--academy-steel-card);
+      border: 1px solid var(--academy-steel-border);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: 145px 1fr;
+      gap: 1.65rem;
+      align-items: start;
+      transition: border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .week-row-card:hover {
+      border-color: var(--accent-gold);
+      transform: translateX(4px);
+    }
+
+    .dual-cover-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+      width: 145px;
+    }
+
+    @media (max-width: 992px) {
+      .metrics-strip-3,
+      .book-showcase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .book-item-card,
+      .book-item-card.featured-fifth-book,
+      .week-row-card {
+        grid-template-columns: 1fr;
+      }
+
+      .cover-frame-2x3 {
+        max-width: 155px;
+      }
+
+      .ascension-bridge-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="academy-subsite">
+  <div class="app-shell">
+    <!-- SHARED LEFT VERTICAL SIDEBAR WEB COMPONENT -->
+    <harrison-sidebar></harrison-sidebar>
 
-  <!-- MOBILE TOP BAR (Visible on viewports <= 960px) -->
-  <div class="mobile-topbar">
-    <a href="../index.html" class="mobile-brand">
-      <img alt="Harrison AI Agents Crest" src="../Harrison_Agents_Dark.jpg" data-dark-src="../Harrison_Agents_Dark.jpg" data-light-src="../Harrison_Agents_Light.jpg">
-      <span class="brand-name-gold">Harrison AI Agents</span>
-    </a>
-    <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-sidebar">
-      ☰ Menu
-    </button>
-  </div>
-
-  <div class="site-wrapper">
-    <!-- LEFT VERTICAL SIDEBAR (Aligned with harrisonaiagents.com main site) -->
-    <aside class="sidebar" id="primary-sidebar" aria-label="Primary Sidebar Navigation">
-      <div>
-        <a href="../index.html" class="sidebar-brand">
-          <div class="sidebar-crest">
-            <img alt="Harrison Agents Profile" src="../Harrison_Agents_Dark.jpg" data-dark-src="../Harrison_Agents_Dark.jpg" data-light-src="../Harrison_Agents_Light.jpg">
-          </div>
-          <div class="sidebar-titles">
-            <span class="sidebar-title-main">Harrison AI Agents</span>
-            <span class="sidebar-title-sub">Academy // Sovereign AI</span>
-          </div>
-        </a>
-
-        <nav class="sidebar-nav" aria-label="Main Site Navigation">
-          <a href="../index.html">Home</a>
-          <a href="../services.html">Agent Services</a>
-          <a href="../solutions.html">Solutions</a>
-          <a href="../ai-tier-comparison-matrix.html">AI Tier Matrix</a>
-          <a href="index.html" class="active" aria-current="page">Academy</a>
-          <a href="../about.html">About Us</a>
-          <a href="../contact.html">Contact</a>
-          <a href="../privacy.html">Privacy</a>
-        </nav>
-      </div>
-
-      <div class="sidebar-footer">
-        <a href="enroll.html?track=201" class="sidebar-cta-btn">Enroll Now →</a>
-        <button type="button" class="theme-toggle-btn" data-theme-toggle>
-          ☀ Switch to Light Mode
-        </button>
-      </div>
-    </aside>
-
-    <!-- MAIN CONTENT VIEWPORT (Steel-Blue Sliding Overlay Panels) -->
     <main class="main-content">
 
-      <!-- SECTION 01: HERO ADVERTISEMENT & 9:16 CAMPAIGN KEY ART -->
-      <section class="steel-overlay-panel" id="academy-hero">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <span class="eyebrow-badge">Harrison AI Agents // Practitioner Training Division</span>
-            <h1>
-              Stop Prompting. Start Architecting <span>Sovereign AI Systems.</span>
+      <!-- SECTION 01: HERO ADVERTISEMENT & 9:16 ANIMATED CREST -->
+      <section class="steel-overlay-section" id="academy-hero">
+        <div class="hero-split">
+          <div>
+            <span class="eyebrow">Harrison AI Agents • Practitioner Training Division</span>
+            <h1 class="hero-title">
+              STOP PROMPTING. START ARCHITECTING <span class="ai-crimson">SOVEREIGN AI SYSTEMS.</span>
             </h1>
-            <p class="hero-lead">
+            <p class="hero-tagline">
               Most professionals still treat Artificial Intelligence like a consumer search bar—typing one-off prompts into a browser while leaking enterprise IP and producing generic output. The <strong>Harrison AI Agents Academy</strong> bridges the divide between casual chatbot usage, multi-agent production engineering, and boardroom-grade cyber resilience.
             </p>
-
-            <div class="hero-quote-box">
-              &quot;True operational leverage requires moving beyond Tier 1 consumer chat interfaces into deterministic phase-gate workflows, non-human identity governance, and resilient SecMLOps execution.&quot;
+            <div class="hero-quote">
+              "True operational leverage requires moving beyond Tier 1 consumer chat interfaces into deterministic phase-gate workflows, non-human identity governance, and resilient SecMLOps execution."
             </div>
 
-            <div class="hero-metrics-strip">
-              <div class="metric-item">
-                <span class="metric-label">Training Tracks</span>
-                <span class="metric-value">2 Practitioner Tiers</span>
+            <div class="metrics-strip-3">
+              <div class="metric-box">
+                <span class="metric-box-label">Training Tracks</span>
+                <span class="metric-box-value">2 Practitioner Tiers</span>
               </div>
-              <div class="metric-item">
-                <span class="metric-label">Included Library</span>
-                <span class="metric-value">5-Book &amp; Manuscript Series</span>
+              <div class="metric-box">
+                <span class="metric-box-label">Included Library</span>
+                <span class="metric-box-value">5 Books + Manuscripts</span>
               </div>
-              <div class="metric-item">
-                <span class="metric-label">Credential Maintenance</span>
-                <span class="metric-value">10 to 25 Verifiable CPEs</span>
+              <div class="metric-box">
+                <span class="metric-box-label">Credential Maintenance</span>
+                <span class="metric-box-value">10 to 25 Verifiable CPEs</span>
               </div>
             </div>
 
-            <div class="hero-cta-group">
-              <a href="#track-comparison" class="btn-primary-gold">Compare Both Training Tracks ↓</a>
-              <a href="#included-book-library" class="btn-secondary-outline">Inspect Included Book Series ↓</a>
-              <a href="enroll.html?track=201" class="btn-secondary-outline">Tuition &amp; Enrollment Portal →</a>
+            <div class="btn-group">
+              <a href="#track-comparison" class="btn btn-primary">Compare Both Training Tracks ↓</a>
+              <a href="#included-book-library" class="btn btn-secondary">Inspect 5-Book Series ↓</a>
+              <a href="enroll.html?track=201" class="btn btn-secondary">Tuition &amp; Enrollment Portal →</a>
             </div>
           </div>
 
-          <div class="hero-media-column">
-            <div class="poster-container-9x16">
-              <img alt="Harrison AI Agents Academy 9:16 Key Art" src="../Harrison_Agents_Dark_9x16.jpg" data-dark-src="../Harrison_Agents_Dark_9x16.jpg" data-light-src="../Harrison_Agents_Light_9x16.jpg">
-            </div>
-            <p class="media-caption">
-              HARRISON AI AGENTS ACADEMY // SOVEREIGN EXECUTION TRACKS (9:16 EDITION)
-            </p>
+          <!-- 9:16 Portrait Animated Logo Video (Auto-switches Dark/Light via ../main.js) -->
+          <div class="media-9x16-frame">
+            <video
+              class="theme-brand-video"
+              src="../Harrison_Agents_Dark_9x16_Animated.mp4"
+              poster="../Harrison_Agents_Dark_9x16.jpg"
+              autoplay
+              loop
+              muted
+              playsinline
+              controls>
+            </video>
+            <div class="media-9x16-caption">Harrison AI Agents Academy • 9:16 Edition</div>
           </div>
         </div>
       </section>
 
       <!-- SECTION 02: THE MARKET GAP & THE 3-LEVEL AI TIER MATRIX BRIDGE -->
-      <section class="steel-overlay-panel" id="tier-matrix-foundation">
-        <div class="section-container">
-          <div class="section-header">
-            <span class="eyebrow-badge">The Operational Divide</span>
-            <h2>Why &quot;Using ChatGPT&quot; Is Not an Enterprise Strategy</h2>
-            <p>
-              Built directly upon our <a href="../ai-tier-comparison-matrix.html"><strong>Harrison AI Agents 3-Tier Operational Matrix</strong></a> and our companion <em>AI, Cybersecurity and Resilience</em> book catalog, our curriculum systematically moves practitioners up the maturity curve—from vulnerable consumer prompting to governed, multi-agent production architectures.
-            </p>
-          </div>
+      <section class="steel-overlay-section" id="tier-matrix-foundation">
+        <div class="section-header">
+          <span class="eyebrow">The Operational Divide</span>
+          <h2 class="section-title">Why "Using ChatGPT" Is Not an Enterprise Strategy</h2>
+          <p class="section-subtitle">
+            Built directly upon our <a href="../ai-tier-comparison-matrix.html"><strong>Harrison AI Agents 3-Tier Operational Matrix</strong></a> and our <em>AI, Cybersecurity and Resilience</em> publishing catalog, our curriculum systematically moves practitioners up the maturity curve—from vulnerable consumer prompting to governed, multi-agent production architectures.
+          </p>
+        </div>
 
-          <div class="three-column-grid">
-            <article class="feature-card">
-              <div>
-                <div class="card-meta">
-                  <span>MATRIX LEVEL // 01</span>
-                  <span>The Commodity Trap</span>
-                </div>
-                <h3>Tier 1: Consumer-Grade AI</h3>
-                <p>
-                  Browser-based chat sessions characterized by zero infrastructure control, conversational drift, unverified training data ingestion, and high intellectual property leakage risk. Where 90% of the workforce is currently stuck.
-                </p>
-              </div>
-            </article>
+        <div class="grid-3" style="margin-bottom: 0;">
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-crimson">MATRIX LEVEL 01 • THE COMMODITY TRAP</span>
+              <h3 class="card-title">Tier 1: Consumer-Grade AI</h3>
+              <p>
+                Browser-based chat sessions characterized by zero infrastructure control, conversational drift, unverified training data ingestion, and high intellectual property leakage risk. Where 90% of the workforce is currently stuck.
+              </p>
+            </div>
+          </article>
 
-            <article class="feature-card">
-              <div>
-                <div class="card-meta">
-                  <span>MATRIX LEVEL // 02</span>
-                  <span>Orchestrated Workflows</span>
-                </div>
-                <h3>Tier 2: The API &amp; Agent Layer</h3>
-                <p>
-                  Segregated multi-agent teams governed by Master Initialization Prompts, deterministic phase-gates, payload validation, and zero-data-retention API boundaries. The core engine of rapid commercial and technical production.
-                </p>
-              </div>
-            </article>
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-gold">MATRIX LEVEL 02 • ORCHESTRATED WORKFLOWS</span>
+              <h3 class="card-title">Tier 2: The API &amp; Agent Layer</h3>
+              <p>
+                Segregated multi-agent teams governed by Master Initialization Prompts, deterministic phase-gates, payload validation, and zero-data-retention API boundaries. The core engine of rapid commercial and technical production.
+              </p>
+            </div>
+          </article>
 
-            <article class="feature-card">
-              <div>
-                <div class="card-meta">
-                  <span>MATRIX LEVEL // 03</span>
-                  <span>Enterprise Resilience</span>
-                </div>
-                <h3>Tier 3: Sovereign &amp; Audited AI</h3>
-                <p>
-                  Hardened enterprise enclaves enforcing Non-Human Identity (NHI) Zero Trust, silicon enclaves, cryptographic data provenance, machine unlearning protocols, NIST AI RMF governance, and frontline SecMLOps incident response.
-                </p>
-              </div>
-            </article>
-          </div>
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-blue">MATRIX LEVEL 03 • ENTERPRISE RESILIENCE</span>
+              <h3 class="card-title">Tier 3: Sovereign &amp; Audited AI</h3>
+              <p>
+                Hardened enterprise enclaves enforcing Non-Human Identity (NHI) Zero Trust, hardware silicon enclaves, cryptographic data provenance, machine unlearning protocols, NIST AI RMF governance, and SecMLOps incident response.
+              </p>
+            </div>
+          </article>
         </div>
       </section>
 
       <!-- SECTION 03: EXECUTIVE TRACK COMPARISON & ASCENSION ARCHITECTURE -->
-      <section class="steel-overlay-panel" id="track-comparison">
-        <div class="section-container">
-          <div class="section-header">
-            <span class="eyebrow-badge">Two-Tier Curriculum Architecture</span>
-            <h2>Select Your Operational Entry Point</h2>
-            <p>
-              Whether you need to master applied multi-agent production workflows in three milestones or earn our full 25-CPE enterprise security and governance credential over five weeks, both tracks feature structured multi-day exercises, protected video demonstrations, and live Q&amp;A with Kristopher Harrison.
+      <section class="steel-overlay-section" id="track-comparison">
+        <div class="section-header">
+          <span class="eyebrow">Two-Tier Curriculum Architecture</span>
+          <h2 class="section-title">Select Your Operational Entry Point</h2>
+          <p class="section-subtitle">
+            Whether you need to master applied multi-agent production workflows in three milestones or earn our full 25-CPE enterprise security and governance credential over five weeks, both tracks feature structured multi-day exercises, protected video demonstrations, and live Q&amp;A with Kristopher Harrison.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 0;">
+          <!-- TRACK 101 SUMMARY CARD -->
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-gold">TRACK 101 • 3 MILESTONES (~3 WEEKS)</span>
+              <h3 class="card-title">Applied AI Systems &amp; Agent Workflow Sprint</h3>
+              <p>
+                For professionals, PMs, consultants, and builders ready to move beyond basic chat prompting and deploy repeatable multi-agent production pipelines, modular web architectures, and Domain 1 security baselines.
+              </p>
+
+              <div class="track-specs">
+                <div class="spec-line">
+                  <span class="spec-line-key">Pacing &amp; Structure</span>
+                  <span class="spec-line-val">3 Applied Milestones (~3 Weeks)</span>
+                </div>
+                <div class="spec-line">
+                  <span class="spec-line-key">Live Instructor Access</span>
+                  <span class="spec-line-val">3 Weekly 60-Min Video Demo + Live Q&amp;A</span>
+                </div>
+                <div class="spec-line">
+                  <span class="spec-line-key">Included Book Bundle</span>
+                  <span class="spec-line-val">2 Volumes (<em>Unlearning Dilemma</em> + <em>AI-Augmented PM</em>)</span>
+                </div>
+                <div class="spec-line">
+                  <span class="spec-line-key">Continuing Education</span>
+                  <span class="spec-line-val">10 CPE Credit Certificate</span>
+                </div>
+                <div class="spec-line tuition-row">
+                  <span class="spec-line-key">One-Time Tuition</span>
+                  <span class="spec-line-val">$495 USD <small>(Founding: $395)</small></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <a href="#syllabus-track-101" class="btn btn-secondary">Inspect 3-Milestone Syllabus ↓</a>
+              <a href="enroll.html?track=101" class="btn btn-primary">Enroll in Track 101 ($495) →</a>
+            </div>
+          </article>
+
+          <!-- TRACK 201 SUMMARY CARD -->
+          <article class="steel-card flagship-highlight">
+            <div>
+              <span class="card-number tier-badge-crimson">TRACK 201 (FLAGSHIP) • 5 CALENDAR WEEKS</span>
+              <h3 class="card-title">Certified AI Security, Architecture &amp; Resilience Practitioner</h3>
+              <p>
+                Engineered for CISOs, Chief Architects, Program Managers, and Senior Assessors. Covers all 5 AI Security Certification Domains across native trust architecture, silicon enclaves, model confidentiality, GERC, and SecMLOps defense.
+              </p>
+
+              <div class="track-specs">
+                <div class="spec-line">
+                  <span class="spec-line-key">Pacing &amp; Structure</span>
+                  <span class="spec-line-val">5 Calendar Weeks + Capstone Portfolio</span>
+                </div>
+                <div class="spec-line">
+                  <span class="spec-line-key">Live Instructor Access</span>
+                  <span class="spec-line-val">5 Weekly 90-Min Video Demo + Hot-Seat Q&amp;A</span>
+                </div>
+                <div class="spec-line">
+                  <span class="spec-line-key">Included Book Bundle</span>
+                  <span class="spec-line-val">All 5 Pictured Books + Technical Manuscripts</span>
+                </div>
+                <div class="spec-line">
+                  <span class="spec-line-key">Continuing Education</span>
+                  <span class="spec-line-val">25 CPE Credits (ISC2, ISACA &amp; PMI Aligned)</span>
+                </div>
+                <div class="spec-line tuition-row">
+                  <span class="spec-line-key">One-Time Tuition</span>
+                  <span class="spec-line-val">$1,695 USD <small>(Founding: $1,295)</small></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <a href="#syllabus-track-201" class="btn btn-secondary">Inspect 5-Week Blueprint ↓</a>
+              <a href="enroll.html?track=201" class="btn btn-primary">Enroll in Track 201 ($1,695) →</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- ASCENSION FUNNEL BRIDGE BANNER -->
+        <div class="ascension-bridge-box">
+          <div>
+            <span class="eyebrow" style="margin-bottom: 0.6rem;">100% Tuition Credit Ascension Bridge</span>
+            <h3 class="card-title">Start with Track 101. Credit 100% of Your Tuition Toward Track 201.</h3>
+            <p style="margin-bottom: 0;">
+              Not sure if you need the full 5-week enterprise security certification track today? Enroll in the <strong>Track 101 Applied Builder Sprint ($495)</strong> first. Every graduate receives a <strong>100% dollar-for-dollar tuition credit</strong> toward Track 201—allowing you to upgrade into the flagship 5-week cohort at any time for only the remaining $1,200 difference.
             </p>
           </div>
-
-          <div class="two-column-tracks-grid">
-            <!-- TRACK 101 SUMMARY CARD -->
-            <article class="track-card track-101">
-              <div class="track-card-body">
-                <div class="card-meta">
-                  <span>TRACK // 101</span>
-                  <span>3 Milestones // Applied Builder Sprint</span>
-                </div>
-                <h3>Applied AI Systems &amp; Agent Workflow Sprint</h3>
-                <p class="track-subtitle">
-                  For professionals, PMs, consultants, and builders ready to move beyond basic chat prompting and deploy repeatable multi-agent production pipelines, modular web architectures, and Domain 1 security baselines.
-                </p>
-
-                <div class="track-specs-list">
-                  <div class="spec-row">
-                    <span class="spec-key">Pacing &amp; Structure</span>
-                    <span class="spec-val">3 Applied Milestones (~3 Weeks)</span>
-                  </div>
-                  <div class="spec-row">
-                    <span class="spec-key">Live Instructor Access</span>
-                    <span class="spec-val">3 Weekly 60-Min Video Demo + Live Q&amp;A Calls</span>
-                  </div>
-                  <div class="spec-row">
-                    <span class="spec-key">Included Book Bundle</span>
-                    <span class="spec-val">2 Volumes (<em>The Unlearning Dilemma</em> &amp; <em>The AI-Augmented PM</em>)</span>
-                  </div>
-                  <div class="spec-row">
-                    <span class="spec-key">Continuing Education</span>
-                    <span class="spec-val">10 CPE Credit Certificate</span>
-                  </div>
-                  <div class="spec-row highlight-price-row">
-                    <span class="spec-key">One-Time Tuition</span>
-                    <span class="spec-val">$495 USD <small>(Founding Rate: $395)</small></span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="track-card-actions">
-                <a href="#syllabus-track-101" class="btn-secondary-outline">Inspect 3-Milestone Syllabus ↓</a>
-                <a href="enroll.html?track=101" class="btn-primary-gold">Enroll in Track 101 ($495) →</a>
-              </div>
-            </article>
-
-            <!-- TRACK 201 SUMMARY CARD -->
-            <article class="track-card track-201 featured-flagship">
-              <div class="track-card-body">
-                <div class="card-meta">
-                  <span>TRACK // 201 (FLAGSHIP)</span>
-                  <span>5 Calendar Weeks // Full 5-Domain Blueprint</span>
-                </div>
-                <h3>Certified AI Security, Architecture &amp; Resilience Practitioner</h3>
-                <p class="track-subtitle">
-                  Engineered for CISOs, Chief Architects, Program Managers, and Senior Assessors. Covers all 5 AI Security Certification Domains across greenfield native trust architecture, silicon enclaves, model confidentiality, GERC, and SecMLOps defense.
-                </p>
-
-                <div class="track-specs-list">
-                  <div class="spec-row">
-                    <span class="spec-key">Pacing &amp; Structure</span>
-                    <span class="spec-val">5 Calendar Weeks + Capstone Portfolio</span>
-                  </div>
-                  <div class="spec-row">
-                    <span class="spec-key">Live Instructor Access</span>
-                    <span class="spec-val">5 Weekly 90-Min Private Video Demo + Hot-Seat Q&amp;A</span>
-                  </div>
-                  <div class="spec-row">
-                    <span class="spec-key">Included Book Bundle</span>
-                    <span class="spec-val">All 5 Pictured Volumes + Technical Manuscript Library</span>
-                  </div>
-                  <div class="spec-row">
-                    <span class="spec-key">Continuing Education</span>
-                    <span class="spec-val">25 CPE Credits (Aligned to ISC2, ISACA &amp; PMI)</span>
-                  </div>
-                  <div class="spec-row highlight-price-row">
-                    <span class="spec-key">One-Time Tuition</span>
-                    <span class="spec-val">$1,695 USD <small>(Founding Cohort: $1,295)</small></span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="track-card-actions">
-                <a href="#syllabus-track-201" class="btn-secondary-outline">Inspect 5-Week Blueprint ↓</a>
-                <a href="enroll.html?track=201" class="btn-primary-gold">Enroll in Track 201 ($1,695) →</a>
-              </div>
-            </article>
-          </div>
-
-          <!-- THE ASCENSION FUNNEL GUARANTEE BANNER -->
-          <div class="ascension-banner">
-            <div class="ascension-content">
-              <span class="eyebrow-badge">100% Tuition Credit Ascension Bridge</span>
-              <h3>Start with Track 101. Credit 100% of Your Tuition Toward Track 201.</h3>
-              <p>
-                Not sure if you need the full 5-week enterprise security certification track today? Enroll in the <strong>Track 101 Applied Builder Sprint ($495)</strong> first. Every graduate receives a <strong>100% dollar-for-dollar tuition credit</strong> toward Track 201—allowing you to upgrade into the flagship 5-week cohort at any time for only the remaining $1,200 tuition difference.
-              </p>
-            </div>
-            <div class="ascension-cta">
-              <a href="enroll.html?track=upgrade" class="btn-secondary-outline">Alumni Upgrade Portal →</a>
-            </div>
-          </div>
+          <a href="enroll.html?track=upgrade" class="btn btn-secondary" style="flex-shrink: 0;">Alumni Upgrade Portal →</a>
         </div>
       </section>
 
-      <!-- SECTION 04: INCLUDED CURRICULUM BOOK LIBRARY (4 PUBLISHED + 5TH UNPUBLISHED GREENFIELD VOLUME) -->
-      <section class="steel-overlay-panel" id="included-book-library">
-        <div class="section-container">
-          <div class="section-header">
-            <span class="eyebrow-badge">The Official Curriculum Library</span>
-            <h2>5-Volume AI, Cybersecurity &amp; Native Architecture Series</h2>
-            <p>
-              Unlike generic bootcamps that rely on slide decks, every Academy cohort is anchored by Kristopher Harrison&apos;s published technical volumes and pre-publication engineering specifications. Track 101 includes Volumes 01 and 02; Track 201 includes all four published volumes plus exclusive access to the fifth greenfield architecture volume and companion threat-mitigation manuscripts.
-            </p>
-          </div>
+      <!-- SECTION 04: THE 5 PICTURED BOOKS (4 PUBLISHED + 5TH UNPUBLISHED GREENFIELD VOLUME) -->
+      <section class="steel-overlay-section" id="included-book-library">
+        <div class="section-header">
+          <span class="eyebrow">Included Cohort Curriculum Library</span>
+          <h2 class="section-title">4 Published Volumes + 5th Greenfield Architecture Volume</h2>
+          <p class="section-subtitle">
+            Every cohort is anchored by Kristopher Harrison's technical book catalog. Track 101 includes Volumes 01 and 02; Track 201 includes all four published books plus exclusive cohort access to the unpublished fifth book (<em>The Determinism Paradox</em>) and companion technical manuscripts.
+          </p>
+        </div>
 
-          <div class="book-library-grid">
-            <!-- BOOK 01: THE UNLEARNING DILEMMA -->
-            <article class="book-showcase-card">
-              <div class="book-cover-2x3">
-                <img alt="Book Cover: The Unlearning Dilemma" src="../Unlearning_Dilemma_Cover_2x3.jpg">
-              </div>
-              <div class="book-card-details">
-                <span class="book-status-pill">Volume 01 // Published Edition</span>
-                <h3>The Unlearning Dilemma</h3>
-                <p>
-                  <strong>Assigned In:</strong> Track 101 (Milestone 1) &amp; Track 201 (Weeks 1 &amp; 3).<br>
-                  Deconstructs legacy deterministic security assumptions, maps the probabilistic ML attack surface across RAG and training pipelines, and establishes protocols for model confidentiality, neural memory sanitization, and verifiable parameter retraction.
-                </p>
-              </div>
-            </article>
+        <div class="book-showcase-grid">
+          <!-- BOOK 01 -->
+          <article class="book-item-card">
+            <div class="cover-frame-2x3">
+              <img src="../Unlearning_Dilemma_Cover_2x3.jpg" alt="The Unlearning Dilemma Book Cover" />
+            </div>
+            <div>
+              <span class="book-pill">Volume 01 • Published Edition</span>
+              <h3 class="card-title">The Unlearning Dilemma</h3>
+              <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                <strong>Assigned In:</strong> Track 101 (Milestone 1) &amp; Track 201 (Weeks 1 &amp; 3).
+              </p>
+              <p style="font-size: 0.9rem; margin-bottom: 0;">
+                Deconstructs legacy deterministic security assumptions, maps the probabilistic ML attack surface across gradient descent trojans and membership inference, and establishes protocols for neural memory sanitization and parameter retraction.
+              </p>
+            </div>
+          </article>
 
-            <!-- BOOK 02: THE AI-AUGMENTED PROJECT MANAGER -->
-            <article class="book-showcase-card">
-              <div class="book-cover-2x3">
-                <img alt="Book Cover: The AI-Augmented Project Manager" src="../AI_Augmented_Project_Manager_Cover_2x3.jpg">
-              </div>
-              <div class="book-card-details">
-                <span class="book-status-pill">Volume 02 // Published Edition</span>
-                <h3>The AI-Augmented Project Manager</h3>
-                <p>
-                  <strong>Assigned In:</strong> Track 101 (Milestone 2) &amp; Track 201 (Week 4).<br>
-                  Operationalizes multi-agent role segregation, Master Initialization Prompts, and PMBOK®-aligned delivery gates—enabling technical leads and PMs to govern probabilistic drift and execute complex deliverables at enterprise scale.
-                </p>
-              </div>
-            </article>
+          <!-- BOOK 02 -->
+          <article class="book-item-card">
+            <div class="cover-frame-2x3">
+              <img src="../AI_Augmented_Project_Manager_Cover_2x3.jpg" alt="The AI-Augmented Project Manager Book Cover" />
+            </div>
+            <div>
+              <span class="book-pill">Volume 02 • Published Edition</span>
+              <h3 class="card-title">The AI-Augmented Project Manager</h3>
+              <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                <strong>Assigned In:</strong> Track 101 (Milestone 2) &amp; Track 201 (Week 4).
+              </p>
+              <p style="font-size: 0.9rem; margin-bottom: 0;">
+                Operationalizes multi-agent role segregation, Master Initialization Prompts, and PMBOK®-aligned delivery gates—enabling technical leads and PMs to govern probabilistic drift and execute complex deliverables at scale.
+              </p>
+            </div>
+          </article>
 
-            <!-- BOOK 03: THE AI-DRIVEN ENTERPRISE -->
-            <article class="book-showcase-card">
-              <div class="book-cover-2x3">
-                <img alt="Book Cover: The AI-Driven Enterprise" src="../AI_Driven_Enterprise_Cover_2x3.jpg">
-              </div>
-              <div class="book-card-details">
-                <span class="book-status-pill">Volume 03 // Published Edition</span>
-                <h3>The AI-Driven Enterprise</h3>
-                <p>
-                  <strong>Assigned In:</strong> Track 201 (Week 4 — Domain 4 GERC).<br>
-                  Bridges executive strategy and fiduciary governance across the NIST AI Risk Management Framework (Govern, Map, Measure, Manage) and ISO/IEC 42001, translating technical telemetry into actionable Board Risk Registers.
-                </p>
-              </div>
-            </article>
+          <!-- BOOK 03 -->
+          <article class="book-item-card">
+            <div class="cover-frame-2x3">
+              <img src="../AI_Driven_Enterprise_Cover_2x3.jpg" alt="The AI-Driven Enterprise Book Cover" />
+            </div>
+            <div>
+              <span class="book-pill">Volume 03 • Published Edition</span>
+              <h3 class="card-title">The AI-Driven Enterprise</h3>
+              <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                <strong>Assigned In:</strong> Track 201 (Week 4 — Domain 4 GERC).
+              </p>
+              <p style="font-size: 0.9rem; margin-bottom: 0;">
+                Bridges executive strategy and fiduciary governance across the NIST AI Risk Management Framework (Govern, Map, Measure, Manage) and ISO/IEC 42001, translating technical telemetry into actionable Board Risk Registers.
+              </p>
+            </div>
+          </article>
 
-            <!-- BOOK 04: AI IN THE TRENCHES -->
-            <article class="book-showcase-card">
-              <div class="book-cover-2x3">
-                <img alt="Book Cover: AI in the Trenches: Auditing, Operations, and Cyber Resilience" src="../AI_in_the_Trenches_Cover_2x3.jpg">
-              </div>
-              <div class="book-card-details">
-                <span class="book-status-pill">Volume 04 // Published Edition</span>
-                <h3>AI in the Trenches: Auditing, Operations, and Cyber Resilience</h3>
-                <p>
-                  <strong>Assigned In:</strong> Track 201 (Week 5 — Domain 5 SecMLOps).<br>
-                  A frontline practitioner manual for continuous algorithmic auditing, SecMLOps pipeline hardening, defending against indirect prompt injection and supply-chain compromises, and executing incident containment playbooks.
-                </p>
-              </div>
-            </article>
+          <!-- BOOK 04 -->
+          <article class="book-item-card">
+            <div class="cover-frame-2x3">
+              <img src="../AI_in_the_Trenches_Cover_2x3.jpg" alt="AI in the Trenches Book Cover" />
+            </div>
+            <div>
+              <span class="book-pill">Volume 04 • Published Edition</span>
+              <h3 class="card-title">AI in the Trenches: Auditing, Operations, and Cyber Resilience</h3>
+              <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                <strong>Assigned In:</strong> Track 201 (Week 5 — Domain 5 SecMLOps).
+              </p>
+              <p style="font-size: 0.9rem; margin-bottom: 0;">
+                Frontline practitioner manual for continuous algorithmic auditing, SecMLOps pipeline hardening, defending against indirect prompt injection and supply-chain compromises, and executing incident containment playbooks.
+              </p>
+            </div>
+          </article>
 
-            <!-- BOOK 05: THE DETERMINISM PARADOX (FULL-SPAN FEATURED UNPUBLISHED VOLUME) -->
-            <article class="book-showcase-card full-span-book">
-              <div class="book-cover-2x3">
-                <img alt="Book Cover: The Determinism Paradox: Architecting Native Trust, Silicon Enclaves, and Glass-Box Governance for Probabilistic Systems" src="../Determinism_Paradox_Cover_2x3.jpg">
-              </div>
-              <div class="book-card-details">
-                <span class="book-status-pill unpublished-pill">Volume 05 // Exclusive Pre-Publication Cohort Manuscript (Domain 2 Anchor)</span>
-                <h3>The Determinism Paradox: Architecting Native Trust, Silicon Enclaves, and Glass-Box Governance for Probabilistic Systems</h3>
-                <p>
-                  <strong>Assigned In:</strong> Track 201 (Week 2 — Domain 2 Program Anchor: 25% Certification Weight).
-                </p>
-                <p>
-                  Because <em>The Unlearning Dilemma</em> and <em>AI in the Trenches</em> already provide exhaustive coverage of adversarial threat mitigation, data poisoning defenses, parameter retraction, and security operations center incident response playbooks, this book deliberately moves beyond reactive threat mitigation. You cannot build a resilient, scalable enterprise solely by chasing attacker tactics or writing incident containment scripts. Enterprise chief architects, principal systems engineers, program managers, and information systems auditors need a proactive, greenfield specification that defines how to structure, engineer, validate, and govern a native probabilistic enterprise from day one.
-                </p>
-              </div>
-            </article>
-          </div>
+          <!-- BOOK 05: THE DETERMINISM PARADOX (UNPUBLISHED 5TH BOOK WITH EXACT SYNOPSIS) -->
+          <article class="book-item-card featured-fifth-book">
+            <div class="cover-frame-2x3">
+              <img src="../Determinism_Paradox_Cover_2x3.jpg" alt="The Determinism Paradox Book Cover" />
+            </div>
+            <div>
+              <span class="book-pill gold-pill">Volume 05 • Pre-Publication Greenfield Specification (Domain 2 Anchor)</span>
+              <h3 class="card-title">The Determinism Paradox: Architecting Native Trust, Silicon Enclaves, and Glass-Box Governance for Probabilistic Systems</h3>
+              <p style="font-size: 0.9rem; margin-bottom: 0.65rem;">
+                <strong>Assigned In:</strong> Track 201 (Week 2 — Domain 2 Program Anchor: 25% Certification Weight).
+              </p>
+              <p style="font-size: 0.92rem; margin-bottom: 0;">
+                Because <em>The Unlearning Dilemma</em> and <em>AI in the Trenches</em> already provide exhaustive coverage of adversarial threat mitigation, data poisoning defenses, parameter retraction, and security operations center incident response playbooks, this book deliberately moves beyond reactive threat mitigation. You cannot build a resilient, scalable enterprise solely by chasing attacker tactics or writing incident containment scripts. Enterprise chief architects, principal systems engineers, program managers, and information systems auditors need a proactive, greenfield specification that defines how to structure, engineer, validate, and govern a native probabilistic enterprise from day one.
+              </p>
+            </div>
+          </article>
+        </div>
 
-          <div class="section-footer-cta">
-            <a href="https://harrisonarbitrage.com/publishing.html" target="_blank" rel="noopener noreferrer" class="btn-secondary-outline">Explore Published Catalog on Harrison Arbitrage ↗</a>
-            <a href="enroll.html?track=201" class="btn-primary-gold">Unlock Full 5-Book Cohort Library in Track 201 →</a>
-          </div>
+        <div class="btn-group" style="margin-top: 1.75rem;">
+          <a href="../unlearning/index.html" class="btn btn-secondary">📖 Enter The Unlearning Dilemma 9:16 Showcase</a>
+          <a href="https://harrisonarbitrage.com/publishing.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View Complete Catalog on Harrison Arbitrage ↗</a>
         </div>
       </section>
 
       <!-- SECTION 05: DETAILED SYLLABUS FOR TRACK 101 (3 MILESTONES) -->
-      <section class="steel-overlay-panel" id="syllabus-track-101">
-        <div class="section-container">
-          <div class="section-header">
-            <span class="eyebrow-badge">Track 101 Blueprint // $495 USD (10 CPEs)</span>
-            <h2>The Applied AI Systems &amp; Agent Workflow Sprint</h2>
-            <p>
-              Instead of dragging out theory for months, Track 101 is structured around <strong>three concrete operational milestones</strong>. Students complete structured exercises across the week and join a live weekly Google Meet session featuring a controlled video walkthrough of our production environment followed by live Q&amp;A.
-            </p>
-          </div>
+      <section class="steel-overlay-section" id="syllabus-track-101">
+        <div class="section-header">
+          <span class="eyebrow">Track 101 Blueprint • $495 USD (10 CPEs)</span>
+          <h2 class="section-title">The Applied AI Systems &amp; Agent Workflow Sprint</h2>
+          <p class="section-subtitle">
+            Structured around three concrete operational milestones. Students complete multi-day exercises across the week and join a live weekly 60-minute Google Meet session featuring a controlled video walkthrough of our production environment followed by live Q&amp;A.
+          </p>
+        </div>
 
-          <div class="three-column-grid">
-            <!-- MILESTONE 01 -->
-            <article class="milestone-card">
-              <div>
-                <div class="card-meta">
-                  <span>MILESTONE // 01</span>
-                  <span>Pre-Domain 1 + AI Tier Matrix</span>
-                </div>
-                <h3>Escaping the Tier 1 Consumer AI Trap</h3>
-                <p>
-                  <strong>Core Focus:</strong> Deconstructing the 3-Level AI Tier Matrix (Consumer AI vs. API Layer vs. Sovereign AI). Understanding context window mechanics, system instructions, deterministic vs. probabilistic failure modes, and why standard chat prompts leak proprietary data.
-                </p>
-                <p>
-                  <strong>Multi-Day Student Exercise:</strong> Audit your current organizational workflow against the 3-Tier Matrix, strip out IP leakage vectors, and convert an unstructured chat task into a repeatable Phase-Gate specification.
-                </p>
+        <div class="grid-3" style="margin-bottom: 1.75rem;">
+          <!-- MILESTONE 01 -->
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-gold">MILESTONE 01 • PRE-DOMAIN 1 + TIER MATRIX</span>
+              <h3 class="card-title">Escaping the Tier 1 Consumer AI Trap</h3>
+              <p>
+                <strong>Core Focus:</strong> Deconstructing the 3-Level AI Tier Matrix (Consumer AI vs. API Layer vs. Sovereign AI). Context window mechanics, system instructions, deterministic vs. probabilistic failure modes, and why standard chat prompts leak proprietary data.
+              </p>
+              <p style="margin-bottom: 0;">
+                <strong>Multi-Day Student Exercise:</strong> Audit your organizational workflow against the 3-Tier Matrix, strip out IP leakage vectors, and convert an unstructured chat task into a repeatable Phase-Gate specification.
+              </p>
+            </div>
+            <div class="milestone-book-footer">
+              <div class="mini-cover-2x3">
+                <img src="../Unlearning_Dilemma_Cover_2x3.jpg" alt="The Unlearning Dilemma Cover" />
               </div>
-              <div class="milestone-book-row">
-                <div class="milestone-book-mini">
-                  <img alt="The Unlearning Dilemma Cover" src="../Unlearning_Dilemma_Cover_2x3.jpg">
-                </div>
-                <span><strong>Included Text:</strong> <em>The Unlearning Dilemma</em></span>
-              </div>
-            </article>
+              <span><strong>Included Text:</strong> <em>The Unlearning Dilemma</em></span>
+            </div>
+          </article>
 
-            <!-- MILESTONE 02 -->
-            <article class="milestone-card">
-              <div>
-                <div class="card-meta">
-                  <span>MILESTONE // 02</span>
-                  <span>Multi-Agent Role Segregation</span>
-                </div>
-                <h3>Master Initialization &amp; Segregated Agent Teams</h3>
-                <p>
-                  <strong>Core Focus:</strong> Replicating the exact multi-agent production workflow used across Harrison AI Agents. How to segregate agent roles (Architect, Technical Drafter, Red-Team Auditor, Production Formatter) using Master Initialization Prompts and strict handoff gates.
-                </p>
-                <p>
-                  <strong>Multi-Day Student Exercise:</strong> Over 3 days, engineer a 4-Agent system prompt architecture to take a complex commercial deliverable (technical book, governance charter, or system spec) from raw outline to audited manuscript.
-                </p>
+          <!-- MILESTONE 02 -->
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-gold">MILESTONE 02 • MULTI-AGENT SEGREGATION</span>
+              <h3 class="card-title">Master Initialization &amp; Segregated Agent Teams</h3>
+              <p>
+                <strong>Core Focus:</strong> Replicating the multi-agent production workflow used across Harrison AI Agents. Segregating agent roles (Architect, Technical Drafter, Red-Team Auditor, Production Formatter) using Master Initialization Prompts and strict handoff gates.
+              </p>
+              <p style="margin-bottom: 0;">
+                <strong>Multi-Day Student Exercise:</strong> Over 3 days, engineer a 4-Agent system prompt architecture to take a complex commercial deliverable from raw outline to audited specification.
+              </p>
+            </div>
+            <div class="milestone-book-footer">
+              <div class="mini-cover-2x3">
+                <img src="../AI_Augmented_Project_Manager_Cover_2x3.jpg" alt="The AI-Augmented Project Manager Cover" />
               </div>
-              <div class="milestone-book-row">
-                <div class="milestone-book-mini">
-                  <img alt="The AI-Augmented Project Manager Cover" src="../AI_Augmented_Project_Manager_Cover_2x3.jpg">
-                </div>
-                <span><strong>Included Text:</strong> <em>The AI-Augmented Project Manager</em></span>
-              </div>
-            </article>
+              <span><strong>Included Text:</strong> <em>The AI-Augmented Project Manager</em></span>
+            </div>
+          </article>
 
-            <!-- MILESTONE 03 -->
-            <article class="milestone-card">
-              <div>
-                <div class="card-meta">
-                  <span>MILESTONE // 03</span>
-                  <span>Production Asset Deployment</span>
-                </div>
-                <h3>From Raw Output to Live Digital Infrastructure</h3>
-                <p>
-                  <strong>Core Focus:</strong> Translating multi-agent outputs into live commercial infrastructure. Behind-the-scenes walkthrough of how the 9:16 mobile-first, Dark/Light theme-reactive websites and publishing pipelines on <code>harrisonaiagents.com</code> and <code>harrisonarbitrage.com</code> were engineered in weeks rather than months.
-                </p>
-                <p>
-                  <strong>Multi-Day Student Exercise:</strong> Use your Milestone 2 agent pipeline to generate, validate, and package a production-ready web portal (<code>styles.css</code> + modular HTML) or commercial publication package.
-                </p>
+          <!-- MILESTONE 03 -->
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-gold">MILESTONE 03 • PRODUCTION DEPLOYMENT</span>
+              <h3 class="card-title">From Raw Output to Live Digital Infrastructure</h3>
+              <p>
+                <strong>Core Focus:</strong> Translating multi-agent outputs into live commercial infrastructure. Behind-the-scenes walkthrough of how the 9:16 mobile-first, Dark/Light theme-reactive web platforms on <code>harrisonaiagents.com</code> and <code>harrisonarbitrage.com</code> were engineered.
+              </p>
+              <p style="margin-bottom: 0;">
+                <strong>Multi-Day Student Exercise:</strong> Use your Milestone 2 agent pipeline to generate, validate, and package a production-ready web portal or commercial publication package.
+              </p>
+            </div>
+            <div class="milestone-book-footer">
+              <div class="mini-cover-2x3">
+                <img src="../Harrison_Agents_Dark_9x16.jpg" class="theme-brand-9x16" alt="Harrison AI Agents Crest" />
               </div>
-              <div class="milestone-book-row">
-                <div class="milestone-book-mini">
-                  <img alt="Harrison AI Agents 9:16 Key Art" src="../Harrison_Agents_Dark_9x16.jpg" data-dark-src="../Harrison_Agents_Dark_9x16.jpg" data-light-src="../Harrison_Agents_Light_9x16.jpg">
-                </div>
-                <span><strong>Capstone Output:</strong> Live Deployment Review + 10 CPE Certificate</span>
-              </div>
-            </article>
-          </div>
+              <span><strong>Capstone Output:</strong> Live Review + 10 CPE Certificate</span>
+            </div>
+          </article>
+        </div>
 
-          <div class="section-footer-cta">
-            <a href="enroll.html?track=101" class="btn-primary-gold">Reserve Your Seat in Track 101 ($495) →</a>
-          </div>
+        <div class="btn-group">
+          <a href="enroll.html?track=101" class="btn btn-primary">Reserve Your Seat in Track 101 ($495) →</a>
         </div>
       </section>
 
       <!-- SECTION 06: DETAILED SYLLABUS FOR TRACK 201 (5 WEEKS / 5 CERTIFICATION DOMAINS) -->
-      <section class="steel-overlay-panel" id="syllabus-track-201">
-        <div class="section-container">
-          <div class="section-header">
-            <span class="eyebrow-badge">Track 201 Flagship Blueprint // $1,695 USD (25 CPEs)</span>
-            <h2>5-Week AI Security, Architecture &amp; Resilience Curriculum</h2>
-            <p>
-              Mapped directly to our five-domain AI Security Certification Blueprint and bundled with all <strong>four published volumes</strong> plus <strong>The Determinism Paradox</strong> and companion technical manuscripts. Each week combines four days of applied architecture exercises with a 90-minute live instructor video demonstration and hot-seat review session.
-            </p>
-          </div>
+      <section class="steel-overlay-section" id="syllabus-track-201">
+        <div class="section-header">
+          <span class="eyebrow">Track 201 Flagship Blueprint • $1,695 USD (25 CPEs)</span>
+          <h2 class="section-title">5-Week AI Security, Architecture &amp; Resilience Curriculum</h2>
+          <p class="section-subtitle">
+            Mapped directly to our five-domain AI Security Certification Blueprint and paired with all five pictured book covers and companion technical manuscripts. Each week combines four days of applied architecture exercises with a 90-minute live instructor video demonstration and hot-seat review session.
+          </p>
+        </div>
 
-          <div class="vertical-curriculum-stack">
-            <!-- WEEK 01 -->
-            <article class="week-module-card">
-              <div class="book-cover-thumb">
-                <img alt="Book Cover for The Unlearning Dilemma" src="../Unlearning_Dilemma_Cover_2x3.jpg">
-              </div>
-              <div class="week-module-content">
-                <div class="card-meta">
-                  <span>WEEK 01 // DOMAIN 01 (15% EXAM WEIGHT)</span>
-                  <span>3.75 CPE Hours</span>
-                </div>
-                <h3>AI Concepts, Security Baselines &amp; Cognitive Unlearning</h3>
-                <p>
-                  <strong>Assigned Curriculum Text:</strong> <em>The Unlearning Dilemma</em> (Volume 01).<br>
-                  <strong>Technical Scope:</strong> Dismantling deterministic legacy security assumptions; mapping the end-to-end ML and autonomous agent attack surface across training, fine-tuning, RAG retrieval, and inference; identifying where legacy perimeter controls fail against probabilistic systems.<br>
-                  <strong>Weekly Student Exercise (Days 1–4):</strong> Audit a legacy deterministic security baseline against an enterprise agent deployment and produce an Institutional Unlearning &amp; Threat Surface Brief.<br>
-                  <strong>Protected Video Demo + Live Q&amp;A:</strong> Visual teardown of deterministic vs. probabilistic system failure modes and semantic bypass vectors.
-                </p>
-              </div>
-            </article>
+        <div class="curriculum-stack">
+          <!-- WEEK 01 -->
+          <article class="week-row-card">
+            <div class="cover-frame-2x3">
+              <img src="../Unlearning_Dilemma_Cover_2x3.jpg" alt="Book Cover for The Unlearning Dilemma" />
+            </div>
+            <div>
+              <span class="card-number tier-badge-crimson">WEEK 01 • DOMAIN 01 (15% EXAM WEIGHT • 3.75 CPEs)</span>
+              <h3 class="card-title">AI Concepts, Security Baselines &amp; Cognitive Unlearning</h3>
+              <p>
+                <strong>Assigned Curriculum Text:</strong> <em>The Unlearning Dilemma</em> (Volume 01).<br />
+                <strong>Technical Scope:</strong> Dismantling deterministic legacy security assumptions; mapping the end-to-end ML and autonomous agent attack surface across training, fine-tuning, RAG retrieval, and inference; identifying where legacy perimeter controls fail against probabilistic systems.<br />
+                <strong>Weekly Student Exercise (Days 1–4):</strong> Audit a legacy deterministic security baseline against an enterprise agent deployment and produce an Institutional Unlearning &amp; Threat Surface Brief.<br />
+                <strong>Protected Video Demo + Live Q&amp;A:</strong> Visual teardown of deterministic vs. probabilistic system failure modes and semantic bypass vectors.
+              </p>
+            </div>
+          </article>
 
-            <!-- WEEK 02 (UPDATED WITH THE DETERMINISM PARADOX 2:3 COVER & GREENFIELD SCOPE) -->
-            <article class="week-module-card">
-              <div class="book-cover-thumb">
-                <img alt="Book Cover for The Determinism Paradox" src="../Determinism_Paradox_Cover_2x3.jpg">
-              </div>
-              <div class="week-module-content">
-                <div class="card-meta">
-                  <span>WEEK 02 // DOMAIN 02 (25% EXAM WEIGHT — PROGRAM ANCHOR)</span>
-                  <span>6.25 CPE Hours</span>
-                </div>
-                <h3>Secure Native AI Architecture, Silicon Enclaves &amp; Glass-Box Governance</h3>
-                <p>
-                  <strong>Assigned Curriculum Text:</strong> <em>The Determinism Paradox: Architecting Native Trust, Silicon Enclaves, and Glass-Box Governance for Probabilistic Systems</em> (Volume 05 Pre-Publication Manuscript &amp; <em>Native AI Architecture</em> Specification).<br>
-                  <strong>Technical Scope:</strong> Proactive greenfield architecture for native probabilistic enterprises; Zero Trust topologies and Non-Human Identity (NHI) governance; hardware-rooted silicon enclaves, cryptographic attestation, ephemeral token scoping, and glass-box telemetry validation across autonomous tool and webhook pipelines.<br>
-                  <strong>Weekly Student Exercise (Days 1–4):</strong> Engineer a greenfield Zero Trust and Silicon Enclave reference topology defining orchestrator boundaries, least-privilege NHI scopes, and glass-box governance gates.<br>
-                  <strong>Protected Video Demo + Live Q&amp;A:</strong> Walkthrough of a multi-agent webhook and CLI orchestration pipeline illustrating privilege containment and deterministic architectural guardrails around probabilistic models.
-                </p>
-              </div>
-            </article>
+          <!-- WEEK 02 (PAIRED WITH THE DETERMINISM PARADOX COVER) -->
+          <article class="week-row-card">
+            <div class="cover-frame-2x3">
+              <img src="../Determinism_Paradox_Cover_2x3.jpg" alt="Book Cover for The Determinism Paradox" />
+            </div>
+            <div>
+              <span class="card-number tier-badge-gold">WEEK 02 • DOMAIN 02 (25% EXAM WEIGHT — PROGRAM ANCHOR • 6.25 CPEs)</span>
+              <h3 class="card-title">Secure Native AI Architecture, Silicon Enclaves &amp; Glass-Box Governance</h3>
+              <p>
+                <strong>Assigned Curriculum Text:</strong> <em>The Determinism Paradox: Architecting Native Trust, Silicon Enclaves, and Glass-Box Governance for Probabilistic Systems</em> (Volume 05 Pre-Publication Specification &amp; <em>Native AI Architecture</em> Manuscript).<br />
+                <strong>Technical Scope:</strong> Proactive greenfield specification for native probabilistic enterprises; Zero Trust reference topologies and Non-Human Identity (NHI) governance; hardware-rooted silicon enclaves, cryptographic attestation, ephemeral token scoping, and glass-box telemetry validation across autonomous tool and webhook pipelines.<br />
+                <strong>Weekly Student Exercise (Days 1–4):</strong> Architect a greenfield Zero Trust and Silicon Enclave topology defining orchestrator boundaries, least-privilege API scopes, and glass-box governance gates.<br />
+                <strong>Protected Video Demo + Live Q&amp;A:</strong> Walkthrough of a multi-agent webhook and CLI orchestration pipeline illustrating privilege containment and architectural guardrails.
+              </p>
+            </div>
+          </article>
 
-            <!-- WEEK 03 -->
-            <article class="week-module-card">
-              <div class="book-cover-thumb">
-                <img alt="Book Cover for The Unlearning Dilemma Technical Edition" src="../Unlearning_Dilemma_Cover_2x3.jpg">
-              </div>
-              <div class="week-module-content">
-                <div class="card-meta">
-                  <span>WEEK 03 // DOMAIN 03 (20% EXAM WEIGHT)</span>
-                  <span>5.00 CPE Hours</span>
-                </div>
-                <h3>AI Data Management, Privacy, Provenance &amp; Model Confidentiality</h3>
-                <p>
-                  <strong>Assigned Curriculum Text:</strong> <em>The Unlearning Dilemma: Mitigating Threats to Model Confidentiality, Neural Memory, and Data Integrity</em> (Technical Threat Mitigation Manuscript).<br>
-                  <strong>Technical Scope:</strong> Cryptographic data provenance and lineage verification; defending against membership inference, model inversion, and RAG vector poisoning; differential privacy, noise injection, and verifiable machine unlearning protocols.<br>
-                  <strong>Weekly Student Exercise (Days 1–4):</strong> Trace data provenance flaws in a compromised RAG/training pipeline, calculate membership inference exposure risk, and engineer a sanitization and machine unlearning protocol.<br>
-                  <strong>Protected Video Demo + Live Q&amp;A:</strong> Recorded demonstration of vector store contamination, training data extraction vectors, and defensive sanitization gates.
-                </p>
-              </div>
-            </article>
+          <!-- WEEK 03 -->
+          <article class="week-row-card">
+            <div class="cover-frame-2x3">
+              <img src="../Unlearning_Dilemma_Cover_2x3.jpg" alt="Book Cover for The Unlearning Dilemma Technical Edition" />
+            </div>
+            <div>
+              <span class="card-number tier-badge-blue">WEEK 03 • DOMAIN 03 (20% EXAM WEIGHT • 5.00 CPEs)</span>
+              <h3 class="card-title">AI Data Management, Privacy, Provenance &amp; Model Confidentiality</h3>
+              <p>
+                <strong>Assigned Curriculum Text:</strong> <em>The Unlearning Dilemma: Mitigating Threats to Model Confidentiality, Neural Memory, and Data Integrity</em> (Technical Threat Mitigation Manuscript).<br />
+                <strong>Technical Scope:</strong> Cryptographic data provenance and lineage verification; defending against membership inference, model inversion, and RAG vector poisoning; differential privacy, noise injection, and verifiable machine unlearning protocols.<br />
+                <strong>Weekly Student Exercise (Days 1–4):</strong> Trace data provenance flaws in a compromised RAG/training pipeline, calculate membership inference exposure risk, and engineer a sanitization and machine unlearning protocol.<br />
+                <strong>Protected Video Demo + Live Q&amp;A:</strong> Recorded demonstration of vector store contamination, training data extraction vectors, and defensive sanitization gates.
+              </p>
+            </div>
+          </article>
 
-            <!-- WEEK 04 (DUAL 2:3 BOOK COVERS: AI-DRIVEN ENTERPRISE + AI-AUGMENTED PM) -->
-            <article class="week-module-card">
-              <div class="dual-book-cover-stack">
-                <div class="book-cover-thumb">
-                  <img alt="Book Cover for The AI-Driven Enterprise" src="../AI_Driven_Enterprise_Cover_2x3.jpg">
-                </div>
-                <div class="book-cover-thumb">
-                  <img alt="Book Cover for The AI-Augmented Project Manager" src="../AI_Augmented_Project_Manager_Cover_2x3.jpg">
-                </div>
+          <!-- WEEK 04 (DUAL COVERS: AI-DRIVEN ENTERPRISE + AI-AUGMENTED PM) -->
+          <article class="week-row-card">
+            <div class="dual-cover-pair">
+              <div class="cover-frame-2x3">
+                <img src="../AI_Driven_Enterprise_Cover_2x3.jpg" alt="Book Cover for The AI-Driven Enterprise" />
               </div>
-              <div class="week-module-content">
-                <div class="card-meta">
-                  <span>WEEK 04 // DOMAIN 04 (20% EXAM WEIGHT)</span>
-                  <span>5.00 CPE Hours</span>
-                </div>
-                <h3>AI Governance, Ethics, Risk, Compliance (GERC) &amp; PMBOK® Delivery</h3>
-                <p>
-                  <strong>Assigned Curriculum Texts:</strong> <em>The AI-Driven Enterprise</em> (Volume 03) &amp; <em>The AI-Augmented Project Manager</em> (Volume 02).<br>
-                  <strong>Technical Scope:</strong> Fiduciary board risk reporting; operationalizing the NIST AI Risk Management Framework (Govern, Map, Measure, Manage) and ISO/IEC 42001; embedding probabilistic drift tolerances and SecMLOps quality gates into PMBOK®-aligned project delivery.<br>
-                  <strong>Weekly Student Exercise (Days 1–4):</strong> Translate technical vulnerabilities from Weeks 2 and 3 into an executive Board Risk Register and a PMBOK®-aligned AI Project Charter.<br>
-                  <strong>Protected Video Demo + Live Q&amp;A:</strong> Simulated Board Risk Committee walkthrough and live instructor critique of student governance charters.
-                </p>
+              <div class="cover-frame-2x3">
+                <img src="../AI_Augmented_Project_Manager_Cover_2x3.jpg" alt="Book Cover for The AI-Augmented Project Manager" />
               </div>
-            </article>
+            </div>
+            <div>
+              <span class="card-number tier-badge-gold">WEEK 04 • DOMAIN 04 (20% EXAM WEIGHT • 5.00 CPEs)</span>
+              <h3 class="card-title">AI Governance, Ethics, Risk, Compliance (GERC) &amp; PMBOK® Delivery</h3>
+              <p>
+                <strong>Assigned Curriculum Texts:</strong> <em>The AI-Driven Enterprise</em> (Volume 03) &amp; <em>The AI-Augmented Project Manager</em> (Volume 02).<br />
+                <strong>Technical Scope:</strong> Fiduciary board risk reporting; operationalizing the NIST AI Risk Management Framework (Govern, Map, Measure, Manage) and ISO/IEC 42001; embedding probabilistic drift tolerances and SecMLOps quality gates into PMBOK®-aligned project delivery.<br />
+                <strong>Weekly Student Exercise (Days 1–4):</strong> Translate technical vulnerabilities from Weeks 2 and 3 into an executive Board Risk Register and a PMBOK®-aligned AI Project Charter.<br />
+                <strong>Protected Video Demo + Live Q&amp;A:</strong> Simulated Board Risk Committee walkthrough and live instructor critique of student governance charters.
+              </p>
+            </div>
+          </article>
 
-            <!-- WEEK 05 -->
-            <article class="week-module-card">
-              <div class="book-cover-thumb">
-                <img alt="Book Cover for AI in the Trenches" src="../AI_in_the_Trenches_Cover_2x3.jpg">
-              </div>
-              <div class="week-module-content">
-                <div class="card-meta">
-                  <span>WEEK 05 // DOMAIN 05 (20% EXAM WEIGHT)</span>
-                  <span>5.00 CPE Hours</span>
-                </div>
-                <h3>Secure AI Operations (SecMLOps), Auditing &amp; Incident Response</h3>
-                <p>
-                  <strong>Assigned Curriculum Text:</strong> <em>AI in the Trenches: Auditing, Operations, and Cyber Resilience</em> (Volume 04).<br>
-                  <strong>Technical Scope:</strong> Frontline SecMLOps pipeline hardening; continuous algorithmic auditing; defending against indirect prompt injection and autonomous supply-chain compromises; executing AI-specific incident containment, model rollback, and forensic preservation.<br>
-                  <strong>Weekly Student Exercise (Days 1–4):</strong> Execute a pre-deployment SecMLOps audit rubric, draft an autonomous agent Incident Response Playbook, and finalize your 5-Week Capstone Portfolio.<br>
-                  <strong>Protected Video Demo + Live Q&amp;A:</strong> &quot;In the Trenches&quot; incident triage walkthrough, final Capstone reviews, and issuance of your 25 CPE Credit Certificate.
-                </p>
-              </div>
-            </article>
-          </div>
+          <!-- WEEK 05 -->
+          <article class="week-row-card">
+            <div class="cover-frame-2x3">
+              <img src="../AI_in_the_Trenches_Cover_2x3.jpg" alt="Book Cover for AI in the Trenches" />
+            </div>
+            <div>
+              <span class="card-number tier-badge-crimson">WEEK 05 • DOMAIN 05 (20% EXAM WEIGHT • 5.00 CPEs)</span>
+              <h3 class="card-title">Secure AI Operations (SecMLOps), Auditing &amp; Incident Response</h3>
+              <p>
+                <strong>Assigned Curriculum Text:</strong> <em>AI in the Trenches: Auditing, Operations, and Cyber Resilience</em> (Volume 04).<br />
+                <strong>Technical Scope:</strong> Frontline SecMLOps pipeline hardening; continuous algorithmic auditing; defending against indirect prompt injection and autonomous supply-chain compromises; executing AI-specific incident containment, model rollback, and forensic preservation.<br />
+                <strong>Weekly Student Exercise (Days 1–4):</strong> Execute a pre-deployment SecMLOps audit rubric, draft an autonomous agent Incident Response Playbook, and finalize your 5-Week Capstone Portfolio.<br />
+                <strong>Protected Video Demo + Live Q&amp;A:</strong> "In the Trenches" incident triage walkthrough, final Capstone reviews, and issuance of your 25 CPE Credit Certificate.
+              </p>
+            </div>
+          </article>
+        </div>
 
-          <div class="section-footer-cta">
-            <a href="enroll.html?track=201" class="btn-primary-gold">Proceed to Track 201 Enrollment ($1,695) →</a>
-            <a href="academy-reimbursement.html" class="btn-secondary-outline">Download Employer Tuition &amp; CPE Justification Brief →</a>
-            <a href="enroll.html?track=corporate" class="btn-secondary-outline">Request Corporate Team Invoice →</a>
-          </div>
+        <div class="btn-group" style="margin-top: 2rem;">
+          <a href="enroll.html?track=201" class="btn btn-primary">Proceed to Track 201 Enrollment ($1,695) →</a>
+          <a href="academy-reimbursement.html" class="btn btn-secondary">Employer Tuition &amp; CPE Justification Brief →</a>
+          <a href="enroll.html?track=corporate" class="btn btn-secondary">Request Corporate Team Invoice →</a>
         </div>
       </section>
 
       <!-- SECTION 07: INSTRUCTOR CREDENTIALS & DELIVERY METHODOLOGY -->
-      <section class="steel-overlay-panel" id="delivery-model">
-        <div class="section-container">
-          <div class="two-column-tracks-grid">
-            <article class="feature-card">
-              <div>
-                <div class="card-meta">
-                  <span>DELIVERY ARCHITECTURE</span>
-                  <span>Zero Cloud Sandbox Overhead</span>
-                </div>
-                <h3>How Weekly Sessions &amp; Exercises Work</h3>
-                <p>
-                  Every cohort combines structured asynchronous building with live instructor interaction—without requiring students to purchase expensive cloud GPU environments:
-                </p>
-                <ul>
-                  <li><strong>Days 1–4 (Asynchronous Multi-Day Milestones):</strong> Students read the assigned book chapters and complete daily architecture, prompt engineering, or security auditing exercises inside their cohort workbook.</li>
-                  <li><strong>Weekly Live Google Meet Session:</strong> Each week features a private, instructor-narrated video demonstration of real-world multi-agent and security architectures (broadcast securely with capture restrictions), followed by 30–50 minutes of live Q&amp;A and hot-seat exercise feedback.</li>
-                  <li><strong>Employer Tuition &amp; CPE Documentation:</strong> Every enrollment includes an official itemized receipt and a signed Continuing Professional Education (CPE) completion certificate mapped to ISC2, ISACA, and PMI domains.</li>
-                </ul>
-              </div>
-            </article>
+      <section class="steel-overlay-section" id="delivery-model">
+        <div class="grid-2" style="margin-bottom: 0;">
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-blue">DELIVERY ARCHITECTURE • ZERO CLOUD SANDBOX OVERHEAD</span>
+              <h3 class="card-title">How Weekly Sessions &amp; Exercises Work</h3>
+              <p>
+                Every cohort combines structured asynchronous building with live instructor interaction—without requiring students to purchase expensive cloud GPU environments:
+              </p>
+              <ul class="card-list">
+                <li><strong>Days 1–4 (Asynchronous Multi-Day Milestones):</strong> Read the assigned book chapters and complete daily architecture, prompt engineering, or security auditing exercises inside your cohort workbook.</li>
+                <li><strong>Weekly Live Google Meet Session:</strong> Private, instructor-narrated video demonstration of real-world multi-agent and security architectures (broadcast securely with capture restrictions), followed by live Q&amp;A and hot-seat exercise feedback.</li>
+                <li><strong>Employer Tuition &amp; CPE Documentation:</strong> Official itemized receipt and signed Continuing Professional Education (CPE) completion certificate mapped to ISC2, ISACA, and PMI domains.</li>
+              </ul>
+            </div>
+          </article>
 
-            <article class="feature-card">
-              <div>
-                <div class="card-meta">
-                  <span>LEAD INSTRUCTOR</span>
-                  <span>Practitioner &amp; Author</span>
-                </div>
-                <h3>Instructed by Kristopher Harrison</h3>
-                <p>
-                  <strong>Chief of Field Operations, Harrison AI Agents // Founder, Harrison Arbitrage LLC</strong><br>
-                  Holding active <strong>PMP®, CISSP®, ISSMP®, and CISA®</strong> credentials alongside decades of enterprise cybersecurity, cryptographic modernization, and technical assessment leadership across defense and commercial sectors, Kristopher Harrison is the author of the Harrison Arbitrage technical publishing catalog, including the five-volume <em>AI, Cybersecurity, Resilience &amp; Native Architecture</em> library.
-                </p>
-              </div>
-              <div class="track-card-actions">
-                <a href="https://harrisonarbitrage.com/publishing.html" target="_blank" rel="noopener noreferrer" class="btn-secondary-outline">Explore Complete Book Catalog ↗</a>
-                <a href="enroll.html?track=201" class="btn-primary-gold">Go to Enrollment &amp; Checkout Portal →</a>
-              </div>
-            </article>
-          </div>
+          <article class="steel-card">
+            <div>
+              <span class="card-number tier-badge-gold">LEAD INSTRUCTOR • PRACTITIONER &amp; AUTHOR</span>
+              <h3 class="card-title">Instructed by Kristopher Harrison</h3>
+              <p>
+                <strong>Chief of Field Operations, Harrison AI Agents // Founder, Harrison Arbitrage LLC</strong>
+              </p>
+              <p>
+                Holding active <strong>PMP®, CISSP®, ISSMP®, and CISA®</strong> credentials alongside decades of enterprise cybersecurity, cryptographic modernization, and technical assessment leadership across defense and commercial sectors, Kristopher Harrison is the author of the Harrison Arbitrage publishing catalog, including the five-volume <em>AI, Cybersecurity, Resilience &amp; Native Architecture</em> library.
+              </p>
+            </div>
+            <div class="btn-group" style="margin-top: 1.25rem;">
+              <a href="enroll.html?track=201" class="btn btn-primary">Go to Enrollment &amp; Checkout Portal →</a>
+              <a href="mailto:info@harrisonaiagents.com" class="btn btn-secondary">info@harrisonaiagents.com</a>
+            </div>
+          </article>
         </div>
       </section>
 
+      <harrison-footer-cta
+        heading="Ready to Architect Governed, Production-Grade AI Systems?"
+        subtext="Enroll in Track 101 ($495 / 10 CPEs) or Track 201 ($1,695 / 25 CPEs) and receive the complete companion book series, multi-day exercise workbooks, and live weekly instruction.">
+      </harrison-footer-cta>
+
     </main>
   </div>
-
-  <!-- COMPACT CONTENT FOOTER (Aligned with Left Sidebar Offset) -->
-  <footer class="content-footer">
-    <div class="content-footer-inner">
-      <span>© 2026 Harrison AI Agents // A Division of Harrison Arbitrage LLC. All Rights Reserved.</span>
-      <span>Academy Support &amp; Corporate Invoicing: <a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a></span>
-    </div>
-  </footer>
-
-  <script src="../main.js"></script>
 </body>
 </html>

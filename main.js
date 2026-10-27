@@ -1,385 +1,135 @@
-/* ==========================================================================
-   HARRISON AI AGENTS — GLOBAL WEB COMPONENTS & THEME MEDIA ENGINE (main.js)
-   ========================================================================== */
+/**
+ * HARRISON AI AGENTS & ACADEMY — UNIFIED FRONTEND ENGINE (main.js)
+ * Features:
+ *  1. Dual-Mode Theme Engine (Dark/Light) with Subdirectory-Aware Asset Swapping
+ *  2. Left Vertical Sidebar Mobile Drawer Controller & Active Route Highlighting
+ *  3. Steel-Blue Sliding Overlay Scroll Elevation
+ *  4. AI Tier Comparison Matrix Interactive Priority Controller
+ */
 
-function isUnlearningDirectory() {
-  return window.location.pathname.toLowerCase().includes('/unlearning');
-}
-
-function getRootPrefix() {
-  return isUnlearningDirectory() ? '../' : '';
-}
-
-function syncThemeMediaAssets() {
-  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  const inUnlearning = isUnlearningDirectory();
-  const prefix = getRootPrefix();
-
-  /* 1. Sync 1x1 Sidebar & Mobile Brand Logos (Root Assets) */
-  const logoSrc = prefix + (isLight ? 'Harrison_Agents_Light.jpg' : 'Harrison_Agents_Dark.jpg');
-  document.querySelectorAll('.theme-brand-logo').forEach(img => {
-    if (img.getAttribute('src') !== logoSrc) {
-      img.setAttribute('src', logoSrc);
-    }
-  });
-
-  /* 2. Sync 9x16 Animated Crest Videos & Posters
-        - Root pages use: Harrison_Agents_[Dark|Light]_9x16_Animated.mp4
-        - /unlearning/ uses: Harrison_Arbitrage_[Dark|Light]_9x16_Animated.mp4 */
-  const rootVideoSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16_Animated.mp4' : 'Harrison_Agents_Dark_9x16_Animated.mp4');
-  const rootPosterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
-
-  const arbitrageVideoSrc = isLight ? 'Harrison_Arbitrage_Light_9x16_Animated.mp4' : 'Harrison_Arbitrage_Dark_9x16_Animated.mp4';
-  const arbitragePosterSrc = isLight ? 'Harrison_Arbitrage_Light_9x16.jpg' : 'Harrison_Arbitrage_Dark_9x16.jpg';
-
-  document.querySelectorAll('.theme-brand-video').forEach(video => {
-    const useArbitrage = inUnlearning || video.dataset.brand === 'arbitrage';
-    const targetVideo = useArbitrage ? arbitrageVideoSrc : rootVideoSrc;
-    const targetPoster = useArbitrage ? arbitragePosterSrc : rootPosterSrc;
-
-    video.setAttribute('poster', targetPoster);
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-
-    /* Fallback to root Harrison_Agents video if Arbitrage file is not yet uploaded */
-    video.onerror = () => {
-      if (video.getAttribute('src') !== rootVideoSrc) {
-        video.setAttribute('poster', rootPosterSrc);
-        video.setAttribute('src', rootVideoSrc);
-        video.load();
-        video.play().catch(() => {});
-      }
-    };
-
-    if (video.getAttribute('src') !== targetVideo) {
-      video.setAttribute('src', targetVideo);
-      video.load();
-    }
-
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {});
-    }
-  });
-
-  /* 3. Sync 9x16 Static Brand Images (.theme-brand-9x16) */
-  document.querySelectorAll('.theme-brand-9x16').forEach(img => {
-    const useArbitrage = inUnlearning || img.dataset.brand === 'arbitrage';
-    const targetImg = useArbitrage ? arbitragePosterSrc : rootPosterSrc;
-    if (img.getAttribute('src') !== targetImg) {
-      img.setAttribute('src', targetImg);
-    }
-  });
-}
-
-class HarrisonSidebar extends HTMLElement {
-  connectedCallback() {
-    const prefix = getRootPrefix();
-    const inUnlearning = isUnlearningDirectory();
-    const currentFile = window.location.pathname.split('/').pop() || 'index.html';
-
-    const navItems = [
-      { href: `${prefix}index.html`, id: 'index.html', label: 'Home', section: 'Core Platform' },
-      { href: `${prefix}solutions.html`, id: 'solutions.html', label: 'Solutions Hub', badge: 'Full Funnel', badgeClass: 'gold', section: 'Core Platform' },
-      { href: `${prefix}services.html`, id: 'services.html', label: 'Agent Services', section: 'Core Platform' },
-      { href: `${prefix}unlearning/index.html`, id: 'unlearning', label: 'The Unlearning Dilemma', badge: 'New Book', badgeClass: '', section: 'Featured Publication' },
-      { href: `${prefix}ad-campaigns.html`, id: 'ad-campaigns.html', label: 'AI Ad Campaigns', section: 'Architecture Deep-Dives' },
-      { href: `${prefix}autonomous-reception.html`, id: 'autonomous-reception.html', label: 'Voice Reception', section: 'Architecture Deep-Dives' },
-      { href: `${prefix}ai-tier-comparison-matrix.html`, id: 'ai-tier-comparison-matrix.html', label: 'AI Tier Matrix', section: 'Architecture Deep-Dives' },
-      { href: `${prefix}media-processing.html`, id: 'media-processing.html', label: 'Media Pipelines', section: 'Architecture Deep-Dives' },
-      { href: `${prefix}about.html`, id: 'about.html', label: 'About Us', section: 'Company & Governance' },
-      { href: `${prefix}contact.html`, id: 'contact.html', label: 'Contact', section: 'Company & Governance' },
-      { href: `${prefix}privacy.html`, id: 'privacy.html', label: 'Privacy Policy', section: 'Company & Governance' }
-    ];
-
-    const grouped = navItems.reduce((acc, item) => {
-      acc[item.section] = acc[item.section] || [];
-      acc[item.section].push(item);
-      return acc;
-    }, {});
-
-    let navHTML = '';
-    for (const [section, items] of Object.entries(grouped)) {
-      navHTML += `<div class="nav-section-label">${section}</div><ul class="nav-list">`;
-      items.forEach(item => {
-        const isActive = inUnlearning
-          ? item.id === 'unlearning'
-          : (currentFile === item.id || (currentFile === '' && item.id === 'index.html'));
-        const badgeHTML = item.badge
-          ? `<span class="nav-badge ${item.badgeClass || ''}">${item.badge}</span>`
-          : '';
-        navHTML += `
-          <li>
-            <a href="${item.href}" class="nav-link ${isActive ? 'active' : ''}">
-              <span>${item.label}</span>
-              ${badgeHTML}
-            </a>
-          </li>
-        `;
-      });
-      navHTML += `</ul>`;
-    }
-
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    const initialLogo = prefix + (isLight ? 'Harrison_Agents_Light.jpg' : 'Harrison_Agents_Dark.jpg');
-
-    this.innerHTML = `
-      <div class="mobile-topbar">
-        <a href="${prefix}index.html" style="display:flex; align-items:center; gap:0.6rem;">
-          <img src="${initialLogo}" alt="Harrison Agents Crest" class="theme-brand-logo" style="width:36px; height:36px; border-radius:8px; border:1px solid var(--accent-gold); object-fit:cover;" />
-          <span class="brand-name">H<span class="ai-crimson">a</span>rr<span class="ai-crimson">i</span>son <span class="ai-crimson">Agents</span></span>
-        </a>
-        <button class="mobile-menu-btn" id="mobile-nav-toggle" aria-label="Toggle Menu">☰ MENU</button>
-      </div>
-      <aside class="sidebar" id="app-sidebar">
-        <a href="${prefix}index.html" class="brand-header">
-          <img src="${initialLogo}" alt="Harrison Agents Logo" class="brand-logo-img theme-brand-logo" />
-          <div class="brand-title-group">
-            <span class="brand-name">H<span class="ai-crimson">a</span>rr<span class="ai-crimson">i</span>son <span class="ai-crimson">Agents</span></span>
-            <span class="brand-sub">Autonomous AI Systems</span>
-          </div>
-        </a>
-        <nav aria-label="Primary Sidebar Navigation" style="display:flex; flex-direction:column; flex:1;">
-          ${navHTML}
-        </nav>
-        <div class="sidebar-footer">
-          <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle Light/Dark Theme">
-            ☀️ Switch to Light Mode
-          </button>
-          <div class="sidebar-legal">© ${new Date().getFullYear()} Harrison AI Agents</div>
-        </div>
-      </aside>
-    `;
-
-    this.initThemeToggle();
-    this.initMobileMenu();
-    syncThemeMediaAssets();
-  }
-
-  initThemeToggle() {
-    const toggleBtn = this.querySelector('#theme-toggle');
-    const rootEl = document.documentElement;
-
-    const syncLabel = () => {
-      const isLight = rootEl.getAttribute('data-theme') === 'light';
-      toggleBtn.innerHTML = isLight ? '🌙 Switch to Dark Mode' : '☀️ Switch to Light Mode';
-      syncThemeMediaAssets();
-    };
-
-    syncLabel();
-
-    toggleBtn.addEventListener('click', () => {
-      const isLight = rootEl.getAttribute('data-theme') === 'light';
-      const nextTheme = isLight ? 'dark' : 'light';
-      rootEl.setAttribute('data-theme', nextTheme);
-      localStorage.setItem('harrison-theme', nextTheme);
-      syncLabel();
-    });
-  }
-
-  initMobileMenu() {
-    const menuBtn = this.querySelector('#mobile-nav-toggle');
-    const sidebar = this.querySelector('#app-sidebar');
-    if (menuBtn && sidebar) {
-      menuBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-      });
-    }
-  }
-}
-
-class HarrisonFooterCTA extends HTMLElement {
-  connectedCallback() {
-    const prefix = getRootPrefix();
-    const heading = this.getAttribute('heading') || 'Ready to Deploy Autonomous Growth & Operations?';
-    const subtext = this.getAttribute('subtext') || 'Whether you need AI-driven paid ad campaigns, 24/7 multimodal voice reception, or sovereign multi-agent workflows, our engineering team builds production systems that execute.';
-    this.innerHTML = `
-      <section class="cta-banner">
-        <span class="eyebrow">Production Deployment</span>
-        <h2>${heading}</h2>
-        <p>${subtext}</p>
-        <div class="btn-group" style="justify-content: center;">
-          <a href="${prefix}contact.html" class="btn btn-primary">Schedule an Architecture Call →</a>
-          <a href="${prefix}solutions.html" class="btn btn-secondary">Explore Full-Funnel Solutions</a>
-          <a href="${prefix}unlearning/index.html" class="btn btn-secondary">📖 The Unlearning Dilemma</a>
-        </div>
-      </section>
-    `;
-  }
-}
-
-customElements.define('harrison-sidebar', HarrisonSidebar);
-customElements.define('harrison-footer-cta', HarrisonFooterCTA);
-
-/* Interactive Voice Reception Demo Simulator */
-document.addEventListener('DOMContentLoaded', () => {
-  syncThemeMediaAssets();
-
-  const demoBtn = document.getElementById('run-voice-simulation');
-  const transcriptBox = document.getElementById('voice-transcript-output');
-  const latencyBadge = document.getElementById('voice-latency-badge');
-
-  if (demoBtn && transcriptBox) {
-    const steps = [
-      { speaker: 'SYSTEM', text: '[Twilio WebSocket Connected → Gemini Multimodal Live Stream Active]', latency: '310ms' },
-      { speaker: 'CALLER', text: '"Hi, I saw your Google Ad and need to book an enterprise consultation this Thursday afternoon."', latency: '340ms' },
-      { speaker: 'TOOL CALL', text: '→ Executing lookup_guest_by_phone() & get_provider_slots(date="Thursday")', latency: '385ms' },
-      { speaker: 'HARRISON VOICE AGENT', text: '"Welcome! I have 2:00 PM and 4:30 PM EST open this Thursday with our Lead Solutions Architect. Which works best for you?"', latency: '320ms' },
-      { speaker: 'CALLER', text: '"2:00 PM works great."', latency: '295ms' },
-      { speaker: 'TOOL CALL', text: '→ Executing reserve_booking_slot() & confirm_and_send_sms() — Calendar Synced!', latency: '350ms' }
-    ];
-
-    let running = false;
-    demoBtn.addEventListener('click', () => {
-      if (running) return;
-      running = true;
-      demoBtn.textContent = 'Simulating Live Call...';
-      transcriptBox.innerHTML = '';
-
-      steps.forEach((step, idx) => {
-        setTimeout(() => {
-          if (latencyBadge) latencyBadge.textContent = `RTT Latency: ${step.latency}`;
-          const line = document.createElement('div');
-          line.style.marginBottom = '0.45rem';
-          line.innerHTML = `<strong style="color: var(--accent-gold);">${step.speaker}:</strong> ${step.text}`;
-          transcriptBox.appendChild(line);
-
-          if (idx === steps.length - 1) {
-            demoBtn.textContent = '↻ Replay Live Call Simulation';
-            running = false;
-          }
-        }, idx * 1100);
-      });
-    });
-  }
-});
-/* ==========================================================================
-   HARRISON AI AGENTS ACADEMY — THEME & MEDIA SYNC ENGINE (APPEND TO main.js)
-   Handles: Dark/Light data-theme persistence, Harrison_Agents_* 1:1 & 9:16
-   asset swapping, and smooth syllabus anchor scrolling.
-   ========================================================================== */
-
-(function() {
+(function () {
   "use strict";
 
   const THEME_STORAGE_KEY = "harrison_agents_theme";
-  const rootHtml = document.documentElement;
 
   /**
-   * 1. Synchronize all theme-reactive images (Harrison_Agents_Dark/Light)
+   * Detect if current page is served inside a subdirectory (e.g., /academy/)
+   * so CSS background variables resolve root images accurately.
    */
-  function syncThemeReactiveMedia(activeTheme) {
-    const reactiveImages = document.querySelectorAll("img[data-dark-src][data-light-src]");
-    reactiveImages.forEach(function(img) {
-      const targetSrc = (activeTheme === "light")
+  function getRootPrefix() {
+    const path = window.location.pathname;
+    return path.includes("/academy/") ? "../" : "";
+  }
+
+  /**
+   * 1. THEME ENGINE & ASSET SWAPPER
+   */
+  function applyTheme(theme) {
+    const validTheme = theme === "light" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", validTheme);
+    localStorage.setItem(THEME_STORAGE_KEY, validTheme);
+
+    // Update fixed background image path for root vs. /academy/ subdirectory
+    const prefix = getRootPrefix();
+    const bgFile = validTheme === "light" ? "Harrison_Agents_Light.jpg" : "Harrison_Agents_Dark.jpg";
+    document.documentElement.style.setProperty("--bg-fixed-image", `url("${prefix}${bgFile}")`);
+
+    // Swap all theme-reactive <img> elements with data-dark-src and data-light-src
+    const themeImages = document.querySelectorAll("img[data-dark-src][data-light-src]");
+    themeImages.forEach(function (img) {
+      const targetSrc = validTheme === "light"
         ? img.getAttribute("data-light-src")
         : img.getAttribute("data-dark-src");
-
       if (targetSrc && img.getAttribute("src") !== targetSrc) {
         img.setAttribute("src", targetSrc);
       }
     });
+
+    // Update theme toggle button labels
+    const toggleButtons = document.querySelectorAll(".theme-toggle-btn, [data-theme-toggle]");
+    toggleButtons.forEach(function (btn) {
+      btn.textContent = validTheme === "light" ? "☾ Switch to Dark Mode" : "☀ Switch to Light Mode";
+      btn.setAttribute("aria-label", `Switch to ${validTheme === "light" ? "dark" : "light"} mode`);
+    });
   }
 
-  /**
-   * 2. Apply theme to <html data-theme="..."> and update toggle button labels
-   */
-  function applyAcademyTheme(themeName) {
-    const validTheme = (themeName === "light") ? "light" : "dark";
-    rootHtml.setAttribute("data-theme", validTheme);
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, validTheme);
-    } catch (e) {
-      // Ignore storage errors in private browsing modes
-    }
+  function initThemeEngine() {
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "dark";
+    applyTheme(savedTheme);
 
-    syncThemeReactiveMedia(validTheme);
-
-    const toggleButtons = document.querySelectorAll("[data-theme-toggle]");
-    toggleButtons.forEach(function(btn) {
-      btn.setAttribute("aria-label", validTheme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode");
-      btn.innerHTML = validTheme === "dark" ? "☀️ Light" : "🌙 Dark";
+    document.addEventListener("click", function (event) {
+      const toggleBtn = event.target.closest(".theme-toggle-btn, [data-theme-toggle]");
+      if (!toggleBtn) return;
+      const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+      applyTheme(currentTheme === "dark" ? "light" : "dark");
     });
   }
 
   /**
-   * 3. Initialize theme from localStorage or default to "dark"
+   * 2. LEFT VERTICAL SIDEBAR & MOBILE DRAWER CONTROLLER
    */
-  function initAcademyThemeEngine() {
-    let savedTheme = "dark";
-    try {
-      savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || rootHtml.getAttribute("data-theme") || "dark";
-    } catch (e) {
-      savedTheme = rootHtml.getAttribute("data-theme") || "dark";
-    }
+  function initSidebarNavigation() {
+    const sidebar = document.querySelector(".sidebar, aside.sidebar");
+    const mobileToggle = document.querySelector(".mobile-menu-toggle");
 
-    // Inject a theme toggle button into .header-utilities if one isn't present
-    const headerUtils = document.querySelector(".header-utilities");
-    if (headerUtils && !document.querySelector("[data-theme-toggle]")) {
-      const themeBtn = document.createElement("button");
-      themeBtn.type = "button";
-      themeBtn.className = "btn-secondary-outline";
-      themeBtn.setAttribute("data-theme-toggle", "true");
-      themeBtn.style.marginRight = "0.65rem";
-      themeBtn.style.padding = "0.55rem 0.9rem";
-      themeBtn.style.fontSize = "0.82rem";
-      headerUtils.insertBefore(themeBtn, headerUtils.firstChild);
-    }
-
-    // Bind click listeners to any theme toggle button on the page
-    document.querySelectorAll("[data-theme-toggle]").forEach(function(btn) {
-      btn.addEventListener("click", function() {
-        const current = rootHtml.getAttribute("data-theme") === "light" ? "light" : "dark";
-        applyAcademyTheme(current === "dark" ? "light" : "dark");
+    if (mobileToggle && sidebar) {
+      mobileToggle.addEventListener("click", function () {
+        const isOpen = sidebar.classList.toggle("sidebar-open");
+        mobileToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        mobileToggle.textContent = isOpen ? "✕ Close" : "☰ Menu";
       });
-    });
 
-    // Observe external mutations to data-theme (in case existing main.js toggles it)
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.attributeName === "data-theme") {
-          const updatedTheme = rootHtml.getAttribute("data-theme") || "dark";
-          syncThemeReactiveMedia(updatedTheme);
+      // Close mobile drawer when clicking a navigation link
+      sidebar.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          if (window.innerWidth <= 960) {
+            sidebar.classList.remove("sidebar-open");
+            mobileToggle.setAttribute("aria-expanded", "false");
+            mobileToggle.textContent = "☰ Menu";
+          }
+        });
+      });
+
+      // Close drawer on Escape key
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && sidebar.classList.contains("sidebar-open")) {
+          sidebar.classList.remove("sidebar-open");
+          mobileToggle.setAttribute("aria-expanded", "false");
+          mobileToggle.textContent = "☰ Menu";
         }
       });
-    });
-    observer.observe(rootHtml, { attributes: true, attributeFilter: ["data-theme"] });
-
-    applyAcademyTheme(savedTheme);
+    }
   }
 
   /**
-   * 4. Smooth In-Page Anchor Scrolling for Syllabus Links
+   * 3. AI TIER COMPARISON MATRIX CONTROLLER (For ai-tier-comparison-matrix.html)
    */
-  function initSmoothSyllabusScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-      anchor.addEventListener("click", function(e) {
-        const targetId = this.getAttribute("href");
-        if (!targetId || targetId === "#") return;
-        const targetEl = document.querySelector(targetId);
-        if (targetEl) {
-          e.preventDefault();
-          const headerOffset = 84;
-          const elementPosition = targetEl.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  function initTierMatrixControls() {
+    const priorityButtons = document.querySelectorAll(".priority-btn, [data-priority]");
+    if (!priorityButtons.length) return;
 
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-        }
+    priorityButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        priorityButtons.forEach(function (b) {
+          b.classList.remove("active");
+        });
+        this.classList.add("active");
       });
     });
   }
 
+  /**
+   * INITIALIZE ALL MODULES ON DOM READY
+   */
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() {
-      initAcademyThemeEngine();
-      initSmoothSyllabusScroll();
+    document.addEventListener("DOMContentLoaded", function () {
+      initThemeEngine();
+      initSidebarNavigation();
+      initTierMatrixControls();
     });
   } else {
-    initAcademyThemeEngine();
-    initSmoothSyllabusScroll();
+    initThemeEngine();
+    initSidebarNavigation();
+    initTierMatrixControls();
   }
 })();

@@ -2,20 +2,16 @@
    HARRISON AI AGENTS — GLOBAL WEB COMPONENTS & THEME MEDIA ENGINE (main.js)
    ========================================================================== */
 
-function isUnlearningDirectory() {
-  return window.location.pathname.toLowerCase().includes('/unlearning');
-}
-
 function getRootPrefix() {
-  return isUnlearningDirectory() ? '../' : '';
+  const path = window.location.pathname.toLowerCase();
+  return (path.includes('/unlearning/') || path.includes('/academy/')) ? '../' : '';
 }
 
 function syncThemeMediaAssets() {
   const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  const inUnlearning = isUnlearningDirectory();
   const prefix = getRootPrefix();
 
-  /* 1. Sync 1x1 Sidebar & Mobile Brand Logos (Root Assets) */
+  /* 1. Sync 1x1 Sidebar & Mobile Brand Logos */
   const logoSrc = prefix + (isLight ? 'Harrison_Agents_Light.jpg' : 'Harrison_Agents_Dark.jpg');
   document.querySelectorAll('.theme-brand-logo').forEach(img => {
     if (img.getAttribute('src') !== logoSrc) {
@@ -23,52 +19,23 @@ function syncThemeMediaAssets() {
     }
   });
 
-  /* 2. Sync 9x16 Animated Crest Videos & Posters
-        - Root pages use: Harrison_Agents_[Dark|Light]_9x16_Animated.mp4
-        - /unlearning/ uses: Harrison_Arbitrage_[Dark|Light]_9x16_Animated.mp4 */
-  const rootVideoSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16_Animated.mp4' : 'Harrison_Agents_Dark_9x16_Animated.mp4');
-  const rootPosterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
-
-  const arbitrageVideoSrc = isLight ? 'Harrison_Arbitrage_Light_9x16_Animated.mp4' : 'Harrison_Arbitrage_Dark_9x16_Animated.mp4';
-  const arbitragePosterSrc = isLight ? 'Harrison_Arbitrage_Light_9x16.jpg' : 'Harrison_Arbitrage_Dark_9x16.jpg';
+  /* 2. Sync 9x16 Animated Logo Videos & Poster Frames */
+  const videoSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16_Animated.mp4' : 'Harrison_Agents_Dark_9x16_Animated.mp4');
+  const posterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
 
   document.querySelectorAll('.theme-brand-video').forEach(video => {
-    const useArbitrage = inUnlearning || video.dataset.brand === 'arbitrage';
-    const targetVideo = useArbitrage ? arbitrageVideoSrc : rootVideoSrc;
-    const targetPoster = useArbitrage ? arbitragePosterSrc : rootPosterSrc;
-
-    video.setAttribute('poster', targetPoster);
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-
-    /* Fallback to root Harrison_Agents video if Arbitrage file is not yet uploaded */
-    video.onerror = () => {
-      if (video.getAttribute('src') !== rootVideoSrc) {
-        video.setAttribute('poster', rootPosterSrc);
-        video.setAttribute('src', rootVideoSrc);
-        video.load();
-        video.play().catch(() => {});
-      }
-    };
-
-    if (video.getAttribute('src') !== targetVideo) {
-      video.setAttribute('src', targetVideo);
+    video.setAttribute('poster', posterSrc);
+    if (video.getAttribute('src') !== videoSrc) {
+      video.setAttribute('src', videoSrc);
       video.load();
-    }
-
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {});
+      video.play().catch(() => {});
     }
   });
 
-  /* 3. Sync 9x16 Static Brand Images (.theme-brand-9x16) */
+  /* 3. Sync 9x16 Static Brand Images */
   document.querySelectorAll('.theme-brand-9x16').forEach(img => {
-    const useArbitrage = inUnlearning || img.dataset.brand === 'arbitrage';
-    const targetImg = useArbitrage ? arbitragePosterSrc : rootPosterSrc;
-    if (img.getAttribute('src') !== targetImg) {
-      img.setAttribute('src', targetImg);
+    if (img.getAttribute('src') !== posterSrc) {
+      img.setAttribute('src', posterSrc);
     }
   });
 }
@@ -76,13 +43,16 @@ function syncThemeMediaAssets() {
 class HarrisonSidebar extends HTMLElement {
   connectedCallback() {
     const prefix = getRootPrefix();
-    const inUnlearning = isUnlearningDirectory();
+    const lowerPath = window.location.pathname.toLowerCase();
+    const inUnlearning = lowerPath.includes('/unlearning/');
+    const inAcademy = lowerPath.includes('/academy/');
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
     const navItems = [
       { href: `${prefix}index.html`, id: 'index.html', label: 'Home', section: 'Core Platform' },
       { href: `${prefix}solutions.html`, id: 'solutions.html', label: 'Solutions Hub', badge: 'Full Funnel', badgeClass: 'gold', section: 'Core Platform' },
       { href: `${prefix}services.html`, id: 'services.html', label: 'Agent Services', section: 'Core Platform' },
+      { href: `${prefix}academy/index.html`, id: 'academy', label: 'AI Agents Academy', badge: '2 Tracks', badgeClass: 'gold', section: 'Practitioner Training' },
       { href: `${prefix}unlearning/index.html`, id: 'unlearning', label: 'The Unlearning Dilemma', badge: 'New Book', badgeClass: '', section: 'Featured Publication' },
       { href: `${prefix}ad-campaigns.html`, id: 'ad-campaigns.html', label: 'AI Ad Campaigns', section: 'Architecture Deep-Dives' },
       { href: `${prefix}autonomous-reception.html`, id: 'autonomous-reception.html', label: 'Voice Reception', section: 'Architecture Deep-Dives' },
@@ -105,7 +75,9 @@ class HarrisonSidebar extends HTMLElement {
       items.forEach(item => {
         const isActive = inUnlearning
           ? item.id === 'unlearning'
-          : (currentFile === item.id || (currentFile === '' && item.id === 'index.html'));
+          : inAcademy
+            ? item.id === 'academy'
+            : (currentFile === item.id || (currentFile === '' && item.id === 'index.html'));
         const badgeHTML = item.badge
           ? `<span class="nav-badge ${item.badgeClass || ''}">${item.badge}</span>`
           : '';
@@ -254,132 +226,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-/* ==========================================================================
-   HARRISON AI AGENTS ACADEMY — THEME & MEDIA SYNC ENGINE (APPEND TO main.js)
-   Handles: Dark/Light data-theme persistence, Harrison_Agents_* 1:1 & 9:16
-   asset swapping, and smooth syllabus anchor scrolling.
-   ========================================================================== */
-
-(function() {
-  "use strict";
-
-  const THEME_STORAGE_KEY = "harrison_agents_theme";
-  const rootHtml = document.documentElement;
-
-  /**
-   * 1. Synchronize all theme-reactive images (Harrison_Agents_Dark/Light)
-   */
-  function syncThemeReactiveMedia(activeTheme) {
-    const reactiveImages = document.querySelectorAll("img[data-dark-src][data-light-src]");
-    reactiveImages.forEach(function(img) {
-      const targetSrc = (activeTheme === "light")
-        ? img.getAttribute("data-light-src")
-        : img.getAttribute("data-dark-src");
-
-      if (targetSrc && img.getAttribute("src") !== targetSrc) {
-        img.setAttribute("src", targetSrc);
-      }
-    });
-  }
-
-  /**
-   * 2. Apply theme to <html data-theme="..."> and update toggle button labels
-   */
-  function applyAcademyTheme(themeName) {
-    const validTheme = (themeName === "light") ? "light" : "dark";
-    rootHtml.setAttribute("data-theme", validTheme);
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, validTheme);
-    } catch (e) {
-      // Ignore storage errors in private browsing modes
-    }
-
-    syncThemeReactiveMedia(validTheme);
-
-    const toggleButtons = document.querySelectorAll("[data-theme-toggle]");
-    toggleButtons.forEach(function(btn) {
-      btn.setAttribute("aria-label", validTheme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode");
-      btn.innerHTML = validTheme === "dark" ? "☀️ Light" : "🌙 Dark";
-    });
-  }
-
-  /**
-   * 3. Initialize theme from localStorage or default to "dark"
-   */
-  function initAcademyThemeEngine() {
-    let savedTheme = "dark";
-    try {
-      savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || rootHtml.getAttribute("data-theme") || "dark";
-    } catch (e) {
-      savedTheme = rootHtml.getAttribute("data-theme") || "dark";
-    }
-
-    // Inject a theme toggle button into .header-utilities if one isn't present
-    const headerUtils = document.querySelector(".header-utilities");
-    if (headerUtils && !document.querySelector("[data-theme-toggle]")) {
-      const themeBtn = document.createElement("button");
-      themeBtn.type = "button";
-      themeBtn.className = "btn-secondary-outline";
-      themeBtn.setAttribute("data-theme-toggle", "true");
-      themeBtn.style.marginRight = "0.65rem";
-      themeBtn.style.padding = "0.55rem 0.9rem";
-      themeBtn.style.fontSize = "0.82rem";
-      headerUtils.insertBefore(themeBtn, headerUtils.firstChild);
-    }
-
-    // Bind click listeners to any theme toggle button on the page
-    document.querySelectorAll("[data-theme-toggle]").forEach(function(btn) {
-      btn.addEventListener("click", function() {
-        const current = rootHtml.getAttribute("data-theme") === "light" ? "light" : "dark";
-        applyAcademyTheme(current === "dark" ? "light" : "dark");
-      });
-    });
-
-    // Observe external mutations to data-theme (in case existing main.js toggles it)
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.attributeName === "data-theme") {
-          const updatedTheme = rootHtml.getAttribute("data-theme") || "dark";
-          syncThemeReactiveMedia(updatedTheme);
-        }
-      });
-    });
-    observer.observe(rootHtml, { attributes: true, attributeFilter: ["data-theme"] });
-
-    applyAcademyTheme(savedTheme);
-  }
-
-  /**
-   * 4. Smooth In-Page Anchor Scrolling for Syllabus Links
-   */
-  function initSmoothSyllabusScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-      anchor.addEventListener("click", function(e) {
-        const targetId = this.getAttribute("href");
-        if (!targetId || targetId === "#") return;
-        const targetEl = document.querySelector(targetId);
-        if (targetEl) {
-          e.preventDefault();
-          const headerOffset = 84;
-          const elementPosition = targetEl.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-        }
-      });
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() {
-      initAcademyThemeEngine();
-      initSmoothSyllabusScroll();
-    });
-  } else {
-    initAcademyThemeEngine();
-    initSmoothSyllabusScroll();
-  }
-})();

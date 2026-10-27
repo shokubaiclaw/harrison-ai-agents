@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enrollment Confirmed | Harrison AI Agents Academy</title>
+  <meta name="description" content="Cohort onboarding checklist and tuition receipt confirmation for the Harrison AI Agents Academy.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- PRIMARY HEADER (harrisonaiagents.com) -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-identity">
+        <div class="brand-crest">
+          <img alt="Harrison AI Agents Crest" src="Harrison_Agents_Dark.jpg" data-light-src="Harrison_Agents_Light.jpg" data-dark-src="Harrison_Agents_Dark.jpg">
+        </div>
+        <div class="brand-titles">
+          <span class="brand-name-gold">Harrison AI Agents</span>
+          <span class="brand-sub">Academy // Onboarding Enclave</span>
+        </div>
+      </a>
+
+      <nav aria-label="Primary Navigation" class="primary-nav">
+        <a href="index.html">Home</a>
+        <a href="academy.html">Academy Syllabus</a>
+        <a href="https://harrisonarbitrage.com/publishing.html" target="_blank" rel="noopener noreferrer">Publishing ↗</a>
+        <a href="brands.html">Brands</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="confirmation-hero-section">
+      <div class="section-container">
+        <div class="confirmation-banner-card">
+          <span class="eyebrow-badge">Tuition Captured // Seat Reserved</span>
+          <h1>Welcome to the Academy, <span id="confirmed-student-name">Practitioner</span>.</h1>
+          <p class="hero-lead">
+            Your enrollment in the <strong>Harrison AI Agents Academy</strong> is officially confirmed. Please save your transaction details below for your records or corporate L&amp;D tuition reimbursement submission.
+          </p>
+
+          <!-- DYNAMIC RECEIPT SUMMARY BAR -->
+          <div class="receipt-metadata-grid">
+            <div class="receipt-item">
+              <span class="receipt-label">PayPal Transaction / Order ID</span>
+              <span class="receipt-value" id="confirmed-order-id">Verifying...</span>
+            </div>
+            <div class="receipt-item">
+              <span class="receipt-label">Enrolled Curriculum Track</span>
+              <span class="receipt-value" id="confirmed-track-name">Track 201 Flagship Cohort</span>
+            </div>
+            <div class="receipt-item">
+              <span class="receipt-label">Included CPE Credential Allocation</span>
+              <span class="receipt-value" id="confirmed-cpe-count">25 CPE Credits (ISC2 / ISACA / PMI)</span>
+            </div>
+            <div class="receipt-item">
+              <span class="receipt-label">Included Book Bundle</span>
+              <span class="receipt-value" id="confirmed-book-bundle">All 6 Technical Volumes</span>
+            </div>
+          </div>
+
+          <div class="receipt-actions-strip">
+            <button type="button" onclick="window.print()" class="btn-secondary-outline">
+              🖨️ Print / Save Official Enrollment Confirmation as PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-STEP ONBOARDING CHECKLIST -->
+    <section class="onboarding-steps-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="eyebrow-badge">Mandatory Cohort Onboarding</span>
+          <h2>Complete Your 3-Step Intake Checklist</h2>
+          <p>
+            To provision your companion books, unlock your Week 1 / Milestone 1 multi-day exercise workbook, and register your email for the private weekly Google Meet sessions, complete the three steps below within the next 24 hours.
+          </p>
+        </div>
+
+        <div class="three-column-grid">
+          <!-- STEP 01 -->
+          <article class="feature-card">
+            <div class="card-meta">
+              <span>ONBOARDING // STEP 01</span>
+              <span>Immediate Action Required</span>
+            </div>
+            <h3>Activate Your Cohort &amp; Book Delivery Profile</h3>
+            <p>
+              Click the button below to send your pre-populated Order ID confirmation to our operations desk at <strong>info@harrisonaiagents.com</strong> along with your preferred delivery format (Digital Kindle/PDF or Paperback shipping address) and professional credential numbers (ISC2, ISACA, or PMI) for CPE mapping.
+            </p>
+            <div class="track-card-actions">
+              <a id="onboarding-mailto-link" href="mailto:info@harrisonaiagents.com" class="btn-primary-gold">
+                Send Onboarding Activation Email →
+              </a>
+            </div>
+          </article>
+
+          <!-- STEP 02 -->
+          <article class="feature-card">
+            <div class="card-meta">
+              <span>ONBOARDING // STEP 02</span>
+              <span>Within 24 Hours of Activation</span>
+            </div>
+            <h3>Receive Your Companion Books &amp; Enclave Access</h3>
+            <p>
+              Once your Step 01 confirmation email is received, our team will dispatch your companion volumes (<span id="step2-book-note">all 4 published books + 2 technical manuscripts</span>) and unlock your private Cohort Enclave containing your first multi-day exercise workbook.
+            </p>
+            <div class="track-card-actions">
+              <a href="https://harrisonarbitrage.com/series-ai-cybersecurity.html" target="_blank" rel="noopener noreferrer" class="btn-secondary-outline">
+                Preview Companion Book Series ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- STEP 03 -->
+          <article class="feature-card">
+            <div class="card-meta">
+              <span>ONBOARDING // STEP 03</span>
+              <span>Weekly Live Cadence</span>
+            </div>
+            <h3>Accept Your Private Google Meet Calendar Invite</h3>
+            <p>
+              You will receive a recurring calendar invitation linked to your registered email address for our weekly live session with Kristopher Harrison. Each session features a protected video demonstration of production AI architectures followed by live Q&amp;A and exercise reviews.
+            </p>
+            <p class="small-compliance-note">
+              <em>Note: To protect student privacy and proprietary architecture IP, external recording bots and screen-capture utilities are prohibited during live sessions.</em>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PRIMARY FOOTER (harrisonaiagents.com) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <span>© 2026 Harrison Arbitrage LLC. All Rights Reserved.</span>
+        <span>Questions? Email <a href="mailto:info@harrisonaiagents.com">info@harrisonaiagents.com</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get("orderID") || "PENDING-VERIFICATION";
+      const trackKey = (params.get("track") || "201").toLowerCase();
+      const studentName = params.get("name") || "Practitioner";
+
+      const TRACK_META = {
+        "101": {
+          name: "Track 101: Applied AI Systems & Agent Workflow Sprint",
+          cpe: "10 CPE Credits (Certificate Upon Milestone 3 Completion)",
+          books: "2 Volumes (The Unlearning Dilemma & The AI-Augmented PM)",
+          bookNote: "your 2 companion volumes (The Unlearning Dilemma and The AI-Augmented Project Manager)"
+        },
+        "201": {
+          name: "Track 201: Certified AI Security, Architecture & Resilience Practitioner",
+          cpe: "25 CPE Credits (Aligned to ISC2, ISACA & PMI)",
+          books: "Complete 6-Volume Technical Library (4 Published + 2 Manuscripts)",
+          bookNote: "all 6 companion volumes (4 published books + 2 technical manuscripts)"
+        },
+        "upgrade": {
+          name: "Track 101-to-201 Flagship Ascension Upgrade",
+          cpe: "+15 Additional CPE Credits (25 Total CPEs)",
+          books: "Remaining 4 Technical Volumes (Completing 6-Book Set)",
+          bookNote: "your remaining 4 companion volumes (including both technical manuscripts)"
+        }
+      };
+
+      const activeMeta = TRACK_META[trackKey] || TRACK_META["201"];
+
+      document.getElementById("confirmed-student-name").textContent = studentName;
+      document.getElementById("confirmed-order-id").textContent = orderId;
+      document.getElementById("confirmed-track-name").textContent = activeMeta.name;
+      document.getElementById("confirmed-cpe-count").textContent = activeMeta.cpe;
+      document.getElementById("confirmed-book-bundle").textContent = activeMeta.books;
+      document.getElementById("step2-book-note").textContent = activeMeta.bookNote;
+
+      // Build pre-filled mailto link so student can activate onboarding in 1 click
+      const subject = encodeURIComponent("Academy Onboarding Activation - Order #" + orderId);
+      const body = encodeURIComponent(
+        "Hello Harrison AI Agents Academy Team,\n\n" +
+        "I have completed my tuition checkout and am submitting my onboarding details:\n\n" +
+        "1. PayPal Order ID: " + orderId + "\n" +
+        "2. Enrolled Track: " + activeMeta.name + "\n" +
+        "3. Full Name (as it should appear on my CPE Certificate): \n" +
+        "4. Preferred Email for Google Meet Invites & Exercise Enclave: \n" +
+        "5. Book Bundle Delivery Preference (Digital Kindle/PDF or Physical Shipping Address): \n" +
+        "6. Relevant Certifications Held (e.g., CISSP, CISA, PMP) for CPE Mapping: \n\n" +
+        "Thank you!"
+      );
+      document.getElementById("onboarding-mailto-link").setAttribute(
+        "href",
+        "mailto:info@harrisonaiagents.com?subject=" + subject + "&body=" + body
+      );
+    })();
+  </script>
+</body>
+</html>

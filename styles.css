@@ -1954,3 +1954,33 @@ input:focus, select:focus, textarea:focus {
     grid-template-columns: 1fr;
   }
 }
+/* --- Compact Executive Sidebar Extensions --- */
+.sidebar-nav-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.nav-accordion-drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-left: 0.65rem;
+  margin-left: 0.65rem;
+  border-left: 1px solid rgba(212, 175, 55, 0.28);
+  transition: max-height 0.28s ease, opacity 0.22s ease;
+}
+.nav-accordion-group.is-open .nav-accordion-drawer {
+  max-height: 320px;
+  opacity: 1;
+  margin-top: 0.35rem;
+}
+.sidebar-gov-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding-top: 0.75rem;
+  margin-top: 0.65rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.76rem;
+}

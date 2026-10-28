@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enrollment Confirmed | Harrison AI Agents Academy</title>
-  <meta name="description" content="Cohort onboarding checklist and tuition receipt confirmation for the Harrison AI Agents Academy." />
+  <meta name="description" content="Official cohort onboarding checklist and tuition receipt confirmation for the 3-Tier Harrison AI Agents Academy." />
   <meta name="robots" content="noindex, nofollow" />
   <script>
     (function() {
@@ -18,18 +18,18 @@
   <link rel="stylesheet" href="../styles.css" />
   <script src="../main.js" defer></script>
 
-  <!-- SCOPED ACADEMY STEEL-BLUE SLIDING OVERLAY & RECEIPT STYLES -->
+  <!-- SCOPED ACADEMY STEEL-BLUE SLIDING OVERLAY & RECEIPT PRINT STYLES -->
   <style>
     :root {
-      --academy-steel-panel: linear-gradient(165deg, rgba(18, 34, 58, 0.86) 0%, rgba(11, 21, 38, 0.92) 100%);
-      --academy-steel-card: rgba(15, 29, 50, 0.82);
+      --academy-steel-panel: linear-gradient(165deg, rgba(18, 34, 58, 0.88) 0%, rgba(11, 21, 38, 0.94) 100%);
+      --academy-steel-card: rgba(15, 29, 50, 0.84);
       --academy-steel-border: rgba(91, 146, 204, 0.34);
       --academy-steel-accent: #5b92cc;
     }
 
     [data-theme="light"] {
-      --academy-steel-panel: linear-gradient(165deg, rgba(232, 240, 250, 0.92) 0%, rgba(216, 228, 244, 0.95) 100%);
-      --academy-steel-card: rgba(255, 255, 255, 0.90);
+      --academy-steel-panel: linear-gradient(165deg, rgba(232, 240, 250, 0.94) 0%, rgba(216, 228, 244, 0.97) 100%);
+      --academy-steel-card: rgba(255, 255, 255, 0.92);
       --academy-steel-border: rgba(43, 92, 143, 0.30);
       --academy-steel-accent: #2b5c8f;
     }
@@ -58,7 +58,7 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--academy-steel-border);
-      border-left: 4px solid var(--accent-gold);
+      border-left: 4px solid var(--academy-steel-accent);
       border-radius: var(--radius-lg);
       padding: 2.5rem;
       margin-bottom: 2.5rem;
@@ -78,23 +78,23 @@
 
     .receipt-metadata-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.15rem;
       margin: 1.75rem 0;
+      padding: 1.35rem;
+      background: var(--academy-steel-card);
+      border: 1.5px solid var(--accent-gold);
+      border-radius: var(--radius-md);
     }
 
     .receipt-item {
-      background: var(--academy-steel-card);
-      border: 1px solid var(--academy-steel-border);
-      padding: 1rem 1.25rem;
-      border-radius: var(--radius-sm);
       display: flex;
       flex-direction: column;
       gap: 0.3rem;
     }
 
     .receipt-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--text-muted);
@@ -102,13 +102,22 @@
     }
 
     .receipt-value {
-      font-size: 1rem;
+      font-size: 0.94rem;
       font-weight: 800;
       color: var(--accent-gold);
       word-break: break-word;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 960px) {
+      .receipt-metadata-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .steel-overlay-section {
+        padding: 1.5rem;
+      }
       .receipt-metadata-grid {
         grid-template-columns: 1fr;
       }
@@ -117,41 +126,40 @@
     @media print {
       harrison-sidebar,
       harrison-footer-cta,
-      .mobile-topbar,
-      .sidebar,
-      .no-print {
+      .no-print-strip,
+      #onboarding-steps-section {
         display: none !important;
       }
       .main-content {
         margin-left: 0 !important;
-        width: 100% !important;
         padding: 0 !important;
       }
+      body,
       .steel-overlay-section,
-      .receipt-item {
+      .receipt-metadata-grid {
         background: #ffffff !important;
         color: #000000 !important;
-        border: 1px solid #000000 !important;
         box-shadow: none !important;
+        border: 1px solid #000000 !important;
       }
     }
   </style>
 </head>
 <body class="academy-subsite">
   <div class="app-shell">
-    <!-- SHARED LEFT VERTICAL SIDEBAR WEB COMPONENT -->
+    <!-- SHARED COMPACT EXECUTIVE SIDEBAR -->
     <harrison-sidebar></harrison-sidebar>
 
     <main class="main-content">
 
-      <!-- RECEIPT & CONFIRMATION BANNER -->
+      <!-- SECTION 01: CONFIRMATION & PRINTABLE RECEIPT BANNER -->
       <section class="steel-overlay-section" id="confirmation-hero">
-        <span class="eyebrow">Tuition Captured • Seat Reserved</span>
-        <h1 class="hero-title" style="margin-bottom: 0.85rem;">
+        <span class="eyebrow">Tuition Captured • Cohort Seat Reserved</span>
+        <h1 class="hero-title" style="margin-bottom: 0.75rem;">
           WELCOME TO THE ACADEMY, <span class="ai-crimson" id="confirmed-student-name">PRACTITIONER</span>.
         </h1>
-        <p class="hero-tagline" style="margin-bottom: 1.25rem;">
-          Your enrollment in the <strong>Harrison AI Agents Academy</strong> is officially confirmed. Please save your transaction details below for your records or corporate L&amp;D tuition reimbursement submission.
+        <p class="hero-tagline">
+          Your enrollment in the <strong>Harrison AI Agents Academy</strong> is officially confirmed. Save or print your transaction details below for your personal records or corporate L&amp;D tuition reimbursement submission.
         </p>
 
         <div class="receipt-metadata-grid">
@@ -160,54 +168,51 @@
             <span class="receipt-value" id="confirmed-order-id">Verifying...</span>
           </div>
           <div class="receipt-item">
-            <span class="receipt-label">Enrolled Curriculum Track</span>
-            <span class="receipt-value" id="confirmed-track-name">Track 201 Flagship Cohort</span>
+            <span class="receipt-label">Enrolled Academy Tier &amp; Track</span>
+            <span class="receipt-value" id="confirmed-track-name">Tier 3: Track 301 Flagship Cohort</span>
           </div>
           <div class="receipt-item">
             <span class="receipt-label">Included CPE Credential Allocation</span>
             <span class="receipt-value" id="confirmed-cpe-count">25 CPE Credits (ISC2 / ISACA / PMI)</span>
           </div>
           <div class="receipt-item">
-            <span class="receipt-label">Included Book Bundle</span>
-            <span class="receipt-value" id="confirmed-book-bundle">All 5 Pictured Volumes + Manuscripts</span>
+            <span class="receipt-label">Included Playbook &amp; Book Library</span>
+            <span class="receipt-value" id="confirmed-book-bundle">All 5 Volumes + Technical Manuscripts</span>
           </div>
         </div>
 
-        <div class="btn-group no-print">
-          <button type="button" onclick="window.print()" class="btn btn-primary">
+        <div class="btn-group no-print-strip">
+          <button type="button" onclick="window.print()" class="btn btn-secondary">
             🖨️ Print / Save Official Enrollment Receipt as PDF
           </button>
           <a href="tuition-reimbursement.html" class="btn btn-secondary">
-            Employer L&amp;D Justification Brief →
-          </a>
-          <a href="index.html" class="btn btn-secondary">
-            ← Return to Academy Hub
+            📄 View Employer L&amp;D Justification Packet
           </a>
         </div>
       </section>
 
-      <!-- 3-STEP ONBOARDING CHECKLIST -->
-      <section class="steel-overlay-section no-print" id="onboarding-steps">
+      <!-- SECTION 02: 3-STEP ONBOARDING CHECKLIST -->
+      <section class="steel-overlay-section" id="onboarding-steps-section">
         <div class="section-header">
           <span class="eyebrow">Mandatory Cohort Onboarding</span>
           <h2 class="section-title">Complete Your 3-Step Intake Checklist</h2>
           <p class="section-subtitle">
-            To provision your companion books, unlock your Week 1 / Milestone 1 multi-day exercise workbook, and register your email for the private weekly Google Meet sessions, complete the three steps below within the next 24 hours.
+            To provision your visual PDF playbooks and companion books, unlock your cohort exercise enclave, and register your email for the live Google Meet sessions, complete the three steps below within the next 24 hours.
           </p>
         </div>
 
-        <div class="grid-3" style="margin-bottom: 0;">
+        <div class="grid-3">
           <!-- STEP 01 -->
           <article class="steel-card">
             <div>
-              <span class="card-number tier-badge-crimson">ONBOARDING STEP 01 • IMMEDIATE ACTION</span>
+              <span class="card-number tier-badge-crimson">STEP 01 • IMMEDIATE ACTION</span>
               <h3 class="card-title">Activate Your Cohort &amp; Book Delivery Profile</h3>
               <p>
-                Click the button below to send your pre-populated Order ID confirmation to our operations desk at <strong>info@harrisonaiagents.com</strong> along with your preferred delivery format (Digital Kindle/PDF or Paperback shipping address) and professional credential numbers (ISC2, ISACA, or PMI) for CPE mapping.
+                Click the button below to dispatch your pre-populated Order ID confirmation to <strong>info@harrisonaiagents.com</strong> along with your preferred book format and certification numbers (ISC2, ISACA, or PMI) for CPE credit mapping.
               </p>
             </div>
             <div class="btn-group" style="margin-top: 1.25rem;">
-              <a id="onboarding-mailto-link" href="mailto:info@harrisonaiagents.com" class="btn btn-primary">
+              <a id="onboarding-mailto-link" href="mailto:info@harrisonaiagents.com" class="btn btn-primary" style="width: 100%; justify-content: center;">
                 Send Onboarding Activation Email →
               </a>
             </div>
@@ -216,15 +221,15 @@
           <!-- STEP 02 -->
           <article class="steel-card">
             <div>
-              <span class="card-number tier-badge-gold">ONBOARDING STEP 02 • WITHIN 24 HOURS</span>
-              <h3 class="card-title">Receive Your Companion Books &amp; Enclave Access</h3>
+              <span class="card-number tier-badge-gold">STEP 02 • WITHIN 24 HOURS</span>
+              <h3 class="card-title">Access Your Playbooks, Books &amp; Cohort Enclave</h3>
               <p>
-                Once your Step 01 confirmation email is received, our team will dispatch your companion volumes (<span id="step2-book-note">all 4 published books + The Determinism Paradox &amp; technical manuscripts</span>) and unlock your private Cohort Enclave containing your first multi-day exercise workbook.
+                Once your Step 01 activation email is received, our operations desk will provision <span id="step2-book-note">all 5 companion books (including The Determinism Paradox) plus your weekly workbooks</span> inside your private Cohort Enclave.
               </p>
             </div>
             <div class="btn-group" style="margin-top: 1.25rem;">
-              <a href="../unlearning/index.html" class="btn btn-secondary">
-                📖 Preview The Unlearning Dilemma →
+              <a href="index.html#included-book-library" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                Review Curriculum Library →
               </a>
             </div>
           </article>
@@ -232,13 +237,13 @@
           <!-- STEP 03 -->
           <article class="steel-card">
             <div>
-              <span class="card-number tier-badge-blue">ONBOARDING STEP 03 • WEEKLY LIVE CADENCE</span>
-              <h3 class="card-title">Accept Your Private Google Meet Calendar Invite</h3>
+              <span class="card-number tier-badge-blue">STEP 03 • LIVE SESSION CADENCE</span>
+              <h3 class="card-title">Accept Your Google Meet Invite &amp; Pre-Submit Q&amp;A</h3>
               <p>
-                You will receive a recurring calendar invitation linked to your registered email address for our weekly live session with Kristopher Harrison. Each session features a protected video demonstration of production AI architectures followed by live Q&amp;A and exercise reviews.
+                You will receive a calendar invitation linked to your registered email for your live sessions with Kristopher Harrison. Submit your workflow or architectural questions <strong>24 hours before each live call</strong> so your edge cases are addressed directly after the pre-recorded demonstration.
               </p>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0;">
-                <em>Note: To protect student privacy and proprietary architecture IP, external recording bots and screen-capture utilities are prohibited during live sessions.</em>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.65rem;">
+                <em>Note: External AI note-taking bots and screen-capture utilities are prohibited during live sessions.</em>
               </p>
             </div>
           </article>
@@ -247,7 +252,7 @@
 
       <harrison-footer-cta
         heading="Need Assistance With Your Cohort Onboarding?"
-        subtext="Reach our operations team directly at info@harrisonaiagents.com for expedited book dispatch or corporate receipt formatting.">
+        subtext="Contact our operations desk directly at info@harrisonaiagents.com with your PayPal Order ID for priority support.">
       </harrison-footer-cta>
 
     </main>
@@ -257,33 +262,51 @@
     (function() {
       const params = new URLSearchParams(window.location.search);
       const orderId = params.get("orderID") || "PENDING-VERIFICATION";
-      const trackKey = (params.get("track") || "201").toLowerCase();
+      const trackKey = (params.get("track") || "301").toLowerCase();
       const studentName = params.get("name") || "Practitioner";
 
       const TRACK_META = {
         "101": {
-          name: "Track 101: Applied AI Systems & Agent Workflow Sprint",
-          cpe: "10 CPE Credits (Certificate Upon Milestone 3 Completion)",
-          books: "2 Volumes (The Unlearning Dilemma & The AI-Augmented PM)",
-          bookNote: "your 2 companion volumes (The Unlearning Dilemma and The AI-Augmented Project Manager)"
+          name: "Tier 1 (Track 101): AI Prompt Engineering & Workflow Mastery Cohort (2 Weeks)",
+          cpe: "4 CPE Credits (Certificate Upon Day 14 Finale Completion)",
+          books: "Visual PDF Playbooks + Volume 01: The Unlearning Dilemma (Digital)",
+          bookNote: "your Production-Quality Visual PDF Playbooks and digital copy of The Unlearning Dilemma"
         },
         "201": {
-          name: "Track 201: Certified AI Security, Architecture & Resilience Practitioner",
+          name: "Tier 2 (Track 201): Applied AI Systems, Local Agents & API Workflow Sprint (3 Milestones)",
+          cpe: "10 CPE Credits (Certificate Upon Milestone 3 Completion)",
+          books: "2 Volumes (The Unlearning Dilemma & The AI-Augmented PM) + Local/API SOPs",
+          bookNote: "your 2 companion volumes (The Unlearning Dilemma and The AI-Augmented Project Manager) plus Local/API SOP guides"
+        },
+        "301": {
+          name: "Tier 3 (Track 301): Certified AI Security, Sovereign Architecture & Resilience Practitioner (5 Weeks)",
           cpe: "25 CPE Credits (Aligned to ISC2, ISACA & PMI)",
-          books: "Complete 5-Volume Library (Including The Determinism Paradox)",
+          books: "Complete 5-Volume Library (Including The Determinism Paradox) + Manuscripts",
           bookNote: "all 5 pictured volumes (including The Determinism Paradox) plus companion technical manuscripts"
         },
+        "upgrade-101-201": {
+          name: "Alumni Ascension Upgrade: Tier 1 → Tier 2 Builder Sprint",
+          cpe: "+6 Additional CPE Credits (10 Total Tier 2 CPEs)",
+          books: "Volume 02 (The AI-Augmented Project Manager) + Local/API SOPs",
+          bookNote: "Volume 02 (The AI-Augmented Project Manager) and your Tier 2 Local/API Milestone Workbooks"
+        },
+        "upgrade-201-301": {
+          name: "Alumni Ascension Upgrade: Tier 2 → Tier 3 Flagship Practitioner Track",
+          cpe: "+15 Additional CPE Credits (25 Total Tier 3 CPEs)",
+          books: "Remaining 3 Volumes (Including The Determinism Paradox) + Manuscripts",
+          bookNote: "your remaining 3 companion volumes (including The Determinism Paradox) and Tier 3 Flagship Workbooks"
+        },
         "upgrade": {
-          name: "Track 101-to-201 Flagship Ascension Upgrade",
-          cpe: "+15 Additional CPE Credits (25 Total CPEs)",
-          books: "Remaining Technical Volumes (Including The Determinism Paradox)",
-          bookNote: "your remaining companion volumes (including The Determinism Paradox)"
+          name: "Alumni Ascension Upgrade (100% Prior Tuition Credited)",
+          cpe: "Upgraded CPE Allocation (Up to 25 Total CPEs)",
+          books: "Upgraded Companion Book & Manuscript Bundle",
+          bookNote: "your upgraded companion book and workbook bundle"
         }
       };
 
-      const activeMeta = TRACK_META[trackKey] || TRACK_META["201"];
+      const activeMeta = TRACK_META[trackKey] || TRACK_META["301"];
 
-      document.getElementById("confirmed-student-name").textContent = studentName;
+      document.getElementById("confirmed-student-name").textContent = studentName.toUpperCase();
       document.getElementById("confirmed-order-id").textContent = orderId;
       document.getElementById("confirmed-track-name").textContent = activeMeta.name;
       document.getElementById("confirmed-cpe-count").textContent = activeMeta.cpe;
@@ -293,13 +316,13 @@
       const subject = encodeURIComponent("Academy Onboarding Activation - Order #" + orderId);
       const body = encodeURIComponent(
         "Hello Harrison AI Agents Academy Team,\n\n" +
-        "I have completed my tuition checkout and am submitting my onboarding details:\n\n" +
+        "I have completed my tuition checkout and am submitting my cohort onboarding details:\n\n" +
         "1. PayPal Order ID: " + orderId + "\n" +
         "2. Enrolled Track: " + activeMeta.name + "\n" +
         "3. Full Name (as it should appear on my CPE Certificate): \n" +
-        "4. Preferred Email for Google Meet Invites & Exercise Enclave: \n" +
-        "5. Book Bundle Delivery Preference (Digital Kindle/PDF or Physical Shipping Address): \n" +
-        "6. Relevant Certifications Held (e.g., CISSP, CISA, PMP) for CPE Mapping: \n\n" +
+        "4. Preferred Email for Google Meet Invites & Cohort Enclave: \n" +
+        "5. Book / Playbook Delivery Preference (Digital or Physical Shipping Address): \n" +
+        "6. Certifications Held (e.g., CISSP, CISA, PMP) for CPE Mapping: \n\n" +
         "Thank you!"
       );
       document.getElementById("onboarding-mailto-link").setAttribute(

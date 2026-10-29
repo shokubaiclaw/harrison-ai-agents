@@ -527,7 +527,7 @@
                 </p>
                 <a
                   id="corporate-mailto-btn"
-                  href="mailto:info@harrisonaiagents.com?subject=Corporate%20Enrollment%20%26%20Invoice%20Request%20-%20Harrison%20AI%20Agents%20Academy&body=Hello%20Harrison%20AI%20Agents%20Academy%20Team%2C%0A%0AWe%20would%20like%20to%20request%20a%20corporate%20invoice%20for%20the%20following%20training%20enrollment%3A%0A%0A-%20Organization%20Name%3A%20%0A-%20Selected%20Package%20%283-Seat%20Pack%20%40%20%244%2C500%20or%20Custom%20Enterprise%20Cohort%29%3A%20%0A-%20Number%20of%20Practitioners%3A%20%0A-%20Billing%20Contact%20Email%3A%20%0A%0AThank%20you."
+                  href="mailto:academy@harrisonaiagents.com?subject=Corporate%20Enrollment%20%26%20Invoice%20Request%20-%20Harrison%20AI%20Agents%20Academy&body=Hello%20Harrison%20AI%20Agents%20Academy%20Team%2C%0A%0AWe%20would%20like%20to%20request%20a%20corporate%20invoice%20for%20the%20following%20training%20enrollment%3A%0A%0A-%20Organization%20Name%3A%20%0A-%20Selected%20Package%20%283-Seat%20Pack%20%40%20%244%2C500%20or%20Custom%20Enterprise%20Cohort%29%3A%20%0A-%20Number%20of%20Practitioners%3A%20%0A-%20Billing%20Contact%20Email%3A%20%0A%0AThank%20you."
                   class="btn btn-primary"
                   style="width: 100%; justify-content: center;">
                   Request Corporate Invoice via Email →
@@ -538,7 +538,7 @@
                 <span>Need an Employer Justification Packet or payment help?</span><br />
                 <a href="tuition-reimbursement.html" style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Employer Tuition &amp; CPE Brief →</a>
                 &nbsp;•&nbsp;
-                <a href="mailto:info@harrisonaiagents.com" style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">info@harrisonaiagents.com</a>
+                <a href="mailto:academy@harrisonaiagents.com" style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">academy@harrisonaiagents.com</a>
               </div>
             </div>
           </div>
@@ -820,12 +820,12 @@
           },
           onError: function(err) {
             console.error("PayPal Checkout Error:", err);
-            alert("We encountered an issue initializing PayPal checkout. Please try again or email info@harrisonaiagents.com for a direct payment link or invoice.");
+            alert("We encountered an issue initializing PayPal checkout. Please try again or email academy@harrisonaiagents.com for a direct payment link or invoice.");
           }
         }).render("#paypal-button-container");
       } else {
         document.getElementById("paypal-button-container").innerHTML =
-          '<div class="sdk-placeholder-notice">PayPal Checkout SDK will mount here once your Live Client ID is inserted. For immediate enrollment assistance, email <a href="mailto:info@harrisonaiagents.com" style="color: var(--accent-gold);">info@harrisonaiagents.com</a>.</div>';
+          '<div class="sdk-placeholder-notice">PayPal Checkout SDK will mount here once your Live Client ID is inserted. For immediate enrollment assistance, email <a href="mailto:academy@harrisonaiagents.com" style="color: var(--accent-gold);">academy@harrisonaiagents.com</a>.</div>';
       }
     })();
   </script>

@@ -31,9 +31,7 @@ function syncThemeMediaAssets() {
     }
   });
 
-  /* 2. Sync 9x16 Animated Crest Videos & Posters
-        - Root & Academy pages use: Harrison_Agents_[Dark|Light]_9x16_Animated.mp4
-        - /unlearning/ uses: Harrison_Arbitrage_[Dark|Light]_9x16_Animated.mp4 */
+  /* 2. Sync 9x16 Animated Crest Videos & Posters */
   const rootVideoSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16_Animated.mp4' : 'Harrison_Agents_Dark_9x16_Animated.mp4');
   const rootPosterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
 
@@ -145,7 +143,7 @@ function injectCompactSidebarStyles() {
       transition: max-height 0.28s ease, opacity 0.22s ease, margin-top 0.22s ease;
     }
     .nav-accordion-group.is-open .nav-accordion-drawer {
-      max-height: 320px;
+      max-height: 380px;
       opacity: 1;
       margin-top: 0.3rem;
     }
@@ -154,7 +152,7 @@ function injectCompactSidebarStyles() {
     }
     @media (hover: hover) and (min-width: 961px) {
       .nav-accordion-group:hover .nav-accordion-drawer {
-        max-height: 320px;
+        max-height: 380px;
         opacity: 1;
         margin-top: 0.3rem;
       }
@@ -202,7 +200,7 @@ class HarrisonSidebar extends HTMLElement {
     const inAcademy = isAcademyDirectory();
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
-    /* 1. Three Primary Prominent Links (Home is handled by the top .brand-header crest) */
+    /* 1. Three Primary Prominent Links */
     const primaryItems = [
       {
         href: `${prefix}solutions.html`,
@@ -230,8 +228,9 @@ class HarrisonSidebar extends HTMLElement {
       }
     ];
 
-    /* 2. Consolidated Technical Architectures Drawer */
+    /* 2. Consolidated Technical Architectures Drawer (Digital Presence placed first) */
     const archItems = [
+      { href: `${prefix}digital-presence.html`, id: 'digital-presence.html', label: '01 // Digital Presence' },
       { href: `${prefix}ai-tier-comparison-matrix.html`, id: 'ai-tier-comparison-matrix.html', label: 'AI Tier Matrix' },
       { href: `${prefix}autonomous-reception.html`, id: 'autonomous-reception.html', label: 'Voice Reception' },
       { href: `${prefix}ad-campaigns.html`, id: 'ad-campaigns.html', label: 'AI Ad Campaigns' },

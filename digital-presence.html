@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Turnkey Digital Presence &amp; Web Infrastructure | Harrison AI Agents</title>
+  <meta name="description" content="Enterprise-grade domain registration, custom business email, zero-build GitHub Pages web design, Google Business Profile verification, and social media provisioning by Harrison AI Agents." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="main.js" defer></script>
+  <style>
+    /* Scoped Executive Layout Enhancements for Digital Presence Hub */
+    .dp-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .dp-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-gold, #d4af37);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    .dp-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.85rem);
+      line-height: 1.15;
+      font-weight: 800;
+      color: var(--text-primary, #f2f3f5);
+      margin-bottom: 1rem;
+    }
+
+    .dp-lead {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text-secondary, #c2c6cf);
+      margin-bottom: 1.5rem;
+    }
+
+    .dp-stat-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .dp-stat-box {
+      background: rgba(21, 23, 28, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-left: 3px solid var(--accent-primary, #b8232c);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+    }
+
+    [data-theme="light"] .dp-stat-box {
+      background: #ffffff;
+      border-color: rgba(156, 122, 35, 0.3);
+      border-left-color: #9e1b22;
+    }
+
+    .dp-stat-val {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--accent-gold, #d4af37);
+    }
+
+    .dp-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary, #c2c6cf);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .dp-pillar-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .dp-pillar-card {
+      background: rgba(21, 23, 28, 0.9);
+      border: 1px solid rgba(194, 198, 207, 0.16);
+      border-top: 3px solid var(--accent-gold, #d4af37);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    [data-theme="light"] .dp-pillar-card {
+      background: #ffffff;
+      border-color: rgba(0, 0, 0, 0.12);
+      border-top-color: #9c7a23;
+    }
+
+    .dp-pillar-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-primary, #b8232c);
+    }
+
+    .dp-pillar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+
+    .dp-pillar-num {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent-primary, #b8232c);
+      text-transform: uppercase;
+    }
+
+    .dp-pillar-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      background: rgba(184, 35, 44, 0.15);
+      color: var(--text-primary, #f2f3f5);
+      border: 1px solid rgba(184, 35, 44, 0.4);
+    }
+
+    [data-theme="light"] .dp-pillar-badge {
+      background: rgba(158, 27, 34, 0.1);
+      color: #9e1b22;
+    }
+
+    .dp-pillar-card h3 {
+      font-size: 1.25rem;
+      color: var(--text-primary, #f2f3f5);
+      margin-bottom: 0.75rem;
+    }
+
+    .dp-pillar-card p {
+      font-size: 0.94rem;
+      color: var(--text-secondary, #c2c6cf);
+      line-height: 1.65;
+      margin-bottom: 1.15rem;
+    }
+
+    .dp-spec-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid rgba(194, 198, 207, 0.12);
+      padding-top: 1rem;
+    }
+
+    .dp-spec-list li {
+      font-size: 0.86rem;
+      color: var(--text-secondary, #c2c6cf);
+      margin-bottom: 0.45rem;
+      padding-left: 1.15rem;
+      position: relative;
+    }
+
+    .dp-spec-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent-gold, #d4af37);
+      font-weight: bold;
+    }
+
+    /* Live Client Showcase Cards */
+    .dp-showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .dp-client-card {
+      background: rgba(21, 23, 28, 0.94);
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    [data-theme="light"] .dp-client-card {
+      background: #ffffff;
+      border-color: rgba(156, 122, 35, 0.35);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    }
+
+    .dp-client-preview {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      position: relative;
+    }
+
+    .dp-client-preview-1 {
+      background: linear-gradient(135deg, #1C1917 0%, #332924 100%);
+      color: #FAF7F5;
+    }
+
+    .dp-client-preview-2 {
+      background: linear-gradient(135deg, #18241E 0%, #2B4236 100%);
+      color: #F7F5F0;
+    }
+
+    .dp-client-tag-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.9rem;
+    }
+
+    .dp-client-id {
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #D4AF37;
+    }
+
+    .dp-client-vertical {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+    }
+
+    .dp-client-preview h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.35rem;
+      color: #FFFFFF;
+    }
+
+    .dp-client-preview p {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: 1rem;
+    }
+
+    .dp-swatch-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .dp-swatch-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.74rem;
+      font-family: monospace;
+      background: rgba(0, 0, 0, 0.45);
+      color: #FFFFFF;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .dp-swatch-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .dp-client-body {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .dp-client-body p {
+      font-size: 0.94rem;
+      color: var(--text-secondary, #c2c6cf);
+      margin-bottom: 1.15rem;
+      line-height: 1.65;
+    }
+
+    .dp-page-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .dp-page-pill {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.28rem 0.65rem;
+      border-radius: 4px;
+      background: rgba(212, 175, 55, 0.09);
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      color: var(--text-primary, #f2f3f5);
+    }
+
+    .dp-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .dp-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-primary, #b8232c);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+    }
+
+    .dp-btn-primary:hover {
+      background: #d62f39;
+      color: #ffffff;
+    }
+
+    .dp-btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: var(--accent-gold, #d4af37);
+      border: 1px solid var(--accent-gold, #d4af37);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      flex: 1;
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .dp-btn-gold:hover {
+      background: rgba(212, 175, 55, 0.15);
+    }
+
+    @media (min-width: 900px) {
+      .dp-hero-grid {
+        grid-template-columns: 1.35fr 0.65fr;
+      }
+      .dp-pillar-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .dp-showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .dp-stat-strip {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Global Compact Executive Sidebar rendered by main.js -->
+    <harrison-sidebar></harrison-sidebar>
+
+    <main class="main-content">
+      <div class="content-container" style="max-width: 1180px; margin: 0 auto; padding: 2rem 1.25rem;">
+
+        <!-- EXECUTIVE HERO SECTION -->
+        <section class="dp-hero-grid">
+          <div>
+            <span class="dp-eyebrow">STAGE 01 FUNNEL // TURNKEY DIGITAL PRESENCE</span>
+            <h1 class="dp-title">Sovereign Web Infrastructure, Domain Identity &amp; Local Search Authority</h1>
+            <p class="dp-lead">
+              Most local businesses are trapped between overpriced monthly agency retainers and fragmented DIY site builders that hold their domain and customer leads hostage. Harrison AI Agents deploys a complete, client-owned commercial digital footprint—combining registrar-level domain control, authenticated custom email, zero-build GitHub Pages web architecture, verified Google Business Profile indexing, and synchronized social media provisioning.
+            </p>
+            <div class="dp-btn-row" style="max-width: 520px;">
+              <a href="#live-client-showcases" class="dp-btn-primary">Launch Live Client Mockups ↓</a>
+              <a href="contact.html" class="dp-btn-gold">Request Onboarding Package →</a>
+            </div>
+          </div>
+
+          <!-- 9:16 Brand Visual Stage (Strict No-16:9 Compliance) -->
+          <div class="asset-frame asset-frame-9x16" style="max-width: 280px; margin: 0 auto; border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 12px; overflow: hidden;">
+            <img
+              src="Harrison_Agents_Dark_9x16.jpg"
+              alt="Harrison AI Agents Sovereign Digital Presence Architecture"
+              class="theme-brand-9x16"
+              style="width: 100%; height: auto; display: block;"
+            />
+          </div>
+        </section>
+
+        <!-- OPERATIONAL METRICS STRIP -->
+        <section class="dp-stat-strip" style="margin-bottom: 3.5rem;">
+          <div class="dp-stat-box">
+            <span class="dp-stat-val">100% Client-Owned</span>
+            <span class="dp-stat-label">Direct Registrar &amp; DNS Custody</span>
+          </div>
+          <div class="dp-stat-box">
+            <span class="dp-stat-val">$0 / Month</span>
+            <span class="dp-stat-label">Static GitHub Pages Hosting</span>
+          </div>
+          <div class="dp-stat-box">
+            <span class="dp-stat-val">6 Core Pages</span>
+            <span class="dp-stat-label">Mobile-First Conversion Blueprint</span>
+          </div>
+          <div class="dp-stat-box">
+            <span class="dp-stat-val">4 Integrated Pillars</span>
+            <span class="dp-stat-label">Domain • Web • Google • Social</span>
+          </div>
+        </section>
+
+        <!-- THE 4 EXECUTIVE SERVICE PILLARS -->
+        <section style="margin-bottom: 4rem;">
+          <div style="margin-bottom: 2rem;">
+            <span class="dp-eyebrow">ARCHITECTURAL DELIVERABLES</span>
+            <h2 style="font-size: 1.85rem; color: var(--text-primary, #f2f3f5); margin-bottom: 0.5rem;">
+              The Four-Pillar Commercial Presence Package
+            </h2>
+            <p style="color: var(--text-secondary, #c2c6cf); max-width: 760px;">
+              Every deployment is engineered so the business owner retains direct billing custody over their domain registrar while we execute the complete technical DNS, repository, inbox, and local directory configuration.
+            </p>
+          </div>
+
+          <div class="dp-pillar-grid">
+            <!-- Pillar 01 -->
+            <article class="dp-pillar-card">
+              <div>
+                <div class="dp-pillar-header">
+                  <span class="dp-pillar-num">Pillar 01 // Identity &amp; Communications</span>
+                  <span class="dp-pillar-badge">Client-Owned Billing</span>
+                </div>
+                <h3>Domain Registration &amp; Custom Email Account Setup</h3>
+                <p>
+                  We guide the client through securing their primary commercial `.com` domain using their own payment method so they never lose legal ownership of their brand name. Once registered, we strip away bloated registrar parking stubs and configure their first official domain email inbox (`info@` or `care@`) so every customer quote and invoice originates from a verified corporate address rather than a generic personal account.
+                </p>
+              </div>
+              <ul class="dp-spec-list">
+                <li>Direct registrar acquisition with delegated technical DNS administration</li>
+                <li>Production `A` record (`185.199.108.153`–`111.153`) and `www` `CNAME` routing</li>
+                <li>Primary business mailbox configuration with SPF, DKIM, and 2FA recovery binding</li>
+                <li>Custom mobile-ready outbound signature block and instant lead auto-responder</li>
+              </ul>
+            </article>
+
+            <!-- Pillar 02 -->
+            <article class="dp-pillar-card">
+              <div>
+                <div class="dp-pillar-header">
+                  <span class="dp-pillar-num">Pillar 02 // Web Engineering</span>
+                  <span class="dp-pillar-badge">Zero-Build Static Speed</span>
+                </div>
+                <h3>6-Page Mobile-First Web Design &amp; GitHub Hosting</h3>
+                <p>
+                  We deploy a blazing-fast, mobile-first 6-page website (`Home`, `Services`, `About Us`, `Gallery`, `Reviews`, `Contact`) hosted on an isolated GitHub Pages repository bound via a dedicated root `CNAME` routing lock and enforced Let's Encrypt TLS/HTTPS encryption. By eliminating fragile WordPress plugins and monthly hosting markups, the site achieves near-instant mobile load times and zero maintenance overhead.
+                </p>
+              </div>
+              <ul class="dp-spec-list">
+                <li>Custom CSS root color variables calibrated to the client's exact brand hex palette</li>
+                <li>Interactive service category jump-bars and tap-to-zoom portfolio lightbox gallery</li>
+                <li>One-tap mobile click-to-call (`tel:`) and pre-formatted custom domain email (`mailto:`)</li>
+                <li>Automated Let's Encrypt SSL/HTTPS enforcement and permanent `CNAME` repository binding</li>
+              </ul>
+            </article>
+
+            <!-- Pillar 03 -->
+            <article class="dp-pillar-card">
+              <div>
+                <div class="dp-pillar-header">
+                  <span class="dp-pillar-num">Pillar 03 // Local Search Indexing</span>
+                  <span class="dp-pillar-badge">Map Pack Authority</span>
+                </div>
+                <h3>Google Business Profile Registration &amp; Local SEO</h3>
+                <p>
+                  A high-converting website must be discoverable the moment neighborhood customers search for local services on Google Maps. We register, claim, or audit the client's Google Business Profile—synchronizing their official Name, Address, and Phone (`NAP`), service-area zip codes, operating hours, and primary commercial categories directly with the embedded map and metadata on their new website.
+                </p>
+              </div>
+              <ul class="dp-spec-list">
+                <li>End-to-end Google Business Profile registration and verification walkthrough</li>
+                <li>1-to-1 `NAP` consistency between website footer schema and Google Maps listing</li>
+                <li>Service-area boundary mapping across target counties and municipal corridors</li>
+                <li>Direct review-generation routing linking happy customers to verified testimonials</li>
+              </ul>
+            </article>
+
+            <!-- Pillar 04 -->
+            <article class="dp-pillar-card">
+              <div>
+                <div class="dp-pillar-header">
+                  <span class="dp-pillar-num">Pillar 04 // Social Proof Bridge</span>
+                  <span class="dp-pillar-badge">Synchronized Branding</span>
+                </div>
+                <h3>Social Media Account Provisioning (Instagram Baseline)</h3>
+                <p>
+                  For visual local service businesses, Instagram acts as a live validation portfolio. We stand up and harden the client's official business Instagram profile, securing a clean `@handle`, optimizing their 150-character local bio, binding account recovery to their new custom domain email, and connecting their website's interactive Gallery page directly to their social feed.
+                </p>
+              </div>
+              <ul class="dp-spec-list">
+                <li>Search-optimized business profile name, category badge, and action buttons</li>
+                <li>Direct bio link pointing to their newly enforced HTTPS custom domain</li>
+                <li>Day-one avatar formatting and starter portfolio grid uploads with shade/service captions</li>
+                <li>Embedded website Gallery-to-Instagram conversion banners for ongoing follower growth</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- LIVE INTERACTIVE CLIENT SHOWCASES (CLIENT_1 & CLIENT_2) -->
+        <section id="live-client-showcases" style="margin-bottom: 3rem;">
+          <div style="margin-bottom: 2rem;">
+            <span class="dp-eyebrow">LIVE PRODUCTION REFERENCE ARCHITECTURES</span>
+            <h2 style="font-size: 1.85rem; color: var(--text-primary, #f2f3f5); margin-bottom: 0.5rem;">
+              Interactive Turnkey Client Deployments
+            </h2>
+            <p style="color: var(--text-secondary, #c2c6cf); max-width: 780px;">
+              Inspect two complete 6-page reference deployments hosted live inside this repository. Both architectures demonstrate how rapid CSS variable skinning, transparent service menus, custom domain email routing, and Instagram portfolio bridges adapt to distinct local business verticals.
+            </p>
+          </div>
+
+          <div class="dp-showcase-grid">
+            <!-- CLIENT_1 CARD: ARUNDEL LUXE NAIL STUDIO -->
+            <article class="dp-client-card">
+              <div class="dp-client-preview dp-client-preview-1">
+                <div class="dp-client-tag-row">
+                  <span class="dp-client-id">DEPLOYMENT // CLIENT_1</span>
+                  <span class="dp-client-vertical">Personal Care &amp; Boutique Spa</span>
+                </div>
+                <h3>Arundel Luxe Nail Studio</h3>
+                <p>Walk-In &amp; Call-First Boutique Nail Artistry, Builder Gel &amp; Autoclave Spa Studio (Glen Burnie, MD)</p>
+                <div class="dp-swatch-bar">
+                  <span class="dp-swatch-chip"><span class="dp-swatch-dot" style="background:#1C1917;"></span>#1C1917</span>
+                  <span class="dp-swatch-chip"><span class="dp-swatch-dot" style="background:#C89D7C;"></span>#C89D7C</span>
+                  <span class="dp-swatch-chip"><span class="dp-swatch-dot" style="background:#FAF7F5;"></span>#FAF7F5</span>
+                  <span class="dp-swatch-chip"><span class="dp-swatch-dot" style="background:#3D6B58;"></span>#3D6B58</span>
+                </div>
+              </div>
+
+              <div class="dp-client-body">
+                <div>
+                  <p>
+                    Engineered for independent walk-in and phone-reservation studios that want to showcase hospital-grade sterilization, transparent service pricing, and high-margin custom nail art without paying monthly per-technician SaaS booking fees. Features interactive shade reference swatches (`#HEX`) inside the portfolio gallery and a pre-formatted group/bridal inquiry generator routed to `info@arundelluxenails.com`.
+                  </p>
+                  <div class="dp-page-pills">
+                    <a href="client_1/index.html" class="dp-page-pill">01. Home</a>
+                    <a href="client_1/services.html" class="dp-page-pill">02. Service Menu</a>
+                    <a href="client_1/about.html" class="dp-page-pill">03. Hygiene &amp; About</a>
+                    <a href="client_1/gallery.html" class="dp-page-pill">04. Swatch Gallery</a>
+                    <a href="client_1/reviews.html" class="dp-page-pill">05. Local Reviews</a>
+                    <a href="client_1/contact.html" class="dp-page-pill">06. Contact &amp; Map</a>
+                  </div>
+                </div>
+
+                <div class="dp-btn-row">
+                  <a href="client_1/index.html" class="dp-btn-primary">Launch Client_1 Live Site ↗</a>
+                  <a href="client_1/gallery.html" class="dp-btn-gold">Inspect Gallery &amp; IG Bridge</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- CLIENT_2 CARD: HANOK BOTANICAL CLEANERS -->
+            <article class="dp-client-card">
+              <div class="dp-client-preview dp-client-preview-2">
+                <div class="dp-client-tag-row">
+                  <span class="dp-client-id">DEPLOYMENT // CLIENT_2</span>
+                  <span class="dp-client-vertical">Organic Garment Care &amp; Tailoring</span>
+                </div>
+                <h3>Hanok Botanical Cleaners &amp; Tailoring</h3>
+                <p>Korean-Owned 100% Perc-Free Organic Wet Cleaning, Couture Preservation &amp; Master Alterations (Severna Park, MD)</p>
+                <div class="dp-swatch-bar">
+                  <span class="dp-swatch-chip"><span class="dp-swatch-dot" style="background:#18241E;"></span>#18241E</span>
+                  <span class="dp-swatch-chip"><span class="dp-swatch-dot" style="background:#4A7862;"></span>#4A7862</span>
+                  <span class="dp-swatch-chip"><span class="dp-swatch-dot" style="background:#F7F5F0;"></span>#F7F5F0</span>
+                  <span class="dp-swatch-chip"><span class="dp-swatch-dot" style="background:#8C6D46;"></span>#8C6D46</span>
+                </div>
+              </div>
+
+              <div class="dp-client-body">
+                <div>
+                  <p>
+                    Tailored for high-trust specialty retail and artisan garment care—highlighting Korean textile heritage, non-toxic botanical cleaning chemistry, military uniform regulation pressing, and silk Hanbok/bridal archival preservation. Styled in Pine Charcoal, Korean Celadon Jade, and Hanji Mulberry Ivory with direct fitting requests routed to `care@hanokbotanicalcleaners.com`.
+                  </p>
+                  <div class="dp-page-pills">
+                    <a href="client_2/index.html" class="dp-page-pill">01. Home</a>
+                    <a href="client_2/services.html" class="dp-page-pill">02. Care &amp; Tailoring Menu</a>
+                    <a href="client_2/about.html" class="dp-page-pill">03. Korean Heritage</a>
+                    <a href="client_2/gallery.html" class="dp-page-pill">04. Restoration Portfolio</a>
+                    <a href="client_2/reviews.html" class="dp-page-pill">05. Client Reviews</a>
+                    <a href="client_2/contact.html" class="dp-page-pill">06. Fitting &amp; Map</a>
+                  </div>
+                </div>
+
+                <div class="dp-btn-row">
+                  <a href="client_2/index.html" class="dp-btn-primary">Launch Client_2 Live Site ↗</a>
+                  <a href="client_2/gallery.html" class="dp-btn-gold">Inspect Restoration Portfolio</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Global Footer CTA Banner rendered by main.js -->
+      <harrison-footer-cta></harrison-footer-cta>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Onboarding &amp; Technical Ingestion Portal | Harrison AI Agents</title>
+  <meta name="description" content="Secure client intake form for domain registration, GitHub web hosting, custom email, and Instagram social setup." />
+  <style>
+    :root {
+      --bg-main: #0D0D0D;
+      --surface-card: #15171C;
+      --surface-elevated: #1E2129;
+      --accent-gold: #C5A059;
+      --accent-gold-hover: #D4AF37;
+      --accent-crimson: #B8232C;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A9A9A9;
+      --border-color: rgba(197, 160, 89, 0.25);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --max-width: 840px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    .portal-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      background: var(--surface-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .portal-header {
+      background: linear-gradient(135deg, #15171C 0%, #1E2129 100%);
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .portal-header img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      border: 1px solid var(--accent-gold);
+      object-fit: cover;
+      margin-bottom: 0.75rem;
+    }
+
+    .portal-header h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .portal-header p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Progress Stepper */
+    .stepper-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .step-indicator {
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .step-indicator.active {
+      color: var(--accent-gold);
+      border-bottom-color: var(--accent-gold);
+      background: rgba(197, 160, 89, 0.05);
+    }
+
+    .step-indicator.completed {
+      color: var(--text-primary);
+      border-bottom-color: #2E7D32;
+    }
+
+    /* Form Body & Sections */
+    .form-body {
+      padding: 2rem;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2.section-title {
+      font-size: 1.15rem;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    p.section-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      background: var(--surface-elevated);
+      border: 1px solid rgba(197, 160, 89, 0.2);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.15);
+    }
+
+    .helper-text {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 0.3rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Interactive Color Eyedropper Studio */
+    .color-studio {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .canvas-dropzone {
+      border: 2px dashed rgba(197, 160, 89, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .canvas-dropzone:hover {
+      border-color: var(--accent-gold);
+      background: rgba(197, 160, 89, 0.05);
+    }
+
+    canvas {
+      max-width: 100%;
+      height: auto;
+      display: none;
+      margin: 0 auto;
+      border-radius: 4px;
+      cursor: crosshair;
+    }
+
+    .swatch-display-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .live-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #FFFFFF;
+      background: #C5A059;
+      display: inline-block;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    /* Action Button Bar */
+    .btn-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: #282C37;
+    }
+
+    .btn-primary {
+      background: var(--accent-gold);
+      color: #0D0D0D;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-gold-hover);
+    }
+
+    .btn-success {
+      background: #2E7D32;
+      color: #FFFFFF;
+    }
+
+    .btn-success:hover {
+      background: #388E3C;
+    }
+
+    /* Export Results Modal / Screen */
+    .export-panel {
+      display: none;
+      background: var(--surface-elevated);
+      border: 1px solid var(--accent-gold);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .export-panel.active {
+      display: block;
+    }
+
+    .export-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-container">
+    <div class="portal-header">
+      <h1>Client Onboarding &amp; Ingestion</h1>
+      <p>Harrison AI Agents // Turnkey Domain, Web Hosting, Email &amp; Social Setup</p>
+    </div>
+
+    <!-- 3-Stage Progress Stepper -->
+    <div class="stepper-bar">
+      <div class="step-indicator active" id="indicator-1">1. Domain &amp; Web Setup</div>
+      <div class="step-indicator" id="indicator-2">2. Custom Email &amp; 2FA</div>
+      <div class="step-indicator" id="indicator-3">3. Social &amp; Assets</div>
+    </div>
+
+    <div class="form-body">
+      <form id="client-intake-form">
+
+        <!-- ================= STAGE 1: DOMAIN & WEB ================= -->
+        <div class="form-section active" id="section-1">
+          <h2 class="section-title">Stage 01 // Domain Registration &amp; GitHub Web Hosting</h2>
+          <p class="section-desc">Gathers domain priorities, registrar payment protocol, brand color palette, and core business metadata.</p>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="business-name">Official Business Name *</label>
+              <input type="text" id="business-name" placeholder="e.g., Arundel Luxe Nail Studio" required />
+            </div>
+            <div class="form-group">
+              <label for="owner-name">Primary Contact Owner *</label>
+              <input type="text" id="owner-name" placeholder="e.g., Elena Tran" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="domain-1">Domain Priority 1 (Primary Choice) *</label>
+              <input type="text" id="domain-1" placeholder="e.g., arundelluxenails.com" required />
+            </div>
+            <div class="form-group">
+              <label for="domain-2">Domain Priority 2 (Backup Choice)</label>
+              <input type="text" id="domain-2" placeholder="e.g., arundelnailsmd.com" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="payment-method-pref">Registrar &amp; Payment Protocol *</label>
+            <select id="payment-method-pref" required>
+              <option value="Client Direct Purchase">Client purchases directly on GoDaddy/Namecheap using their payment card</option>
+              <option value="Delegate Access Handshake">Client grants GoDaddy Delegate Access after initial domain search</option>
+              <option value="Live Onboarding Checkout">Complete registration together on 5-minute live onboarding call</option>
+            </select>
+          </div>
+
+          <!-- Interactive Color Eyedropper Studio -->
+          <div class="form-group">
+            <label>Brand Color Palette (Interactive Eyedropper Studio)</label>
+            <p class="helper-text" style="margin-bottom:0.5rem;">Upload a logo or reference design image, then click anywhere on the image canvas to instantly extract and lock in precise pixel HEX color codes.</p>
+            
+            <div class="color-studio">
+              <div class="canvas-dropzone" id="canvas-dropzone" onclick="document.getElementById('color-img-upload').click()">
+                <span id="dropzone-label">📁 Click or Drop Reference Logo / Image Here to Extract Colors</span>
+                <input type="file" id="color-img-upload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)" />
+                <canvas id="image-canvas"></canvas>
+              </div>
+
+              <div class="swatch-display-row">
+                <span class="live-swatch" id="selected-swatch"></span>
+                <div style="flex: 1;">
+                  <label for="extracted-hex" style="margin-bottom:0.2rem; font-size:0.75rem;">Selected Pixel HEX Code</label>
+                  <input type="text" id="extracted-hex" value="#C5A059" placeholder="#HEXCODE" style="font-family: monospace; font-weight: bold;" />
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="addHexToPalette()">Add to Palette</button>
+              </div>
+
+              <div style="margin-top: 0.75rem; font-size: 0.82rem; color: var(--text-secondary);">
+                <strong>Locked Palette:</strong> <span id="palette-chips" style="font-family: monospace; color: var(--accent-gold);">#C5A059 (Primary), #0D0D0D (Dark)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-row" style="justify-content: flex-end;">
+            <button type="button" class="btn btn-primary" onclick="validateAndNavigate(1)">Next: Custom Email &amp; 2FA →</button>
+          </div>
+        </div>
+
+        <!-- ================= STAGE 2: EMAIL & 2FA ================= -->
+        <div class="form-section" id="section-2">
+          <h2 class="section-title">Stage 02 // Custom Email Account &amp; DNS Mail Routing</h2>
+          <p class="section-desc">Collects mailbox prefix, sender display name, recovery binding numbers, and signature preferences.</p>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="email-prefix">Desired Email Prefix *</label>
+              <select id="email-prefix" required>
+                <option value="info">info@yourdomain.com (General Inquiries)</option>
+                <option value="contact">contact@yourdomain.com (Front Desk)</option>
+                <option value="care">care@yourdomain.com (Service / Support)</option>
+                <option value="estimates">estimates@yourdomain.com (Sales / Quotes)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sender-display-name">Official Sender Display Name *</label>
+              <input type="text" id="sender-display-name" placeholder="e.g., Arundel Luxe Concierge" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="recovery-email">Client Personal Recovery Email *</label>
+              <input type="email" id="recovery-email" placeholder="owner@gmail.com (for 2FA reset)" required />
+            </div>
+            <div class="form-group">
+              <label for="recovery-phone">Client Mobile Phone (2FA SMS) *</label>
+              <input type="tel" id="recovery-phone" placeholder="(410) 555-0192" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inbox-arch">Inbox Architecture Preference *</label>
+            <select id="inbox-arch" required>
+              <option value="Google Workspace / Microsoft 365">Dedicated Hosted Business Mailbox (Google Workspace / M365)</option>
+              <option value="Registrar Free Forwarding">Free Domain Email Forwarding into existing personal Gmail/Yahoo inbox</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="auto-responder-text">Instant Lead Auto-Responder Text</label>
+            <textarea id="auto-responder-text" rows="2" placeholder="Thank you for contacting Arundel Luxe! We received your message and will reply within 2 hours.">Thank you for contacting us! We received your inquiry and will reply shortly.</textarea>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-secondary" onclick="navigateToSection(1)">← Back</button>
+            <button type="button" class="btn btn-primary" onclick="validateAndNavigate(2)">Next: Social Media &amp; Assets →</button>
+          </div>
+        </div>
+
+        <!-- ================= STAGE 3: SOCIAL & ASSETS ================= -->
+        <div class="form-section" id="section-3">
+          <h2 class="section-title">Stage 03 // Social Media Setup &amp; Reference Assets</h2>
+          <p class="section-desc">Captures Instagram handle priorities, bio copy, Google Business Profile details, and reference upload notes.</p>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="ig-handle-1">Instagram Handle Priority 1 *</label>
+              <input type="text" id="ig-handle-1" placeholder="@arundelluxenails" required />
+            </div>
+            <div class="form-group">
+              <label for="ig-handle-2">Instagram Handle Priority 2</label>
+              <input type="text" id="ig-handle-2" placeholder="@arundelluxenailsmd" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ig-bio">Instagram Profile Bio &amp; Category *</label>
+            <textarea id="ig-bio" rows="2" placeholder="Nail Salon • Glen Burnie, MD | Autoclave Sanitized &amp; BIAB Builder Gel | Call (410) 555-0192" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="reference-notes">Reference Design Elements &amp; Special Instructions</label>
+            <textarea id="reference-notes" rows="3" placeholder="List required page sections (Hero, Menu, Gallery, Reviews, Contact) and note any specific layout preferences..."></textarea>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-secondary" onclick="navigateToSection(2)">← Back</button>
+            <button type="button" class="btn btn-success" onclick="generateAllExports()">Generate Portable Ingestion Package ✓</button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- EXPORT RESULTS PANEL -->
+      <div class="export-panel" id="export-panel">
+        <h3 style="color: var(--accent-gold); margin-bottom: 0.5rem;">✓ Onboarding Ingestion Package Ready</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+          All form parameters, extracted hex palettes, and configuration instructions have been successfully compiled. Choose your export format below:
+        </p>
+        <div class="export-actions">
+          <button type="button" class="btn btn-primary" onclick="downloadHtmlDossier()">Download HTML Dossier (.html)</button>
+          <button type="button" class="btn btn-secondary" onclick="downloadTextDoc()">Download Google Doc / Text Spec (.txt)</button>
+          <button type="button" class="btn btn-secondary" onclick="downloadCsvRow()">Download CRM Spreadsheet Row (.csv)</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // --- Navigation & Stepper Logic ---
+    function navigateToSection(targetStep) {
+      document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.step-indicator').forEach(i => {
+        i.classList.remove('active', 'completed');
+      });
+
+      document.getElementById(`section-${targetStep}`).classList.add('active');
+      
+      for (let i = 1; i <= 3; i++) {
+        const ind = document.getElementById(`indicator-${i}`);
+        if (i < targetStep) ind.classList.add('completed');
+        else if (i === targetStep) ind.classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function validateAndNavigate(currentStep) {
+      const section = document.getElementById(`section-${currentStep}`);
+      const inputs = section.querySelectorAll('[required]');
+      let valid = true;
+      inputs.forEach(inp => {
+        if (!inp.value.trim()) {
+          valid = false;
+          inp.style.borderColor = '#B8232C';
+        } else {
+          inp.style.borderColor = 'rgba(197, 160, 89, 0.2)';
+        }
+      });
+      if (!valid) {
+        alert('Please fill out all required fields before proceeding.');
+        return;
+      }
+      navigateToSection(currentStep + 1);
+    }
+
+    // --- Interactive HTML5 Canvas Eyedropper Logic ---
+    let lockedPalette = ['#C5A059', '#0D0D0D', '#15171C'];
+
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.getElementById('image-canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          
+          canvas.style.display = 'block';
+          document.getElementById('dropzone-label').style.display = 'none';
+
+          // Bind canvas click for pixel color extraction
+          canvas.onclick = function(evt) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const x = (evt.clientX - rect.left) * scaleX;
+            const y = (evt.clientY - rect.top) * scaleY;
+            
+            const pixel = ctx.getImageData(x, y, 1, 1).data;
+            const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
+            
+            document.getElementById('extracted-hex').value = hex;
+            document.getElementById('selected-swatch').style.backgroundColor = hex;
+          };
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function rgbToHex(r, g, b) {
+      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+    }
+
+    function addHexToPalette() {
+      const hex = document.getElementById('extracted-hex').value;
+      if (!lockedPalette.includes(hex)) {
+        lockedPalette.push(hex);
+        document.getElementById('palette-chips').textContent = lockedPalette.join(', ');
+      }
+    }
+
+    // --- Data Aggregation & Export Generators ---
+    function gatherFormData() {
+      return {
+        businessName: document.getElementById('business-name').value || 'Unspecified',
+        ownerName: document.getElementById('owner-name').value || 'Unspecified',
+        domain1: document.getElementById('domain-1').value || 'Unspecified',
+        domain2: document.getElementById('domain-2').value || 'N/A',
+        paymentPref: document.getElementById('payment-method-pref').value,
+        palette: lockedPalette.join(', '),
+        emailPrefix: document.getElementById('email-prefix').value,
+        senderName: document.getElementById('sender-display-name').value || 'Unspecified',
+        recoveryEmail: document.getElementById('recovery-email').value || 'Unspecified',
+        recoveryPhone: document.getElementById('recovery-phone').value || 'Unspecified',
+        inboxArch: document.getElementById('inbox-arch').value,
+        autoResponder: document.getElementById('auto-responder-text').value,
+        igHandle1: document.getElementById('ig-handle-1').value || 'Unspecified',
+        igHandle2: document.getElementById('ig-handle-2').value || 'N/A',
+        igBio: document.getElementById('ig-bio').value || 'Unspecified',
+        referenceNotes: document.getElementById('reference-notes').value || 'None'
+      };
+    }
+
+    function generateAllExports() {
+      navigateToSection(3);
+      document.getElementById('export-panel').classList.add('active');
+      document.getElementById('export-panel').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function downloadHtmlDossier() {
+      const data = gatherFormData();
+      const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Ingestion Dossier - ${data.businessName}</title></head>
+<body style="font-family:sans-serif; padding:2rem; background:#FAF7F5; color:#1C1917;">
+  <h1>Client Ingestion Dossier: ${data.businessName}</h1>
+  <hr>
+  <h3>1. Domain &amp; Web Hosting</h3>
+  <p><strong>Owner:</strong> ${data.ownerName}</p>
+  <p><strong>Primary Domain:</strong> ${data.domain1}</p>
+  <p><strong>Backup Domain:</strong> ${data.domain2}</p>
+  <p><strong>Payment Protocol:</strong> ${data.paymentPref}</p>
+  <p><strong>Brand Palette Hexes:</strong> ${data.palette}</p>
+  
+  <h3>2. Email &amp; 2FA Configuration</h3>
+  <p><strong>Primary Handle:</strong> ${data.emailPrefix}@${data.domain1}</p>
+  <p><strong>Sender Display:</strong> ${data.senderName}</p>
+  <p><strong>Recovery Email:</strong> ${data.recoveryEmail}</p>
+  <p><strong>Recovery Phone:</strong> ${data.recoveryPhone}</p>
+  <p><strong>Inbox Architecture:</strong> ${data.inboxArch}</p>
+  <p><strong>Auto-Responder:</strong> ${data.autoResponder}</p>
+
+  <h3>3. Social Media &amp; Reference Notes</h3>
+  <p><strong>Instagram Handle:</strong> ${data.igHandle1}</p>
+  <p><strong>Instagram Bio:</strong> ${data.igBio}</p>
+  <p><strong>Reference Notes:</strong> ${data.referenceNotes}</p>
+</body>
+</html>`;
+
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${data.businessName.replace(/\s+/g, '_')}_Ingestion_Dossier.html`;
+      a.click();
+    }
+
+    function downloadTextDoc() {
+      const data = gatherFormData();
+      const txtContent = `HARRISON AI AGENTS // CLIENT INGESTION SPECIFICATION
+==================================================
+Business Name: ${data.businessName}
+Owner Contact: ${data.ownerName}
+
+STAGE 1: DOMAIN & WEB HOSTING
+- Primary Domain: ${data.domain1}
+- Backup Domain: ${data.domain2}
+- Payment Method: ${data.paymentPref}
+- Color Palette Hexes: ${data.palette}
+
+STAGE 2: EMAIL & AUTHENTICATION
+- Primary Email: ${data.emailPrefix}@${data.domain1}
+- Sender Display Name: ${data.senderName}
+- Recovery Email: ${data.recoveryEmail}
+- Recovery Phone (2FA): ${data.recoveryPhone}
+- Inbox Architecture: ${data.inboxArch}
+- Auto-Responder Text: ${data.autoResponder}
+
+STAGE 3: SOCIAL MEDIA & ASSETS
+- Instagram Handle: ${data.igHandle1}
+- Backup Handle: ${data.igHandle2}
+- Profile Bio: ${data.igBio}
+- Reference Notes: ${data.referenceNotes}
+`;
+
+      const blob = new Blob([txtContent], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${data.businessName.replace(/\s+/g, '_')}_Spec.txt`;
+      a.click();
+    }
+
+    function downloadCsvRow() {
+      const data = gatherFormData();
+      const csvHeader = "BusinessName,Owner,Domain1,PaymentMethod,Palette,PrimaryEmail,RecoveryPhone,InstagramHandle\n";
+      const csvRow = `"${data.businessName}","${data.ownerName}","${data.domain1}","${data.paymentPref}","${data.palette}","${data.emailPrefix}@${data.domain1}","${data.recoveryPhone}","${data.igHandle1}"\n`;
+
+      const blob = new Blob([csvHeader + csvRow], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${data.businessName.replace(/\s+/g, '_')}_crm_row.csv`;
+      a.click();
+    }
+  </script>
+
+</body>
+</html>

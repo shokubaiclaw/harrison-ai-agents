@@ -232,9 +232,9 @@ class HarrisonSidebar extends HTMLElement {
     const archItems = [
       { href: `${prefix}digital-presence.html`, id: 'digital-presence.html', label: '01 // Digital Presence' },
       { href: `${prefix}ad-campaigns.html`, id: 'ad-campaigns.html', label: '02 // AI Ad Campaigns' },
-      { href: `${prefix}autonomous-reception.html`, id: '03 // autonomous-reception.html', label: 'Voice Reception' },
-      { href: `${prefix}ai-tier-comparison-matrix.html`, id: '05 // ai-tier-comparison-matrix.html', label: 'AI Tier Matrix' },         
-      { href: `${prefix}media-processing.html`, id: '06 // media-processing.html', label: 'Media Pipelines' },
+      { href: `${prefix}autonomous-reception.html`, id: 'autonomous-reception.html', label: '03 // Voice Reception' },
+      { href: `${prefix}ai-tier-comparison-matrix.html`, id: 'ai-tier-comparison-matrix.html', label: '05 // AI Tier Matrix' },         
+      { href: `${prefix}media-processing.html`, id: 'media-processing.html', label: '06 // Media Pipelines' },
       { href: `${prefix}services.html`, id: 'services.html', label: 'Agent Services' }
     ];
 

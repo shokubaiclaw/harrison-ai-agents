@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Harrison AI Agents</title>
-  <meta name="description" content="Contact Harrison AI Agents to scope AI-driven ad campaigns, 24/7 autonomous voice receptionists, web infrastructure, multi-agent LLM workflows, or inquiries for The Unlearning Dilemma." />
+  <meta name="description" content="Contact Harrison AI Agents to scope AI-driven ad campaigns, 24/7 autonomous voice receptionists, web infrastructure, multi-agent LLM workflows, or book and speaking inquiries." />
   <script>
     (function() {
       const savedTheme = localStorage.getItem('harrison-theme');
@@ -29,7 +29,7 @@
           INITIATE YOUR <span class="ai-crimson">DEPLOYMENT</span>
         </h1>
         <p class="hero-tagline">
-          Tell us about your growth targets, telephony volume, operational bottlenecks, or speaking/bulk book inquiries for <em>The Unlearning Dilemma</em>. Our team will respond within 24 hours.
+          Tell us about your growth targets, telephony volume, operational bottlenecks, or speaking and bulk book inquiries for <em>The Determinism Paradox</em> and <em>The Unlearning Dilemma</em>. Our team will respond within 24 hours.
         </p>
       </section>
 
@@ -76,7 +76,7 @@
                     <option value="agentic-workflows">05. Multi-Agent Workflows &amp; Sovereign/API LLM Deployment</option>
                     <option value="media-processing">06. Automated Audio/Video Media Processing Pipelines</option>
                     <option value="web-infrastructure">01. Web Design, Landing Pages &amp; DNS/SSL Infrastructure</option>
-                    <option value="book-media">📖 The Unlearning Dilemma — Book Orders, Speaking &amp; Media</option>
+                    <option value="book-media">📖 Publications — Bulk Book Orders, Keynotes &amp; Media Inquiries</option>
                   </select>
                 </div>
 
@@ -95,7 +95,7 @@
             </form>
           </div>
 
-          <!-- Right Column: Direct Dispatch + 9:16 Brand Crest Preview -->
+          <!-- Right Column: Direct Dispatch + Social Channels + 9:16 Brand Crest Preview -->
           <div style="display: flex; flex-direction: column; gap: 1.75rem; min-width: 0;">
             <div class="card">
               <span class="card-number">DIRECT DISPATCH</span>
@@ -107,13 +107,17 @@
                 <a href="mailto:info@harrisonaiagents.com" style="font-weight: 700; color: var(--accent-primary);">info@harrisonaiagents.com</a>
                 <span style="color: var(--accent-gold); font-size: 0.75rem; font-weight: 700;">● SLA: &lt; 24 HRS</span>
               </div>
-              <p style="font-size: 0.88rem; margin-bottom: 0;">
-                Part of the <strong>Harrison Arbitrage LLC</strong> brand family.
+              <p style="font-size: 0.88rem; margin-bottom: 0.5rem;">
+                Part of the <strong>Harrison Arbitrage LLC</strong> brand family. Connect with us across social platforms:
               </p>
+              <!-- Auto-mounted & theme-synced by main.js -->
+              <div data-harrison-social-bar data-social-class="contact-social-row"></div>
             </div>
 
-            <!-- 9:16 Animated Logo Card alongside Onboarding Steps -->
-            <div class="media-9x16-frame" style="max-width: 240px; margin: 0.5rem auto 1rem;">
+            <!-- 9:16 Animated Logo Card -->
+            <div class="card" style="align-items: center; text-align: center;">
+              <span class="card-number">OFFICIAL BRAND CREST</span>
+              <div class="media-9x16-frame" style="max-width: 240px; margin: 0.5rem auto 1rem;">
                 <video
                   class="theme-brand-video"
                   src="Harrison_Agents_Dark_9x16_Animated.mp4"
@@ -140,12 +144,22 @@
     document.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
       const requestedService = params.get('service');
+      const requestedBook = (params.get('book') || '').toLowerCase();
       const selectEl = document.getElementById('service-interest');
+      const messageEl = document.getElementById('project-scope');
 
       if (requestedService && selectEl) {
         const matchingOption = Array.from(selectEl.options).find(opt => opt.value === requestedService);
         if (matchingOption) {
           selectEl.value = requestedService;
+        }
+      }
+
+      if (messageEl && !messageEl.value.trim()) {
+        if (requestedBook === 'determinism') {
+          messageEl.value = 'Inquiry regarding The Determinism Paradox (speaking engagement, executive briefing, bulk copies, or press kit): ';
+        } else if (requestedBook === 'unlearning') {
+          messageEl.value = 'Inquiry regarding The Unlearning Dilemma (speaking engagement, executive briefing, bulk copies, or press kit): ';
         }
       }
 
@@ -162,7 +176,7 @@
             const email = document.getElementById('work-email').value.trim();
             const phone = document.getElementById('phone-number').value.trim() || 'Not provided';
             const serviceText = selectEl.options[selectEl.selectedIndex].text;
-            const message = document.getElementById('project-scope').value.trim();
+            const message = messageEl.value.trim();
 
             const subject = encodeURIComponent(`[Harrison AI Inquiry] ${company} — ${serviceText}`);
             const body = encodeURIComponent(

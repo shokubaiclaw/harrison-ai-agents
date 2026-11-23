@@ -36,7 +36,6 @@ const HARRISON_SOCIAL_LINKS = [
     label: 'Harrison AI Agents on X',
     url: 'https://x.com/harrisonaiagent'
   }
-  */
 ];
 
 function isUnlearningDirectory() {

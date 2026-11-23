@@ -9,13 +9,18 @@ function isUnlearningDirectory() {
   return path.includes('/unlearning/') || path.endsWith('/unlearning');
 }
 
+function isDeterminismDirectory() {
+  const path = window.location.pathname.toLowerCase();
+  return path.includes('/determinism/') || path.endsWith('/determinism');
+}
+
 function isAcademyDirectory() {
   const path = window.location.pathname.toLowerCase();
   return path.includes('/academy/') || path.endsWith('/academy');
 }
 
 function getRootPrefix() {
-  return (isUnlearningDirectory() || isAcademyDirectory()) ? '../' : '';
+  return (isUnlearningDirectory() || isDeterminismDirectory() || isAcademyDirectory()) ? '../' : '';
 }
 
 function syncThemeMediaAssets() {

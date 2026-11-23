@@ -314,7 +314,7 @@ class HarrisonSidebar extends HTMLElement {
         <a href="${prefix}index.html" class="brand-header" title="Return to Harrison AI Agents Home">
           <img src="${initialLogo}" alt="Harrison Agents Logo" class="brand-logo-img theme-brand-logo" />
           <div class="brand-title-group">
-            <span class="brand-name">H<span class="ai-crimson">a</span>rr<span class="ai-crimson">i</span>son <span class="ai-crimson">Agents</span></span>
+            <span class="brand-name">Harrison <span class="ai-crimson">AI Agents</span></span>
             <span class="brand-sub">Autonomous AI • Home</span>
           </div>
         </a>

@@ -1,8 +1,43 @@
 /* ==========================================================================
    HARRISON AI AGENTS — GLOBAL WEB COMPONENTS & THEME MEDIA ENGINE (/main.js)
-   Supports: Root (/), Book Showcase (/unlearning/), and Academy (/academy/)
-   Sidebar Architecture: Approach C (Compact Executive Sidebar)
+   Supports: Root (/), Determinism (/determinism/), Unlearning (/unlearning/),
+             and Academy (/academy/)
+   Sidebar Architecture: Approach C (Compact Executive Sidebar + Publications Drawer)
    ========================================================================== */
+
+/* Preferred file extension for Social_[NAME]_[Dark|Light] assets in root ('jpg' or 'png').
+   An automatic fallback switches between .jpg and .png if the first format is not found. */
+const SOCIAL_ICON_EXT = 'png';
+
+/* Centralized Harrison AI Agents Social Profiles (renders globally in Sidebar & Footer CTA) */
+const HARRISON_SOCIAL_LINKS = [
+  {
+    name: 'LinkedIn',
+    label: 'Harrison AI Agents on LinkedIn',
+    url: 'https://www.linkedin.com/company/harrison-ai-agents/'
+  },
+  {
+    name: 'Instagram',
+    label: 'Harrison AI Agents on Instagram (@harrisonaiagents)',
+    url: 'https://www.instagram.com/harrisonaiagents/'
+  },
+  {
+    name: 'Facebook',
+    label: 'Harrison AI Agents on Facebook',
+    url: 'https://www.facebook.com/profile.php?id=61593269286650'
+  },
+  {
+    name: 'NextDoor',
+    label: 'Harrison AI Agents on NextDoor (Glen Burnie, MD)',
+    url: 'https://nextdoor.com/pages/harrison-ai-agents-glen-burnie-md/'
+  }
+  ,{
+    name: 'X',
+    label: 'Harrison AI Agents on X',
+    url: 'https://x.com/harrisonaiagent'
+  }
+  */
+];
 
 function isUnlearningDirectory() {
   const path = window.location.pathname.toLowerCase();
@@ -23,9 +58,44 @@ function getRootPrefix() {
   return (isUnlearningDirectory() || isDeterminismDirectory() || isAcademyDirectory()) ? '../' : '';
 }
 
+function getSocialIconSrc(name, isLight, ext = SOCIAL_ICON_EXT) {
+  const prefix = getRootPrefix();
+  const mode = isLight ? 'Light' : 'Dark';
+  return `${prefix}Social_${name}_${mode}.${ext}`;
+}
+
+function buildSocialIconsHTML(isLight, extraClass = '') {
+  const altExt = SOCIAL_ICON_EXT === 'png' ? 'jpg' : 'png';
+  const items = HARRISON_SOCIAL_LINKS.map(item => {
+    const primarySrc = getSocialIconSrc(item.name, isLight, SOCIAL_ICON_EXT);
+    const fallbackSrc = getSocialIconSrc(item.name, isLight, altExt);
+    return `
+      <a
+        href="${item.url}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-icon-link"
+        title="${item.label}"
+        aria-label="${item.label}">
+        <img
+          src="${primarySrc}"
+          alt="${item.name}"
+          class="theme-social-icon"
+          data-social-name="${item.name}"
+          data-fallback-ext="${altExt}"
+          onerror="if(!this.dataset.triedFallback){this.dataset.triedFallback='1';this.src='${fallbackSrc}';}" />
+      </a>
+    `;
+  }).join('');
+
+  return `<div class="social-icon-row ${extraClass}" aria-label="Harrison AI Agents Social Channels">${items}</div>`;
+}
+
 function syncThemeMediaAssets() {
   const isLight = document.documentElement.getAttribute('data-theme') === 'light';
   const inUnlearning = isUnlearningDirectory();
+  const inDeterminism = isDeterminismDirectory();
+  const inBookDir = inUnlearning || inDeterminism;
   const prefix = getRootPrefix();
 
   /* 1. Sync 1x1 Sidebar & Mobile Brand Logos (Root Assets) */
@@ -36,16 +106,26 @@ function syncThemeMediaAssets() {
     }
   });
 
-  /* 2. Sync 9x16 Animated Crest Videos & Posters */
+  /* 2. Sync 9x16 Animated Crest Videos & Posters
+        - Root & Academy pages use: Harrison_Agents_[Dark|Light]_9x16_Animated.mp4
+        - /unlearning/ uses: Harrison_Arbitrage_[Dark|Light]_9x16_Animated.mp4
+        - /determinism/ uses: Harrison_Arbitrage_Dark_9x16_Animated_Burst.mp4 / Light_9x16_Animated.mp4 */
   const rootVideoSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16_Animated.mp4' : 'Harrison_Agents_Dark_9x16_Animated.mp4');
   const rootPosterSrc = prefix + (isLight ? 'Harrison_Agents_Light_9x16.jpg' : 'Harrison_Agents_Dark_9x16.jpg');
 
-  const arbitrageVideoSrc = isLight ? 'Harrison_Arbitrage_Light_9x16_Animated.mp4' : 'Harrison_Arbitrage_Dark_9x16_Animated.mp4';
+  const arbitrageDarkVideo = inDeterminism
+    ? 'Harrison_Arbitrage_Dark_9x16_Animated_Burst.mp4'
+    : 'Harrison_Arbitrage_Dark_9x16_Animated.mp4';
+  const arbitrageVideoSrc = isLight ? 'Harrison_Arbitrage_Light_9x16_Animated.mp4' : arbitrageDarkVideo;
   const arbitragePosterSrc = isLight ? 'Harrison_Arbitrage_Light_9x16.jpg' : 'Harrison_Arbitrage_Dark_9x16.jpg';
 
   document.querySelectorAll('.theme-brand-video').forEach(video => {
-    const useArbitrage = inUnlearning || video.dataset.brand === 'arbitrage';
-    const targetVideo = useArbitrage ? arbitrageVideoSrc : rootVideoSrc;
+    const hasExplicitSrc = video.dataset.darkSrc && video.dataset.lightSrc;
+    const useArbitrage = inBookDir || video.dataset.brand === 'arbitrage';
+
+    const targetVideo = hasExplicitSrc
+      ? (isLight ? video.dataset.lightSrc : video.dataset.darkSrc)
+      : (useArbitrage ? arbitrageVideoSrc : rootVideoSrc);
     const targetPoster = useArbitrage ? arbitragePosterSrc : rootPosterSrc;
 
     video.setAttribute('poster', targetPoster);
@@ -75,10 +155,29 @@ function syncThemeMediaAssets() {
 
   /* 3. Sync 9x16 Static Brand Images (.theme-brand-9x16) */
   document.querySelectorAll('.theme-brand-9x16').forEach(img => {
-    const useArbitrage = inUnlearning || img.dataset.brand === 'arbitrage';
+    const useArbitrage = inBookDir || img.dataset.brand === 'arbitrage';
     const targetImg = useArbitrage ? arbitragePosterSrc : rootPosterSrc;
     if (img.getAttribute('src') !== targetImg) {
       img.setAttribute('src', targetImg);
+    }
+  });
+
+  /* 4. Sync Square Social Media Icons (.theme-social-icon) */
+  const altExt = SOCIAL_ICON_EXT === 'png' ? 'jpg' : 'png';
+  document.querySelectorAll('.theme-social-icon').forEach(img => {
+    const name = img.dataset.socialName;
+    if (!name) return;
+    const targetSrc = getSocialIconSrc(name, isLight, SOCIAL_ICON_EXT);
+    const fallbackSrc = getSocialIconSrc(name, isLight, altExt);
+    if (img.getAttribute('src') !== targetSrc) {
+      delete img.dataset.triedFallback;
+      img.onerror = () => {
+        if (!img.dataset.triedFallback) {
+          img.dataset.triedFallback = '1';
+          img.setAttribute('src', fallbackSrc);
+        }
+      };
+      img.setAttribute('src', targetSrc);
     }
   });
 }
@@ -106,7 +205,7 @@ function injectCompactSidebarStyles() {
       border: 1px solid var(--accent-gold, #d4af37);
       flex-shrink: 0;
     }
-    /* Expandable Technical Architectures Accordion */
+    /* Expandable Accordions (Publications & Technical Architectures) */
     .nav-accordion-group {
       margin-top: 0.35rem;
     }
@@ -115,14 +214,17 @@ function injectCompactSidebarStyles() {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.5rem;
       background: transparent;
       border: 1px solid transparent;
       border-radius: var(--radius-sm, 8px);
       padding: 0.6rem 0.75rem;
       color: var(--text-secondary, #c2c6cf);
       font-family: inherit;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
       cursor: pointer;
       text-align: left;
       transition: all 0.2s ease;
@@ -132,6 +234,12 @@ function injectCompactSidebarStyles() {
       color: var(--text-primary, #f2f3f5);
       background: rgba(212, 175, 55, 0.08);
       border-color: rgba(212, 175, 55, 0.28);
+    }
+    .nav-accordion-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
     }
     .nav-accordion-chevron {
       font-size: 0.75rem;
@@ -165,6 +273,64 @@ function injectCompactSidebarStyles() {
         transform: rotate(180deg);
       }
     }
+    /* Theme-Synced Square Social Media Icon Bar */
+    .social-icon-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+    .sidebar-social-row {
+      padding-top: 0.5rem;
+    }
+    .footer-social-wrap {
+      margin-top: 1.5rem;
+      padding-top: 1.15rem;
+      border-top: 1px solid var(--border-color, rgba(212, 175, 55, 0.18));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .footer-social-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-gold, #d4af37);
+    }
+    .social-icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--accent-gold-border, rgba(212, 175, 55, 0.38));
+      background-color: var(--bg-primary, #101115);
+      overflow: hidden;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .social-icon-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-primary, #b8232c);
+      box-shadow: 0 4px 14px var(--accent-glow, rgba(184, 35, 44, 0.32));
+    }
+    .social-icon-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .contact-social-row {
+      justify-content: flex-start;
+      margin-top: 0.85rem;
+    }
+    .contact-social-row .social-icon-link {
+      width: 40px;
+      height: 40px;
+    }
     /* Single-Line Horizontal Company & Governance Bar */
     .sidebar-gov-inline {
       display: flex;
@@ -173,7 +339,7 @@ function injectCompactSidebarStyles() {
       flex-wrap: wrap;
       gap: 0.45rem;
       padding-top: 0.65rem;
-      margin-top: 0.55rem;
+      margin-top: 0.45rem;
       border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.09));
       font-size: 0.75rem;
     }
@@ -202,10 +368,12 @@ class HarrisonSidebar extends HTMLElement {
 
     const prefix = getRootPrefix();
     const inUnlearning = isUnlearningDirectory();
+    const inDeterminism = isDeterminismDirectory();
     const inAcademy = isAcademyDirectory();
+    const inSubdir = inUnlearning || inDeterminism || inAcademy;
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
-    /* 1. Three Primary Prominent Links */
+    /* 1. Always-Visible Primary Platforms */
     const primaryItems = [
       {
         href: `${prefix}solutions.html`,
@@ -213,7 +381,7 @@ class HarrisonSidebar extends HTMLElement {
         label: 'Solutions Hub',
         badge: 'Full Funnel',
         badgeClass: 'gold',
-        active: !inUnlearning && !inAcademy && currentFile === 'solutions.html'
+        active: !inSubdir && currentFile === 'solutions.html'
       },
       {
         href: `${prefix}academy/index.html`,
@@ -222,30 +390,44 @@ class HarrisonSidebar extends HTMLElement {
         badge: '3 Tiers',
         badgeClass: 'gold',
         active: inAcademy
+      }
+    ];
+
+    /* 2. Option 1: Publications Accordion Drawer */
+    const pubItems = [
+      {
+        href: `${prefix}determinism/index.html`,
+        id: 'determinism',
+        label: 'The Determinism Paradox',
+        badge: 'New',
+        badgeClass: '',
+        active: inDeterminism
       },
       {
         href: `${prefix}unlearning/index.html`,
         id: 'unlearning',
         label: 'The Unlearning Dilemma',
-        badge: 'Book',
-        badgeClass: '',
+        badge: 'Vol 01',
+        badgeClass: 'gold',
         active: inUnlearning
       }
     ];
 
-    /* 2. Consolidated Technical Architectures Drawer (Digital Presence placed first) */
+    const hasActivePub = inDeterminism || inUnlearning;
+
+    /* 3. Consolidated Technical Architectures Drawer (Digital Presence placed first) */
     const archItems = [
       { href: `${prefix}digital-presence.html`, id: 'digital-presence.html', label: '01 // Digital Presence' },
       { href: `${prefix}ad-campaigns.html`, id: 'ad-campaigns.html', label: '02 // AI Ad Campaigns' },
       { href: `${prefix}autonomous-reception.html`, id: 'autonomous-reception.html', label: '03 // Voice Reception' },
-      { href: `${prefix}ai-tier-comparison-matrix.html`, id: 'ai-tier-comparison-matrix.html', label: '05 // AI Tier Matrix' },         
+      { href: `${prefix}ai-tier-comparison-matrix.html`, id: 'ai-tier-comparison-matrix.html', label: '05 // AI Tier Matrix' },
       { href: `${prefix}media-processing.html`, id: 'media-processing.html', label: '06 // Media Pipelines' },
       { href: `${prefix}services.html`, id: 'services.html', label: 'Agent Services' }
     ];
 
-    const hasActiveArch = !inUnlearning && !inAcademy && archItems.some(item => item.id === currentFile);
+    const hasActiveArch = !inSubdir && archItems.some(item => item.id === currentFile);
 
-    /* 3. Single-Line Horizontal Governance Footer Links */
+    /* 4. Single-Line Horizontal Governance Footer Links */
     const govItems = [
       { href: `${prefix}about.html`, id: 'about.html', label: 'About Us' },
       { href: `${prefix}contact.html`, id: 'contact.html', label: 'Contact' },
@@ -268,12 +450,28 @@ class HarrisonSidebar extends HTMLElement {
     });
     primaryListHTML += `</ul>`;
 
+    let pubListHTML = `<ul class="nav-list" style="margin-bottom:0;">`;
+    pubItems.forEach(item => {
+      const badgeHTML = item.badge
+        ? `<span class="nav-badge ${item.badgeClass || ''}">${item.badge}</span>`
+        : '';
+      pubListHTML += `
+        <li>
+          <a href="${item.href}" class="nav-link ${item.active ? 'active' : ''}" style="font-size:0.78rem; padding:0.46rem 0.65rem;">
+            <span>${item.label}</span>
+            ${badgeHTML}
+          </a>
+        </li>
+      `;
+    });
+    pubListHTML += `</ul>`;
+
     let archListHTML = `<ul class="nav-list" style="margin-bottom:0;">`;
     archItems.forEach(item => {
-      const isActive = !inUnlearning && !inAcademy && currentFile === item.id;
+      const isActive = !inSubdir && currentFile === item.id;
       archListHTML += `
         <li>
-          <a href="${item.href}" class="nav-link ${isActive ? 'active' : ''}" style="font-size:0.82rem; padding:0.45rem 0.65rem;">
+          <a href="${item.href}" class="nav-link ${isActive ? 'active' : ''}" style="font-size:0.8rem; padding:0.45rem 0.65rem;">
             <span>${item.label}</span>
           </a>
         </li>
@@ -283,7 +481,7 @@ class HarrisonSidebar extends HTMLElement {
 
     const govInlineHTML = govItems
       .map((item, idx) => {
-        const isActive = !inUnlearning && !inAcademy && currentFile === item.id;
+        const isActive = !inSubdir && currentFile === item.id;
         const sep = idx < govItems.length - 1 ? '<span class="sidebar-gov-sep">•</span>' : '';
         return `<a href="${item.href}" class="${isActive ? 'active' : ''}">${item.label}</a>${sep}`;
       })
@@ -291,6 +489,7 @@ class HarrisonSidebar extends HTMLElement {
 
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     const initialLogo = prefix + (isLight ? 'Harrison_Agents_Light.jpg' : 'Harrison_Agents_Dark.jpg');
+    const sidebarSocialHTML = buildSocialIconsHTML(isLight, 'sidebar-social-row');
 
     this.innerHTML = `
       <div class="mobile-topbar">
@@ -304,12 +503,32 @@ class HarrisonSidebar extends HTMLElement {
         <a href="${prefix}index.html" class="brand-header" title="Return to Harrison AI Agents Home">
           <img src="${initialLogo}" alt="Harrison Agents Logo" class="brand-logo-img theme-brand-logo" />
           <div class="brand-title-group">
-            <span class="brand-name">Harrison <span class="ai-crimson">AI Agents</span></span>
+            <span class="brand-name">H<span class="ai-crimson">a</span>rr<span class="ai-crimson">i</span>son <span class="ai-crimson">Agents</span></span>
             <span class="brand-sub">Autonomous AI • Home</span>
           </div>
         </a>
         <nav aria-label="Primary Sidebar Navigation" style="display:flex; flex-direction:column; flex:1;">
           ${primaryListHTML}
+
+          <!-- Publications Accordion (Option 1) -->
+          <div class="nav-accordion-group ${hasActivePub ? 'is-open has-active-child' : ''}" id="pub-accordion-group">
+            <button
+              type="button"
+              class="nav-accordion-trigger"
+              id="pub-accordion-btn"
+              aria-expanded="${hasActivePub ? 'true' : 'false'}">
+              <span>Publications</span>
+              <span class="nav-accordion-right">
+                <span class="nav-badge">Books</span>
+                <span class="nav-accordion-chevron">▾</span>
+              </span>
+            </button>
+            <div class="nav-accordion-drawer" id="pub-accordion-drawer">
+              ${pubListHTML}
+            </div>
+          </div>
+
+          <!-- Technical Architectures Accordion -->
           <div class="nav-accordion-group ${hasActiveArch ? 'is-open has-active-child' : ''}" id="arch-accordion-group">
             <button
               type="button"
@@ -328,6 +547,7 @@ class HarrisonSidebar extends HTMLElement {
           <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle Light/Dark Theme">
             ☀️ Switch to Light Mode
           </button>
+          ${sidebarSocialHTML}
           <div class="sidebar-gov-inline" aria-label="Company and Governance">
             ${govInlineHTML}
           </div>
@@ -338,13 +558,14 @@ class HarrisonSidebar extends HTMLElement {
 
     this.initThemeToggle();
     this.initMobileMenu();
-    this.initArchAccordion();
+    this.initAccordion('#pub-accordion-group', '#pub-accordion-btn');
+    this.initAccordion('#arch-accordion-group', '#arch-accordion-btn');
     syncThemeMediaAssets();
   }
 
-  initArchAccordion() {
-    const group = this.querySelector('#arch-accordion-group');
-    const btn = this.querySelector('#arch-accordion-btn');
+  initAccordion(groupSelector, btnSelector) {
+    const group = this.querySelector(groupSelector);
+    const btn = this.querySelector(btnSelector);
     if (group && btn) {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -388,9 +609,19 @@ class HarrisonSidebar extends HTMLElement {
 
 class HarrisonFooterCTA extends HTMLElement {
   connectedCallback() {
+    injectCompactSidebarStyles();
+
     const prefix = getRootPrefix();
+    const inDeterminism = isDeterminismDirectory();
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
     const heading = this.getAttribute('heading') || 'Ready to Deploy Autonomous Growth & Operations?';
     const subtext = this.getAttribute('subtext') || 'Whether you need AI-driven paid ad campaigns, 24/7 multimodal voice reception, or sovereign multi-agent workflows, our engineering team builds production systems that execute.';
+
+    const bookHref = inDeterminism ? `${prefix}unlearning/index.html` : `${prefix}determinism/index.html`;
+    const bookLabel = inDeterminism ? '📖 Companion: The Unlearning Dilemma' : '📖 New Book: The Determinism Paradox';
+    const footerSocialHTML = buildSocialIconsHTML(isLight);
+
     this.innerHTML = `
       <section class="cta-banner">
         <span class="eyebrow">Production Deployment</span>
@@ -399,18 +630,31 @@ class HarrisonFooterCTA extends HTMLElement {
         <div class="btn-group" style="justify-content: center;">
           <a href="${prefix}contact.html" class="btn btn-primary">Schedule an Architecture Call →</a>
           <a href="${prefix}academy/index.html" class="btn btn-secondary">Explore 3-Tier AI Academy →</a>
-          <a href="${prefix}unlearning/index.html" class="btn btn-secondary">📖 The Unlearning Dilemma</a>
+          <a href="${bookHref}" class="btn btn-secondary">${bookLabel}</a>
+        </div>
+        <div class="footer-social-wrap">
+          <span class="footer-social-label">Connect With Harrison AI Agents</span>
+          ${footerSocialHTML}
         </div>
       </section>
     `;
+
+    syncThemeMediaAssets();
   }
 }
 
 customElements.define('harrison-sidebar', HarrisonSidebar);
 customElements.define('harrison-footer-cta', HarrisonFooterCTA);
 
-/* Interactive Voice Reception Demo Simulator */
+/* Interactive Voice Reception Demo Simulator & Optional Social Mount */
 document.addEventListener('DOMContentLoaded', () => {
+  /* Auto-populate any standalone <div data-harrison-social-bar> container (e.g., contact.html) */
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  document.querySelectorAll('[data-harrison-social-bar]').forEach(container => {
+    const extraClass = container.getAttribute('data-social-class') || '';
+    container.innerHTML = buildSocialIconsHTML(isLight, extraClass);
+  });
+
   syncThemeMediaAssets();
 
   const demoBtn = document.getElementById('run-voice-simulation');

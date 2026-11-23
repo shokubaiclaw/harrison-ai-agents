@@ -24,19 +24,17 @@ const HARRISON_SOCIAL_LINKS = [
   {
     name: 'Facebook',
     label: 'Harrison AI Agents on Facebook',
-    /* TODO: Confirm your exact Facebook page slug or profile URL if different */
-    url: 'https://www.facebook.com/harrisonaiagents'
+    url: 'https://www.facebook.com/profile.php?id=61593269286650'
   },
   {
     name: 'NextDoor',
     label: 'Harrison AI Agents on NextDoor (Glen Burnie, MD)',
     url: 'https://nextdoor.com/pages/harrison-ai-agents-glen-burnie-md/'
   }
-  /* Uncomment once an official X handle is active:
   ,{
     name: 'X',
     label: 'Harrison AI Agents on X',
-    url: 'https://x.com/YOUR_X_HANDLE'
+    url: 'https://x.com/harrisonaiagent'
   }
   */
 ];

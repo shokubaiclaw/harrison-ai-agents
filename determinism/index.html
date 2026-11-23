@@ -1,1 +1,507 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Determinism Paradox — Architecting Native Trust for Probabilistic Systems | Harrison AI Agents</title>
+  <meta name="description" content="The Determinism Paradox — Official 9:16 mobile-first book showcase. A five-part greenfield engineering specification for native trust, silicon enclaves, and glass-box governance." />
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('harrison-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="../main.js" defer></script>
+  <style>
+    /* Override page circuitry watermark with Harrison Arbitrage 9x16 assets */
+    :root {
+      --bg-circuit-image: url('Harrison_Arbitrage_Dark_9x16.jpg');
+    }
+    [data-theme="light"] {
+      --bg-circuit-image: url('Harrison_Arbitrage_Light_9x16.jpg');
+    }
+
+    .book-showcase-header {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 2.25rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .book-subtitle-line {
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin: 0 auto 0.85rem;
+    }
+
+    .view-mode-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    /* 4-Card 9:16 Portrait Grid */
+    .portrait-9x16-stream {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 350px));
+      justify-content: center;
+      gap: 2rem;
+      margin: 0 auto 3.5rem;
+    }
+
+    .portrait-9x16-stream.mobile-reel-mode {
+      grid-template-columns: minmax(280px, 380px);
+      gap: 2.25rem;
+    }
+
+    /* Strict 9:16 Portrait Card Frame */
+    .reel-card-9x16 {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      max-width: 370px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--accent-gold);
+      background-color: var(--bg-secondary);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65), 0 0 24px var(--accent-glow);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .reel-card-9x16 > video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background-color: #0b0c0e;
+    }
+
+    .reel-top-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.85rem;
+      right: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .reel-pill {
+      background: rgba(16, 17, 21, 0.88);
+      backdrop-filter: blur(8px);
+      color: var(--accent-gold);
+      border: 1px solid var(--accent-gold);
+      padding: 0.24rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .reel-pill.crimson {
+      background: var(--accent-primary);
+      color: #ffffff;
+      border-color: var(--accent-gold);
+    }
+
+    /* Card 2 & Card 4 Stage Container */
+    .reel-contained-stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.95rem 1.1rem 1.05rem;
+      background:
+        radial-gradient(circle at 50% 30%, var(--accent-subtle), transparent 70%),
+        linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+      position: relative;
+    }
+
+    .reel-stage-header {
+      text-align: center;
+      margin-bottom: 0.35rem;
+      flex-shrink: 0;
+    }
+
+    .reel-stage-overline {
+      font-size: 0.66rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .reel-stage-title {
+      font-size: 1.08rem;
+      margin-top: 0.1rem;
+      color: var(--text-primary);
+    }
+
+    .reel-contained-img-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0.35rem 0;
+      position: relative;
+      min-height: 0;
+    }
+
+    .reel-contained-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--accent-gold-border);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    .reel-contained-img-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--accent-gold-border);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+      background-color: #0b0c0e;
+    }
+
+    .reel-edition-caption {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-gold-border);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: var(--radius-sm);
+      padding: 0.55rem 0.7rem;
+      font-size: 0.73rem;
+      line-height: 1.4;
+      color: var(--text-secondary);
+      text-align: left;
+      flex-shrink: 0;
+    }
+
+    .reel-edition-caption strong {
+      color: var(--accent-gold);
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.15rem;
+    }
+
+    /* Card 3: Condensed 5-Part Greenfield Specification 9:16 Layout */
+    .reel-story-card {
+      width: 100%;
+      height: 100%;
+      padding: 2.75rem 0.95rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(14, 15, 19, 0.93) 0%, rgba(14, 15, 19, 0.98) 100%),
+        url('Determinism_Paradox_Cover_2x3.jpg') center/cover no-repeat;
+      color: #f2f3f5;
+      overflow-y: auto;
+    }
+
+    .reel-story-card h3 {
+      color: #ffffff;
+      font-size: 0.98rem;
+      line-height: 1.2;
+      margin-bottom: 0.2rem;
+    }
+
+    .reel-story-lead {
+      color: #d5d8df;
+      font-size: 0.68rem;
+      line-height: 1.32;
+      margin-bottom: 0.42rem;
+    }
+
+    .reel-blueprint-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin: 0 0 0.5rem;
+      padding: 0;
+    }
+
+    .reel-blueprint-list li {
+      font-size: 0.64rem;
+      line-height: 1.28;
+      color: #e4e6eb;
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 3px solid var(--accent-primary);
+      padding: 0.28rem 0.48rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .reel-blueprint-list li strong {
+      color: var(--accent-gold);
+      display: block;
+      font-size: 0.66rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.05rem;
+    }
+
+    @media (max-width: 640px) {
+      .portrait-9x16-stream {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .reel-card-9x16 {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <harrison-sidebar></harrison-sidebar>
+
+    <main class="main-content">
+      <!-- 9:16 MOBILE-FIRST HEADER -->
+      <header class="book-showcase-header">
+        <span class="eyebrow">New Release • Official 9:16 Mobile Experience</span>
+        <h1 class="hero-title" style="margin: 0 auto 0.55rem;">
+          THE <span class="ai-crimson">DETERMINISM</span> PARADOX
+        </h1>
+        <div class="book-subtitle-line">
+          Architecting Native Trust, Silicon Enclaves, and Glass-Box Governance for Probabilistic Systems
+        </div>
+        <p class="hero-tagline" style="margin: 0 auto 1.25rem;">
+          Stop retrofitting legacy controls onto probabilistic systems. Explore the five-part greenfield engineering specification built for enterprise chief architects, principal systems engineers, and auditors.
+        </p>
+        <div class="btn-group" style="justify-content: center;">
+          <!-- TODO: Replace placeholder URL with official Amazon product link once live -->
+          <a href="https://www.amazon.com/gp/product/REPLACE_WITH_DETERMINISM_ASIN" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Order on Amazon →
+          </a>
+          <a href="../contact.html?service=book-media" class="btn btn-secondary">
+            Speaking, Bulk &amp; Media Inquiries
+          </a>
+        </div>
+
+        <div class="view-mode-bar">
+          <button type="button" id="toggle-reel-layout" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.74rem;">
+            📱 Switch to Single-Column Mobile Reel View
+          </button>
+        </div>
+      </header>
+
+      <!-- 4-CARD 9:16 PORTRAIT SHOWCASE DECK -->
+      <section class="portrait-9x16-stream" id="book-portrait-stream">
+
+        <!-- CARD 01: 3D ANIMATED BOOK TRAILER -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill crimson">01 • Launch Trailer</span>
+            <span class="reel-pill">Greenfield Spec</span>
+          </div>
+          <video
+            src="Determinism_Paradox_3D_Book_Animated.mp4"
+            poster="Determinism_Paradox_Cover_2x3.jpg"
+            autoplay
+            loop
+            muted
+            playsinline
+            controls>
+          </video>
+        </article>
+
+        <!-- CARD 02: 3D BOOK MOCKUP + FIRST EDITION & PRINT/DIGITAL TITLES -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill crimson">02 • First Edition</span>
+            <span class="reel-pill">Print &amp; Digital</span>
+          </div>
+          <div class="reel-contained-stage">
+            <div class="reel-stage-header">
+              <div class="reel-stage-overline">Volume 05 • Greenfield Specification</div>
+              <h3 class="reel-stage-title">The Determinism Paradox</h3>
+            </div>
+
+            <div class="reel-contained-img-wrap">
+              <img src="Determinism_Paradox_3D_Book_Mockup.jpg" alt="The Determinism Paradox 3D Book Mockup" />
+            </div>
+
+            <div class="reel-edition-caption">
+              <strong>Actionable Chief Architect Blueprint</strong>
+              Proactive native trust architectures, hardware-rooted silicon enclaves, and glass-box runtime assurance engineered from day one.
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 03: FIVE-PART CHAPTER ARCHITECTURE + AMAZON & KEYNOTE LINKS -->
+        <article class="reel-card-9x16" id="order-deck">
+          <div class="reel-top-badge">
+            <span class="reel-pill">03 • Architecture</span>
+            <span class="reel-pill crimson">5-Part Format</span>
+          </div>
+          <div class="reel-story-card">
+            <div>
+              <span style="font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); font-weight: 700;">
+                Structure of This Book
+              </span>
+              <h3>Five-Part Chief Architect Specification</h3>
+              <p class="reel-story-lead">
+                Moving beyond reactive threat playbooks, every chapter executes five standardized native engineering phases:
+              </p>
+              <ul class="reel-blueprint-list">
+                <li>
+                  <strong>01. Legacy Integration vs. Native Inception</strong>
+                  Retire obsolete retrofits—static service accounts, contractual cloud privacy tiers, and manual review queues—to engineer natively around AI.
+                </li>
+                <li>
+                  <strong>02. Reference Topology &amp; Structural Patterns</strong>
+                  Formal multi-enclave trust zones, data schemas, and quantitative laws written in rigorous prose ready for System Design Documents.
+                </li>
+                <li>
+                  <strong>03. Systems Engineering &amp; Infrastructure Spec</strong>
+                  Step-by-step greenfield builds covering protocol headers, middleware proxies, identity tokens, hardware attestation, and admission control.
+                </li>
+                <li>
+                  <strong>04. Continuous Assurance &amp; Runtime Governance</strong>
+                  Self-validating architectures wiring automated telemetry, deterministic output schemas, drift monitors, and HITL state machines into daily ops.
+                </li>
+                <li>
+                  <strong>05. Executive Synthesis &amp; Credential Alignment</strong>
+                  Translates controls into boardroom capital strategy, TCO optimization, fiduciary risk metrics, and global AI security certification domains.
+                </li>
+              </ul>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.35rem; flex-shrink: 0;">
+              <!-- TODO: Replace placeholder URL with official Amazon product link once live -->
+              <a
+                href="https://www.amazon.com/gp/product/REPLACE_WITH_DETERMINISM_ASIN"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+                style="width: 100%; padding: 0.52rem; font-size: 0.71rem; text-align: center;">
+                Order Direct / Bulk Copies on Amazon →
+              </a>
+              <a
+                href="../contact.html?service=book-media"
+                class="btn btn-secondary"
+                style="width: 100%; padding: 0.45rem; font-size: 0.68rem; text-align: center; background: rgba(24, 26, 32, 0.9); color: #f2f3f5;">
+                Request Author Keynote / Press Kit
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 04: HARRISON ARBITRAGE PUBLISHER CREST (THEME-RESPONSIVE VIDEOS ONLY) -->
+        <article class="reel-card-9x16">
+          <div class="reel-top-badge">
+            <span class="reel-pill crimson">04 • Official Publisher</span>
+            <span class="reel-pill">Harrison Arbitrage</span>
+          </div>
+          <div class="reel-contained-stage">
+            <div class="reel-stage-header">
+              <div class="reel-stage-overline">Harrison Arbitrage Publishing</div>
+              <h3 class="reel-stage-title">The Determinism Paradox</h3>
+            </div>
+
+            <div class="reel-contained-img-wrap">
+              <video
+                id="arbitrage-theme-video"
+                data-brand="arbitrage"
+                data-dark-src="Harrison_Arbitrage_Dark_9x16_Animated_Burst.mp4"
+                data-light-src="Harrison_Arbitrage_Light_9x16_Animated.mp4"
+                src="Harrison_Arbitrage_Dark_9x16_Animated_Burst.mp4"
+                poster="Harrison_Arbitrage_Dark_9x16.jpg"
+                autoplay
+                loop
+                muted
+                playsinline
+                controls>
+              </video>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <harrison-footer-cta
+        heading="Bring Native AI Architecture to Your Enterprise Leadership"
+        subtext="Order The Determinism Paradox or schedule an executive architecture briefing on silicon enclaves, glass-box governance, and Tier 3 Academy certification.">
+      </harrison-footer-cta>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* 1. Toggle between 4-Card Grid and Single-Column Mobile Reel Stream */
+      const layoutBtn = document.getElementById('toggle-reel-layout');
+      const streamContainer = document.getElementById('book-portrait-stream');
+
+      if (layoutBtn && streamContainer) {
+        layoutBtn.addEventListener('click', () => {
+          streamContainer.classList.toggle('mobile-reel-mode');
+          const isSingle = streamContainer.classList.contains('mobile-reel-mode');
+          layoutBtn.textContent = isSingle
+            ? '⊞ Switch to 4-Card Deck View'
+            : '📱 Switch to Single-Column Mobile Reel View';
+        });
+      }
+
+      /* 2. Direct Theme-Sync Controller for Card 4 Harrison Arbitrage Videos */
+      const arbVideo = document.getElementById('arbitrage-theme-video');
+
+      function updateArbitrageThemeVideo() {
+        if (!arbVideo) return;
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const nextVideo = isLight
+          ? 'Harrison_Arbitrage_Light_9x16_Animated.mp4'
+          : 'Harrison_Arbitrage_Dark_9x16_Animated_Burst.mp4';
+        const nextPoster = isLight
+          ? 'Harrison_Arbitrage_Light_9x16.jpg'
+          : 'Harrison_Arbitrage_Dark_9x16.jpg';
+
+        arbVideo.setAttribute('poster', nextPoster);
+        if (arbVideo.getAttribute('src') !== nextVideo) {
+          arbVideo.setAttribute('src', nextVideo);
+          arbVideo.load();
+        }
+        arbVideo.muted = true;
+        arbVideo.defaultMuted = true;
+        arbVideo.playsInline = true;
+        arbVideo.play().catch(() => {});
+      }
+
+      /* Initialize on page load and watch <html data-theme="..."> for instant theme switches */
+      updateArbitrageThemeVideo();
+
+      const themeObserver = new MutationObserver(() => {
+        updateArbitrageThemeVideo();
+      });
+      themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+    });
+  </script>
+</body>
+</html>
